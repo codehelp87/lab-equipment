@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingsTable extends Migration
+class CreateNotifiedUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,34 +13,27 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('notified_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('session');
+            $table->integer('status');
             $table->timestamps();
 
             $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
-            $table->integer('lab_id')
-                ->unsigned()
-                ->default(1);
-            $table->integer('equipment_id')
+
+            $table->integer('notification_id')
                 ->unsigned()
                 ->default(1);
 
             $table->foreign('users')
                 ->references('user_id')
-                ->on('bookings')
+                ->on('notified_users')
                 ->onDelete('cascade');
 
-            $table->foreign('labs')
-                ->references('lab_id')
-                ->on('bookings')
-                ->onDelete('cascade');
-
-            $table->foreign('equipments')
-                ->references('equipment_id')
-                ->on('bookings')
+            $table->foreign('notifications')
+                ->references('notification_id')
+                ->on('notified_users')
                 ->onDelete('cascade');
         });
     }
@@ -52,6 +45,6 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('notified_users');
     }
 }

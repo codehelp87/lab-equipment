@@ -15,9 +15,19 @@ class CreateTrainingsTable extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->increments('id');
-            $table->increments('id');
+            $table->date('date_of_training_session');
+            $table->string('location');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->integer('booking_id')
+                ->unsigned()
+                ->default(1);
+
+            $table->foreign('bookings')
+                ->references('booking_id')
+                ->on('trainings')
+                ->onDelete('cascade');
         });
     }
 
