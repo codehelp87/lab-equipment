@@ -38,9 +38,8 @@
                     <!--script-->
                     <script>
                     $("span.menu").click(function(){
-                        $(".top-nav ul").slideToggle(500, function() {
-
-                        });
+                    $(".top-nav ul").slideToggle(500, function() {
+                    });
                     });
                     </script>
                 </div>

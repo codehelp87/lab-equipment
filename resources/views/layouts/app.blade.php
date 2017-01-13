@@ -14,43 +14,42 @@
         <meta name="keywords" content="Scientist Responsive web template" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     </head>
-<body>
-    <div id="app">
-      <!--header-->
-        <div class="header header-top" style="margin-bottom: 20px;">
-            <div class="container">
-                <div class="logo">
-                    <h1><a href="{{ url('/login') }}">
-                        Scientist
-                    </a></h1>
-                </div>
-                <div class="top-nav">
-                    <span class="menu"><img src="{{ asset('images/menu.png') }}" alt=""> </span>
-                    <ul>
-                        <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                        @if (Route::has('login'))
-                        
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                        
-                        @endif
-                    </ul>
-                    <div class="clearfix"> </div>
-                    <!--script-->
-                    <script>
-                    $("span.menu").click(function(){
+    <body>
+        <div id="app">
+            <!--header-->
+            <div class="header header-top" style="margin-bottom: 20px;">
+                <div class="container">
+                    <div class="logo">
+                        <h1><a href="{{ url('/login') }}">
+                            Scientist
+                        </a></h1>
+                    </div>
+                    <div class="top-nav">
+                        <span class="menu"><img src="{{ asset('images/menu.png') }}" alt=""> </span>
+                        <ul>
+                            <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                            @if (Route::has('login'))
+                            
+                            <li><a href="{{ url('/login') }}">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            
+                            @endif
+                        </ul>
+                        <div class="clearfix"> </div>
+                        <!--script-->
+                        <script>
+                        $("span.menu").click(function(){
                         $(".top-nav ul").slideToggle(500, function() {
-
                         });
-                    });
-                    </script>
+                        });
+                        </script>
+                    </div>
+                    <div class="clearfix"> </div>
                 </div>
-                <div class="clearfix"> </div>
+                <!---->
             </div>
-            <!---->
-        </div>
-        @yield('content')
-        <!--address-->
+            @yield('content')
+            <!--address-->
             <div class="address">
                 <div class="container">
                     <div class=" address-more">
@@ -82,8 +81,8 @@
                 </div>
             </div>
             <!--//address-->
-    </div>
- <!--footer-->
+        </div>
+        <!--footer-->
         <div class="footer">
             <div class="container">
                 <div class="col-md-4 footer-top">
@@ -102,7 +101,7 @@
                 <div class="clearfix"> </div>
             </div>
         </div>
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-</body>
+        <!-- Scripts -->
+        <script src="/js/app.js"></script>
+    </body>
 </html>
