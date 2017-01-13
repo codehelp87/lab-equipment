@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace LabEquipment\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
