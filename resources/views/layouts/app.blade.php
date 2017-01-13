@@ -1,86 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-</head>
+<html>
+    <head>
+        <title>Scientist A medical Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <!-- Custom Theme files -->
+        <!--theme-style-->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <!--//theme-style-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Scientist Responsive web template" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+      <!--header-->
+        <div class="header header-top">
             <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                <div class="logo">
+                    <h1><a href="{{ url('/login') }}">
+                        Scientist
+                    </a></h1>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                <div class="top-nav">
+                    <span class="menu"><img src="{{ asset('images/menu.png') }}" alt=""> </span>
+                    <ul>
+                        <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                        @if (Route::has('login'))
+                        
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        
                         @endif
                     </ul>
+                    <div class="clearfix"> </div>
+                    <!--script-->
+                    <script>
+                    $("span.menu").click(function(){
+                        $(".top-nav ul").slideToggle(500, function() {
+
+                        });
+                    });
+                    </script>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <!---->
+        </div>
+        @yield('content')
+        <!--address-->
+            <div class="address">
+                <div class="container">
+                    <div class=" address-more">
+                        <h3>Address</h3>
+                        <div class="col-md-4 address-grid">
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                            <div class="address1">
+                                <p>Lorem ipsum dolor</p>
+                                <p>TL 19034-88974</p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="col-md-4 address-grid ">
+                            <i class="glyphicon glyphicon-phone"></i>
+                            <div class="address1">
+                                <p>+885699655</p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="col-md-4 address-grid ">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            <div class="address1">
+                                <p><a href="mailto:@example.com"> @example.com</a></p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-
-        @yield('content')
+            <!--//address-->
     </div>
-
+ <!--footer-->
+        <div class="footer">
+            <div class="container">
+                <div class="col-md-4 footer-top">
+                    <h3><a href="/login">scientist</a></h3>
+                </div>
+                <div class="col-md-4 footer-top1">
+                    <ul class="social">
+                        <li><a href="#"><i> </i></a></li>
+                        <li><a href="#"><i class="dribble"> </i></a></li>
+                        <li><a href="#"><i class="facebook"> </i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-top2">
+                    <p >© 2016 Scientist. All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>

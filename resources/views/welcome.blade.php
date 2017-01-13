@@ -26,7 +26,7 @@
                 <div class="top-nav">
                     <span class="menu"><img src="{{ asset('images/menu.png') }}" alt=""> </span>
                     <ul>
-                        <li class="active"><a href="{{ url('/login') }}">Home</a></li>
+                        <li class="active"><a href="{{ url('/') }}">Home</a></li>
                         @if (Route::has('login'))
                         
                         <li><a href="{{ url('/login') }}">Login</a></li>
