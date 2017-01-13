@@ -7,7 +7,7 @@
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <!-- Custom Theme files -->
         <!--theme-style-->
-        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
         <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,7 +17,7 @@
 <body>
     <div id="app">
       <!--header-->
-        <div class="header header-top">
+        <div class="header header-top" style="margin-bottom: 20px;">
             <div class="container">
                 <div class="logo">
                     <h1><a href="{{ url('/login') }}">
