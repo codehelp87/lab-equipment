@@ -23,7 +23,6 @@ class CreateTrainingsTable extends Migration
             $table->integer('booking_id')
                 ->unsigned()
                 ->default(1);
-
             $table->foreign('bookings')
                 ->references('booking_id')
                 ->on('trainings')

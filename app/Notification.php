@@ -10,4 +10,10 @@ class Notification extends Model
 
     protected $dates = ['deleted_at'];
     //
+    protected $fillable = ['title', 'content'];
+
+    public function notifiedUsers()
+    {
+    	return $this->hasMany('LabEquipment\NotifiedUser');
+    }
 }

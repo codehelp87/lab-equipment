@@ -22,23 +22,22 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
-            $table->integer('lab_id')
-                ->unsigned()
-                ->default(1);
-            $table->integer('equipment_id')
-                ->unsigned()
-                ->default(1);
-
-            $table->foreign('users')
+             $table->foreign('users')
                 ->references('user_id')
                 ->on('bookings')
                 ->onDelete('cascade');
 
+            $table->integer('lab_id')
+                ->unsigned()
+                ->default(1);
             $table->foreign('labs')
                 ->references('lab_id')
                 ->on('bookings')
                 ->onDelete('cascade');
 
+            $table->integer('equipment_id')
+                ->unsigned()
+                ->default(1);
             $table->foreign('equipments')
                 ->references('equipment_id')
                 ->on('bookings')
