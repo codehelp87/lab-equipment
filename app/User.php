@@ -3,13 +3,13 @@
 namespace LabEquipment;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use SoftDeletingTrait;
+    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
@@ -19,7 +19,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'student_id', 'office_location', 'phone'
+        'name',
+        'email',
+        'password',
+        'student_id',
+        'office_location',
+        'phone',
     ];
 
     /**

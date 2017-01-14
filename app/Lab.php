@@ -3,11 +3,11 @@
 namespace LabEquipment;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lab extends Model
 {
-	use SoftDeletingTrait;
+	use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
