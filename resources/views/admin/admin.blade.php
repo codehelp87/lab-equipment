@@ -47,6 +47,7 @@
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                         <div class="panel-body">
+                        @include('admin.training_completion.complete_training')
                         </div>
                     </div>
                 </div>
