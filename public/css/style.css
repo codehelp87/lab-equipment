@@ -1,14 +1,16 @@
-/*******************************
-* Does not work properly if "in" is added after "collapse".
-* Get free snippets on bootpen.com
-*******************************/
+input[type="radio"], 
+input[type="checkbox"] {
+	margin-top: -5px;
+}
 
 body {
 	color: #616161;
 }
 
-h4.admin, div.panel-group {
+h4.admin{
 	color: #616161;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .panel-group .panel {
@@ -42,4 +44,22 @@ h4.admin, div.panel-group {
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
     border-top-color: #EEEEEE;
+}
+
+/* Flatten das boostrap */
+.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid {
+ 	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	border-radius: 0px !important;
+	border-collapse: collapse !important;
+	background-image: none !important;
+}
+button.btn-default {
+	background: #616161;
+	color: #ffffff;
+	border-radius: 4px !important;
+	border: none;
 }
