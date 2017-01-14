@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-default">
                                 Register
                                 </button>
                                 <a class="btn btn-link" href="{{ url('/login') }}">
