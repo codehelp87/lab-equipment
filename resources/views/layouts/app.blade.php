@@ -17,89 +17,28 @@
     <body>
         <div id="app">
             <!--header-->
-            <div class="header header-top" style="margin-bottom: 20px;">
-                <div class="container">
-                    <div class="logo">
-                        <h1><a href="{{ url('/login') }}">
-                            Scientist
-                        </a></h1>
-                    </div>
-                    <div class="top-nav">
-                        <span class="menu"><img src="{{ asset('images/menu.png') }}" alt=""> </span>
-                        <ul>
-                            <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                            @if (Route::has('login'))
-                            
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                            
-                            @endif
-                        </ul>
-                        <div class="clearfix"> </div>
-                        <!--script-->
-                        <script>
-                        $("span.menu").click(function(){
-                        $(".top-nav ul").slideToggle(500, function() {
-                        });
-                        });
-                        </script>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <!---->
-            </div>
-            @yield('content')
-            <!--address-->
-            <div class="address">
-                <div class="container">
-                    <div class=" address-more">
-                        <h3>Address</h3>
-                        <div class="col-md-4 address-grid">
-                            <i class="glyphicon glyphicon-map-marker"></i>
-                            <div class="address1">
-                                <p>Lorem ipsum dolor</p>
-                                <p>TL 19034-88974</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-4 address-grid ">
-                            <i class="glyphicon glyphicon-phone"></i>
-                            <div class="address1">
-                                <p>+885699655</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-4 address-grid ">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                            <div class="address1">
-                                <p><a href="mailto:@example.com"> @example.com</a></p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
-            </div>
-            <!--//address-->
-        </div>
-        <!--footer-->
-        <div class="footer">
             <div class="container">
-                <div class="col-md-4 footer-top">
-                    <h3><a href="/login">scientist</a></h3>
-                </div>
-                <div class="col-md-4 footer-top1">
-                    <ul class="social">
-                        <li><a href="#"><i> </i></a></li>
-                        <li><a href="#"><i class="dribble"> </i></a></li>
-                        <li><a href="#"><i class="facebook"> </i></a></li>
+                <div class="top-nav">
+                    <ul>
+                        @if (Route::has('login'))
+                        
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        
+                        @endif
                     </ul>
-                </div>
-                <div class="col-md-4 footer-top2">
-                    <p >© 2016 Scientist. All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                    <div class="clearfix"> </div>
+                    <!--script-->
+                    <script>
+                    $("span.menu").click(function() {
+                    $(".top-nav ul").slideToggle(500, function() {
+                    });
+                    });
+                    </script>
                 </div>
                 <div class="clearfix"> </div>
             </div>
+            @yield('content')
         </div>
         <!-- Scripts -->
         <script src="/js/app.js"></script>
