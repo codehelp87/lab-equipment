@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotifiedUsersTable extends Migration
+class CreateBookingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateNotifiedUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('notified_users', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status');
+            $table->string('session');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateNotifiedUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notified_users');
+        Schema::dropIfExists('bookings');
     }
 }
