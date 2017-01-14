@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Scientist A medical Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+        <title>Home :: Lab Equipment</title>
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -19,21 +19,17 @@
             <!--header-->
             <div class="container">
                 <div class="top-nav">
-                    <ul>
-                        @if (Route::has('login'))
-                        
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                        
-                        @endif
-                    </ul>
                     <div class="clearfix"> </div>
                     <!--script-->
                     <script>
-                    $("span.menu").click(function() {
-                    $(".top-nav ul").slideToggle(500, function() {
-                    });
-                    });
+                    function toggleIcon(e) {
+                        $(e.target)
+                          .prev('.panel-heading')
+                          .find(".more-less")
+                          .toggleClass('glyphicon-plus glyphicon-minus');
+                      }
+                      $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+                      $('.panel-group').on('shown.bs.collapse', toggleIcon);
                     </script>
                 </div>
                 <div class="clearfix"> </div>
