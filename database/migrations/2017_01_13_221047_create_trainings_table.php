@@ -19,14 +19,6 @@ class CreateTrainingsTable extends Migration
             $table->string('location');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->integer('booking_id')
-                ->unsigned()
-                ->default(1);
-            $table->foreign('bookings')
-                ->references('booking_id')
-                ->on('trainings')
-                ->onDelete('cascade');
         });
     }
 

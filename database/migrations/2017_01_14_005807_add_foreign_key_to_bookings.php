@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingsTable extends Migration
+class AddForeignKeyToBookings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,34 +13,29 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('session');
-            $table->softDeletes();
-            $table->timestamps();
-
+        Schema::table('bookings', function (Blueprint $table) {
             $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
-             $table->foreign('users')
-                ->references('user_id')
-                ->on('bookings')
+             $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->integer('lab_id')
                 ->unsigned()
                 ->default(1);
-            $table->foreign('labs')
-                ->references('lab_id')
-                ->on('bookings')
+            $table->foreign('lab_id')
+                ->references('id')
+                ->on('labs')
                 ->onDelete('cascade');
 
             $table->integer('equipment_id')
                 ->unsigned()
                 ->default(1);
-            $table->foreign('equipments')
-                ->references('equipment_id')
-                ->on('bookings')
+            $table->foreign('equipment_id')
+                ->references('id')
+                ->on('equipments')
                 ->onDelete('cascade');
         });
     }
@@ -52,6 +47,8 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::table('bookings', function (Blueprint $table) {
+            //
+        });
     }
 }
