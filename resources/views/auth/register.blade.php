@@ -52,6 +52,9 @@
                                 <button type="submit" class="btn btn-primary">
                                 Register
                                 </button>
+                                <a class="btn btn-link" href="{{ url('/login') }}">
+                                    Need to login?
+                                </a>
                             </div>
                         </div>
                     </form>
