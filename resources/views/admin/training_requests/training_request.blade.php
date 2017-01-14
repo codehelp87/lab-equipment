@@ -69,3 +69,4 @@
         </div>
     </div>
 </form>
+@include('admin.training_requests.training_request_modal')
