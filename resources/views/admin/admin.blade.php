@@ -76,6 +76,7 @@
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                         <div class="panel-body">
+                        @include('admin.manage_user_account.edit_user_account')
                         </div>
                     </div>
                 </div>
