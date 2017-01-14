@@ -3,6 +3,7 @@
 namespace LabEquipment;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Training extends Model
 {

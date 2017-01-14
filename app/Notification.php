@@ -3,10 +3,11 @@
 namespace LabEquipment;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Notification extends Model
 {
-	 use SoftDeletingTrait;
+	use SoftDeletingTrait;
 
     protected $dates = ['deleted_at'];
     //
