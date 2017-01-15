@@ -1,4 +1,3 @@
-
 ;(($) =>  {
   $.fn.UpdateUserInfo = () => {
     return $(this).each(() => {
