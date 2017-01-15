@@ -1,5 +1,5 @@
 
-(($) =>  {
+;(($) =>  {
   $.fn.UpdateUserInfo = () => {
     return $(this).each(() => {
       user = new User;

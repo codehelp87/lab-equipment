@@ -62,4 +62,11 @@ class User extends Authenticatable
             ->where('email', strtolower($email))
             ->first();
     }
+
+    public function scopeFindAll($query)
+    {
+        return $query
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 }
