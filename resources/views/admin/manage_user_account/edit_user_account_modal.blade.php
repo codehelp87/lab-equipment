@@ -7,7 +7,7 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal">
-				<div class="form-group">
+					<div class="form-group">
 						<label for="student_id" class="col-sm-2 control-label">Student ID</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="student_id" placeholder="Student ID" value="{{ Auth::user()->student_id }}">
@@ -41,6 +41,13 @@
 					<div class="col-sm-4">
 						<select name="status" id="status" class="form-control" required="required">
 							<option value="1">Active</option>
+						</select>
+					</div>
+					<hr>
+					<div class="col-sm-4">
+						<label for="office" class="col-sm-2 control-label">Assign Role</label>
+						<select name="role" id="status" class="form-control" required="required">
+							<option value="1">Change Role</option>
 						</select>
 					</div>
 					<hr>
