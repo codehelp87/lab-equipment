@@ -136,6 +136,7 @@
                     </div>
                     <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseEight">
                         <div class="panel-body">
+                        @include('admin.notification.add_new_notification')
                         </div>
                     </div>
                 </div>
