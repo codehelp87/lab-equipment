@@ -1,4 +1,5 @@
 <form class="form-horizontal" id="update_user_bio">
+<input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
@@ -14,13 +15,13 @@
     <div class="form-group">
         <label for="phone" class="col-sm-2 control-label">Phone</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ Auth::user()->phone }}">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ Auth::user()->phone }}">
         </div>
     </div>
     <div class="form-group">
         <label for="office" class="col-sm-2 control-label">Office</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office" name="office" placeholder="Office">
+            <input type="text" class="form-control" id="office" name="office" placeholder="Office" value="{{ Auth::user()->office_location }}">
         </div>
     </div>
     <div class="form-group">
