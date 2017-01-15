@@ -8,6 +8,7 @@
         <!-- Custom Theme files -->
         <!--theme-style-->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
         <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,16 +22,6 @@
                 <div class="top-nav">
                     <div class="clearfix"> </div>
                     <!--script-->
-                    <script>
-                    function toggleIcon(e) {
-                        $(e.target)
-                          .prev('.panel-heading')
-                          .find(".more-less")
-                          .toggleClass('glyphicon-plus glyphicon-minus');
-                      }
-                      $('.panel-group').on('hidden.bs.collapse', toggleIcon);
-                      $('.panel-group').on('shown.bs.collapse', toggleIcon);
-                    </script>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -38,5 +29,8 @@
         </div>
         <!-- Scripts -->
         <script src="/js/app.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="/js/edit_user.js"></script>
     </body>
 </html>

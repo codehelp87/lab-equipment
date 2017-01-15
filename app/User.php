@@ -55,4 +55,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo('LabEquipment\User');
     }
+
+    public function scopeFindOneByEmail($query, $email)
+    {
+        return $query
+            ->where('email', strtolower($email))
+            ->first();
+    }
 }
