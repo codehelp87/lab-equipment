@@ -3,6 +3,9 @@
 namespace LabEquipment\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LabEquipment\User;
+use LabEquipment\Lab;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.admin');
+        $users = User::findAll();
+        $labs = Lab::findAll();
+        return view('admin.admin', compact('users', 'labs'));
     }
 }

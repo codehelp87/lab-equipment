@@ -122,7 +122,7 @@
                     </div>
                     <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                         <div class="panel-body">
-                        @include('admin.manage_lab.manage_lab')
+                        @include('admin.manage_lab.manage_lab', ['users' => $users])
                         </div>
                     </div>
                 </div>

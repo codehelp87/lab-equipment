@@ -1,5 +1,5 @@
 <form class="form-horizontal" id="update_user_bio">
-<input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
+    <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">

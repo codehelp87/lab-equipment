@@ -26,4 +26,11 @@ class Lab extends Model
     {
     	return $this->hasMany('LabEquipment\Equipment');
     }
+
+    public function scopeFindAll($query)
+    {
+        return $query
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 }

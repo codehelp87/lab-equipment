@@ -32,5 +32,6 @@
         <script src="/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="/js/edit_user.js"></script>
+        <script src="/js/create_lab.js"></script>
     </body>
 </html>
