@@ -62,6 +62,7 @@
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                         <div class="panel-body">
+                        @include('admin.manage_lab.total_lab')
                         </div>
                     </div>
                 </div>
