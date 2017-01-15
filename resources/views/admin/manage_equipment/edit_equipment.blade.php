@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="assign_user" class="col-sm-2 control-label">Assign Lab</label>
+        <label for="assign_user" class="col-sm-2 control-label">Assign to Lab</label>
         <div class="col-sm-10">
             <select name="assign_lab" id="assign_user" class="form-control" required="required">
                 <option value="0">Choose Lab</option>
