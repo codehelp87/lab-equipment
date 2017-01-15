@@ -44,6 +44,14 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="assign_user" class="col-sm-2 control-label">Assign Lab</label>
+        <div class="col-sm-10">
+            <select name="assign_lab" id="assign_user" class="form-control" required="required">
+                <option value="0">Choose Lab</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="photo" class="col-sm-2 control-label">Photo</label>
         <div class="col-sm-10">
             <input type="file" name="photo" id="photo" class="form-control" value="" required="required">

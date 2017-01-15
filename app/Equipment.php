@@ -24,5 +24,11 @@ class Equipment extends Model
         'price_per_unit_time', 
         'availability',
         'equipment_photo',
+        'lab_id',
     ];
+
+    public function lab()
+    {
+        return $this->belongsTo('LabEquipment\Lab');
+    }
 }

@@ -10,7 +10,7 @@ class Booking extends Model
 	use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    //
+
     protected $fillable = [
         'session',
         'user_id',

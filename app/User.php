@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('LabEquipment\Role');
     }
+
+    public function lab()
+    {
+        return $this->belongsTo('LabEquipment\User');
+    }
 }
