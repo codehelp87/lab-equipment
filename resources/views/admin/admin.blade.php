@@ -62,7 +62,7 @@
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                         <div class="panel-body">
-                        @include('admin.manage_lab.total_lab')
+                        @include('admin.lab_usage.total_lab')
                         </div>
                     </div>
                 </div>
@@ -122,6 +122,7 @@
                     </div>
                     <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                         <div class="panel-body">
+                        @include('admin.manage_lab.manage_lab')
                         </div>
                     </div>
                 </div>

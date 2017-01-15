@@ -30,4 +30,4 @@
         </div>
     </div>
 </form>
-@include('admin.manage_lab.total_lab_modal')
+@include('admin.lab_usage.total_lab_modal')

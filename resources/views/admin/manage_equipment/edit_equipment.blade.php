@@ -42,15 +42,16 @@
                 <option value="0">Availability</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="photo" class="col-sm-2 control-label">Photo</label>
-            <div class="col-sm-10">
-                <input type="file" name="photo" id="photo" class="form-control" value="" required="required">
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="photo" class="col-sm-2 control-label">Photo</label>
+        <div class="col-sm-10">
+            <input type="file" name="photo" id="photo" class="form-control" value="" required="required">
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-large btn-default">Save</button>
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-large btn-default">Save</button>
         </div>
-    </form>
+    </div>
+</form>
