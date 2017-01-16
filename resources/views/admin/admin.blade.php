@@ -107,7 +107,7 @@
                     </div>
                     <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
                         <div class="panel-body">
-                        @include('admin.add_more_equipment.add_more_equipment')
+                        @include('admin.add_more_equipment.add_more_equipment', ['labs' => $labs])
                         </div>
                     </div>
                 </div>

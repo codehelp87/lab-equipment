@@ -33,5 +33,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="/js/edit_user.js"></script>
         <script src="/js/create_lab.js"></script>
+        <script src="/js/add_equipment.js"></script>
     </body>
 </html>

@@ -1,14 +1,14 @@
 ;(($) =>  {
   $.fn.UpdateUserInfo = () => {
     return $(this).each(() => {
-      user = new User;
+      let user = new User;
       user.updateProfile();
     });
   }
 
   class User {
     updateProfile() {
-      user = new User;
+      let user = new User;
       let saveBtn = $('#save-bio');
       saveBtn.on('click', function() {
         let name = $('form#update_user_bio').find('#name').val();
