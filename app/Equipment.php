@@ -10,6 +10,13 @@ class Equipment extends Model
 	use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'equipments';
     
     /**
      * The attributes that are mass assignable.
