@@ -8,7 +8,7 @@
 
   class Lab {
     createLab() {
-      lab = new Lab;
+      let lab = new Lab;
       let saveBtn = $('#save-lab');
       saveBtn.on('click', function() {
         let title = $('form#manage_lab').find('#title').val();

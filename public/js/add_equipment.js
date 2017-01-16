@@ -10,50 +10,31 @@
   class Equipment {
     createEquipment() {
       let equipment = new Equipment;
-      let saveBtn = $('#save-equipment');
-      saveBtn.on('click', function() {
-      let title = $('form#add_more_equipment').find('#title').val();
-      let modelNo = $('form#add_more_equipment').find('#model_no').val();
-      let maker = $('form#add_more_equipment').find('#maker').val();
-      let timeUnit = $('form#add_more_equipment').find('#time_unit').val();//time_unit
-      let reservationTime = $('form#add_more_equipment').find('#reservation_time').val();//reservation_time
-      let pricePerUnit = $('form#add_more_equipment').find('#price_per_unit').val();//price_per_unit
-      let assignedLab = $('form#add_more_equipment').find('#assign_lab').val();//assign_lab;
-      let availability = $('form#add_more_equipment').find('#availability').val();//availability
+      $("form#add_more_equipment").submit(function(evt){
+        evt.preventDefault();
+        let formData = new FormData($(this)[0]);
+        let assignedLab = $('form#add_more_equipment').find('#assign_lab').val();//assign_lab;
+        let availability = $('form#add_more_equipment').find('#availability').val();//availability
 
-      if (equipment.checkforEmptyFields().length > 0) {
-        toastr.error('Filled the fields in red!');
+        if (assignedLab == '') {
+          toastr.error('Assign a lab!');
+          return false;
+        }
+        if (availability == '') {
+          toastr.error('Select equipment availability!');
+          return false;
+        }
+
+        equipment.makeAjaxCall('/equipments/add', formData, 'POST')
+          .done(function(data) {
+            toastr.success(data.message);
+            equipment.clearFormFieds();
+            return false
+          })
+          .fail(function(error) {
+            toastr.error(error.toString());
+          });
         return false;
-      }
-      if (assignedLab == '') {
-        toastr.error('Assign a lab!');
-        return false;
-      }
-      if (availability == '') {
-        toastr.error('Select equipment availability!');
-        return false;
-      }
-      // make a put request to the server side
-      let params = {
-        'title': title,
-        'model_no': modelNo,
-        'maker': maker,
-        'time_unit' => timeUnit,
-        'reservation_time' => reservationTime,
-        'price_per_unit' => pricePerUnit,
-        'assign_lab' => assignedLab,
-        'availability' => $availability
-      }
-      lab.makeAjaxCall('/equipments/add', params, 'POST')
-        .done(function(data) {
-          toastr.success(data.message);
-          equipment.clearFormFieds();
-          return false
-        })
-        .fail(function(error) {
-          toastr.error(error.toString());
-        });
-      return false;
     });
   }
 
@@ -84,12 +65,17 @@
   makeAjaxCall(url, params, method) {
     return $.ajax({
       headers:{
-      'X-CSRF-Token': $('input[name="_token"]').val()
-    },
+        'X-CSRF-Token': $('input[name="_token"]').val()
+      },
       url: url,
       type: method,
       dataType: 'json',
       data: params,
+      async: false,
+      cache: false,
+      contentType: false,
+      enctype: 'multipart/form-data',
+      processData: false,
     });
   }
 }
