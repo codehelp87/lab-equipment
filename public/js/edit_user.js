@@ -19,10 +19,6 @@
         let newPassword = $('form#update_user_bio').find('#new_password').val();
         let confirmPassword = $('form#update_user_bio').find('#com_password').val();
 
-        if (user.checkforEmptyFields().length > 0) {
-          toastr.error('Filled the fields in red!');
-          return false;
-        }
         if (newPassword != confirmPassword) {
           return toastr.error('Both passwords does not match!');
         }
@@ -45,30 +41,6 @@
             toastr.error(error.toString());
           });
         return false;
-      });
-    }
-
-    checkforEmptyFields() {
-      let error = [];
-      $('form#update_user_bio')
-        .find('input')
-        .each(function(index, el) {
-          let _this = $(this);
-          if (_this.val() == '') {
-            error.push(_this.attr('id'));
-            _this.css('border', '1px solid red');
-          } else {
-            _this.css('border', '1px solid #ccc');
-          }
-        });
-      return error;
-    }
-
-    clearFormFieds() {
-      $('form#update_user_bio')
-        .find('input[type="password"]')
-        .each(function(index, el) {
-          $(this).val('');
       });
     }
 
