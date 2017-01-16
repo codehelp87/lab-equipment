@@ -1,8 +1,7 @@
-
 ;(($) =>  {
   $.fn.UpdateEquipmentLab = () => {
     return $(this).each(() => {
-      lab = new Lab;
+      let lab = new Lab;
       lab.createLab();
     });
   }

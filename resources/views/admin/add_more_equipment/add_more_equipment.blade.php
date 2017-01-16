@@ -39,14 +39,16 @@
         <label for="availability" class="col-sm-2 control-label">Availability</label>
         <div class="col-sm-10">
             <select name="availability" id="availability" class="form-control" required="required">
-                <option value="0">Availability</option>
+                <option value="">Availability</option>
+                <option value="0">Available</option>
+                <option value="1">Unavailable</option>
             </select>
         </div>
     </div>
     <div class="form-group">
-        <label for="assign_user" class="col-sm-2 control-label">Assign to Lab</label>
+        <label for="assign_lab" class="col-sm-2 control-label">Assign to Lab</label>
         <div class="col-sm-10">
-            <select name="assign_lab" id="assign_user"  name= "assign_user" class="form-control" required="required">
+            <select name="assign_lab" id="assign_lab"  name= "assign_lab" class="form-control" required="required">
                 <option value="0">Choose Lab</option>
                 @if ($labs->count() > 0)
                 @foreach($labs as $lab)

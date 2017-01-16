@@ -1,7 +1,7 @@
 ;(($) =>  {
   $.fn.UpdateUserInfo = () => {
     return $(this).each(() => {
-      user = new User;
+      let user = new User;
       user.updateProfile();
     });
   }
