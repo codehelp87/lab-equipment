@@ -5,6 +5,7 @@ namespace LabEquipment\Http\Controllers;
 use Illuminate\Http\Request;
 use LabEquipment\User;
 use LabEquipment\Lab;
+use LabEquipment\Equipment;
 
 
 class HomeController extends Controller
@@ -28,6 +29,7 @@ class HomeController extends Controller
     {
         $users = User::findAll();
         $labs = Lab::findAll();
-        return view('admin.admin', compact('users', 'labs'));
+        $equipments = Equipment::findAll();
+        return view('admin.admin', compact('users', 'labs', 'equipments'));
     }
 }

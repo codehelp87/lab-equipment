@@ -38,4 +38,11 @@ class Equipment extends Model
     {
         return $this->belongsTo('LabEquipment\Lab');
     }
+
+    public function scopeFindAll($query)
+    {
+        return $query
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 }
