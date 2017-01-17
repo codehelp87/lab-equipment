@@ -1,5 +1,5 @@
 <div class="col-sm-12">
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="list-equipment">
         <tbody>
             @if($equipments->count() > 0)
             @foreach($equipments as $equipment)
@@ -12,7 +12,7 @@
                     <Strong>Max Time(per day)</Strong><br>
                 </td>
                 <td>
-                    {{ $equipment->available == 1? 'Avalaible': 'Unavailable'}}<br>
+                    {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
                     {{ $equipment->price_per_unit_time}}<br>
                     {{ $equipment->max_reservation_time}}<br>
                 </td>
