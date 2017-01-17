@@ -24,7 +24,8 @@ class EquipmentController extends Controller
 
         if (count($equipment) > 0) {
             return response()->json([
-                'message' => 'Equipment was created successfully'
+                'message' => 'Equipment was created successfully',
+                'equipment' => $equipment,
             ]);
         }
 
