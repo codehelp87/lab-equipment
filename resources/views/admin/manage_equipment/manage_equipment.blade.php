@@ -26,6 +26,11 @@
                 </td>
                 <td><a href="#" class="edit-eqipment" id="{{ $equipment->id }}" title="{{ $equipment->title }}">Edit</a></td>
             </tr>
+            <tr>
+                <td colspan="7">
+                    <div class="display{{ $equipment->id }}" id="edit-eqipment{{ $equipment->id }}" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
+                </td>
+            </tr>
             @endforeach
             @endif
         </tbody>

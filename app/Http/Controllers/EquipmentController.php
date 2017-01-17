@@ -3,6 +3,7 @@
 namespace LabEquipment\Http\Controllers;
 
 use Cloudder;
+use LabEquipment\Lab;
 use Illuminate\Http\Request;
 use LabEquipment\Equipment;
 
@@ -32,6 +33,18 @@ class EquipmentController extends Controller
         return response()->json([
             'message' => 'Error creating Lab'
         ]);
+    }
+
+    public function editEquipment(Request $request, $id)
+    {
+        $equipment = Equipment::find($id);
+        $labs = Lab::findAll();
+
+        if (count($equipment) > 0) {
+            return view('admin.manage_equipment.edit_equipment', 
+                compact('equipment', 'labs')
+            );
+        }
     }
 
     /**

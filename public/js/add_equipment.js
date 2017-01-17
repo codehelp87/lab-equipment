@@ -4,6 +4,7 @@
     return $(this).each(() => {
       let equipment = new Equipment;
       equipment.createEquipment();
+      equipment.editEquipment();
     });
   }
 
@@ -27,7 +28,6 @@
           toastr.error('Select equipment availability!');
           return false;
         }
-        smtBtn.text('Loading...');
 
         equipment.makeAjaxCall('/equipments/add', formData, 'POST')
           .done(function(data) {
@@ -42,6 +42,30 @@
             toastr.error(JSON.stringify(error));
           });
         return false;
+    });
+  }
+
+  editEquipment() {
+    let equipment = new Equipment;
+    $(function() {
+      $('body').on('click', 'table#list-equipment a', function() {
+      let _this = $(this);
+      let id = _this.attr('id');
+      let editMode =  $('table#list-equipment')
+          .find('tr > td div.display'+id);
+          
+          equipment.makeAjaxRequest('/equipments/'+id, '', 'GET')
+          .done(function(data) {
+            editMode
+              .html(data)
+              .css('display', 'block');
+          })
+          .fail(function(error) {
+            toastr.error(JSON.stringify(error));
+          });
+
+          return false;
+    })
     });
   }
 
@@ -106,10 +130,37 @@
       cache: false,
       contentType: false,
       enctype: 'multipart/form-data',
-      processData: false,
+      processData: false
+      // beforeSend: function() {
+      //   $("form#add_more_equipment")
+      //   .find('button#save-equipment')
+      //   .text('Loading...');
+      // }
+    });
+  }
+
+  makeAjaxRequest(url, params, method) {
+    return $.ajax({
+      headers:{
+        'X-CSRF-Token': $('input[name="_token"]').val()
+      },
+      url: url,
+      type: method,
+      dataType: 'html',
+      data: params,
+      async: false,
+      cache: false,
+      contentType: false,
+      enctype: 'multipart/form-data',
+      processData: false
+      // beforeSend: function() {
+      //   $("form#add_more_equipment")
+      //   .find('button#save-equipment')
+      //   .text('Loading...');
+      // }
     });
   }
 }
 })(jQuery);
 
-$('form#add_more_equipment').UpdateEquipment();
+$('form#add_more_equipment, table#list-equipment a').UpdateEquipment();
