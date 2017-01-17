@@ -93,7 +93,8 @@
                     <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                         <div class="panel-body">
                         @include('admin.manage_equipment.manage_equipment')
-                        @include('admin.add_more_equipment.add_more_equipment', ['labs' => $labs])
+                        @include('admin.add_more_equipment.add_more_equipment', ['labs' => $labs, 
+                        'equipments' => $equipments])
                         </div>
                     </div>
                 </div>

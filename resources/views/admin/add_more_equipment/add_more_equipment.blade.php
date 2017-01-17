@@ -40,8 +40,8 @@
         <div class="col-sm-10">
             <select name="availability" id="availability" class="form-control" required="required">
                 <option value="">Availability</option>
-                <option value="0">Available</option>
-                <option value="1">Unavailable</option>
+                <option value="1">Available</option>
+                <option value="0">Unavailable</option>
             </select>
         </div>
     </div>
