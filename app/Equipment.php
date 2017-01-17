@@ -32,6 +32,7 @@ class Equipment extends Model
         'availability',
         'equipment_photo',
         'lab_id',
+        'time_unit'
     ];
 
     public function lab()

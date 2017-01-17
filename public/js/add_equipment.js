@@ -13,7 +13,6 @@
       $("form#add_more_equipment").submit(function(evt){
         // Change button text to loading
         let smtBtn = $("form#add_more_equipment").find('button#save-equipment');
-        smtBtn.text('Loading...');
 
         evt.preventDefault();
         let formData = new FormData($(this)[0]);
@@ -28,6 +27,7 @@
           toastr.error('Select equipment availability!');
           return false;
         }
+        smtBtn.text('Loading...');
 
         equipment.makeAjaxCall('/equipments/add', formData, 'POST')
           .done(function(data) {
