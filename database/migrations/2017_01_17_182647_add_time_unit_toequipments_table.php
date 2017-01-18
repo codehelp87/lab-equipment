@@ -14,7 +14,7 @@ class AddTimeUnitToequipmentsTable extends Migration
     public function up()
     {
         Schema::table('equipments', function (Blueprint $table) {
-            $table->string('time_unit');
+            $table->string('time_unit')->nullable();
         });
     }
 

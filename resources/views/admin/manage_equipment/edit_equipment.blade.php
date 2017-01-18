@@ -1,4 +1,5 @@
-<form class="form-horizontal" id="edit_equipment">
+<form class="form-horizontal" id="edit_equipment" style="border-bottom: 1px solid #ccc;">
+<h4 style="padding: 20px;">Edit | {{ $equipment->title }} </h4>
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Title of Equipment</label>
         <div class="col-sm-10">
@@ -66,7 +67,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-large btn-default" id="edit-equipment">Save</button>
+            <button type="submit" class="btn btn-large btn-default edit-equipment" id="{{ $equipment->id }}">Save</button>
         </div>
     </div>
 </form>

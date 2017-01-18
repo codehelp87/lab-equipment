@@ -5,6 +5,7 @@
       let equipment = new Equipment;
       equipment.createEquipment();
       equipment.editEquipment();
+      equipment.updateEquipment();
     });
   }
 
@@ -45,6 +46,40 @@
     });
   }
 
+  updateEquipment() {
+      let equipment = new Equipment;
+      $('body').on('submit', 'form#edit_equipment', function(evt) {
+        evt.preventDefault();
+        let id = $(this).attr('id');
+        console.log('ID', id);
+        // let formData = new FormData($(this)[0]);
+        // let assignedLab = $('form#edit_equipment').find('#assign_lab').val();//assign_lab;
+        // let availability = $('form#edit_equipment').find('#availability').val();//availability
+
+        // if (assignedLab == '') {
+        //   toastr.error('Assign a lab!');
+        //   return false;
+        // }
+        // if (availability == '') {
+        //   toastr.error('Select equipment availability!');
+        //   return false;
+        // }
+
+        // equipment.makeAjaxCall('/equipments/'+id, formData, 'PUT')
+        //   .done(function(data) {
+        //     toastr.success(data.message);
+        //     //let newEquipment = equipment.addNewEquipmentToHtmlTable(data.equipment);
+        //     //$('table#list-equipment').append(newEquipment);
+        //     equipment.clearFormFieds();
+        //     return false
+        //   })
+        //   .fail(function(error) {
+        //     toastr.error(JSON.stringify(error));
+        //   });
+        return false;
+    });
+  }
+
   editEquipment() {
     let equipment = new Equipment;
     $(function() {
@@ -57,6 +92,7 @@
           equipment.makeAjaxRequest('/equipments/'+id, '', 'GET')
           .done(function(data) {
             editMode
+              .slideDown()
               .html(data)
               .css('display', 'block');
           })
@@ -163,4 +199,4 @@
 }
 })(jQuery);
 
-$('form#add_more_equipment, table#list-equipment a').UpdateEquipment();
+$('body').UpdateEquipment();
