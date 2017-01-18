@@ -3,7 +3,7 @@
         <tbody>
             @if($equipments->count() > 0)
             @foreach($equipments as $equipment)
-            <tr>
+            <tr id="edit-eqipment{{ $equipment->id }}">
                 <td>{{ $equipment->model_no }}</td>
                 <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                 <td>

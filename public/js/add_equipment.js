@@ -35,7 +35,7 @@
             toastr.success(data.message);
             let newEquipment = equipment.addNewEquipmentToHtmlTable(data.equipment);
             $('table#list-equipment').append(newEquipment);
-            equipment.clearFormFieds();
+            equipment.clearFormFields();
             smtBtn.text('Save');
             return false
           })
@@ -48,34 +48,29 @@
 
   updateEquipment() {
       let equipment = new Equipment;
-      $('body').on('submit', 'form#edit_equipment', function(evt) {
+      $('body').on('submit', 'form.edit_equipment', function(evt) {
         evt.preventDefault();
+        let form = $(document).find('form.edit_equipment');
         let id = $(this).attr('id');
-        console.log('ID', id);
-        // let formData = new FormData($(this)[0]);
-        // let assignedLab = $('form#edit_equipment').find('#assign_lab').val();//assign_lab;
-        // let availability = $('form#edit_equipment').find('#availability').val();//availability
+        
+        let formData = new FormData(form[0]);
 
-        // if (assignedLab == '') {
-        //   toastr.error('Assign a lab!');
-        //   return false;
-        // }
-        // if (availability == '') {
-        //   toastr.error('Select equipment availability!');
-        //   return false;
-        // }
+        let assignedLab = $('form.edit_equipment').find('#assign_lab').val();//assign_lab;
+        let availability = $('form.edit_equipment').find('#availability').val();//availability
 
-        // equipment.makeAjaxCall('/equipments/'+id, formData, 'PUT')
-        //   .done(function(data) {
-        //     toastr.success(data.message);
-        //     //let newEquipment = equipment.addNewEquipmentToHtmlTable(data.equipment);
-        //     //$('table#list-equipment').append(newEquipment);
-        //     equipment.clearFormFieds();
-        //     return false
-        //   })
-        //   .fail(function(error) {
-        //     toastr.error(JSON.stringify(error));
-        //   });
+        equipment.makeAjaxCall('/equipments/'+id+'/update', formData, 'POST')
+          .done(function(res) {
+            toastr.success(res.message);
+            let newEquipment = equipment.addNewEquipmentToHtmlTable(res.equipment);
+            $(document).find('table tr#edit-eqipment'+id).replaceWith(newEquipment);
+            $(document).find('div#edit-eqipment'+id).slideUp();
+            equipment.clearFormFields();
+            return false
+          })
+          .fail(function(error) {
+            console.log(JSON.stringify(error));
+            toastr.error(JSON.stringify(error));
+          });
         return false;
     });
   }
@@ -131,7 +126,7 @@
 
   checkforEmptyFields() {
     let error = [];
-    $('form#add_more_equipment')
+    $('form.add_more_equipment')
       .find('input')
       .each(function(index, el) {
         let _this = $(this);
@@ -145,8 +140,8 @@
     return error;
   }
 
-  clearFormFieds() {
-    $('form#add_more_equipment')
+  clearFormFields() {
+    $('form.add_more_equipment')
       .find('input[type="text"]')
       .each(function(index, el) {
         $(this).val('');

@@ -37,7 +37,7 @@ class EquipmentController extends Controller
 
     public function updateEquipment(Request $request, $id)
     {
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::find($id)->first();
 
         if (count($equipment) > 0) {
             $equipment->title = $request->title;

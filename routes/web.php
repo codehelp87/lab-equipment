@@ -18,6 +18,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::put('/users/{email}', 'UserController@editUserInfo');
 Route::post('/labs/add', 'LabController@createLab');
+Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
 Route::post('/equipments/add', 'EquipmentController@createEquipment');
 Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
-Route::put('/equipments/{id}', 'EquipmentController@updateEquipment');
