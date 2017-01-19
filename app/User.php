@@ -71,11 +71,11 @@ class User extends Authenticatable
             ->get();
     }
 
-    public function scopeFindAllBookings($query, $userId)
+    public function scopeFindOneById($query, $userId)
     {
         return $query
             ->where('id', $userId)
-            ->first()
-            ->bookings();
+            ->withTrashed()
+            ->first();
     }
 }

@@ -35,8 +35,14 @@ class UserController extends Controller
 
     public function editUserAccount(Request $request, $userId)
     {
-        $user = User::FindAllBookings($userId);
+        $user = User::findOneById($userId);
 
-        return response()->json($user, 200);
+        if (is_null($user)) {
+            return response()->json(['message' => 'Account De-activated'], 200);
+        }
+        //return response()->json($user, 200);
+        return view('admin.manage_user_account.update_user_account', 
+            compact('user')
+        );
     }
 }

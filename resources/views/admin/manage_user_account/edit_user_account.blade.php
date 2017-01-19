@@ -37,7 +37,7 @@
                             {{ 'Inactive' }}
                             @endif
                         </td>
-                        <td><a href="#"  class="student-edit" id="student{{$user->id}}">Edit</a></td>
+                        <td><a href="#"  class="student-edit" id="{{$user->id}}">Edit</a></td>
                     </tr>
                     @endforeach
                     @endif

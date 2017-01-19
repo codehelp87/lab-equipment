@@ -20,7 +20,7 @@ class Booking extends Model
     
     public function user()
     {
-    	return $this->belongs('LabEquipment\User');
+    	return $this->belongsTo('LabEquipment\User');
     }
 
     public function training()
