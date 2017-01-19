@@ -54,23 +54,25 @@
 	</div>
 	<hr>
 	@if (!is_null($user->bookings))
+	<h6>Status by equipment</h6>
 	@foreach($user->bookings as $booking)
-	<div class="col-sm-6">
-		<h6>Status by equipment</h6>
-		<label for="equipment" class="col-sm-2 control-label"> {{ $booking->title }}</label>
-		<select name="equipment[]" id="equipment" class="form-control" required="required" name="equipment">
-			<option value="">Status</option>
-			<option value="1">Active</option>
-			<option value="0">Inactive</option>
-		</select>
+	<div class="form-group">
+		<label for="equipment[]" class="col-sm-2 control-label"> {{ $booking->equipment->title }}</label>
+		<div class="col-sm-6">
+			<select name="equipment[]" id="equipment[]" class="form-control" required="required" name="equipment">
+				<option value="">Status</option>
+				<option value="1">Active</option>
+				<option value="0">Inactive</option>
+			</select>
+		</div>
 	</div>
 	@endforeach
 	@endif
 	<div class="form-group">
-	<div class="col-sm-6">
-		<a class="btn btn-link text-center" href="{{ url('/password/reset') }}" target="blank">
-			Reset Password(send a link to reset password)
-		</a>
-	</div>
+		<div class="col-sm-6">
+			<a class="btn btn-link text-center" href="{{ url('/password/reset') }}" target="blank">
+				Reset Password(send a link to reset password)
+			</a>
+		</div>
 	</div>
 </form>

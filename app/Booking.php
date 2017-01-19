@@ -27,4 +27,9 @@ class Booking extends Model
     {
     	return $this->hasOne('LabEquipment\Training');
     }
+
+    public function equipment()
+    {
+        return $this->belongsTo('LabEquipment\Equipment');
+    }
 }
