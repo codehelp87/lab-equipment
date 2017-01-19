@@ -30,9 +30,10 @@
 		</div>
 		<hr>
 	</div>
+	<hr>
 	<div class="form-group">
-	<label for="status" class="col-sm-2 control-label">Account Status</label>
-		<div class="col-sm-4">
+		<label for="status" class="col-sm-2 control-label">Account Status</label>
+		<div class="col-sm-6">
 			<select name="status" id="status" class="form-control" required="required">
 				<option value="">Status</option>
 				<option value="1">Active</option>
@@ -42,8 +43,8 @@
 	</div>
 	<hr>
 	<div class="form-group">
-	<label for="role" class="col-sm-2 control-label">Assign Role</label>
-		<div class="col-sm-4">
+		<label for="role" class="col-sm-2 control-label">Assign Role</label>
+		<div class="col-sm-6">
 			<select name="role" id="status" class="form-control" required="required">
 				<option value="">Change Role</option>
 				<option value="1">Student</option>
@@ -53,9 +54,9 @@
 	</div>
 	<hr>
 	@if (!is_null($user->bookings))
-	<h4>Status by equipment</h4>
 	@foreach($user->bookings as $booking)
-	<div class="col-sm-4">
+	<div class="col-sm-6">
+		<h6>Status by equipment</h6>
 		<label for="equipment" class="col-sm-2 control-label"> {{ $booking->title }}</label>
 		<select name="equipment[]" id="equipment" class="form-control" required="required" name="equipment">
 			<option value="">Status</option>
@@ -65,11 +66,11 @@
 	</div>
 	@endforeach
 	@endif
-	<hr>
-	<div class="col-sm-4">
-		<a class="btn btn-link" href="{{ url('/password/reset') }}">
+	<div class="form-group">
+	<div class="col-sm-6">
+		<a class="btn btn-link text-center" href="{{ url('/password/reset') }}" target="blank">
 			Reset Password(send a link to reset password)
 		</a>
 	</div>
-	<hr>
+	</div>
 </form>

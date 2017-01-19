@@ -18,7 +18,7 @@
         let userId = _this.attr('id');
         user.makeAjaxRequest('/users/'+userId+'/edit', '', 'GET')
           .done(function(data) {
-            modalBody.append(data);
+            modalBody.html(data);
             modalWrapper.modal('show');
           })
           .fail(function(error) {
