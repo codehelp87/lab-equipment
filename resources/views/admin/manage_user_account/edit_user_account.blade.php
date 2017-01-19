@@ -3,11 +3,18 @@
         <div class="col-sm-4">
             <select name="lab" id="lab" class="form-control" required="required">
                 <option value="0">See by Lab</option>
+                @if ($labs->count() > 0)
+                @foreach($labs as $lab)
+                <option value="{{ $lab->id }}">{{ $lab->title }}</option>
+                @endforeach
+                @endif
             </select>
         </div>
         <div class="col-sm-4">
             <select name="status" id="status" class="form-control" required="required">
-                <option value="0">See by Status</option>
+                <option value="">See by Status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
             </select>
         </div>
     </div>
