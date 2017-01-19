@@ -18,7 +18,7 @@
                     @if ($users->count() > 0)
                     @foreach($users as $index => $user)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $user->student_id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>

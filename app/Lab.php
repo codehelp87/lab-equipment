@@ -33,4 +33,11 @@ class Lab extends Model
             ->orderBy('id', 'desc')
             ->get();
     }
+
+    public function scopeFindOneById($query, $id)
+    {
+        return $query
+            ->find($id);
+            //->first();
+    }
 }

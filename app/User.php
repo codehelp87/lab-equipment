@@ -46,9 +46,9 @@ class User extends Authenticatable
         return $this->hasMany('LabEquipment\NotifiedUser');
     }
 
-    public function roles()
+    public function role()
     {
-        return $this->hasMany('LabEquipment\Role');
+        return $this->hasOne('LabEquipment\Role');
     }
 
     public function lab()
