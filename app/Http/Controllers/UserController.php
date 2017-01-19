@@ -32,4 +32,11 @@ class UserController extends Controller
         }
         return response()->json(['message' => 'Error updating record']);
     }
+
+    public function editUserAccount(Request $request, $userId)
+    {
+        $user = User::FindAllBookings($userId);
+
+        return response()->json($user, 200);
+    }
 }

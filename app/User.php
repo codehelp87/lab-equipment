@@ -67,6 +67,15 @@ class User extends Authenticatable
     {
         return $query
             ->orderBy('id', 'desc')
+            ->withTrashed()
             ->get();
+    }
+
+    public function scopeFindAllBookings($query, $userId)
+    {
+        return $query
+            ->where('id', $userId)
+            ->first()
+            ->bookings();
     }
 }
