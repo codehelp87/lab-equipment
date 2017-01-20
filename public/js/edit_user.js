@@ -4,10 +4,31 @@
       let user = new User;
       user.updateProfile();
       user.editUserAccount();
+      user.updateUserAccount();
     });
   }
 
   class User {
+    updateUserAccount() {
+      let user = new User;
+      let submitBtn = $('button.ok');
+      submitBtn.on('click', function() {
+        let form = $(document).find('div#manage-user-account div.modal-body > form.user-account');
+        let modal = $(document).find('div#manage-user-account');
+        let id = form.attr('id');
+        let formObject = form.find('input, select');
+        user.makeAjaxCall('/users/'+id+'/update', formObject, 'POST')
+          .done(function(data) {
+            toastr.success(data.message);
+            modal.modal('hide');
+          })
+          .fail(function(data) {
+            toastr.error(error.toString());
+          })
+         return false;
+      });
+    }
+
     editUserAccount() {
       let user = new User;
       let editLink = $('a.student-edit');

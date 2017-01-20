@@ -1,4 +1,4 @@
-<div class="modal fade manage-user-account" id="manage-user-account{{ $user->id }}">
+<div class="modal fade manage-user-account" id="manage-user-account">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">

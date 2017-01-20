@@ -63,7 +63,7 @@ class User extends Authenticatable
             ->first();
     }
 
-    public function scopeFindAll($query)
+    public function scopeFindAllWithTrashed($query)
     {
         return $query
             ->orderBy('id', 'desc')
@@ -71,11 +71,25 @@ class User extends Authenticatable
             ->get();
     }
 
-    public function scopeFindOneById($query, $userId)
+    public function scopeFindAll($query)
+    {
+        return $query
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    public function scopeFindOneByIdWithTrashed($query, $userId)
     {
         return $query
             ->where('id', $userId)
             ->withTrashed()
+            ->first();
+    }
+
+    public function scopeFindOneById($query, $userId)
+    {
+        return $query
+            ->where('id', $userId)
             ->first();
     }
 }

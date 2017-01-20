@@ -46,4 +46,19 @@ class Equipment extends Model
             ->orderBy('id', 'desc')
             ->get();
     }
+
+    public function scopeFindOneByIdWithTrashed($query, $id)
+    {
+        return $query
+            ->where('id', $id)
+            ->withTrashed()
+            ->first();
+    }
+
+    public function scopeFindOneById($query, $userId)
+    {
+        return $query
+            ->where('id', $id)
+            ->first();
+    }
 }
