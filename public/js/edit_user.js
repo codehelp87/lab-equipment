@@ -22,7 +22,7 @@
             toastr.success(data.message);
             modal.modal('hide');
           })
-          .fail(function(data) {
+          .fail(function(error) {
             toastr.error(error.toString());
           })
          return false;
