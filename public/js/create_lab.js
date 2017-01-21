@@ -3,36 +3,66 @@
     return $(this).each(() => {
       let lab = new Lab;
       lab.createLab();
+      lab.assignUserToLab();
     });
   }
 
   class Lab {
+    assignUserToLab() {
+      let lab = new Lab;
+      let saveBtn = $('#save-lab-user');
+      saveBtn.on('click', function() {
+        let user = $('form#assign_user_to_lab').find('#user').val();
+        let labId = $('form#assign_user_to_lab').find('#lab').val();
+
+        if (user == '') {
+          toastr.error('Choose a user to assign to lab!');
+          return false;
+        }
+
+        if (labId == '') {
+          toastr.error('Choose lab!');
+          return false;
+        }
+        // make a put request to the server side
+        let params = {'user': user};
+
+        lab.makeAjaxCall('/labs/'+labId+'/add', params, 'PUT')
+          .done(function(data) {
+            if (data.message == 200) {
+              toastr.success('User was assigned to Lab successfully');
+            }
+            toastr.error(data.message);
+            return false
+          })
+          .fail(function(error) {
+            toastr.error(error.toString());
+          });
+        return false;
+      });
+    }
+
     createLab() {
       let lab = new Lab;
       let saveBtn = $('#save-lab');
       saveBtn.on('click', function() {
         let title = $('form#manage_lab').find('#title').val();
         let modelNo = $('form#manage_lab').find('#model_no').val();
-        let assignedUser = $('form#manage_lab').find('#assign_user').val();
 
         if (lab.checkforEmptyFields().length > 0) {
           toastr.error('Filled the fields in red!');
-          return false;
-        }
-        if (assignedUser == '') {
-          toastr.error('Assign a user!');
           return false;
         }
         // make a put request to the server side
         let params = {
           'title': title,
           'model_no': modelNo,
-          'user': assignedUser,
         }
+
         lab.makeAjaxCall('/labs/add', params, 'POST')
           .done(function(data) {
             toastr.success(data.message);
-            lab.clearFormFieds();
+            lab.checkforEmptyFields();
             return false
           })
           .fail(function(error) {
@@ -58,7 +88,7 @@
       return error;
     }
 
-    clearFormFieds() {
+    clearFormFields() {
       $('form#manage_lab')
         .find('input[type="text"]')
         .each(function(index, el) {

@@ -19,8 +19,11 @@ Route::get('/home', 'HomeController@index');
 Route::put('/users/{email}', 'UserController@editUserInfo');
 Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
+
 Route::post('/labs/add', 'LabController@createLab');
 Route::get('/labs/{id}/users', 'LabController@getLabUsers');
+Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
+
 Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
 Route::post('/equipments/add', 'EquipmentController@createEquipment');
 Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
