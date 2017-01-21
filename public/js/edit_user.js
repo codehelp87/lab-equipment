@@ -16,18 +16,20 @@
           select.on('change', function() {
             let _this = $(this);
             let labId = _this.val();
+            let table = $('table.user-account-list tbody');
 
             if (labId > 0) {
               let route = '/labs/'+labId+'/users';
               user.makeAjaxCall(route, '', 'GET')
                 .done(function(data) {
-                  if (data.email !== undefined) {
-                    return user.buildUserTable(data);
+                  if (data.length > 0) {
+                    table.html(user.buildUserTable(data));
+                    return toastr.success('Table just populated');
                   }
                   return toastr.error(data.message);
                 })
                 .fail(function(error) {
-                  //console.log(error);
+                  console.log(error);
                 });
             }
           return false;
@@ -35,25 +37,27 @@
     }
 
     buildUserTable(data) {
-      let tr = '';
+      let tableRow = '';
+      let counter = 1;
       for (let user in data) {
-        //console.log(user.id);
-      //   tr += <tr>
-      //     <td>{{ $loop->index + 1 }}</td>
-      //     <td>{{ $user->student_id }}</td>
-      //     <td>{{ $user->name }}</td>
-      //     <td>{{ $user->email }}</td>
-      //     <td>{{ $user->phone }}</td>
-      //     <td>
-      //         @if (is_null($user->deleted_at))
-      //         {{ 'Active' }}
-      //         @else
-      //         {{ 'Inactive' }}
-      //         @endif
-      //     </td>
-      //     <td><a href="#"  class="student-edit" id="{{$user->id}}">Edit</a></td>
-      // </tr>
+        tableRow += '<tr>' +
+          '<td>'+counter+'</td>' +
+          '<td>'+data[user].student_id+'</td>' +
+          '<td>'+data[user].name+'</td>' +
+          '<td>'+data[user].email+'</td>' +
+          '<td>'+data[user].phone+'</td>'+
+          '<td>';
+          if (data[user].deleted_at == null) {
+            tableRow += 'Active'; 
+          } else {
+            tableRow += 'Inactive';
+          }
+          tableRow += '</td>' + 
+          '<td><a href="#"  class="student-edit" id='+data[user].id+'>Edit</a></td>';
+         tableRow += '</tr>';
+        counter++;
       }
+      return tableRow;
     }
 
     updateUserAccount() {
@@ -78,8 +82,7 @@
 
     editUserAccount() {
       let user = new User;
-      let editLink = $('a.student-edit');
-      editLink.on('click', function() {
+      $('body').on('click', 'a.student-edit', function() {
         let modalWrapper = $('.manage-user-account');
         let modalBody = modalWrapper.find('div.modal-body');
         let _this = $(this);
