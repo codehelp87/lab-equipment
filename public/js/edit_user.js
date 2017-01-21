@@ -5,10 +5,57 @@
       user.updateProfile();
       user.editUserAccount();
       user.updateUserAccount();
+      user.getLabUsers();
     });
   }
 
   class User {
+    getLabUsers() {
+      let user = new User;
+      let select = $('form#edit-user-account #lab');
+          select.on('change', function() {
+            let _this = $(this);
+            let labId = _this.val();
+
+            if (labId > 0) {
+              let route = '/labs/'+labId+'/users';
+              user.makeAjaxCall(route, '', 'GET')
+                .done(function(data) {
+                  if (data.email !== undefined) {
+                    return user.buildUserTable(data);
+                  }
+                  return toastr.error(data.message);
+                })
+                .fail(function(error) {
+                  //console.log(error);
+                });
+            }
+          return false;
+      });
+    }
+
+    buildUserTable(data) {
+      let tr = '';
+      for (let user in data) {
+        //console.log(user.id);
+      //   tr += <tr>
+      //     <td>{{ $loop->index + 1 }}</td>
+      //     <td>{{ $user->student_id }}</td>
+      //     <td>{{ $user->name }}</td>
+      //     <td>{{ $user->email }}</td>
+      //     <td>{{ $user->phone }}</td>
+      //     <td>
+      //         @if (is_null($user->deleted_at))
+      //         {{ 'Active' }}
+      //         @else
+      //         {{ 'Inactive' }}
+      //         @endif
+      //     </td>
+      //     <td><a href="#"  class="student-edit" id="{{$user->id}}">Edit</a></td>
+      // </tr>
+      }
+    }
+
     updateUserAccount() {
       let user = new User;
       let submitBtn = $('button.ok');

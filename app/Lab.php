@@ -17,7 +17,7 @@ class Lab extends Model
         'user_id'
     ];
 
-    public function user() 
+    public function user()
     {
     	return $this->belongsTo('LabEquipment\User');
     }
@@ -37,7 +37,7 @@ class Lab extends Model
     public function scopeFindOneById($query, $id)
     {
         return $query
-            ->find($id);
-            //->first();
+            ->where('id', $id)
+            ->first();
     }
 }

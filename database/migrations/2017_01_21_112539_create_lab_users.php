@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserIdToLab extends Migration
+class CreateLabUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,23 @@ class AddUserIdToLab extends Migration
      */
     public function up()
     {
-        Schema::table('labs', function (Blueprint $table) {
+        Schema::create('labusers', function (Blueprint $table) {
+            $table->increments('id');
+
             $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->integer('lab_id')
+                ->unsigned()
+                ->default(1);
+            $table->foreign('lab_id')
+                ->references('id')
+                ->on('labs')
                 ->onDelete('cascade');
         });
     }
@@ -31,8 +41,6 @@ class AddUserIdToLab extends Migration
      */
     public function down()
     {
-        Schema::table('labs', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('labusers');
     }
 }

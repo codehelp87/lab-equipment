@@ -23,6 +23,19 @@ class LabController extends Controller
 
     	return response()->json([
     		'message' => 'Error creating Lab'
-    	]);
+    	], 400);
+    }
+
+    public function getLabUsers(Request $request, $id)
+    {
+        $lab = Lab::findOneById($id);
+
+        if (count($lab) > 0) {
+            return response()->json($lab->user, 200);
+        }
+
+        return response()->json([
+            'message' => 'Lab Users not found'
+        ], 404);
     }
 }

@@ -57,6 +57,7 @@
 	<?php $id = '';?>
 	<h6>Status by equipment</h6>
 	@foreach($user->bookings as $index => $booking)
+	@if(!is_null(@$booking->equipment))
 	<?php $id .= $booking->equipment->id.'##'; ?>
 	<div class="form-group">
 		<label for="equipment[]" class="col-sm-2 control-label"> {{ $booking->equipment->title }}</label>
@@ -68,6 +69,7 @@
 			</select>
 		</div>
 	</div>
+	@endif
 	@endforeach
 	@endif
 	<input type="hidden" name="equipment_id" id="equipment_id" class="form-control" value="{{ $id }}">

@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" id="edit-user-account">
     <div class="form-group">
         <div class="col-sm-4">
             <select name="lab" id="lab" class="form-control" required="required">
