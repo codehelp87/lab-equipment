@@ -46,4 +46,4 @@
         </div>
     </div>
 </form>
-@include('admin.manage_user_account.edit_user_account_modal', ['equipment'])
+@include('admin.manage_user_account.edit_user_account_modal')

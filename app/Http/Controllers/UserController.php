@@ -83,4 +83,21 @@ class UserController extends Controller
         }
         return response()->json(['message' => 'Error updating user Account'], 400);
     }
+
+    public function gettUserStatus(Request $request, $status)
+    {
+        if ($status == 0) {
+            $users = User::where('deleted_at', '!=', NULL)->get();
+            if ($users->count() > 0) {
+                return response()->json($users, 200);
+            }
+        } else {
+            $users = User::FindAll();
+            if ($users->count() > 0) {
+                return response()->json($users, 200);
+            }
+        }
+
+        return response()->json(['message' => 'Users not found'], 404);
+    }
 }

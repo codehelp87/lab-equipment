@@ -6,10 +6,39 @@
       user.editUserAccount();
       user.updateUserAccount();
       user.getLabUsers();
+      user.getUserByStatus();
     });
   }
 
   class User {
+    getUserByStatus() {
+      let user = new User;
+      let select = $('form#edit-user-account #status');
+        select.on('change', function() {
+          let _this = $(this);
+          let status = _this.val();
+          let table = $('table.user-account-list tbody');
+
+          if (_this.val() != '') {
+            let route = '/users/'+status+'/view';
+            user.makeAjaxCall(route, '', 'GET')
+              .done(function(data) {
+                if (data.length > 0) {
+                  table.html(user.buildUserTable(data));
+                  return toastr.success('Table just populated');
+                }
+                return toastr.error(data.message);
+              })
+              .fail(function(error) {
+                console.log('Error', error.responseText);
+                  return toastr.error(error.responseText);
+              });
+          }
+
+        return false;
+      });
+    }
+
     getLabUsers() {
       let user = new User;
       let select = $('form#edit-user-account #lab');

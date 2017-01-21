@@ -16,6 +16,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/users/{status}/view', 'UserController@gettUserStatus');
 Route::put('/users/{email}', 'UserController@editUserInfo');
 Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
