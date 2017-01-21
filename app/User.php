@@ -51,9 +51,9 @@ class User extends Authenticatable
         return $this->hasOne('LabEquipment\Role');
     }
 
-    public function labs()
+    public function labUser()
     {
-        return $this->HasMany('LabEquipment\Lab');
+        return $this->hasMany('LabEquipment\LabUser');
     }
 
     public function scopeFindOneByEmail($query, $email)

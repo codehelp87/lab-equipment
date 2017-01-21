@@ -141,11 +141,100 @@
             <p>
                 <h4 class="student"> Hello, {{ Auth::user()->name }}!</h4>
                 <form action="/logout" method="post">
-                <button type="submit" class=" btn btn-default pull-right">Logout</button>
+                    <button type="submit" class=" btn btn-default pull-right">Logout</button>
                     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
                 </form>
             </p>
             <hr>
+            <p>
+                <h5>Notifications <a class="pull-right">Read all</a></h5>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                        <tr>
+                            <td> dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                        <tr>
+                            <td> Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, </td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <p>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td><strong>{{ Auth::user()-> name }}</strong></td>
+                            <td><strong>Lab: {{
+                            !is_null(@Auth::user()->labUser[0])? Auth::user()->labUser[0]->user->name: 'Nill' }}</strong></td>
+                            <td><a href="#" title="{{ Auth::user()-> name}}">See my page</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <hr>
+            <p>
+            <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td><strong>NMR</strong></td>
+                            <td>{{ date('Y/m/d') }}</td>
+                            <td>11:00 - 11:10</td>
+                            <td><button type="button" class="btn btn-default pull-right">Cancel</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <hr>
+            <p>
+                <h5>Book an Equipment</h5>
+                <table class="table table-responsive" id="list-equipment">
+        <tbody>
+            @if($equipments->count() > 0)
+            @foreach($equipments as $equipment)
+            <tr id="edit-eqipment{{ $equipment->id }}">
+                <td>{{ $equipment->model_no }}</td>
+                <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                <td>
+                    <Strong>Status</Strong><br>
+                    <Strong>Unit Time</Strong><br>
+                    <Strong>Max Time(per day)</Strong><br>
+                </td>
+                <td>
+                    {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                    {{ $equipment->price_per_unit_time}}<br>
+                    {{ $equipment->max_reservation_time}}<br>
+                </td>
+                <td>
+                    <Strong>Open</Strong><br>
+                    <Strong>Cancel</Strong><br>
+                </td>
+                <td>
+                    <span>30 minutes before</span><br>
+                    <span>1 hour before</span><br>
+                </td>
+                <td><button type="button" class="btn btn-default pull-right">Book Now</button></td>
+            </tr>
+            <tr>
+            <td colspan="3"></td>
+              <td colspan="3">
+                <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
+                <span>Your usage for this month <strong>1:00</strong></span><br>
+                <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked  day)</span><br>
+                </td>
+                <td colspan="1"></td>
+            </tr>
+            @endforeach
+            @endif
+        </tbody>
+    </table>
+            </p>
         </div>
         @endif
     </div>
