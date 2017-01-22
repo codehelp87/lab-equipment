@@ -67,38 +67,38 @@
 									<td>
 										<div class="checkbox">
 											<label>
-												<input type="checkbox" value="">
+												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
 												:00 - 10
 											</label>
 										</div>
 									</td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="">
+											<input type="checkbox" value="{{ $i }}:10 - {{ $i }}:20">
 											:10 - 20
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="">
+											<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
 											:20 - 30
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="">
+											<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
 											:30 - 40
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="">
+											<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:50">
 											:40 - 50
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="">
+											<input type="checkbox" value="{{ $i }}:50 - {{ $i }}:00">
 											:50 - 00
 										</label>
 									</div></td>

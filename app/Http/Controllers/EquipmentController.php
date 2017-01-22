@@ -11,7 +11,7 @@ class EquipmentController extends Controller
 {
     public function bookEquipment(Request $request, $id)
     {
-        $equipment = Equipment::find($id)->first();
+        $equipment = Equipment::find($id);
 
         if (count($equipment) > 0) {
             return view('student.book_equipment', 
@@ -48,7 +48,7 @@ class EquipmentController extends Controller
 
     public function updateEquipment(Request $request, $id)
     {
-        $equipment = Equipment::find($id)->first();
+        $equipment = Equipment::find($id);
 
         if (count($equipment) > 0) {
             $equipment->title = $request->title;
