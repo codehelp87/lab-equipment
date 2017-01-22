@@ -58,6 +58,7 @@
                         </tbody>
                     </table>
                 </p>
+                <hr>
                 <p>
                     <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
                     <table class="table table-hover">
