@@ -1,5 +1,6 @@
 <form class="form-horizontal" id="change_password">
     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
+    <input type="hidden" name="email" id="email" class="form-control" value="{{ Auth::user()->email }}">
     <div class="form-group">
         <label for="c_password" class="col-sm-2 control-label">Enter Current Password</label>
         <div class="col-sm-10">
@@ -20,7 +21,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-large btn-default" id="save-bio">Save</button>
+            <button type="submit" class="btn btn-large btn-default" id="change-password">Save</button>
         </div>
     </div>
 </form>

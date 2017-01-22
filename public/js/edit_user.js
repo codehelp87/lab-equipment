@@ -7,10 +7,66 @@
       user.updateUserAccount();
       user.getLabUsers();
       user.getUserByStatus();
+      user.changePassword();
     });
   }
 
   class User {
+    changePassword() {
+      let user = new User;
+      let saveBtn = $(document).find('button#change-password');
+      saveBtn.on('click', function() {
+        let email = $(document).find('form#change_password').find('#email').val();
+        let oldPassword = $(document).find('form#change_password').find('#c_password').val();
+        let newPassword = $(document).find('form#change_password').find('#new_password').val();
+        let confirmPassword = $(document).find('form#change_password').find('#com_password').val();
+
+        if (oldPassword == '') {
+          toastr.error('Enter current password!');
+          return false;
+        }
+        if (newPassword == '') {
+          toastr.error('Enter new password!');
+          return false;
+        }
+
+        if (confirmPassword == '') {
+          toastr.error('Pls confirm your password!');
+          return false;
+        }
+
+        if (newPassword != confirmPassword) {
+          toastr.error('Both passwords does not match!');
+          return false;
+        }
+        // make a put request to the server side
+        let params = {
+          'email': email,
+          'c_password': oldPassword,
+          'new_password': newPassword
+        }
+        user.makeAjaxCall('/users/'+email+'/password_change', params, 'PUT')
+          .done(function(data) {
+            toastr.success(data.message);
+            user.clearFormFields();
+            return false
+          })
+          .fail(function(error) {
+            toastr.error(error.toString());
+          });
+        return false;
+      });
+    }
+
+    clearFormFields() {
+      $(document)
+        .find('form#change_password')
+        .find('input[type="password"]')
+        .each(function(index, el) {
+          $(this).val('');
+        });
+    }
+
     getUserByStatus() {
       let user = new User;
       let select = $('form#edit-user-account #status');

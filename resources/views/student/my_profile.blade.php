@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
         @include('admin.manage_user_account.logout')
-            <h4>My Page</h4>
+            <h5>My Page</h5>
             <table class="table table-hover">
                 <tbody>
                     <tr>

@@ -23,6 +23,7 @@ Route::get('/home/profile', 'UserController@viewMyProfile')
 Route::get('/users/{status}/view', 'UserController@gettUserStatus');
 Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
+Route::put('/users/{email}/password_change', 'UserController@changePassword');
 
 Route::post('/labs/add', 'LabController@createLab');
 Route::get('/labs/{id}/users', 'LabController@getLabUsers');

@@ -9,6 +9,26 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function changePassword(Request $request, $email)
+    {
+        $user = User::findOneByEmail($email);
+        $oldPassword = $request->c_password;
+        $newPassword = $request->new_password;
+
+        if (count($user) > 0) {
+            if (\Hash::check($oldPassword, $user->getAuthPassword())) {
+                $user->password = bcrypt($newPassword);
+                $user->save();
+            }
+
+            return response()->json([
+                'message' => 'Your password has been updated successfully'
+            ]);
+        }
+
+        return response()->json(['message' => 'Error updating password']);
+    }
+
     public function viewMyProfile()
     {
         $equipments = Equipment::findAll();
