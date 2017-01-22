@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         @if (Auth::user()->role_id == 2)
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             @include('admin.manage_user_account.logout')
             <h4>Admin</h4>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -133,7 +133,7 @@
             <!-- panel-group -->
         </div>
         @else
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             @include('admin.manage_user_account.logout')
             <hr>
             <p>
@@ -184,7 +184,7 @@
             <hr>
             <p>
                 <h5>Book an Equipment</h5>
-                <table class="table table-responsive" id="list-equipment">
+                <table class="table table-responsive" id="book-equipment">
                     <tbody>
                         @if($equipments->count() > 0)
                         @foreach($equipments as $equipment)
@@ -209,7 +209,7 @@
                                 <span>30 minutes before</span><br>
                                 <span>1 hour before</span><br>
                             </td>
-                            <td><button type="button" class="btn btn-default pull-right">Book Now</button></td>
+                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>

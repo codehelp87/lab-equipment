@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-        @include('admin.manage_user_account.logout')
+        <div class="col-md-10 col-md-offset-1">
+            @include('admin.manage_user_account.logout')
             <h5>My Page</h5>
             <table class="table table-hover">
                 <tbody>

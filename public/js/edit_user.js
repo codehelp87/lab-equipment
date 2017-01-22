@@ -16,6 +16,7 @@
       let user = new User;
       let saveBtn = $(document).find('button#change-password');
       saveBtn.on('click', function() {
+        var $btn = $(this).button('loading')
         let email = $(document).find('form#change_password').find('#email').val();
         let oldPassword = $(document).find('form#change_password').find('#c_password').val();
         let newPassword = $(document).find('form#change_password').find('#new_password').val();
@@ -23,20 +24,24 @@
 
         if (oldPassword == '') {
           toastr.error('Enter current password!');
+          $btn.button('reset')
           return false;
         }
         if (newPassword == '') {
           toastr.error('Enter new password!');
+          $btn.button('reset')
           return false;
         }
 
         if (confirmPassword == '') {
           toastr.error('Pls confirm your password!');
+          $btn.button('reset')
           return false;
         }
 
         if (newPassword != confirmPassword) {
           toastr.error('Both passwords does not match!');
+          $btn.button('reset')
           return false;
         }
         // make a put request to the server side
@@ -47,6 +52,8 @@
         }
         user.makeAjaxCall('/users/'+email+'/password_change', params, 'PUT')
           .done(function(data) {
+            // business logic...
+            $btn.button('reset')
             toastr.success(data.message);
             user.clearFormFields();
             return false
@@ -71,6 +78,7 @@
       let user = new User;
       let select = $('form#edit-user-account #status');
         select.on('change', function() {
+          var $btn = $(this).button('loading')
           let _this = $(this);
           let status = _this.val();
           let table = $('table.user-account-list tbody');
@@ -79,6 +87,8 @@
             let route = '/users/'+status+'/view';
             user.makeAjaxCall(route, '', 'GET')
               .done(function(data) {
+                // business logic...
+                $btn.button('reset')
                 if (data.length > 0) {
                   table.html(user.buildUserTable(data));
                   return toastr.success('Table just populated');
@@ -99,6 +109,7 @@
       let user = new User;
       let select = $('form#edit-user-account #lab');
           select.on('change', function() {
+            var $btn = $(this).button('loading')
             let _this = $(this);
             let labId = _this.val();
             let table = $('table.user-account-list tbody');
@@ -107,6 +118,8 @@
               let route = '/labs/'+labId+'/users';
               user.makeAjaxCall(route, '', 'GET')
                 .done(function(data) {
+                  // business logic...
+                  $btn.button('reset')
                   if (data.length > 0) {
                     table.html(user.buildUserTable(data));
                     return toastr.success('Table just populated');
@@ -149,12 +162,15 @@
       let user = new User;
       let submitBtn = $('button.ok');
       submitBtn.on('click', function() {
+        var $btn = $(this).button('loading')
         let form = $(document).find('div#manage-user-account div.modal-body > form.user-account');
         let modal = $(document).find('div#manage-user-account');
         let id = form.attr('id');
         let formObject = form.find('input, select');
         user.makeAjaxCall('/users/'+id+'/update', formObject, 'POST')
           .done(function(data) {
+            // business logic...
+            $btn.button('reset')
             toastr.success(data.message);
             modal.modal('hide');
           })
@@ -168,12 +184,15 @@
     editUserAccount() {
       let user = new User;
       $('body').on('click', 'a.student-edit', function() {
+        var $btn = $(this).button('loading')
         let modalWrapper = $('.manage-user-account');
         let modalBody = modalWrapper.find('div.modal-body');
         let _this = $(this);
         let userId = _this.attr('id');
         user.makeAjaxRequest('/users/'+userId+'/edit', '', 'GET')
           .done(function(data) {
+            // business logic...
+            $btn.button('reset')
             modalBody.html(data);
             modalWrapper.modal('show');
           })
@@ -188,6 +207,7 @@
       let user = new User;
       let saveBtn = $('#save-bio');
       saveBtn.on('click', function() {
+        var $btn = $(this).button('loading')
         let name = $('form#update_user_bio').find('#name').val();
         let email = $('form#update_user_bio').find('#email').val();
         let phone = $('form#update_user_bio').find('#phone').val();
@@ -210,6 +230,8 @@
         }
         user.makeAjaxCall('/users/'+email, params, 'PUT')
           .done(function(data) {
+            // business logic...
+            $btn.button('reset')
             toastr.success(data.message);
             return false
           })

@@ -9,6 +9,17 @@ use LabEquipment\Equipment;
 
 class EquipmentController extends Controller
 {
+    public function bookEquipment(Request $request, $id)
+    {
+        $equipment = Equipment::find($id)->first();
+
+        if (count($equipment) > 0) {
+            return view('student.book_equipment', 
+                compact('equipment')
+            );
+        }
+    }
+
     public function createEquipment(Request $request)
     {
         $equipment = Equipment::create([

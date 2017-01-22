@@ -12,6 +12,7 @@
       let lab = new Lab;
       let saveBtn = $('#save-lab-user');
       saveBtn.on('click', function() {
+        var $btn = $(this).button('loading')
         let user = $('form#assign_user_to_lab').find('#user').val();
         let labId = $('form#assign_user_to_lab').find('#lab').val();
 
@@ -29,6 +30,8 @@
 
         lab.makeAjaxCall('/labs/'+labId+'/add', params, 'PUT')
           .done(function(data) {
+            // business logic...
+            $btn.button('reset')
             if (data.message == 200) {
               toastr.success('User was assigned to Lab successfully');
             }
