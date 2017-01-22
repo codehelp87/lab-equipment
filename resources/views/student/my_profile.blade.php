@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+        @include('admin.manage_user_account.logout')
             <h4>My Page</h4>
             <table class="table table-hover">
                 <tbody>

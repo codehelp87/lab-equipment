@@ -4,11 +4,7 @@
     <div class="row">
         @if (Auth::user()->role_id == 2)
         <div class="col-md-8 col-md-offset-2">
-            <h4 class="admin"> Hello, {{ Auth::user()->name }}!</h4>
-            <form action="/logout" method="post">
-                <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
-                <button type="submit" class=" btn btn-default pull-right">Logout</button>
-            </form>
+            @include('admin.manage_user_account.logout')
             <h4>Admin</h4>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
@@ -138,13 +134,7 @@
         </div>
         @else
         <div class="col-md-8 col-md-offset-2">
-            <p>
-                <h4 class="student"> Hello, {{ Auth::user()->name }}!</h4>
-                <form action="/logout" method="post">
-                    <button type="submit" class=" btn btn-default pull-right">Logout</button>
-                    <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
-                </form>
-            </p>
+            @include('admin.manage_user_account.logout')
             <hr>
             <p>
                 <h5>Notifications <a class="pull-right">Read all</a></h5>
@@ -179,7 +169,7 @@
             </p>
             <hr>
             <p>
-            <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
+                <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
                 <table class="table table-hover">
                     <tbody>
                         <tr>
@@ -195,45 +185,45 @@
             <p>
                 <h5>Book an Equipment</h5>
                 <table class="table table-responsive" id="list-equipment">
-        <tbody>
-            @if($equipments->count() > 0)
-            @foreach($equipments as $equipment)
-            <tr id="edit-eqipment{{ $equipment->id }}">
-                <td>{{ $equipment->model_no }}</td>
-                <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
-                <td>
-                    <Strong>Status</Strong><br>
-                    <Strong>Unit Time</Strong><br>
-                    <Strong>Max Time(per day)</Strong><br>
-                </td>
-                <td>
-                    {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                    {{ $equipment->price_per_unit_time}}<br>
-                    {{ $equipment->max_reservation_time}}<br>
-                </td>
-                <td>
-                    <Strong>Open</Strong><br>
-                    <Strong>Cancel</Strong><br>
-                </td>
-                <td>
-                    <span>30 minutes before</span><br>
-                    <span>1 hour before</span><br>
-                </td>
-                <td><button type="button" class="btn btn-default pull-right">Book Now</button></td>
-            </tr>
-            <tr>
-            <td colspan="3"></td>
-              <td colspan="3">
-                <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
-                <span>Your usage for this month <strong>1:00</strong></span><br>
-                <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked  day)</span><br>
-                </td>
-                <td colspan="1"></td>
-            </tr>
-            @endforeach
-            @endif
-        </tbody>
-    </table>
+                    <tbody>
+                        @if($equipments->count() > 0)
+                        @foreach($equipments as $equipment)
+                        <tr id="edit-eqipment{{ $equipment->id }}">
+                            <td>{{ $equipment->model_no }}</td>
+                            <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                            <td>
+                                <Strong>Status</Strong><br>
+                                <Strong>Unit Time</Strong><br>
+                                <Strong>Max Time(per day)</Strong><br>
+                            </td>
+                            <td>
+                                {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                                {{ $equipment->price_per_unit_time}}<br>
+                                {{ $equipment->max_reservation_time}}<br>
+                            </td>
+                            <td>
+                                <Strong>Open</Strong><br>
+                                <Strong>Cancel</Strong><br>
+                            </td>
+                            <td>
+                                <span>30 minutes before</span><br>
+                                <span>1 hour before</span><br>
+                            </td>
+                            <td><button type="button" class="btn btn-default pull-right">Book Now</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="3">
+                                <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
+                                <span>Your usage for this month <strong>1:00</strong></span><br>
+                                <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked  day)</span><br>
+                            </td>
+                            <td colspan="1"></td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </p>
         </div>
         @endif
