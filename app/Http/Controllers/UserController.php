@@ -9,6 +9,13 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function viewMyProfile()
+    {
+        $equipments = Equipment::findAll();
+
+        return view('student.my_profile', compact('equipments'));
+    }
+
     public function editUserInfo(Request $request, $email)
     {
         $name = $request->name;
