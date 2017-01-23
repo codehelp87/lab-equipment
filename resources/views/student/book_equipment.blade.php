@@ -65,7 +65,7 @@
 								<td>{{ (int)($i - 24).":00" }}</td>
 								@endif
 									<td>
-										<div class="checkbox-inline">
+										<div class="checkbox">
 											<label>
 												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
 												:00 - 10
@@ -106,11 +106,12 @@
 								<?php endfor ?>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-default" id="book-now">Book Now</button>
+						<button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}}" id="book-now">Book Now</button>
 					</div>
 				</div>
 			{{-- </div> --}}
 		</div>
 	</div>
 </div>
+@include('student.booking_detail_modal')
 @endsection

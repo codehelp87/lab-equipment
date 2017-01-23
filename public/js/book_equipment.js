@@ -9,8 +9,12 @@
 
   class Equipment {
     bookEquipment() {
+      let equipment = new Equipment;
       let bookBtn = $(document).find('button#book-now');
       bookBtn.on('click', function() {
+        let selectedTimeSlot = [];
+        let equipmentId = $(this).attr('data-id');
+        let modal = $(document).find('div.booking-detail');
         let checkBox = $(document)
           .find('div.checkbox')
           .find('input[type="checkbox"]:checked');
@@ -26,10 +30,32 @@
           return false
         }
 
-        console.log('Size', checkBox.size());
+        checkBox.each(function(index, el) {
+          selectedTimeSlot.push($(this).val());
+        });
+        let modalContent = equipment.prepareModal(time, selectedTimeSlot);
+        modal.find('div.modal-body').html(modalContent);
         //alert('Hi');
+        modal.modal('show');
         return false;
       });
+    }
+
+    prepareModal(bookingDate, selectedTimeSlot) {
+      let stuff = '<h5 class="text-center">You will book</h5>';
+      let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
+      let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
+      let slots = '<ul>';
+        for(let i = 0; i < selectedTimeSlot.length; i++) {
+          slots += '<li>'+selectedTimeSlot[i]+'</li>';
+        }
+        slots += '</ul>';
+
+        stuff += dateSelected;
+        stuff += slots;
+        stuff +=  info;
+
+      return stuff;
     }
 
     linkToBookingDetails() {
