@@ -67,38 +67,38 @@
 									<td>
 										<div class="checkbox">
 											<label>
-												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
+												<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
 												:00 - 10
 											</label>
 										</div>
 									</td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{ $i }}:10 - {{ $i }}:20">
+											<input type="checkbox" value="{{ ($i - 24) }}:10 - {{ ($i - 24) }}:20">
 											:10 - 20
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
+											<input type="checkbox" value="{{ ($i - 24) }}:20 - {{ ($i - 24) }}:30">
 											:20 - 30
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
+											<input type="checkbox" value="{{ ($i - 24) }}:30 - {{ ($i - 24) }}:40">
 											:30 - 40
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:50">
+											<input type="checkbox" value="{{ ($i - 24) }}:40 - {{ ($i - 24) }}:50">
 											:40 - 50
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{ $i }}:50 - {{ $i }}:00">
+											<input type="checkbox" value="{{ ($i - 24) }}:50 - {{ ($i - 24) }}:00">
 											:50 - 00
 										</label>
 									</div></td>
