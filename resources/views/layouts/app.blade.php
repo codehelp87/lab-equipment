@@ -35,15 +35,23 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="{{ asset('js/moment.js')}}"></script>
-        <script src="{{ asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css" />
         <script src="{{ asset('js/edit_user.js') }}"></script>
         <script src="{{ asset('js/create_lab.js') }}"></script>
         <script src="{{ asset('js/add_equipment.js') }}"></script>
         <script src="{{ asset('js/book_equipment.js') }}"></script>
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
-                $("#datetimepicker1").on("dp.change", function (e) {
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                $('#datetimepicker1').datepicker({
+                    todayHighlight: true,
+                    startDate: today,
+                    format: "yyyy.mm.dd D",
+                });
+                $(document).find('span#time').text(today);
+                $("#datetimepicker1").on("changeDate", function (e) {
                     //console.log(e.date);
                     $(document).find('span#time').text(e.date);
                 });

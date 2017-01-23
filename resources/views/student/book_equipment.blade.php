@@ -59,77 +59,77 @@
 								<?php $count = 0; ?>
 								<?php for ($i = 9; $i <= 33; $i++): ?>
 								<tr>
-								@if ($i <= 24)
-								  <td>{{ $i.":00" }}</td>
-								@else 
-								<td>{{ (int)($i - 24).":00" }}</td>
-								@endif
+									@if ($i <= 24)
+									<td>{{ $i.":00" }}</td>
+									@else
+									<td>{{ (int)($i - 24).":00" }}</td>
+									@endif
 									<td>
 										<div class="checkbox">
 											<label>
-											@if ($i <= 24)
+												@if ($i <= 24)
 												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
 												:00 - 10
-											@else 
-											<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
+												@else
+												<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
 												:00 - 10
-											@endif 
+												@endif
 											</label>
 										</div>
 									</td>
 									<td><div class="checkbox">
 										<label>
 											@if ($i <= 24)
-												<input type="checkbox" value="{{ $i }}:10 - {{ $i }}:20">
-												:10 - 20
-											@else 
+											<input type="checkbox" value="{{ $i }}:10 - {{ $i }}:20">
+											:10 - 20
+											@else
 											<input type="checkbox" value="{{ ($i - 24) }}:10 - {{ ($i - 24) }}:20">
-												:10 - 20
-											@endif 
+											:10 - 20
+											@endif
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
 											@if ($i <= 24)
-												<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
-												:20 - 30
-											@else 
+											<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
+											:20 - 30
+											@else
 											<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
-												:20 - 30
-											@endif 
+											:20 - 30
+											@endif
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
 											@if ($i <= 24)
-												<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
-												:30 - 40
-											@else 
+											<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
+											:30 - 40
+											@else
 											<input type="checkbox" value="{{ ($i - 24) }}:30 - {{ ($i - 24) }}:10">
-												:30 - 40
-											@endif 
+											:30 - 40
+											@endif
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
 											@if ($i <= 24)
-												<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:40">
-												:40 - 50
-											@else 
+											<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:40">
+											:40 - 50
+											@else
 											<input type="checkbox" value="{{ ($i - 24) }}:40 - {{ ($i - 24) }}:50">
-												:40 - 50
-											@endif 
+											:40 - 50
+											@endif
 										</label>
 									</div></td>
 									<td><div class="checkbox">
 										<label>
 											@if ($i <= 24)
-												<input type="checkbox" value="{{ $i }}:50 - {{ $i }}:00">
-												:50 - 00
-											@else 
+											<input type="checkbox" value="{{ $i }}:50 - {{ $i }}:00">
+											:50 - 00
+											@else
 											<input type="checkbox" value="{{ ($i - 24) }}:50 - {{ ($i - 24) }}:00">
-												:50 - 00
-											@endif 
+											:50 - 00
+											@endif
 										</label>
 									</div></td>
 								</tr>
