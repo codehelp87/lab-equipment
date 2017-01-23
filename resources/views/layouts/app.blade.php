@@ -39,6 +39,7 @@
         <script src="{{ asset('js/edit_user.js') }}"></script>
         <script src="{{ asset('js/create_lab.js') }}"></script>
         <script src="{{ asset('js/add_equipment.js') }}"></script>
+        <script src="{{ asset('js/book_equipment.js') }}"></script>
         <script type="text/javascript">
             $(function () {
                 $('#datetimepicker1').datetimepicker();
