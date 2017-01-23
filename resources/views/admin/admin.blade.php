@@ -162,7 +162,7 @@
                             <td><strong>{{ Auth::user()-> name }}</strong></td>
                             <td><strong>Lab: {{
                             !is_null(@Auth::user()->labUser[0])? Auth::user()->labUser[0]->user->name: 'Nill' }}</strong></td>
-                            <td><a href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}">See my page</a></td>
+                            <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                         </tr>
                     </tbody>
                 </table>

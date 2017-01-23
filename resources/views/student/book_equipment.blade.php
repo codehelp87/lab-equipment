@@ -65,7 +65,7 @@
 								<td>{{ (int)($i - 24).":00" }}</td>
 								@endif
 									<td>
-										<div class="checkbox">
+										<div class="checkbox-inline">
 											<label>
 												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
 												:00 - 10
@@ -106,7 +106,7 @@
 								<?php endfor ?>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-default">Book Now</button>
+						<button type="button" class="btn btn-default" id="book-now">Book Now</button>
 					</div>
 				</div>
 			{{-- </div> --}}

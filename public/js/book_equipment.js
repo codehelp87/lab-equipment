@@ -3,10 +3,35 @@
     return $(this).each(() => {
       let equipment = new Equipment;
       equipment.linkToBookingDetails();
+      equipment.bookEquipment();
     });
   }
 
   class Equipment {
+    bookEquipment() {
+      let bookBtn = $(document).find('button#book-now');
+      bookBtn.on('click', function() {
+        let checkBox = $(document)
+          .find('div.checkbox')
+          .find('input[type="checkbox"]:checked');
+        let time = $(document).find('span#time').text();
+
+        if (time == '') {
+          toastr.error('Pls select date');
+          return false
+        }
+
+        if (checkBox.size() <= 0) {
+          toastr.error('Pls select time slot');
+          return false
+        }
+
+        console.log('Size', checkBox.size());
+        //alert('Hi');
+        return false;
+      });
+    }
+
     linkToBookingDetails() {
       let linkBtn = $(document).find('button#book-equipment');
       linkBtn.on('click', function() {
