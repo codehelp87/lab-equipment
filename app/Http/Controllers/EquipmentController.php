@@ -18,6 +18,7 @@ class EquipmentController extends Controller
                 compact('equipment')
             );
         }
+        abort(404);
     }
 
     public function createEquipment(Request $request)
@@ -86,6 +87,8 @@ class EquipmentController extends Controller
                 compact('equipment', 'labs')
             );
         }
+
+        abort(404);
     }
 
     /**

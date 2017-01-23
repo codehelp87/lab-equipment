@@ -106,6 +106,7 @@
 								<?php endfor ?>
 							</tbody>
 						</table>
+						<button type="button" class="btn btn-default">Book Now</button>
 					</div>
 				</div>
 			{{-- </div> --}}
