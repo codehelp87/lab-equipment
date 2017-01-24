@@ -16,6 +16,9 @@ Route::post('/logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 
+Route::get('/training/register', 'HomeController@requestForm')
+    ->name('request_training');
+
 Route::get('/home', 'HomeController@index');
 Route::get('/home/profile', 'UserController@viewMyProfile')
     ->name('my_profile');

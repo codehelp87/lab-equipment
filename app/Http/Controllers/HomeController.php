@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -30,6 +30,12 @@ class HomeController extends Controller
         $users = User::findAll();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
-        return view('admin.admin', compact('users', 'labs', 'equipments', 'lab'));
+        return view('admin.admin', compact('users', 'labs', 'equipments'));
+    }
+
+    public function requestForm()
+    {
+        $labs = Lab::findAll();
+        return view('student.request_training', compact('labs'));
     }
 }
