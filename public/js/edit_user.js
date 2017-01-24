@@ -78,7 +78,6 @@
       let user = new User;
       let select = $('form#edit-user-account #status');
         select.on('change', function() {
-          var $btn = $(this).button('loading')
           let _this = $(this);
           let status = _this.val();
           let table = $('table.user-account-list tbody');
@@ -87,8 +86,6 @@
             let route = '/users/'+status+'/view';
             user.makeAjaxCall(route, '', 'GET')
               .done(function(data) {
-                // business logic...
-                $btn.button('reset')
                 if (data.length > 0) {
                   table.html(user.buildUserTable(data));
                   return toastr.success('Table just populated');
@@ -97,7 +94,7 @@
               })
               .fail(function(error) {
                 console.log('Error', error.responseText);
-                  return toastr.error(error.responseText);
+                return toastr.error(error.responseText);
               });
           }
 
@@ -109,7 +106,6 @@
       let user = new User;
       let select = $('form#edit-user-account #lab');
           select.on('change', function() {
-            var $btn = $(this).button('loading')
             let _this = $(this);
             let labId = _this.val();
             let table = $('table.user-account-list tbody');
@@ -118,8 +114,6 @@
               let route = '/labs/'+labId+'/users';
               user.makeAjaxCall(route, '', 'GET')
                 .done(function(data) {
-                  // business logic...
-                  $btn.button('reset')
                   if (data.length > 0) {
                     table.html(user.buildUserTable(data));
                     return toastr.success('Table just populated');

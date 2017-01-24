@@ -34,8 +34,12 @@ class LabController extends Controller
 
         if (count($lab) > 0) {
             $labUsers = [];
-            foreach ($lab->labUsers as $index => $users) {
-                $labUsers[$index] = $users->user;
+            $labUsers = LabUser::where('lab_id',$lab->id)->get();
+
+            if (count($labUsers) > 0) {
+                foreach ($labUsers as $index => $users) {
+                    $labUsers[$index] = $users->user;
+                }
             }
 
             return response()->json($labUsers, 200);
