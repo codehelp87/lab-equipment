@@ -2,6 +2,7 @@
 
 namespace LabEquipment\Http\Controllers;
 
+use Auth;
 use LabEquipment\Lab;
 use LabEquipment\LabUser;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class LabController extends Controller
     	$lab = Lab::create([
     		'title' => $request->title,
     		'model_no' => $request->model_no,
+            'user_id' => Auth::user()->id,
     	]);
 
     	if (count($lab) > 0) {
@@ -49,10 +51,10 @@ class LabController extends Controller
         $lab = Lab::findOneById($id);
 
         $labUser = LabUser::where('user_id', $request->user)
-            ->where('lab_id', $id)
+            ->where('lab_id', $lab->id)
             ->first();
 
-        if ($labUser->count() > 0) {
+        if (count($labUser) > 0) {
             return response()->json([
                 'message' => 'User has been assigned to Lab before'
             ]); 

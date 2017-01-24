@@ -39,6 +39,8 @@
             return false
           })
           .fail(function(error) {
+            // business logic...
+            $btn.button('reset')
             toastr.error(error.toString());
           });
         return false;
