@@ -80,9 +80,9 @@
                 <hr>
                 <p>
                     <h5><strong>Booking History</strong></h5>
+                    @if($bookings->count() > 0)
                     <table class="table table-hover">
                         <tbody>
-                        @if($bookings->count() > 0)
                             @foreach($bookings as $booking)
                             <tr>
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
@@ -92,9 +92,11 @@
                                 <td>Not completed</td>
                             </tr>
                             @endforeach
-                        @endif
                         </tbody>
                     </table>
+                    @else
+                    <h5>No booking history found</h5>
+                    @endif
                 </p>
             </div>
         </div>
