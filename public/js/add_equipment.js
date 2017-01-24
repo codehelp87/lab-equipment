@@ -42,7 +42,8 @@
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
           });
-        return false;
+
+      return false;
     });
   }
 

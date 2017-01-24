@@ -3,6 +3,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
+		<input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
 			{{-- @include('admin.manage_user_account.logout') --}}
 			<h5><a href="{{ route('my_profile') }}" class="pull-left"> << My page </a></h5><br>
 			<hr>
@@ -136,7 +137,7 @@
 								<?php endfor ?>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}}" id="book-now">Book Now</button>
+						<button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now">Book Now</button>
 					</div>
 				</div>
 			{{-- </div> --}}

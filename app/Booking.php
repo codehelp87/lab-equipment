@@ -12,9 +12,7 @@ class Booking extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'session',
         'user_id',
-        'lab_id',
         'equipment_id',
         'time_slot',
         'booking_date',
@@ -23,7 +21,7 @@ class Booking extends Model
     /**
      * Always json_decode time_slot so they are usable
      */
-    public function getTimeSlotAttribute($value)
+    public function getTimeslotAttribute($value)
     {
         return json_decode($value);
 
@@ -34,7 +32,7 @@ class Booking extends Model
     /**
      * Always json_encode the time_slot when saving to the database
      */
-    public function setTimeSlotAttribute($value)
+    public function setTimeslotAttribute($value)
     {
         $this->attributes['time_slot'] = json_encode($value);
     }

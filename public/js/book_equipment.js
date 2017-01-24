@@ -37,6 +37,32 @@
         modal.find('div.modal-body').html(modalContent);
         //alert('Hi');
         modal.modal('show');
+
+        let okBtn = modal.find('button.ok');
+        const route = '/equipments/booking';
+        let params = {
+          'equipment': equipmentId,
+          'time_slot': selectedTimeSlot,
+          'booking_date': time
+        }
+
+        okBtn.on('click', function() {
+          equipment.makeAjaxCall(route, params, 'POST')
+          .done(function(data) {
+            if (data.id !=undefined) {
+              modal.modal('hide');
+              toastr.success('Your booking has been recorded');
+              return false;
+            }
+            return toastr.success(data.message);
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+
+          return false;
+        });
+
         return false;
       });
     }
@@ -72,39 +98,34 @@
       });
     }
 
-    makeAjaxCall(url, params, method) {
+    // makeAjaxCall(url, params, method) {
+    //   return $.ajax({
+    //     headers:{
+    //       'X-CSRF-Token': $('input[name="_token"]').val()
+    //     },
+    //     url: url,
+    //     type: method,
+    //     dataType: 'json',
+    //     data: params,
+    //     async: false,
+    //     cache: false,
+    //     contentType: false,
+    //     enctype: 'multipart/form-data',
+    //     processData: false
+    //   });
+    // }
+
+  makeAjaxCall(url, params, method) {
       return $.ajax({
         headers:{
-          'X-CSRF-Token': $('input[name="_token"]').val()
-        },
+        'X-CSRF-Token': $('input[name="_token"]').val()
+      },
         url: url,
         type: method,
         dataType: 'json',
         data: params,
-        async: false,
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false
       });
     }
-
-  makeAjaxRequest(url, params, method) {
-    return $.ajax({
-      headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
-      },
-      url: url,
-      type: method,
-      dataType: 'html',
-      data: params,
-      async: false,
-      cache: false,
-      contentType: false,
-      enctype: 'multipart/form-data',
-      processData: false
-    });
-  }
 }
 })(jQuery);
 

@@ -160,7 +160,7 @@
 
     updateUserAccount() {
       let user = new User;
-      let submitBtn = $('button.ok');
+      let submitBtn = $('div#manage-user-account button.ok');
       submitBtn.on('click', function() {
         var $btn = $(this).button('loading')
         let form = $(document).find('div#manage-user-account div.modal-body > form.user-account');
@@ -175,6 +175,8 @@
             modal.modal('hide');
           })
           .fail(function(error) {
+            // business logic...
+            $btn.button('reset')
             toastr.error(error.toString());
           })
          return false;

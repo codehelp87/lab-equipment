@@ -29,6 +29,8 @@ Route::post('/labs/add', 'LabController@createLab');
 Route::get('/labs/{id}/users', 'LabController@getLabUsers');
 Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
 
+Route::post('/equipments/booking', 'BookingController@addBooking');
+
 Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
 Route::get('/equipments/{id}/booking', 'EquipmentController@bookEquipment');
 Route::post('/equipments/add', 'EquipmentController@createEquipment');
