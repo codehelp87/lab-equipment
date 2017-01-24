@@ -49,7 +49,7 @@
         okBtn.on('click', function() {
           equipment.makeAjaxCall(route, params, 'POST')
           .done(function(data) {
-            if (data.id !=undefined) {
+            if (data.id != undefined) {
               modal.modal('hide');
               toastr.success('Your booking has been recorded');
               return false;

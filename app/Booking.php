@@ -51,4 +51,12 @@ class Booking extends Model
     {
         return $this->belongsTo('LabEquipment\Equipment');
     }
+
+    public function scopeFindOneByEquipment($query, $userId)
+    {
+        return $query
+            ->where('user_id', $userId)
+            ->orderBy('id', 'DESC')
+            ->get();
+    }
 }

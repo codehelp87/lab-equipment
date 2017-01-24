@@ -65,13 +65,15 @@
                     <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
                     <table class="table table-hover">
                         <tbody>
+                         @if ($equipments->count() > 0)
                             <tr>
-                                <td><strong>NMR</strong></td>
+                                <td><strong>{{ $equipments[count($equipments) - 1]->title}}</strong></td>
                                 <td>400-MR D22</td>
                                 <td>{{ date('Y/m/d') }}</td>
                                 <td>11:00 - 11:10</td>
                                 <td><button type="button" class="btn btn-default pull-right">Cancel</button></td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </p>
@@ -80,27 +82,17 @@
                     <h5><strong>Booking History</strong></h5>
                     <table class="table table-hover">
                         <tbody>
+                        @if($bookings->count() > 0)
+                            @foreach($bookings as $booking)
                             <tr>
-                                <td><strong>NMR</strong></td>
-                                <td>400-MR D22</td>
-                                <td>{{ date('Y/m/d') }}</td>
-                                <td>11:00 - 11:10</td>
-                                <td>Completed</td>
+                                <td><strong>{{ $booking->equipment->title }}</strong></td>
+                                <td>{{ $booking->equipment->model_no }}</td>
+                                <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
+                                <td>{{ implode(' , ', $booking->time_slot) }}</td>
+                                <td>Not completed</td>
                             </tr>
-                            <tr>
-                                <td><strong>NMR</strong></td>
-                                <td>400-MR D22</td>
-                                <td>{{ date('Y/m/d') }}</td>
-                                <td>11:00 - 11:10</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td><strong>NMR</strong></td>
-                                <td>400-MR D22</td>
-                                <td>{{ date('Y/m/d') }}</td>
-                                <td>11:00 - 11:10</td>
-                                <td>Completed</td>
-                            </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </p>

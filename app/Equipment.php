@@ -40,6 +40,11 @@ class Equipment extends Model
         return $this->belongsTo('LabEquipment\Lab');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany('LabEquipment\Booking');
+    }
+
     public function scopeFindAll($query)
     {
         return $query

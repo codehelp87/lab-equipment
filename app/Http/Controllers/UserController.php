@@ -2,8 +2,10 @@
 
 namespace LabEquipment\Http\Controllers;
 
+use Auth;
 use LabEquipment\User;
 use LabEquipment\Equipment;
+use LabEquipment\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -32,8 +34,16 @@ class UserController extends Controller
     public function viewMyProfile()
     {
         $equipments = Equipment::findAll();
+        $bookings =  $this->showMyBookingHistory();
 
-        return view('student.my_profile', compact('equipments'));
+        return view('student.my_profile', compact('equipments', 'bookings'));
+    }
+
+    protected function showMyBookingHistory()
+    {
+        $user = Auth::user();
+
+        return Booking::findOneByEquipment($user->id);
     }
 
     public function editUserInfo(Request $request, $email)
