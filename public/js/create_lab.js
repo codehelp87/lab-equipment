@@ -34,6 +34,7 @@
             $btn.button('reset')
             if (data.message == 200) {
               toastr.success('User was assigned to Lab successfully');
+              return false
             }
             toastr.error(data.message);
             return false
