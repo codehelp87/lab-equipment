@@ -4,10 +4,44 @@
       let lab = new Lab;
       lab.createLab();
       lab.assignUserToLab();
+      lab.getLabEquipment();
     });
   }
 
   class Lab {
+    getLabEquipment() {
+      let lab = new Lab;
+      let selectLab = $(document)
+        .find('form#training_request')
+        .find('select#lab');
+      let equipments = $(document)
+        .find('form#training_request')
+        .find('select#equipment');
+
+      selectLab.on('change', function() {
+        let _this = $(this);
+        let labId = _this.val();
+        const route = '/labs/'+labId+'/equipments';
+        lab.makeAjaxCall(route, '', 'GET')
+        .done(function(data) {
+          if (data.length > 0 && data[0].availability != undefined) {
+            let options = '';
+            for (let equipment in data) {
+              options += '<option value='+data[equipment].id+'>'+data[equipment].model_no+'</option>'
+            }
+            equipments.append(options);
+            return toastr.success('Lab Equipments has been added');
+          }
+          return toastr.error('Lab Equipments not available');
+        })
+        .fail(function(error) {
+          console.log(error);
+        })
+        return false;
+      });
+    }
+
+
     assignUserToLab() {
       let lab = new Lab;
       let saveBtn = $('#save-lab-user');

@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class LabController extends Controller
 {
+    public function getLabEquipments(Request $request, $id) 
+    {
+        $lab = Lab::findOneById($id);
+
+        if (count($lab) > 0) {
+            $equipments = $lab->equipments;
+
+            return response()->json($equipments, 200);
+        }
+
+        return response()->json([
+            'message' => 'Lab equipments not available'
+        ], 200);
+    }
+
     public function createLab(Request $request)
     {
     	$lab = Lab::create([
