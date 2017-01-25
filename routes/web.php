@@ -42,6 +42,7 @@ Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 
 Route::post('/equipments/booking', 'BookingController@addBooking');
 
+Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
 Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
 Route::get('/equipments/{id}/booking', 'EquipmentController@bookEquipment');
 Route::post('/equipments/add', 'EquipmentController@createEquipment');

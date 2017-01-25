@@ -4,11 +4,40 @@ namespace LabEquipment\Http\Controllers;
 
 use Cloudder;
 use LabEquipment\Lab;
+use LabEquipment\LabUser;
 use Illuminate\Http\Request;
 use LabEquipment\Equipment;
 
 class EquipmentController extends Controller
 {
+    public function EquipmentUsers(Request $request, $id)
+    {
+        $students = [];
+        $equipment = Equipment::FindOneById($id);
+
+        if (count($equipment) > 0) {
+            $equipmentLab = $equipment->lab;
+
+            if (count($equipmentLab) > 0) {
+                $labUser =  LabUser::FindOneById($equipmentLab->id);
+                $labProfessor = $labUser->user->name;
+            }
+
+            $bookings = $equipment->bookings;
+            if (count($bookings) > 0) {
+                foreach($bookings as $index => $booking) {
+                    $students[$index] = $booking->user;
+                }
+            }
+            return response()->json([$labProfessor, $students], 200);
+        }
+
+        return response()->json([
+            'message' => 'No requesters for this equipment',
+        ]);
+
+    }
+
     public function bookEquipment(Request $request, $id)
     {
         $equipment = Equipment::find($id);

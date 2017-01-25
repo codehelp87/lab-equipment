@@ -1,40 +1,21 @@
-<form class="form-horizontal">
+<form class="form-horizontal approve-request" id="approve-request">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Equipment</label>
         <div class="col-sm-4">
             <select name="equipment" id="equipment" class="form-control" required="required">
                 <option value="0">Select Equipment</option>
+                @if($equipments->count() > 0)
+                @foreach($equipments as $equipment)
+                <option value="{{ $equipment->id }}">{{ $equipment->model_no }}</option>
+                @endforeach
+                @endif
             </select>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-12">
-            <table class="table table-responsive">
+            <table class="table table-responsive" id="display-training-request">
                 <tbody>
-                    <tr>
-                        <td>Larry</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>
-                            <div class="form-group">
-                                <input type="checkbox" class="form-control" id="select">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Larry</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>
-                            <div class="form-group">
-                                <input type="checkbox" class="form-control" id="select">
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -59,7 +40,7 @@
     </div>
     <div class="form-group">
         <label for="location" class="col-sm-2 control-label">Location</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
             <input type="text" class="form-control" id="location" placeholder="Location">
         </div>
     </div>

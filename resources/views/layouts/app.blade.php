@@ -41,6 +41,7 @@
         <script src="{{ asset('js/lab.js') }}"></script>
         <script src="{{ asset('js/add_equipment.js') }}"></script>
         <script src="{{ asset('js/book_equipment.js') }}"></script>
+        <script src="{{ asset('js/training_request.js') }}"></script>
         <script type="text/javascript">
             $(function () {
                 var date = new Date();

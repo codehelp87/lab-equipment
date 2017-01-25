@@ -63,7 +63,7 @@ class Equipment extends Model
     public function scopeFindOneById($query, $userId)
     {
         return $query
-            ->where('id', $id)
+            ->where('id', $userId)
             ->first();
     }
 }
