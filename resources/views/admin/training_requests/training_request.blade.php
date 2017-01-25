@@ -21,20 +21,35 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Date of Training session</label>
-        <div class="col-sm-3">
-            <select name="equipment" id="equipment" class="form-control" required="required">
+        <label for="year" class="col-sm-2 control-label">Date of Training session</label>
+        <div class="col-sm-2">
+            <select name="year" id="year" class="form-control" required="required">
                 <option value="0">Select Year</option>
+                <?php 
+                  for($y = 2017; $y <= 2017; $y++) {
+                    echo '<option value='.$y.'>'.$y.'</option>';
+                  }
+                ?>
             </select>
         </div>
-        <div class="col-sm-3">
-            <select name="equipment" id="equipment" class="form-control" required="required">
+        <div class="col-sm-2">
+            <select name="month" id="month" class="form-control" required="required">
                 <option value="0">Select Month</option>
+                <?php 
+                  for($m = 1; $m <= 12; $m++) {
+                    echo '<option value='.$m.'>'.$m.'</option>';
+                  }
+                ?>
             </select>
         </div>
-        <div class="col-sm-3">
-            <select name="equipment" id="equipment" class="form-control" required="required">
+        <div class="col-sm-2">
+            <select name="day" id="day" class="form-control" required="required">
                 <option value="0">Select Day</option>
+                <?php 
+                  for($d = 1; $d <= 31; $d++) {
+                    echo '<option value='.$d.'>'.$d.'</option>';
+                  }
+                ?>
             </select>
         </div>
     </div>
