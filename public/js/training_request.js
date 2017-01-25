@@ -3,10 +3,89 @@
     return $(this).each(() => {
       let req = new TrainingRequest;
       req.getLabEquipment();
+      req.selectTrainingRequest();
     });
   }
 
   class TrainingRequest {
+    selectTrainingRequest() {
+      let selectedStudents = [];
+      let req = new TrainingRequest;
+      let smtBtn = $(document)
+        .find('form#approve-request button.btn-default');
+
+      smtBtn.on('click', function() {
+        let modal = $('div#list-accepted-request');
+        let checkBox = $(document)
+          .find('table#display-training-request')
+          .find('input[type="checkbox"]:checked');
+
+        let location = $(document)
+          .find('form#approve-request input#location').val();
+        let month = $(document)
+          .find('form#approve-request select#month').val();
+        let day = $(document)
+          .find('form#approve-request select#day').val();
+        let year = $(document)
+          .find('form#approve-request select#year').val();
+
+        if (year == '') {
+          toastr.error('Pls select year');
+          return false;
+        }
+
+        if (month == '') {
+          toastr.error('Pls select month');
+          return false;
+        }
+
+        if (day == '') {
+          toastr.error('Pls select day');
+          return false;
+        }
+
+        if (location == '') {
+          toastr.error('Pls select training location');
+          return false;
+        }
+
+        if (checkBox.size() <= 0) {
+          toastr.error('Pls select student to add');
+          return false
+        }
+
+        checkBox.each(function(index, el) {
+          selectedStudents.push($(this).attr('data-name'));
+        });
+
+        let bookingDate = year+'/'+month+'/'+day;
+
+        let modalContent = req.prepareModal(bookingDate, selectedStudents, location);
+        modal.find('div.modal-body').html(modalContent);
+        modal.modal('show');
+        return false;
+      });
+    }
+
+    prepareModal(bookingDate, selectedStudents, location) {
+      let stuff = '<h5 class="text-center">Are you sure to confirm this request and send a confirmation email?</h5>';
+      let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
+      let trainingLocation = '<h5 class="text-center">'+location+'</h5>';
+      let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
+      let students = '<ul style="list-style:none;">';
+        for(let i = 0; i < selectedStudents.length; i++) {
+          students += '<li><strong>'+decodeURI(selectedStudents[i])+'</strong></li>';
+        }
+        students += '</ul>';
+
+        stuff += students;
+        stuff += dateSelected;
+        stuff += trainingLocation;
+        stuff +=  info;
+
+      return stuff;
+    }
+
     getLabEquipment() {
       let req = new TrainingRequest;
 
@@ -44,14 +123,13 @@
       let labProf = data[0];
       let students = data[1];
       for (let i = 0; i < students.length; i++) {
-        console.log(students[i].student_id);
         tableRow += '<tr>' +
           '<td>'+students[i].student_id+'</td>' +
           '<td>'+students[i].name+'</td>' +
           '<td>'+students[i].email+'</td>' +
           '<td>'+students[i].phone+'</td>'+
           '<td>'+labProf+'</td>'+
-          '<td><input type="checkbox" class="form-control training-requester" data-name='+encodeURI(students[i].name)+'id="training-requester" value='+students[i].id+'></td>';
+          '<td><input type="checkbox" class="form-control training-requester" data-name='+encodeURI(students[i].name)+' id="training-requester" value='+students[i].id+'></td>';
          tableRow += '</tr>';
       }
       return tableRow;
