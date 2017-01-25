@@ -29,7 +29,7 @@
             for (let equipment in data) {
               options += '<option value='+data[equipment].id+'>'+data[equipment].model_no+'</option>'
             }
-            equipments.append(options);
+            equipments.html(options);
             return toastr.success('Lab Equipments has been added');
           }
           return toastr.error('Lab Equipments not available');
