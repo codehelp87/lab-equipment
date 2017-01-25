@@ -8,7 +8,7 @@
 				Dear {{ $name }} ,<br>
 				You have signed up for the basic equipment training session.<br>
 				<?php $newDate = date_create($date); ?>
-				Date: {{ date_format($newDate,'F m/d H:i:s') }} at 9:00am <br>
+				Date: {{ date_format($newDate,'F') }} <span>1st(Wed) at 9:00am</span> <br>
 				Location: {{ $location }}<br>
 				Please be on time.<br>
 				Thanks,<br><br>

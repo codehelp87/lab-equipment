@@ -85,6 +85,7 @@
             if (data.id != undefined) {
               modal.modal('hide');
               toastr.success('Your confirmation has been sent');
+              req.clearFields();
               return false;
             }
             return toastr.success(data.message);
@@ -96,6 +97,17 @@
       });
         return false;
       });
+    }
+
+    clearFields() {
+      let location = $(document)
+          .find('form#approve-request input#location').val('');
+        let month = $(document)
+          .find('form#approve-request select#month').val('');
+        let day = $(document)
+          .find('form#approve-request select#day').val('');
+        let year = $(document)
+          .find('form#approve-request select#year').val('');
     }
 
     prepareModal(bookingDate, selectedStudents, location) {
