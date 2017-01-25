@@ -19,6 +19,9 @@ Auth::routes();
 Route::get('/training/register', 'UserController@requestForm')
     ->name('request_training');
 
+Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
+    ->name('training_confirmation');
+
 Route::get('/home', 'HomeController@index');
 Route::get('/home/profile', 'UserController@viewMyProfile')
     ->name('my_profile');

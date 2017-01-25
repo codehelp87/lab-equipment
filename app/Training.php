@@ -14,16 +14,12 @@ class Training extends Model
     protected $fillable = [
         'date_of_training_session',
         'location',
-        'booking_id',
+        'user_id',
      ];
     
     public function user()
     {
         return $this->belongs('LabEquipment\User');
     }
-    
-    public function booking()
-    {
-    	return $this->belongsTo('LabEquipment\Booking');
-    }
+
 }

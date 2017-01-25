@@ -16,6 +16,7 @@ class Booking extends Model
         'equipment_id',
         'time_slot',
         'booking_date',
+        'session',
     ];
 
     /**
@@ -58,5 +59,19 @@ class Booking extends Model
             ->where('user_id', $userId)
             ->orderBy('id', 'DESC')
             ->get();
+    }
+
+    public function scopeFindOneById($query, $id)
+    {
+        return $query
+            ->where('id', $id)
+            ->first();
+    }
+
+    public function scopeFindOneByStudent($query, $userId)
+    {
+        return $query
+            ->where('user_id', $userId)
+            ->first();
     }
 }

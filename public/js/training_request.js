@@ -70,7 +70,7 @@
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
         let okBtn = modal.find('button.ok');
-        const route = '/equipments/training/request';
+        const route = '/equipments/training/confirmation';
 
         let params = {
           'equipment': equipmentId,

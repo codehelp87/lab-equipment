@@ -8,12 +8,50 @@ use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\Equipment;
 use LabEquipment\Booking;
+use LabEquipment\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function confirmTrainingRequest(Request $request)
+    {
+        $training = null;
+        $students = $request->students;
+
+        if (count($students) > 0) {
+            foreach($students as $student) {
+                $training = Training::create([
+                    'user_id' => $student,
+                    'date_of_training_session' => $request->booking_date,
+                    'location' => $request->location,
+                ]);
+
+                $booking = Booking::findOneByStudent($student);
+                $booking->destroy($booking->id);
+
+                // Send confirmation email
+                $user = User::findOneById($student);
+                // send email
+                $data = [
+                    'name' => $user->name,
+                    'email' => $user->email, 
+                    'date' => $request->session,
+                    'location' => $request->location,
+                ];
+                $this->sendEmail($data, $user->email);
+            }
+            
+            // marked them as completedly left booking
+            if (!is_null($training)) {
+                return response()->json($training, 200);
+            }
+
+            return response()->json(['message' => 'Error creating training'], 400);
+        }
+    }
+
     public function createTrainingRequest(Request $request)
     {
         // // Allow maximum of 5 students per training request
@@ -34,16 +72,9 @@ class UserController extends Controller
                     'equipment_id' => $request->equipment,
                     'time_slot' => 'nil',
                     'booking_date' => $request->session,
+                    'session' => $request->session
                 ]);
             }
-
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email, 
-                'date' => $request->session
-            ];
-            // send email
-            //$this->sendEmail($data, $request->email);
 
             return redirect()->route('training_request_confirmation');
         // }
