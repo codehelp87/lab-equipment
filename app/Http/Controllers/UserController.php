@@ -58,26 +58,40 @@ class UserController extends Controller
         // $bookings = Booking::where('booking_date', $request->session)->get();
 
         // if (count($bookings) < 5) {
-            $user = User::create([
-                'name' => $request->name,
-                'student_id' => $request->student_id,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'password' => \Hash::make($request->email),
+        // 
+        // Check for password
+        $newPassword =  $request->new_password;
+        $confirmPassword = $request->com_password;
+
+        if ($newPassword !== $confirmPassword) {
+            return redirect()
+                ->back()
+                ->with('message', 'Password mismatched');
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'student_id' => $request->student_id,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => \Hash::make($request->newPassword),
+        ]);
+
+        //Block the account after signup
+        $user->destroy($user->id);
+
+        if (count($user) > 0) {
+            $booking = Booking::create([
+                'user_id' => $user->id,
+                'equipment_id' => $request->equipment,
+                'time_slot' => 'nil',
+                'booking_date' => $request->session,
+                'session' => $request->session
             ]);
+        }
 
-            if (count($user) > 0) {
-                $booking = Booking::create([
-                    'user_id' => $user->id,
-                    'equipment_id' => $request->equipment,
-                    'time_slot' => 'nil',
-                    'booking_date' => $request->session,
-                    'session' => $request->session
-                ]);
-            }
-
-            return redirect()->route('training_request_confirmation');
-        // }
+        return redirect()->route('training_request_confirmation');
+    // }
 
     }
 
