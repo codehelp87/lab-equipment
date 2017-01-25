@@ -27,8 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::findAll();
+        $adminUsers = User::FindAllAdmin();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
-        return view('admin.admin', compact('users', 'labs', 'equipments'));
+        return view('admin.admin', compact('users', 'labs', 'equipments', 'adminUsers'));
     }
 }

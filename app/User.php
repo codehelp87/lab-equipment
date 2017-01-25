@@ -78,6 +78,14 @@ class User extends Authenticatable
             ->get();
     }
 
+    public function scopeFindAllAdmin($query)
+    {
+        return $query
+            ->where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function scopeFindOneByIdWithTrashed($query, $userId)
     {
         return $query

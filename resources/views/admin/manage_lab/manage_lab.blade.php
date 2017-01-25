@@ -28,8 +28,8 @@
         <div class="col-sm-10">
             <select name="user" id="user" class="form-control" required="required">
                 <option value="">Choose User</option>
-                @if ($users->count() > 0)
-                @foreach($users as $user)
+                @if ($adminUsers->count() > 0)
+                @foreach($adminUsers as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
                 @endif

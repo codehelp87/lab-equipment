@@ -51,7 +51,7 @@
           '<td>'+students[i].email+'</td>' +
           '<td>'+students[i].phone+'</td>'+
           '<td>'+labProf+'</td>'+
-          '<td><input type="checkbox" class="form-control training-requester" id="training-requester" value='+students[i].id+'></td>';
+          '<td><input type="checkbox" class="form-control training-requester" data-name='+encodeURI(students[i].name)+'id="training-requester" value='+students[i].id+'></td>';
          tableRow += '</tr>';
       }
       return tableRow;
