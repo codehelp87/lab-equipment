@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyToTraining extends Migration
+class RenameBookingIdToUserId extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class AddForeignKeyToTraining extends Migration
     public function up()
     {
         Schema::table('trainings', function (Blueprint $table) {
-            $table->integer('booking_id')
+            $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
-            $table->foreign('booking_id')
+             $table->foreign('user_id')
                 ->references('id')
-                ->on('bookings')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class AddForeignKeyToTraining extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('trainings');
     }
 }

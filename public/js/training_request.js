@@ -10,9 +10,12 @@
   class TrainingRequest {
     selectTrainingRequest() {
       let selectedStudents = [];
+      let studentIds = [];
       let req = new TrainingRequest;
       let smtBtn = $(document)
         .find('form#approve-request button.btn-default');
+      let equipmentId = $(document)
+        .find('form#approve-request input#equipment').val();
 
       smtBtn.on('click', function() {
         let modal = $('div#list-accepted-request');
@@ -55,14 +58,42 @@
         }
 
         checkBox.each(function(index, el) {
-          selectedStudents.push($(this).attr('data-name'));
+          let _this = $(this);
+          selectedStudents.push(_this.attr('data-name'));
+          studentIds.push(_this.val());
         });
 
         let bookingDate = year+'/'+month+'/'+day;
 
         let modalContent = req.prepareModal(bookingDate, selectedStudents, location);
+        modal.find('div.modal-body').html('');
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
+        let okBtn = modal.find('button.ok');
+        const route = '/equipments/training/request';
+
+        let params = {
+          'equipment': equipmentId,
+          'students': studentIds,
+          'booking_date': bookingDate,
+          'location': location
+        }
+
+        okBtn.on('click', function() {
+          req.makeAjaxCall(route, params, 'POST')
+          .done(function(data) {
+            if (data.id != undefined) {
+              modal.modal('hide');
+              toastr.success('Your confirmation has been sent');
+              return false;
+            }
+            return toastr.success(data.message);
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+        return false;
+      });
         return false;
       });
     }

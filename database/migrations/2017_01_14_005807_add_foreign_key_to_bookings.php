@@ -22,14 +22,6 @@ class AddForeignKeyToBookings extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->integer('lab_id')
-                ->unsigned()
-                ->default(1);
-            $table->foreign('lab_id')
-                ->references('id')
-                ->on('labs')
-                ->onDelete('cascade');
-
             $table->integer('equipment_id')
                 ->unsigned()
                 ->default(1);

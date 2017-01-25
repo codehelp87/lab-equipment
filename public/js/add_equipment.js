@@ -80,6 +80,7 @@
     let equipment = new Equipment;
     $(function() {
       $('body').on('click', 'table#list-equipment a', function() {
+        var $btn = $(this).button('loading');
       let _this = $(this);
       let id = _this.attr('id');
       let editMode =  $('table#list-equipment')
@@ -91,9 +92,11 @@
               .slideDown()
               .html(data)
               .css('display', 'block');
+              $btn.button('reset')
           })
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
+            $btn.button('reset')
           });
 
           return false;

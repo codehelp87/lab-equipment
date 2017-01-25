@@ -14,7 +14,6 @@ class Lab extends Model
     protected $fillable = [
         'title',
         'model_no',
-        'user_id'
     ];
 
     public function labUser()
