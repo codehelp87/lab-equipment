@@ -9,16 +9,17 @@ use LabEquipment\User;
 use LabEquipment\Equipment;
 use LabEquipment\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
     public function createTrainingRequest(Request $request)
     {
-        // Allow maximum of 5 students per training request
-        $bookings = Booking::where('booking_date', $request->session)->get();
+        // // Allow maximum of 5 students per training request
+        // $bookings = Booking::where('booking_date', $request->session)->get();
 
-        if (count($bookings) < 5) {
+        // if (count($bookings) < 5) {
             $user = User::create([
                 'name' => $request->name,
                 'student_id' => $request->student_id,
@@ -36,16 +37,25 @@ class UserController extends Controller
                 ]);
             }
 
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email, 
+                'date' => $request->session
+            ];
+            // send email
+            //$this->sendEmail($data, $request->email);
+
             return redirect()->route('training_request_confirmation');
-        }
+        // }
 
-        // Create the message
-        //Toast::error('We have reach the maximum of five students for this month');
-        // Return a HTTP response to initiate the new session
-        //return Redirect::to('request_training');
-        
-        abort(400, 'We have reach the maximum of five students for this month');
+    }
 
+    protected function sendEmail($data, $email)
+    {
+        Mail::send('student.email', $data, function ($message) use ($email) {
+            $message->from('lab-equipment@domain.com', 'Confirmation Email');
+            $message->to($email)->subject('Confirmation Email');
+        });
     }
 
     public function requestForm()
