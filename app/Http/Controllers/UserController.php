@@ -78,7 +78,7 @@ class UserController extends Controller
         ]);
 
         //Block the account after signup
-        $user->destroy($user->id);
+        //$user->destroy($user->id);
 
         if (count($user) > 0) {
             $booking = Booking::create([
@@ -222,7 +222,7 @@ class UserController extends Controller
     public function gettUserStatus(Request $request, $status)
     {
         if ($status == 0) {
-            $users = User::where('deleted_at', '!=', NULL)->get();
+            $users = User::onlyTrashed()->get();
             if ($users->count() > 0) {
                 return response()->json($users, 200);
             }

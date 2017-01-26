@@ -49,7 +49,7 @@ class LabController extends Controller
 
         if (count($lab) > 0) {
             $labUsers = [];
-            $labUsers = LabUser::where('lab_id',$lab->id)->get();
+            $labUsers = LabUser::where('lab_id', $lab->id)->get();
 
             if (count($labUsers) > 0) {
                 foreach ($labUsers as $index => $users) {
