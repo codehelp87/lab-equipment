@@ -18,10 +18,10 @@
         .find('form#complete-training button.btn-default');
         smtBtn.on('click', function() {
           let equipmentId = $(document)
-            .find('form#complete-training input#equipment')
+            .find('form#complete-training select#equipment')
             .val();
           let equipmentName = $(document)
-            .find('form#complete-training input#equipment option:selected')
+            .find('form#complete-training select#equipment option:selected')
             .text();
           let checkBox = $(document)
             .find('table#display-complete-training')
@@ -37,6 +37,11 @@
             selectedStudents.push(_this.attr('data-name'));
             studentIds.push(_this.val());
           });
+
+          let modalContent = req.prepareModalForTraniningCompleted(equipmentName, selectedStudents);
+          modal.find('div.modal-body').html(modalContent);
+          selectedStudents = [];
+          modal.modal('show');
 
           let okBtn = modal.find('button.ok');
           const route = '/equipments/training/completed';
@@ -187,20 +192,18 @@
     }
 
     prepareModalForTraniningCompleted(equipment, selectedStudents) {
-      let students = '';
+      let students, stuff = '';
       let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
       students = '<ul style="list-style:none;">';
         for(let i = 0; i < selectedStudents.length; i++) {
           students += '<li><strong>'+decodeURI(selectedStudents[i])+'</strong></li>';
         }
       students += '</ul>';
-      let selectedEquipment = '<h5 class="text-center">'+equipment+'</h5>';
-      let trainingInfo = '<h5 class="text-center">Training is completed</h5>';
+      let trainingInfo = '<h5 class="text-center">'+decodeURI(equipment)+' Training is completed </h5>';
 
-    stuff += students;
-    stuff += selectedEquipment;
-    stuff += trainingInfo;
-    stuff +=  info;
+      stuff += students;
+      stuff += trainingInfo;
+      stuff +=  info;
 
       return stuff;
     }
