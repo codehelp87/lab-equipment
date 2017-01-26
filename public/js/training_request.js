@@ -65,9 +65,9 @@
 
         let bookingDate = year+'/'+month+'/'+day;
 
-        let modalContent = req.prepareModal(bookingDate, selectedStudents, location);
-        modal.find('div.modal-body').html('');
+        let modalContent  = req.prepareModal(bookingDate, selectedStudents, location);
         modal.find('div.modal-body').html(modalContent);
+        selectedStudents = [];
         modal.modal('show');
         let okBtn = modal.find('button.ok');
         const route = '/equipments/training/confirmation';
@@ -111,20 +111,21 @@
     }
 
     prepareModal(bookingDate, selectedStudents, location) {
+      let students = '';
       let stuff = '<h5 class="text-center">Are you sure to confirm this request and send a confirmation email?</h5>';
       let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
       let trainingLocation = '<h5 class="text-center">'+location+'</h5>';
       let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
-      let students = '<ul style="list-style:none;">';
+      students = '<ul style="list-style:none;">';
         for(let i = 0; i < selectedStudents.length; i++) {
           students += '<li><strong>'+decodeURI(selectedStudents[i])+'</strong></li>';
         }
-        students += '</ul>';
+      students += '</ul>';
 
-        stuff += students;
-        stuff += dateSelected;
-        stuff += trainingLocation;
-        stuff +=  info;
+    stuff += students;
+    stuff += dateSelected;
+    stuff += trainingLocation;
+    stuff +=  info;
 
       return stuff;
     }
