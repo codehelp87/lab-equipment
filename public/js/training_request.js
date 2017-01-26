@@ -89,7 +89,6 @@
               type: 'POST',
               dataType: 'json',
               data: params,
-              //timeout: 10000
             }).done(function(data) {
               if (data.id != undefined) {
                 modal.modal('hide');
@@ -102,12 +101,10 @@
               console.log(error);
             }).always(function() {
               console.log('Complete');
-              xhr.abort();
             });
+            return false;
           });
-          if (requests[0].readyState == 4) {
-            requests[0].abort();
-          }
+        return false;
       });
     }
 
@@ -180,7 +177,6 @@
         })
         .always(function() {
             console.log('Complete');
-            //xhr.abort();
         });
         return false;
       });
@@ -209,10 +205,6 @@
         'X-CSRF-Token': $('input[name="_token"]').val()
       },
       url: url,
-<<<<<<< HEAD
-      timeout: 1000,
-=======
->>>>>>> 9c5f9e2e8024f01088e6e8f0e8956218afebead8
       type: method,
       dataType: 'json',
       data: params,

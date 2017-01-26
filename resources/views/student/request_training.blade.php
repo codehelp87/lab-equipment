@@ -17,7 +17,7 @@
                         </p>
                         <div class="form-group">
                             @if (session('message'))
-                            <div class="alert alert-error text-center">
+                            <div class="alert alert-danger text-center">
                                 {{ session('message') }}
                             </div>
                             @endif

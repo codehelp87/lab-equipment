@@ -55,19 +55,24 @@ class UserController extends Controller
 
     public function createTrainingRequest(Request $request)
     {
-        // // Allow maximum of 5 students per training request
-        // $bookings = Booking::where('booking_date', $request->session)->get();
-
-        // if (count($bookings) < 5) {
-        // 
         // Check for password
         $newPassword =  $request->new_password;
         $confirmPassword = $request->com_password;
 
         if ($newPassword !== $confirmPassword) {
             return redirect()
-                ->back()
-                ->with('message', 'Password mismatched');
+                ->route('request_training')
+                ->with('message', 'Password mismatched')
+                ->withInput();
+        }
+
+        $user = User::findOneByEmail($request->email);
+
+        if (count($user) > 0) {
+            return redirect()
+                ->route('request_training')
+                ->with('message', 'Email already exists')
+                ->withInput();
         }
 
         $user = User::create([
@@ -88,9 +93,6 @@ class UserController extends Controller
             ]);
         }
 
-        //Block the account after signup
-        //$user->destroy($user->id);
-
         if (count($user) > 0) {
             $booking = Booking::create([
                 'user_id' => $user->id,
@@ -102,8 +104,6 @@ class UserController extends Controller
         }
 
         return redirect()->route('training_request_confirmation');
-    // }
-
     }
 
     protected function sendEmail($data, $email)
