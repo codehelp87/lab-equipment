@@ -6,6 +6,7 @@ use Auth;
 //use Grimthorr\LaravelToast\Toast;
 use LabEquipment\Lab;
 use LabEquipment\User;
+use LabEquipment\LabUser;
 use LabEquipment\Equipment;
 use LabEquipment\Booking;
 use LabEquipment\Training;
@@ -76,6 +77,16 @@ class UserController extends Controller
             'phone' => $request->phone,
             'password' => \Hash::make($request->newPassword),
         ]);
+
+        // lab user 
+        $lab = Lab::findOneById($request->lab);
+
+        if ($lab->count() > 0) {
+            $labUser = LabUser::create([
+                'user_id' => $user->id,
+                'lab_id' => $lab->id,
+            ]);
+        }
 
         //Block the account after signup
         //$user->destroy($user->id);
