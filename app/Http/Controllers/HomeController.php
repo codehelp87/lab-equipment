@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::findAll();
+        $users = User::findAllWithTrashed();
         $adminUsers = User::FindAllAdmin();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
