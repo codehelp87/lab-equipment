@@ -3,7 +3,7 @@
         <label for="name" class="col-sm-2 control-label">Equipment</label>
         <div class="col-sm-4">
             <select name="equipment" id="equipment" class="form-control" required="required">
-                <option value="0">Select Equipment</option>
+                <option value="">Select Equipment</option>
                 @if($equipments->count() > 0)
                 @foreach($equipments as $equipment)
                 <option value="{{ $equipment->id }}">{{ $equipment->model_no }}</option>

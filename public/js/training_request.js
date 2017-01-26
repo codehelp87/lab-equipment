@@ -4,12 +4,51 @@
       let req = new TrainingRequest;
       req.getLabEquipment();
       req.selectTrainingRequest();
+      req.completeTraining();
     });
   }
 
   class TrainingRequest {
+    completeTraining() {
+      let req = new TrainingRequest;
+      let selectedStudents = [];
+      let studentIds = [];
+      let modal = $('div#list-complete-training');
+      let smtBtn = $(document)
+        .find('form#complete-training button.btn-default');
+        smtBtn.on('click', function() {
+          let equipmentId = $(document)
+            .find('form#complete-training input#equipment')
+            .val();
+          let equipmentName = $(document)
+            .find('form#complete-training input#equipment option:selected')
+            .text();
+          let checkBox = $(document)
+            .find('table#display-complete-training')
+            .find('input[type="checkbox"]:checked');
+
+          if (checkBox.size() <= 0) {
+            toastr.error('Pls select student to add');
+            return false
+          }
+
+          checkBox.each(function(index, el) {
+            let _this = $(this);
+            selectedStudents.push(_this.attr('data-name'));
+            studentIds.push(_this.val());
+          });
+
+          let okBtn = modal.find('button.ok');
+          const route = '/equipments/training/completed';
+
+          okBtn.on('click', function() {
+            return false;
+          });
+          return false;
+        });
+    }
+
     selectTrainingRequest() {
-      let requests = [];
       let selectedStudents = [];
       let studentIds = [];
       let req = new TrainingRequest;
@@ -147,37 +186,58 @@
       return stuff;
     }
 
+    prepareModalForTraniningCompleted(equipment, selectedStudents) {
+      let students = '';
+      let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
+      students = '<ul style="list-style:none;">';
+        for(let i = 0; i < selectedStudents.length; i++) {
+          students += '<li><strong>'+decodeURI(selectedStudents[i])+'</strong></li>';
+        }
+      students += '</ul>';
+      let selectedEquipment = '<h5 class="text-center">'+equipment+'</h5>';
+      let trainingInfo = '<h5 class="text-center">Training is completed</h5>';
+
+    stuff += students;
+    stuff += selectedEquipment;
+    stuff += trainingInfo;
+    stuff +=  info;
+
+      return stuff;
+    }
+
     getLabEquipment() {
       let req = new TrainingRequest;
 
       let selectEquipment = $(document)
-        .find('form#approve-request')
+        .find('form#approve-request, form#complete-training')
         .find('select#equipment');
 
       let tableBody = $(document)
-        .find('form#approve-request')
-        .find('table#display-training-request tbody');
+        .find('form#approve-request, form#complete-training')
+        .find('table#display-training-request tbody, table#display-complete-training tbody');
 
       selectEquipment.on('change', function() {
         let _this = $(this);
         let equipmentId = _this.val();
         const route = '/equipments/'+equipmentId+'/students';
-        req.makeAjaxCall(route, '', 'GET')
-        .done(function(data) {
-          if (data[1].length > 0) {
-            let students = req.displayTrainingRequest(data);
-            tableBody.html(students);
-            return toastr.success('Student loaded');
-          }
-          tableBody.html('');
-          return toastr.error('No requests available for this equipment');
-        })
-        .fail(function(error) {
-          console.log(error);
-        })
-        .always(function() {
-            console.log('Complete');
-        });
+        if (_this.val() != '') {
+          req.makeAjaxCall(route, '', 'GET')
+            .done(function(data) {
+              if (data[1].length > 0) {
+                let students = req.displayTrainingRequest(data);
+                tableBody.html(students);
+                return toastr.success('Student loaded');
+              }
+              tableBody.html('');
+              return toastr.error('No requests available for this equipment');
+            })
+            .fail(function(error) {
+              console.log(error);
+            })
+            .always(function() {
+              console.log('Complete');
+            });
+        }
         return false;
       });
     }
