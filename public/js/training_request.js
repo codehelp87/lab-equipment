@@ -81,33 +81,33 @@
         }
 
         okBtn.on('click', function() {
-        requests.push(req.makeAjaxCall(route, params, 'POST'));
-
-        for(var i = 0; i < requests.length; i++) {
-          if (requests[i].readyState == 4) {
-            requests[i].abort();
-          }
-        }
-          requests[0].done(function(data) {
-            if (data.id != undefined) {
-              modal.modal('hide');
-              studentIds = [];
-              req.clearFields();
-              for(var i = 0; i < requests.length; i++) {
-                requests[i].abort();
+          $.ajax({
+              headers:{
+                'X-CSRF-Token': $('input[name="_token"]').val()
+              },
+              url: route,
+              type: 'POST',
+              dataType: 'json',
+              data: params,
+              //timeout: 10000
+            }).done(function(data) {
+              if (data.id != undefined) {
+                modal.modal('hide');
+                req.clearFields();
+                okBtn.unbind('click');
+                return toastr.success('Your confirmation has been sent');
               }
-              return toastr.success('Your confirmation has been sent');
-            }
-            return toastr.success(data.message);
-          })
-          .fail(function(error) {
-            console.log(error);
+              return toastr.success(data.message);
+            }).fail(function(error) {
+              console.log(error);
+            }).always(function() {
+              console.log('Complete');
+              xhr.abort();
+            });
           });
           if (requests[0].readyState == 4) {
             requests[0].abort();
           }
-      });
-        return false;
       });
     }
 
@@ -178,6 +178,10 @@
         .fail(function(error) {
           console.log(error);
         })
+        .always(function() {
+            console.log('Complete');
+            //xhr.abort();
+        });
         return false;
       });
     }
@@ -205,6 +209,10 @@
         'X-CSRF-Token': $('input[name="_token"]').val()
       },
       url: url,
+<<<<<<< HEAD
+      timeout: 1000,
+=======
+>>>>>>> 9c5f9e2e8024f01088e6e8f0e8956218afebead8
       type: method,
       dataType: 'json',
       data: params,
