@@ -15,11 +15,18 @@ class Training extends Model
         'date_of_training_session',
         'location',
         'user_id',
+        'equipment_id',
+        'status',
      ];
     
     public function user()
     {
-        return $this->belongs('LabEquipment\User');
+        return $this->belongsTo('LabEquipment\User');
+    }
+
+    public function equipment()
+    {
+        return $this->belongsTo('LabEquipment\Equipment');
     }
 
 }

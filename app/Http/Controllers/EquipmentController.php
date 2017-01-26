@@ -7,11 +7,38 @@ use Cloudder;
 use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\LabUser;
-use Illuminate\Http\Request;
 use LabEquipment\Equipment;
+use LabEquipment\Training;
+use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+    public function TrainingUsers(Request $request, $id)
+    {
+        $students = [];
+        $equipment = Equipment::FindOneById($id);
+
+        if (count($equipment) > 0) {
+            $user =  User::FindOneById($equipment->user_id);
+            $labProfessor = $user->name;
+
+            $trainings = Training::where('equipment_id', $equipment->id)
+            ->distinct()
+            ->get();
+
+            if (count($trainings) > 0) {
+                foreach($trainings as $index => $training) {
+                    $students[$index] = $training->user;
+                }
+            }
+            return response()->json([$labProfessor, $students], 200);
+        }
+
+        return response()->json([
+            'message' => 'No students available for training under this equipment',
+        ]);
+    }
+
     public function EquipmentUsers(Request $request, $id)
     {
         $students = [];

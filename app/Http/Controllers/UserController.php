@@ -15,6 +15,21 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function completeTraining(Request $request)
+    {
+        $students = $request->students;
+        $equipment = $request->equipment;
+        $equipmentName = $request->equipment_name;
+
+        $trainingRequests = Training::where('equipment_id', $equipment);
+
+        if (count($students) > 0) {
+            foreach($students as $student) {
+                //$equipment
+            }
+        }
+    }
+
     public function confirmTrainingRequest(Request $request)
     {
         $training = null;
@@ -26,10 +41,8 @@ class UserController extends Controller
                     'user_id' => $student,
                     'date_of_training_session' => $request->booking_date,
                     'location' => $request->location,
+                    'equipment_id' => $request->equipment,
                 ]);
-
-                //$booking = Booking::findOneByStudent($student);
-                //$booking->destroy($booking->id);
 
                 // Send confirmation email
                 $user = User::findOneById($student);

@@ -5,6 +5,7 @@
       req.getLabEquipment();
       req.selectTrainingRequest();
       req.completeTraining();
+      req.getTrainingStudents();
     });
   }
 
@@ -45,8 +46,21 @@
 
           let okBtn = modal.find('button.ok');
           const route = '/equipments/training/completed';
+          let params = {
+            'equipment': equipmentId,
+            'students': studentIds,
+            'equipment_name': equipmentName
+          }
 
           okBtn.on('click', function() {
+            req.makeAjaxCall(route, params, 'POST')
+            .done(function(data) {
+              console.log(data);
+              okBtn.unbind('click');
+            })
+            .fail(function(error) {
+              console.log(error);
+            })
             return false;
           });
           return false;
@@ -59,10 +73,11 @@
       let req = new TrainingRequest;
       let smtBtn = $(document)
         .find('form#approve-request button.btn-default');
-      let equipmentId = $(document)
-        .find('form#approve-request input#equipment').val();
 
       smtBtn.on('click', function() {
+        let equipmentId = $(document)
+        .find('form#approve-request select#equipment').val();
+
         let modal = $('div#list-accepted-request');
         let checkBox = $(document)
           .find('table#display-training-request')
@@ -208,16 +223,52 @@
       return stuff;
     }
 
+    getTrainingStudents() {
+      let req = new TrainingRequest;
+      let selectEquipment = $(document)
+        .find('form#complete-training')
+        .find('select#equipment');
+
+      let tableBody = $(document)
+        .find('form#complete-training')
+        .find('table#display-complete-training tbody');
+
+      selectEquipment.on('change', function() {
+        let _this = $(this);
+        let equipmentId = _this.val();
+        const route = '/equipments/'+equipmentId+'/trainings';
+        if (_this.val() != '') {
+          req.makeAjaxCall(route, '', 'GET')
+            .done(function(data) {
+              if (data[1].length > 0) {
+                let students = req.displayTrainingRequest(data);
+                tableBody.html(students);
+                return toastr.success('Student loaded');
+              }
+              tableBody.html('');
+              return toastr.error('No requests available for this equipment');
+            })
+            .fail(function(error) {
+              console.log(error);
+            })
+            .always(function() {
+              console.log('Complete');
+            });
+        }
+        return false;
+      });
+    }
+
     getLabEquipment() {
       let req = new TrainingRequest;
 
       let selectEquipment = $(document)
-        .find('form#approve-request, form#complete-training')
+        .find('form#approve-request')
         .find('select#equipment');
 
       let tableBody = $(document)
-        .find('form#approve-request, form#complete-training')
-        .find('table#display-training-request tbody, table#display-complete-training tbody');
+        .find('form#approve-request')
+        .find('table#display-training-request tbody');
 
       selectEquipment.on('change', function() {
         let _this = $(this);

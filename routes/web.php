@@ -40,6 +40,9 @@ Route::put('/users/{email}/password_change', 'UserController@changePassword');
 Route::post('/training/request/create', 'UserController@createTrainingRequest')
     ->name('create-training-request');
 
+Route::post('equipments/training/completed', 'UserController@completeTraining')
+    ->name('training_completed_confirmation');
+
 Route::get('request/training/confirmation', function() {
     return view('student.training_request_confirmation');
 })->name('training_request_confirmation');
@@ -52,6 +55,8 @@ Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 Route::post('/equipments/booking', 'BookingController@addBooking');
 
 Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
+Route::get('equipments/{id}/trainings', 'EquipmentController@TrainingUsers');
+///
 Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
 Route::get('/equipments/{id}/booking', 'EquipmentController@bookEquipment');
 Route::post('/equipments/add', 'EquipmentController@createEquipment');
