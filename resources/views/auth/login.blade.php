@@ -6,6 +6,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><h4>Chemistry Dept. Equipment User System</h4></div>
                 <div class="panel-body">
+                    @if (session('message'))
+                    <div class="alert alert-danger text-center">
+                        {{ session('message') }}
+                    </div>
+                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

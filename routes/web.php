@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('load_login');
 Route::post('/logout', 'Auth\LoginController@logout');
 
+
+
 Auth::routes();
+
+Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/training/register', 'UserController@requestForm')
     ->name('request_training');
@@ -22,7 +26,8 @@ Route::get('/training/register', 'UserController@requestForm')
 Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
     ->name('training_confirmation');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
 Route::get('/home/profile', 'UserController@viewMyProfile')
     ->name('my_profile');
 
