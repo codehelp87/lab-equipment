@@ -9,6 +9,7 @@
 
   class TrainingRequest {
     selectTrainingRequest() {
+      let requests = [];
       let selectedStudents = [];
       let studentIds = [];
       let req = new TrainingRequest;
@@ -80,20 +81,31 @@
         }
 
         okBtn.on('click', function() {
-          req.makeAjaxCall(route, params, 'POST')
-          .done(function(data) {
+        requests.push(req.makeAjaxCall(route, params, 'POST'));
+
+        for(var i = 0; i < requests.length; i++) {
+          if (requests[i].readyState == 4) {
+            requests[i].abort();
+          }
+        }
+          requests[0].done(function(data) {
             if (data.id != undefined) {
               modal.modal('hide');
-              toastr.success('Your confirmation has been sent');
+              studentIds = [];
               req.clearFields();
-              return false;
+              for(var i = 0; i < requests.length; i++) {
+                requests[i].abort();
+              }
+              return toastr.success('Your confirmation has been sent');
             }
             return toastr.success(data.message);
           })
           .fail(function(error) {
             console.log(error);
           });
-        return false;
+          if (requests[0].readyState == 4) {
+            requests[0].abort();
+          }
       });
         return false;
       });
@@ -108,6 +120,14 @@
           .find('form#approve-request select#day').val('');
         let year = $(document)
           .find('form#approve-request select#year').val('');
+
+        let checkBox = $(document)
+          .find('table#display-training-request')
+          .find('input[type="checkbox"]');
+
+        checkBox.each(function(index, el) {
+          $(this).attr('checked', false);
+        });
     }
 
     prepareModal(bookingDate, selectedStudents, location) {
@@ -184,10 +204,10 @@
         headers:{
         'X-CSRF-Token': $('input[name="_token"]').val()
       },
-        url: url,
-        type: method,
-        dataType: 'json',
-        data: params,
+      url: url,
+      type: method,
+      dataType: 'json',
+      data: params,
       });
     }
   }
