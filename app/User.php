@@ -5,8 +5,9 @@ namespace LabEquipment;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthContract;
 
-class User extends Authenticatable
+class User extends Authenticatable implements AuthContract
 {
     use Notifiable;
     use SoftDeletes;

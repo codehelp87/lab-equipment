@@ -3,7 +3,6 @@
 namespace LabEquipment\Http\Controllers;
 
 use Auth;
-//use Grimthorr\LaravelToast\Toast;
 use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\LabUser;
