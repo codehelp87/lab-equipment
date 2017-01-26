@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/home/profile', 'UserController@viewMyProfile')
     ->name('my_profile');
 
+Route::put('/users/{email}', 'UserController@editUserInfo');
 Route::get('/users/{status}/view', 'UserController@gettUserStatus');
 Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
