@@ -28,8 +28,8 @@ class UserController extends Controller
                     'location' => $request->location,
                 ]);
 
-                $booking = Booking::findOneByStudent($student);
-                $booking->destroy($booking->id);
+                //$booking = Booking::findOneByStudent($student);
+                //$booking->destroy($booking->id);
 
                 // Send confirmation email
                 $user = User::findOneById($student);
