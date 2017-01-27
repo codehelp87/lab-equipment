@@ -11,6 +11,6 @@ class Role extends Model
 
     public function user()
     {
-    	return $this->belongsTo('LabEquipment\User')
+    	return $this->belongsTo('LabEquipment\User');
     }
 }

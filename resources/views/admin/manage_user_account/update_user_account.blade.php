@@ -36,8 +36,16 @@
 		<div class="col-sm-6">
 			<select name="status" id="status" class="form-control" required="required">
 				<option value="">Status</option>
+				@if(is_null($user->deleted_at) || $user->status == 1)
+				<option value="1" selected="selected">Active</option>
+				@else
 				<option value="1">Active</option>
+				@endif
+				@if(!is_null($user->deleted_at) || $user->status == 0)
+				<option value="0" selected="selected">Inactive</option>
+				@else
 				<option value="0">Inactive</option>
+				@endif
 			</select>
 		</div>
 	</div>
@@ -47,8 +55,16 @@
 		<div class="col-sm-6">
 			<select name="role" id="role" class="form-control" required="required">
 				<option value="">Change Role</option>
+				@if ($user->role_id == 1)
+				<option value="1" selected="selected">Student</option>
+				@else
 				<option value="1">Student</option>
+				@endif
+				@if ($user->role_id == 1)
+				<option value="2" selected="selected">Admin</option>
+				@else
 				<option value="2">Admin</option>
+				@endif
 			</select>
 		</div>
 	</div>
@@ -64,8 +80,16 @@
 		<div class="col-sm-6">
 			<select name="equipment[]" id="equipment[]" class="form-control" required="required">
 				<option value="">Status</option>
+				@if ($booking->equipment->availability == 1)
+				<option value="1" selected="selected">Active</option>
+				@else
 				<option value="1">Active</option>
+				@endif
+				@if ($booking->equipment->availability == 0)
+				<option value="0" selected="selected">Inactive</option>
+				@else
 				<option value="0">Inactive</option>
+				@endif
 			</select>
 		</div>
 	</div>
