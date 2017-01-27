@@ -55,19 +55,23 @@ class UserController extends Controller
 
         if (count($students) > 0) {
             foreach($students as $student) {
-                $training = Training::create([
-                    'user_id' => $student,
-                    'date_of_training_session' => $request->booking_date,
-                    'location' => $request->location,
-                    'equipment_id' => $request->equipment,
-                ]);
-
-                // Send confirmation email
+                 // Send confirmation email
                 $user = User::findOneById($student);
+                $getTraining = Training::where('equipment_id', $request->equipment)
+                   ->where('user_id', $user->id);
+
+                if (!count($getTraining) > 0) {
+                    $training = Training::create([
+                        'user_id' => $student,
+                        'date_of_training_session' => $request->booking_date,
+                        'location' => $request->location,
+                        'equipment_id' => $request->equipment,
+                    ]);
+                }
                 // send email
                 $data = [
                     'name' => $user->name,
-                    'email' => $user->email, 
+                    'email' => $user->email,
                     'date' => $request->booking_date,
                     'location' => $request->location,
                 ];
