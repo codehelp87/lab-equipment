@@ -55,8 +55,12 @@
           okBtn.on('click', function() {
             req.makeAjaxCall(route, params, 'POST')
             .done(function(data) {
-              console.log(data);
-              okBtn.unbind('click');
+              if (data.length > 0) {
+                modal.modal('hide');
+                req.clearFields();
+                okBtn.unbind('click');
+                return toastr.success('Your confirmation has been sent');
+              }
             })
             .fail(function(error) {
               console.log(error);
@@ -178,7 +182,7 @@
           .find('form#approve-request select#year').val('');
 
         let checkBox = $(document)
-          .find('table#display-training-request')
+          .find('table#display-training-request, table#display-complete-training')
           .find('input[type="checkbox"]');
 
         checkBox.each(function(index, el) {

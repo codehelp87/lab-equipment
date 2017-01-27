@@ -21,12 +21,30 @@ class UserController extends Controller
         $equipment = $request->equipment;
         $equipmentName = $request->equipment_name;
 
-        $trainingRequests = Training::where('equipment_id', $equipment);
+        $trainingRequests = Training::where('equipment_id', $equipment)
+            ->distinct()
+            ->get();
 
-        if (count($students) > 0) {
-            foreach($students as $student) {
-                //$equipment
+        if (count($trainingRequests) > 0) {
+            if (count($students) > 0) {
+                foreach($students as $student) {
+                    // Send confirmation email
+                    $user = User::findOneById($student);
+                    // send email
+                    $data = [
+                        'name' => $user->name,
+                        'email' => $user->email, 
+                        'equipment' => $equipmentName,
+                    ];
+                    $this->sendTrainingCompletionEmail($data, $user->email);
+                }
             }
+
+            if (!is_null($trainingRequests)) {
+                return response()->json($trainingRequests, 200);
+            }
+
+            return response()->json(['message' => 'Error completing request'], 400);
         }
     }
 
@@ -121,8 +139,16 @@ class UserController extends Controller
     protected function sendEmail($data, $email)
     {
         Mail::send('student.email', $data, function ($message) use ($email) {
-            $message->from('lab-equipment@domain.com', 'Confirmation Email');
-            $message->to($email)->subject('Confirmation Email');
+            $message->from('lab-equipment@domain.com', 'You have registered for equipment');
+            $message->to($email)->subject('Training Request');
+        });
+    }
+
+    protected function sendTrainingCompletionEmail($data, $email)
+    {
+        Mail::send('student.complete_training_email', $data, function ($message) use ($email) {
+            $message->from('lab-equipment@domain.com', 'You have completed your Training');
+            $message->to($email)->subject('Training Completion');
         });
     }
 
