@@ -13,6 +13,7 @@
         </div>
     </div>
     <div class="form-group">
+    {{ $user->phone }}
         <label for="phone" class="col-sm-2 control-label">Phone</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ Auth::user()->phone }}">
