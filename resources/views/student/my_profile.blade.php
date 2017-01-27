@@ -88,7 +88,7 @@
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
                                 <td>{{ $booking->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
-                                <td>{{ implode(' , ', $booking->time_slot) }}</td>
+                                <td>@if ($booking->time_slot != 'nil') {{ implode(',', $booking->time_slot) }} @endif </td>
                                 <td>Not completed</td>
                             </tr>
                             @endforeach
