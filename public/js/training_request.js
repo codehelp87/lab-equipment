@@ -153,7 +153,7 @@
               dataType: 'json',
               data: params,
             }).done(function(data) {
-              if (data.id != undefined) {
+              if (data.message == 'successful') {
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');

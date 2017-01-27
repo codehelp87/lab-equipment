@@ -15,6 +15,20 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function activateUserAccount(Request $request, $hash)
+    {
+        $email = base64_decode($request->get('email'));
+        $user = User::findOneByEmail($email);
+
+        if (count($user) > 0) {
+            $user->status = 1;
+            $user->save();
+            Auth::login($user);
+            return redirect() ->route('dashboard');
+        }
+        return redirect()->route('request_training');
+    }
+
     public function completeTraining(Request $request)
     {
         $students = $request->students;
@@ -50,7 +64,6 @@ class UserController extends Controller
 
     public function confirmTrainingRequest(Request $request)
     {
-        $training = null;
         $students = $request->students;
 
         if (count($students) > 0) {
@@ -58,9 +71,10 @@ class UserController extends Controller
                  // Send confirmation email
                 $user = User::findOneById($student);
                 $getTraining = Training::where('equipment_id', $request->equipment)
-                   ->where('user_id', $user->id);
+                   ->where('user_id', $user->id)
+                   ->first();
 
-                if (!count($getTraining) > 0) {
+                if (is_null($getTraining)) {
                     $training = Training::create([
                         'user_id' => $student,
                         'date_of_training_session' => $request->booking_date,
@@ -79,11 +93,9 @@ class UserController extends Controller
             }
             
             // marked them as completedly left booking
-            if (!is_null($training)) {
-                return response()->json($training, 200);
-            }
+            return response()->json(['message' => 'successful'], 200);
 
-            return response()->json(['message' => 'Error creating training'], 400);
+            //return response()->json(['message' => 'Error creating training'], 400);
         }
     }
 
@@ -102,7 +114,7 @@ class UserController extends Controller
 
         $user = User::findOneByEmail($request->email);
 
-        if (count($user) > 0) {
+        if ($user instanceof User) {
             return redirect()
                 ->route('request_training')
                 ->with('message', 'Email already exists')
