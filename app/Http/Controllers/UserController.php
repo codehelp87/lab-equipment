@@ -226,7 +226,11 @@ class UserController extends Controller
                 $user->email = $email;
                 $user->office_location = $office;
                 $user->phone = $phone;
-                $user->password = bcrypt($newPassword);
+
+                if ($newPassword != '') {
+                    $user->password = bcrypt($newPassword);
+                }
+                
                 $user->save();
             } 
             return response()->json(['message' => 'Record updated successfully']);
