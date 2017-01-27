@@ -49,10 +49,11 @@ class LoginController extends Controller
             ->where('email', $request->email)
             ->first();
 
-            Auth::login($user);
+            if (count($user) > 0) {
+                Auth::login($user);
 
-            return redirect()
-                ->route('dashboard');
+                return redirect() ->route('dashboard');
+            }
         } 
 
         return redirect()
