@@ -60,7 +60,7 @@
 				@else
 				<option value="1">Student</option>
 				@endif
-				@if ($user->role_id == 1)
+				@if ($user->role_id == 2)
 				<option value="2" selected="selected">Admin</option>
 				@else
 				<option value="2">Admin</option>
