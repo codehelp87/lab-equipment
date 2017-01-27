@@ -19,12 +19,12 @@
     </div>
 </form>
 <hr>
-<h6>Assign user to lab</h6>
+<h6>Assign Professor to Lab</h6>
 <hr>
 <form class="form-horizontal" id="assign_user_to_lab">
     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
-        <label for="assign_user" class="col-sm-2 control-label">Assign Professor to Lab</label>
+        <label for="assign_user" class="col-sm-2 control-label">Assign User</label>
         <div class="col-sm-10">
             <select name="user" id="user" class="form-control" required="required">
                 <option value="">Choose User</option>
