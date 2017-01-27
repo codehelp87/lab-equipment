@@ -1,7 +1,7 @@
 <form class="form-horizontal" id="manage_lab">
     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
-        <label for="title" class="col-sm-2 control-label">Title</label>
+        <label for="title" class="col-sm-2 control-label">Labb Name</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="title" name="title" placeholder="Title">
         </div>
@@ -24,7 +24,7 @@
 <form class="form-horizontal" id="assign_user_to_lab">
     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
-        <label for="assign_user" class="col-sm-2 control-label">Assign User</label>
+        <label for="assign_user" class="col-sm-2 control-label">Assign Professor to Lab</label>
         <div class="col-sm-10">
             <select name="user" id="user" class="form-control" required="required">
                 <option value="">Choose User</option>
