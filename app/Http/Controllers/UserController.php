@@ -126,7 +126,7 @@ class UserController extends Controller
             'student_id' => $request->student_id,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => \Hash::make($request->newPassword),
+            'password' => bcrypt($newPassword),
         ]);
 
         // lab user 
@@ -260,9 +260,7 @@ class UserController extends Controller
             $user->role_id = $request->role;
 
             $status = $request->status == 0? $user->destroy($user->id): $user->restore();
-
             $user->save();
-
             // For Equipment
             $equipments = $request->equipment;
             $equipmentId = $request->equipment_id;

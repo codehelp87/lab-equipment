@@ -3,6 +3,7 @@
 namespace LabEquipment\Http\Controllers\Auth;
 
 use Auth;
+use Hash;
 use LabEquipment\User;
 use Symfony\Component\HttpFoundation\Request;
 use LabEquipment\Http\Controllers\Controller;
@@ -44,9 +45,9 @@ class LoginController extends Controller
     {
         $user = User::findOneByEmail($request->email);
 
-        if (\Hash::check($request->password, $user->getAuthPassword())) {
+        if (Hash::check($request->password, $user->password)) {
             $user = User::where('status', 1)
-            ->where('email', $request->email)
+            ->where('email', $request->get('email'))
             ->first();
 
             if (count($user) > 0) {
