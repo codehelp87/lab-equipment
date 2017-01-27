@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function activateUserAccount(Request $request, $hash)
     {
-        $email = base64_decode($request->get('email'));
+        $email = base64_decode($request->hash);
         $user = User::findOneByEmail($email);
 
         if (count($user) > 0) {
