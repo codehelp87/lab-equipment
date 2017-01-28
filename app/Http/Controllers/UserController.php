@@ -264,7 +264,7 @@ class UserController extends Controller
             $user->role_id = $request->role;
 
             $status = $request->status == 0? 0: 1;
-            $user->status($status);
+            $user->status = $status;
             $user->save();
             // For Equipment
             $equipments = $request->equipment;
