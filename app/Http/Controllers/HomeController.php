@@ -2,8 +2,10 @@
 
 namespace LabEquipment\Http\Controllers;
 
-use LabEquipment\User;
+use Auth;
 use LabEquipment\Lab;
+use LabEquipment\User;
+use LabEquipment\Booking;
 use LabEquipment\Equipment;
 use Illuminate\Http\Request;
 
@@ -26,10 +28,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $bookings = $this->showMyBookingHistory();
         $users = User::findAllWithTrashed();
         $adminUsers = User::FindAllAdmin();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
-        return view('admin.admin', compact('users', 'labs', 'equipments', 'adminUsers'));
+        return view('admin.admin', compact('users', 'labs', 'equipments', 'adminUsers', 'bookings'));
+    }
+
+    protected function showMyBookingHistory()
+    {
+        return Booking::findOneByEquipment(Auth::user()->id);
     }
 }

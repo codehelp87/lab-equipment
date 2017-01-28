@@ -204,9 +204,7 @@ class UserController extends Controller
 
     protected function showMyBookingHistory()
     {
-        $user = Auth::user();
-
-        return Booking::findOneByEquipment($user->id);
+        return Booking::findOneByEquipment(Auth::user()->id);
     }
 
     public function editUserInfo(Request $request, $email)
