@@ -159,7 +159,7 @@
           '<td>'+data[user].email+'</td>' +
           '<td>'+data[user].phone+'</td>'+
           '<td>';
-          if (data[user].deleted_at == null) {
+          if (data[user].status == 1) {
             tableRow += 'Active'; 
           } else {
             tableRow += 'Inactive';

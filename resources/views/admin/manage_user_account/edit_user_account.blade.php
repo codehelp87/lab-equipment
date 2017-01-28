@@ -31,7 +31,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>
-                            @if (is_null($user->deleted_at))
+                            @if ($user->status == 1)
                             {{ 'Active' }}
                             @else
                             {{ 'Inactive' }}
