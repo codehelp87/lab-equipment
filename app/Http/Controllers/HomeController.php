@@ -33,7 +33,10 @@ class HomeController extends Controller
         $adminUsers = User::FindAllAdmin();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
-        return view('admin.admin', compact('users', 'labs', 'equipments', 'adminUsers', 'bookings'));
+
+        return view('admin.admin', compact(
+            'users', 'labs', 'equipments', 'adminUsers', 'bookings'
+        ));
     }
 
     protected function showMyBookingHistory()
