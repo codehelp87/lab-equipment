@@ -13,11 +13,12 @@
       let bookBtn = $(document).find('button#book-now');
       bookBtn.on('click', function() {
         let selectedTimeSlot = [];
+        let selectedTimeSlotId = [];
         let equipmentId = $(this).attr('data-id');
         let modal = $(document).find('div.booking-detail');
         let checkBox = $(document)
           .find('div.checkbox')
-          .find('input[type="checkbox"]:checked');
+          .find('input[type="checkbox"]:checked').not('input[type="checkbox"]:disabled');
         let time = $(document).find('span#time').text();
 
         if (time == '') {
@@ -32,6 +33,8 @@
 
         checkBox.each(function(index, el) {
           selectedTimeSlot.push($(this).val());
+          selectedTimeSlotId.push($(this).attr('id'));
+
         });
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
@@ -42,7 +45,7 @@
         const route = '/equipments/booking';
         let params = {
           'equipment': equipmentId,
-          'time_slot': selectedTimeSlot,
+          'time_slot': selectedTimeSlotId,
           'booking_date': time
         }
 
@@ -97,23 +100,6 @@
         return false;
       });
     }
-
-    // makeAjaxCall(url, params, method) {
-    //   return $.ajax({
-    //     headers:{
-    //       'X-CSRF-Token': $('input[name="_token"]').val()
-    //     },
-    //     url: url,
-    //     type: method,
-    //     dataType: 'json',
-    //     data: params,
-    //     async: false,
-    //     cache: false,
-    //     contentType: false,
-    //     enctype: 'multipart/form-data',
-    //     processData: false
-    //   });
-    // }
 
   makeAjaxCall(url, params, method) {
       return $.ajax({
