@@ -10,7 +10,9 @@
   class Equipment {
     bookEquipment() {
       let equipment = new Equipment;
+
       let bookBtn = $(document).find('button#book-now');
+
       bookBtn.on('click', function() {
         let selectedTimeSlot = [];
         let selectedTimeSlotId = [];
@@ -32,10 +34,23 @@
         }
 
         checkBox.each(function(index, el) {
-          selectedTimeSlot.push($(this).val());
-          selectedTimeSlotId.push($(this).attr('id'));
-
+          var _this = $(this);
+          selectedTimeSlot.push(_this.val());
+          selectedTimeSlotId.push(_this.attr('id'));
         });
+
+        if (selectedTimeSlotId[0] <= 72 && selectedTimeSlotId[selectedTimeSlotId.length - 1] <= 72) {
+          if (!equipment.checkDayToNight(selectedTimeSlotId)) {
+            toastr.error('You can only select between 9:00AM - 9:00PM');
+            return false;
+          }
+        } else {
+          if (!equipment.checkNightToDay(selectedTimeSlotId)) {
+            toastr.error('You can only select between 9:00PM - 9:00AM');
+            return false;
+          }
+        }
+
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         //alert('Hi');
@@ -69,6 +84,39 @@
 
         return false;
       });
+    }
+
+    checkDayToNight(timeSlots) {
+      const DAY_TO_NIGHT_MAX = 72; // 0 - 72
+      let timeCount = timeSlots.length;
+      let minCounter = 0;
+
+      for (let i = 0; i < timeSlots.length; i++) {
+        if (timeSlots[i] <= DAY_TO_NIGHT_MAX) {
+          minCounter ++;
+        }
+      }
+
+      if (minCounter < timeCount) {
+        return false
+      }
+      return true;
+    }
+
+    checkNightToDay(timeSlots) {
+      const NIGHT_TO_DAY_MIN = 72; // 72 to 149
+      let timeCount = timeSlots.length;
+      let maxCounter = 0;
+
+      for (let i = 0; i < timeSlots.length; i++) {
+        if (timeSlots[i] >= NIGHT_TO_DAY_MIN) {
+          maxCounter ++;
+        }
+      }
+      if (maxCounter < timeCount) {
+        return false
+      }
+      return true;
     }
 
     prepareModal(bookingDate, selectedTimeSlot) {
