@@ -71,7 +71,7 @@
 												<input type="checkbox" value="{{ $i }}:00 - {{ $i }}:10">
 												:00 - 10
 												@else
-												<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
+												<input type="checkbox" value="{{ ($i + 12) }}:00 - {{ ($i + 12) }}:10">
 												:00 - 10
 												@endif
 											</label>
@@ -83,7 +83,7 @@
 											<input type="checkbox" value="{{ $i }}:10 - {{ $i }}:20">
 											:10 - 20
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:10 - {{ ($i - 24) }}:20">
+											<input type="checkbox" value="{{ ($i + 12) }}:10 - {{ ($i + 12) }}:20">
 											:10 - 20
 											@endif
 										</label>
@@ -94,7 +94,7 @@
 											<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
 											:20 - 30
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:20 - {{ ($i - 24) }}:30">
+											<input type="checkbox" value="{{ ($i + 12) }}:20 - {{ ($i + 12) }}:30">
 											:20 - 30
 											@endif
 										</label>
@@ -105,7 +105,7 @@
 											<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
 											:30 - 40
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:30 - {{ ($i - 24) }}:40">
+											<input type="checkbox" value="{{ ($i + 12) }}:30 - {{ ($i + 12) }}:40">
 											:30 - 40
 											@endif
 										</label>
@@ -116,7 +116,7 @@
 											<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:40">
 											:40 - 50
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:40 - {{ ($i - 24) }}:40">
+											<input type="checkbox" value="{{ ($i + 12) }}:40 - {{ ($i + 12) }}:40">
 											:40 - 50
 											@endif
 										</label>
@@ -127,7 +127,7 @@
 											<input type="checkbox" value="{{ $i }}:50 - {{ $i }}:00">
 											:50 - 00
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:50 - {{ ($i - 24) }}:00">
+											<input type="checkbox" value="{{ ($i + 12) }}:50 - {{ ($i + 12) }}:00">
 											:50 - 00
 											@endif
 										</label>
