@@ -22,6 +22,11 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/training/register', 'UserController@requestForm')
     ->name('request_training');
+ Route::post('/training/request/create', 'UserController@createTrainingRequest')
+	    ->name('create-training-request');
+
+Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
+
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -41,9 +46,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
 	Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
 
-	Route::post('/training/request/create', 'UserController@createTrainingRequest')
-	    ->name('create-training-request');
-
 	Route::post('equipments/training/completed', 'UserController@completeTraining')
 	    ->name('training_completed_confirmation');
 
@@ -54,7 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/labs/add', 'LabController@createLab');
 	Route::get('/labs/{id}/users', 'LabController@getLabUsers');
 	Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
-	Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 
 	Route::post('/equipments/booking', 'BookingController@addBooking');
 
