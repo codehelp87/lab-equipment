@@ -23,43 +23,46 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/training/register', 'UserController@requestForm')
     ->name('request_training');
 
-Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
-    ->name('training_confirmation');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/home', 'HomeController@index')->name('dashboard');
+	Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
+	    ->name('training_confirmation');
 
-Route::get('/home/profile', 'UserController@viewMyProfile')
-    ->name('my_profile');
+	Route::get('/home', 'HomeController@index')->name('dashboard');
 
-Route::put('/users/{email}', 'UserController@editUserInfo');
-Route::get('/users/{status}/view', 'UserController@gettUserStatus');
-Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
-Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
-Route::put('/users/{email}/password_change', 'UserController@changePassword');
-Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
-Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
+	Route::get('/home/profile', 'UserController@viewMyProfile')
+	    ->name('my_profile');
 
-Route::post('/training/request/create', 'UserController@createTrainingRequest')
-    ->name('create-training-request');
+	Route::put('/users/{email}', 'UserController@editUserInfo');
+	Route::get('/users/{status}/view', 'UserController@gettUserStatus');
+	Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
+	Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
+	Route::put('/users/{email}/password_change', 'UserController@changePassword');
+	Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
+	Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
 
-Route::post('equipments/training/completed', 'UserController@completeTraining')
-    ->name('training_completed_confirmation');
+	Route::post('/training/request/create', 'UserController@createTrainingRequest')
+	    ->name('create-training-request');
 
-Route::get('request/training/confirmation', function() {
-    return view('student.training_request_confirmation');
-})->name('training_request_confirmation');
+	Route::post('equipments/training/completed', 'UserController@completeTraining')
+	    ->name('training_completed_confirmation');
 
-Route::post('/labs/add', 'LabController@createLab');
-Route::get('/labs/{id}/users', 'LabController@getLabUsers');
-Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
-Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
+	Route::get('request/training/confirmation', function() {
+	    return view('student.training_request_confirmation');
+	})->name('training_request_confirmation');
 
-Route::post('/equipments/booking', 'BookingController@addBooking');
+	Route::post('/labs/add', 'LabController@createLab');
+	Route::get('/labs/{id}/users', 'LabController@getLabUsers');
+	Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
+	Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 
-Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
-Route::get('equipments/{id}/trainings', 'EquipmentController@TrainingUsers');
-///
-Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
-Route::get('/equipments/{id}/booking', 'EquipmentController@bookEquipment');
-Route::post('/equipments/add', 'EquipmentController@createEquipment');
-Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
+	Route::post('/equipments/booking', 'BookingController@addBooking');
+
+	Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
+	Route::get('equipments/{id}/trainings', 'EquipmentController@TrainingUsers');
+	///
+	Route::post('/equipments/{id}/update', 'EquipmentController@updateEquipment');
+	Route::get('/equipments/{id}/booking', 'EquipmentController@bookEquipment');
+	Route::post('/equipments/add', 'EquipmentController@createEquipment');
+	Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
+});
