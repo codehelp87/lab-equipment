@@ -18,11 +18,13 @@
       let submitBtn = $('a#send-reset-password-link');
       submitBtn.on('click', function() {
         let _this = $(this);
+        var $btn = $(this).button('loading')
         let userEmail = $('div#manage-user-account').find('input#email').val();
         console.log('Email', userEmail);
-        user.makeAjaxCall('users/password/reset', {'email': userEmail}, 'POST')
+        user.makeAjaxRequest('users/password/reset', {'email': userEmail}, 'POST')
         .done(function(data) {
-          console.log(data);
+          toastr.success('Password link has been sent to your email');
+          $btn.button('reset');
         })
         .fail(function(error) {
           console.log(error)
