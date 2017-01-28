@@ -41,12 +41,12 @@
 
         if (selectedTimeSlotId[0] <= 72 && selectedTimeSlotId[selectedTimeSlotId.length - 1] <= 72) {
           if (!equipment.checkDayToNight(selectedTimeSlotId)) {
-            toastr.error('You can only select between 9:00AM - 9:00PM');
+            toastr.error('You can only select between 9:00AM - 9:00PM or 9:00PM - 9:00AM');
             return false;
           }
         } else {
           if (!equipment.checkNightToDay(selectedTimeSlotId)) {
-            toastr.error('You can only select between 9:00PM - 9:00AM');
+            toastr.error('You can only select between 9:00PM - 9:00AM or 9:00AM - 9:00PM');
             return false;
           }
         }
