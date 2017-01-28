@@ -145,6 +145,7 @@
 					var checkbox = $('div.checkbox input[type="checkbox"]');
 					checkbox.each(function(index, el) {
 						var _this = $(this);
+						@if(count(equipment) > 0)
 						@foreach($equipment->bookings as $booking)
 					    @if (count($booking->time_slot) > 0)
 					    @foreach($booking->time_slot as $slot)
@@ -156,6 +157,7 @@
 					    @endforeach
 					  @endif
 					@endforeach
+					@endif
 					});
 				});
 			</script>
