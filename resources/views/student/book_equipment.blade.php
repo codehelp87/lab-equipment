@@ -94,7 +94,7 @@
 											<input type="checkbox" value="{{ $i }}:20 - {{ $i }}:30">
 											:20 - 30
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:00 - {{ ($i - 24) }}:10">
+											<input type="checkbox" value="{{ ($i - 24) }}:20 - {{ ($i - 24) }}:30">
 											:20 - 30
 											@endif
 										</label>
@@ -105,7 +105,7 @@
 											<input type="checkbox" value="{{ $i }}:30 - {{ $i }}:40">
 											:30 - 40
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:30 - {{ ($i - 24) }}:10">
+											<input type="checkbox" value="{{ ($i - 24) }}:30 - {{ ($i - 24) }}:40">
 											:30 - 40
 											@endif
 										</label>
@@ -116,7 +116,7 @@
 											<input type="checkbox" value="{{ $i }}:40 - {{ $i }}:40">
 											:40 - 50
 											@else
-											<input type="checkbox" value="{{ ($i - 24) }}:40 - {{ ($i - 24) }}:50">
+											<input type="checkbox" value="{{ ($i - 24) }}:40 - {{ ($i - 24) }}:40">
 											:40 - 50
 											@endif
 										</label>
@@ -140,9 +140,31 @@
 					</div>
 				</div>
 			{{-- </div> --}}
+			<script>
+				$(function() {
+					var checkbox = $('div.checkbox input[type="checkbox"]');
+					checkbox.each(function(index, el) {
+						var _this = $(this);
+						@foreach($equipment->bookings as $booking)
+					    @if (count($booking->time_slot) > 0)
+					    @foreach($booking->time_slot as $slot)
+					      var slot = "{{ $slot }}"
+					      if (slot === _this.val()) {
+					      	_this.attr({'checked': 'checked', 'disabled': true});
+					      	_this.parent().css('text-decoration', 'line-through')
+					      }
+					    @endforeach
+					  @endif
+					@endforeach
+					});
+				});
+			</script>
 			<style type="text/css">
 				.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
 					position: inherit;
+				}
+				table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+					vertical-align: middle; 
 				}
 			</style>
 		</div>

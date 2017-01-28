@@ -18,6 +18,7 @@ class BookingController extends Controller
 			'equipment_id' => $request->equipment,
 			'time_slot' => $request->time_slot,
 			'booking_date' => date_format($date, 'Y-m-d H:i:s'),
+			'session' => date_format($date, 'Y-m-d H:i:s'),
 		]);
 
 		if (count($booking) > 0) {
