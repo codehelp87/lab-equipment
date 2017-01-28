@@ -38,8 +38,8 @@ class ForgotPasswordController extends Controller
 
     $response = $this->sendResetLinkEmail($request, function($m)
     {
-        $m->subject($this->getEmailSubject());
         $m->from('admin@chemdepartment.com', 'Chemistry Department');
+        $m->subject($this->getEmailSubject());
     });
 
     switch ($response)
