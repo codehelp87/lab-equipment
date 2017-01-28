@@ -1367,7 +1367,7 @@
 						@if(count($equipment) > 0 && !is_null($equipment->bookings))
 						@foreach($equipment->bookings as $booking)
 					    @if (count($booking->time_slot) > 0)
-					    @foreach($booking->time_slot as $slot)
+					    @foreach($booking->time_slot_id as $slot)
 					      var slot = "{{ $slot }}"
 					      if (slot === _this.attr('id')) {
 					      	_this.attr({'checked': true, 'disabled': true});

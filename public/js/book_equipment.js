@@ -45,8 +45,9 @@
         const route = '/equipments/booking';
         let params = {
           'equipment': equipmentId,
-          'time_slot': selectedTimeSlotId,
-          'booking_date': time
+          'time_slot': selectedTimeSlot,
+          'booking_date': time,
+          'time_slot_id': selectedTimeSlotId
         }
 
         okBtn.on('click', function() {

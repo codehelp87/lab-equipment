@@ -17,6 +17,7 @@ class Booking extends Model
         'time_slot',
         'booking_date',
         'session',
+        'time_slot_id',
     ];
 
     /**
@@ -36,6 +37,25 @@ class Booking extends Model
     public function setTimeslotAttribute($value)
     {
         $this->attributes['time_slot'] = json_encode($value);
+    }
+
+    /**
+     * Always json_decode time_slot so they are usable
+     */
+    public function getTimeslotIdAttribute($value)
+    {
+        return json_decode($value);
+
+        // you could always make sure you get an array returned also
+        // return json_decode($value, true);
+    }
+
+    /**
+     * Always json_encode the time_slot when saving to the database
+     */
+    public function setTimeslotIdAttribute($value)
+    {
+        $this->attributes['time_slot_id'] = json_encode($value);
     }
     
     public function user()
