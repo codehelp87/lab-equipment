@@ -24,7 +24,7 @@
                 <tbody>
                     @if ($users->count() > 0)
                     @foreach($users as $index => $user)
-                    <tr>
+                    <tr id="student-edit{{ $user->id}}" data-index="{{ $index + 1}}">
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $user->student_id }}</td>
                         <td>{{ $user->name }}</td>

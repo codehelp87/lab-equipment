@@ -20,7 +20,7 @@
         let _this = $(this);
         var $btn = $(this).button('loading')
         let userEmail = $('div#manage-user-account').find('input#email').val();
-        console.log('Email', userEmail);
+
         user.makeAjaxRequest('users/password/reset', {'email': userEmail}, 'POST')
         .done(function(data) {
           toastr.success('Password link has been sent to your email');
@@ -148,11 +148,36 @@
       });
     }
 
+    replaceUserRow(data, index) {
+      let tableRow = '';
+      let counter = 0;
+      //for (let user in data) {
+        tableRow += '<tr id="student-edit'+data.id+'" data-index='+index+'>' +
+          '<td>'+index+'</td>' +
+          '<td>'+data.student_id+'</td>' +
+          '<td>'+data.name+'</td>' +
+          '<td>'+data.email+'</td>' +
+          '<td>'+data.phone+'</td>'+
+          '<td>';
+          if (data.status == 1) {
+            tableRow += 'Active'; 
+          } else {
+            tableRow += 'Inactive';
+          }
+          tableRow += '</td>' + 
+          '<td><a href="#"  class="student-edit" id='+data.id+'>Edit</a></td>';
+         tableRow += '</tr>';
+         console.log(counter);
+         counter ++;
+      //}
+      return tableRow;
+    }
+
     buildUserTable(data) {
       let tableRow = '';
       let counter = 1;
       for (let user in data) {
-        tableRow += '<tr>' +
+        tableRow += '<tr id="student-edit'+data[user].id+'" data-index='+counter+'>' +
           '<td>'+counter+'</td>' +
           '<td>'+data[user].student_id+'</td>' +
           '<td>'+data[user].name+'</td>' +
@@ -180,12 +205,20 @@
         let form = $(document).find('div#manage-user-account div.modal-body > form.user-account');
         let modal = $(document).find('div#manage-user-account');
         let id = form.attr('id');
+        let currentTr = $(document)
+          .find('table.user-account-list')
+          .find('tr#student-edit'+id)
+        let index = currentTr.attr('data-index');
+
         let formObject = form.find('input, select');
         user.makeAjaxCall('/users/'+id+'/update', formObject, 'POST')
           .done(function(data) {
             // business logic...
-            $btn.button('reset')
-            toastr.success(data.message);
+            $btn.button('reset');
+
+            let edittedAccount = user.replaceUserRow(data, index);
+            $(document).find('tr#student-edit'+id).replaceWith(edittedAccount);
+            toastr.success('User was successfully updated!');
             modal.modal('hide');
           })
           .fail(function(error) {

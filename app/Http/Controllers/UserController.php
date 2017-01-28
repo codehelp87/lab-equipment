@@ -282,7 +282,7 @@ class UserController extends Controller
                 }
             }
 
-            return response()->json(['message' => 'User Account updated successfully'], 200);
+            return response()->json($user, 200);
         }
         return response()->json(['message' => 'Error updating user Account'], 400);
     }
