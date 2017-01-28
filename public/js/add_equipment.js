@@ -6,23 +6,10 @@
       equipment.createEquipment();
       equipment.editEquipment();
       equipment.updateEquipment();
-      equipment.cancelEditEquipmentForm();
     });
   }
 
   class Equipment {
-    cancelEditEquipmentForm()
-    {
-      let cancelBtn = $(document)
-        .find('form.edit_equipment')
-        .find('button.cancel-edit-equipment');
-
-        cancelBtn.on('click', function() {
-          let _this = $(this);
-          console.log(_this.attr('id'));
-          return false;
-        });
-    }
     createEquipment() {
       let equipment = new Equipment;
       $("form#add_more_equipment").submit(function(evt){
