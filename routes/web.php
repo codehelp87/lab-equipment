@@ -27,11 +27,11 @@ Route::get('/training/register', 'UserController@requestForm')
 
 Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 
+Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
+	    ->name('training_confirmation');
+
 
 Route::group(['middleware' => ['auth']], function () {
-
-	Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
-	    ->name('training_confirmation');
 
 	Route::get('/home', 'HomeController@index')->name('dashboard');
 
