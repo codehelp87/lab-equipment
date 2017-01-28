@@ -6,16 +6,28 @@
       equipment.createEquipment();
       equipment.editEquipment();
       equipment.updateEquipment();
+      equipment.cancelEditEquipmentForm();
     });
   }
 
   class Equipment {
+    cancelEditEquipmentForm()
+    {
+      let cancelBtn = $(document)
+        .find('form.edit_equipment')
+        .find('button.cancel-edit-equipment');
+
+        cancelBtn.on('click', function() {
+          let _this = $(this);
+          console.log(_this.attr('id'));
+          return false;
+        });
+    }
     createEquipment() {
       let equipment = new Equipment;
       $("form#add_more_equipment").submit(function(evt){
         // Change button text to loading
         let smtBtn = $("form#add_more_equipment").find('button#save-equipment');
-
         evt.preventDefault();
         let formData = new FormData($(this)[0]);
         let assignedLab = $('form#add_more_equipment').find('#assign_lab').val();//assign_lab;
@@ -80,8 +92,8 @@
     let equipment = new Equipment;
     $(function() {
       $('body').on('click', 'table#list-equipment a', function() {
-        var $btn = $(this).button('loading');
-      let _this = $(this);
+      let _this = $(this)
+      let $btn = _this.button('loading');;
       let id = _this.attr('id');
       let editMode =  $('table#list-equipment')
           .find('tr > td div.display'+id);

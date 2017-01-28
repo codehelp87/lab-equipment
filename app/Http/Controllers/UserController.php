@@ -253,7 +253,7 @@ class UserController extends Controller
 
     public function updateUserAccount(Request $request, $userId)
     {
-        $user = User::findOneByIdWithTrashed($userId);
+        $user = User::findOneById($userId);
 
         if (!is_null($user)) {
             $user->email = $request->email;

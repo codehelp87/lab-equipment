@@ -41,8 +41,16 @@
         <div class="col-sm-10">
             <select name="availability" id="availability" class="form-control" required="required">
                 <option value="">Availability</option>
-                <option value="1">Available</option>
-                <option value="0">Unavailable</option>
+                @if ($equipment->availability == 1)
+                    <option value="1" selected="selected">Available</option>
+                @else
+                    <option value="1">Available</option>
+                @endif
+                @if ($equipment->availability == 0)
+                    <option value="0" selected="selected">Unavailable</option>
+                @else
+                    <option value="0">Unavailable</option>
+                @endif
             </select>
         </div>
     </div>
@@ -53,7 +61,11 @@
                 <option value="0">Choose Lab</option>
                 @if ($labs->count() > 0)
                 @foreach($labs as $lab)
+                @if ($equipment->lab->id == $lab-> id)
+                <option value="{{ $lab->id }}" selected="selected">{{ $lab->title }}</option>
+                @else
                 <option value="{{ $lab->id }}">{{ $lab->title }}</option>
+                @endif
                 @endforeach
                 @endif
             </select>
@@ -68,6 +80,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default edit-equipment">Save</button>
+            <button type="submit" class="btn btn-large btn-default cancel-edit-equipment" id="{{ $equipment->id }}">Cancel</button>
         </div>
     </div>
 </form>
