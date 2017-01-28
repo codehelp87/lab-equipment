@@ -1,7 +1,7 @@
 <form class="form-horizontal" id="manage_lab">
     <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
     <div class="form-group">
-        <label for="title" class="col-sm-2 control-label">Labb Name</label>
+        <label for="title" class="col-sm-2 control-label">Lab Name</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="title" name="title" placeholder="Title">
         </div>
