@@ -290,12 +290,12 @@ class UserController extends Controller
     public function gettUserStatus(Request $request, $status)
     {
         if ($status == 0) {
-            $users = User::onlyTrashed()->get();
+            $users = User::where('status', 0)->get();
             if ($users->count() > 0) {
                 return response()->json($users, 200);
             }
         } else {
-            $users = User::FindAll();
+            $users = User::where('status', 1)->get();
             if ($users->count() > 0) {
                 return response()->json($users, 200);
             }
