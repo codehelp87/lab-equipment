@@ -2,7 +2,7 @@
 
 namespace LabEquipment;
 
-use LabEquipment\Notifications\MyOwnResetPassword;
+use LabEquipment\Notifications\MyOwnResetPassword as ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,7 +38,7 @@ class User extends Authenticatable implements AuthContract
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new MyOwnResetPassword($token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**
