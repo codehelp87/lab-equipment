@@ -65,12 +65,13 @@
                     <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
                     <table class="table table-hover">
                         <tbody>
-                         @if ($equipments->count() > 0)
+                         @if ($bookings->count() > 0)
                             <tr>
-                                <td><strong>{{ $equipments[count($equipments) - 1]->title}}</strong></td>
-                                <td>400-MR D22</td>
-                                <td>{{ date('Y/m/d') }}</td>
-                                <td>11:00 - 11:10</td>
+                                <td><strong>{{ $bookings[count($bookings) - 1]->equipment->title }}</strong></td>
+                                <td>{{ $bookings[count($bookings) - 1]->equipment->model_no }}</td>
+                                <td>{{ date_format(new \DateTime($bookings[count($bookings) - 1]->booking_date), 'Y/m/d') }}</td>
+                                <td>@if (@$bookings[count($bookings) - 1]->time_slot != '') {{ implode(' , ', @$bookings[count($bookings) - 1]->time_slot) }}
+                                @endif </td>
                                 <td><button type="button" class="btn btn-default pull-right">Cancel</button></td>
                             </tr>
                             @endif
