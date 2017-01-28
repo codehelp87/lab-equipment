@@ -115,7 +115,9 @@ class EquipmentController extends Controller
             $equipment->price_per_unit_time = $request->price_per_unit;
             $equipment->lab_id = $request->assign_lab;
             $equipment->availability = $request->availability;
-            $equipment->equipment_photo = $this->handleCloudinaryFileUpload($request);
+            if (!is_null($request->file('photo'))) {
+                $equipment->equipment_photo = $this->handleCloudinaryFileUpload($request);
+            }
         }
 
         $equipment->save();

@@ -74,7 +74,7 @@
     <div class="form-group">
         <label for="photo" class="col-sm-2 control-label">Photo</label>
         <div class="col-sm-10">
-            <input type="file" name="photo" id="photo" class="form-control" value="" required="required">
+            <input type="file" name="photo" id="photo" class="form-control">
         </div>
     </div>
     <div class="form-group">
