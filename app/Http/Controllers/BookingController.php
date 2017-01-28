@@ -8,6 +8,9 @@ use LabEquipment\Booking;
 
 class BookingController extends Controller
 {
+	const DAY_TO_NIGHT_MAX = 89;
+	const NIGHT_TO_DAY_MIN = 90;
+
 	public function addBooking(Request $request)
 	{
 		$user = Auth::user();
