@@ -3,8 +3,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-		<input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
-			{{-- @include('admin.manage_user_account.logout') --}}
+			<input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
 			<h5><a href="{{ route('my_profile') }}" class="pull-left"> << My page </a></h5><br>
 			<hr>
 			<h5>Book an equipment</h5>
@@ -141,6 +140,11 @@
 					</div>
 				</div>
 			{{-- </div> --}}
+			<style type="text/css">
+				.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+					position: inherit;
+				}
+			</style>
 		</div>
 	</div>
 </div>
