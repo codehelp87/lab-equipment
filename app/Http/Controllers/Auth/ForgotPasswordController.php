@@ -3,7 +3,7 @@
 namespace LabEquipment\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Support\Facades\Password;
 use LabEquipment\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
@@ -43,13 +43,13 @@ class ForgotPasswordController extends Controller
 
     switch ($response)
     {
-        case PasswordBroker::RESET_LINK_SENT:
+        case Password::RESET_LINK_SENT:
             return[
                 'error'=>'false',
                 'msg'=>'A password link has been sent to your email address'
             ];
 
-        case PasswordBroker::INVALID_USER:
+        case Password::INVALID_USER:
             return[
                 'error'=>'true',
                 'msg'=>"We can't find a user with that email address"
