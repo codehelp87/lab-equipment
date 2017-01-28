@@ -37,6 +37,7 @@ Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
 Route::put('/users/{email}/password_change', 'UserController@changePassword');
 Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
+Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
 
 Route::post('/training/request/create', 'UserController@createTrainingRequest')
     ->name('create-training-request');

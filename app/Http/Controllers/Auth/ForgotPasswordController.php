@@ -2,6 +2,8 @@
 
 namespace LabEquipment\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use LabEquipment\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
@@ -27,6 +29,31 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
+
+    public function getEmail(Request $request)
+    {
+    $this->validate($request, ['email' => 'required|email']);
+
+    $response = $this->sendResetLinkEmail($request, function($m)
+    {
+        $m->subject($this->getEmailSubject());
+    });
+
+    switch ($response)
+    {
+        case PasswordBroker::RESET_LINK_SENT:
+            return[
+                'error'=>'false',
+                'msg'=>'A password link has been sent to your email address'
+            ];
+
+        case PasswordBroker::INVALID_USER:
+            return[
+                'error'=>'true',
+                'msg'=>"We can't find a user with that email address"
+            ];
+    }
+}
 }

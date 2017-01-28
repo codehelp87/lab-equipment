@@ -8,10 +8,28 @@
       user.getLabUsers();
       user.getUserByStatus();
       user.changePassword();
+      user.resetPassword();
     });
   }
 
   class User {
+    resetPassword() {
+      let user = new User;
+      let submitBtn = $('a#send-reset-password-link');
+      submitBtn.on('click', function() {
+        let _this = $(this);
+        let userEmail = $('div#manage-user-account').find('input#email').val();
+        console.log('Email', userEmail);
+        user.makeAjaxCall('users/password/reset', {'email': userEmail}, 'POST')
+        .done(function(data) {
+          console.log(data);
+        })
+        .fail(function(error) {
+          console.log(error)
+        })
+        return false;
+      });
+    }
     changePassword() {
       let user = new User;
       let saveBtn = $(document).find('button#change-password');

@@ -97,11 +97,4 @@
 	@endforeach
 	@endif
 	<input type="hidden" name="equipment_id" id="equipment_id" class="form-control" value="{{ $id }}">
-	<div class="form-group">
-		<div class="col-sm-6">
-			<a class="btn btn-link text-center" href="{{ url('/password/reset') }}" target="blank">
-				Reset Password(send a link to reset password)
-			</a>
-		</div>
-	</div>
 </form>

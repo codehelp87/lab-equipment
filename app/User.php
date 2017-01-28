@@ -2,6 +2,7 @@
 
 namespace LabEquipment;
 
+use LabEquipment\Notifications\MyOwnResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,6 +29,17 @@ class User extends Authenticatable implements AuthContract
         'phone',
         'status',
     ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MyOwnResetPassword($token));
+    }
 
     /**
      * The attributes that should be hidden for arrays.
