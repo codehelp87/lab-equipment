@@ -80,7 +80,6 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default edit-equipment">Save</button>
-            <a  class="btn btn-large btn-default cancel-edit-equipment" id="{{ $equipment->id }}">Cancel</a>
         </div>
     </div>
 </form>
