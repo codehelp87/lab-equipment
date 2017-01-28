@@ -143,7 +143,7 @@ class UserController extends Controller
             $booking = Booking::create([
                 'user_id' => $user->id,
                 'equipment_id' => $request->equipment,
-                'time_slot' => 'nil',
+                'time_slot' => null,
                 'booking_date' => $request->session,
                 'session' => $request->session
             ]);
