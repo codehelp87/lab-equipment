@@ -70,7 +70,7 @@
                                 <td><strong>{{ $bookings[count($bookings) - 1]->equipment->title }}</strong></td>
                                 <td>{{ $bookings[count($bookings) - 1]->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($bookings[count($bookings) - 1]->booking_date), 'Y/m/d') }}</td>
-                                <td>@if (@$bookings[count($bookings) - 1]->time_slot != '') {{ implode(' , ', @$bookings[count($bookings) - 1]->time_slot) }}
+                                <td>@if (@$bookings[count($bookings) - 1]->time_slot != null) {{ implode(' , ', @$bookings[count($bookings) - 1]->time_slot) }}
                                 @endif </td>
                                 <td><button type="button" class="btn btn-default pull-right">Cancel</button></td>
                             </tr>
