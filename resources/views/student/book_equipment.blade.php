@@ -150,7 +150,7 @@
 					    @foreach($booking->time_slot as $slot)
 					      var slot = "{{ $slot }}"
 					      if (slot === _this.val()) {
-					      	_this.attr({'checked': 'checked', 'disabled': true});
+					      	_this.attr({'checked': true, 'disabled': true});
 					      	_this.parent().css('text-decoration', 'line-through')
 					      }
 					    @endforeach
