@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="model_no" class="col-sm-2 control-label">Model No</label>
+        <label for="model_no" class="col-sm-2 control-label">Lab Location</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="model_no" name="model_no" placeholder="Model No">
         </div>
