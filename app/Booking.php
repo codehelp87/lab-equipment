@@ -18,6 +18,7 @@ class Booking extends Model
         'booking_date',
         'session',
         'time_slot_id',
+        'status',
     ];
 
     /**
