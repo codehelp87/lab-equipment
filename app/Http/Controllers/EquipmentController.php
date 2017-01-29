@@ -64,9 +64,21 @@ class EquipmentController extends Controller
 
     }
 
+    public function validateDate($date) 
+    {
+        $d = \DateTime::createFromFormat('Y-m-d', $date);
+
+        return $d && $d->format('Y-m-d') === $date;
+    }
+
     public function bookEquipment(Request $request, $id)
     {
         $bookingDate = $request->query->get('date');
+
+        if ($bookingDate != '' && !$this->validateDate($bookingDate)) {
+            abort(404, 'Invalid date format');
+        }
+
         $date = new \DateTime($bookingDate);
         $bookingDate = date_format($date, 'Y-m-d');
 
