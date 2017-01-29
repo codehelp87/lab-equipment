@@ -1364,8 +1364,8 @@
                     checkbox.each(function(index, el) {
                         var _this = $(this);
                         _this.attr('id', index);
-                        @if(count($equipment) > 0 && !is_null($equipment->bookings))
-                        @foreach($equipment->bookings as $booking)
+                        @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
+                        @foreach($equipmentBookings as $booking)
                     @if (count($booking->time_slot) > 0)
                     @foreach($booking->time_slot_id as $slot)
                     var slot = "{{ $slot }}"
