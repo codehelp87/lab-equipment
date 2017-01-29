@@ -57,5 +57,6 @@
                 });
             });
         </script>
+        @include('student.cancel_booking_modal')
     </body>
 </html>

@@ -82,7 +82,7 @@
                                 @if ($lastBookingTime >= 60)
                                 <button type="button" class="btn btn-default pull-right inActiveBtn cancel-booking" id="{{ $booking->equipment->id }}" disabled="disabled"> Cancel</button>
                                 @else
-                                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->equipment->id }}"> Cancel</button
+                                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->equipment->id }}" data-time-slot="{{ implode(' , ', $booking->time_slot) }}"> Cancel</button
                                 @endif
                                 </td>
                             </tr>

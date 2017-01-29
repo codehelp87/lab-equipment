@@ -4,10 +4,30 @@
       let equipment = new Equipment;
       equipment.linkToBookingDetails();
       equipment.bookEquipment();
+      equipment.cancelBooking();
     });
   }
 
   class Equipment {
+    cancelBooking(){
+      let equipment = new Equipment;
+      let cancelBtn = $(document).find('button.cancel-booking');
+
+      cancelBtn.on('click', function() {
+        let _this = $(this);
+        let modal = $(document).find('div.cancel_booking');
+        let selectedTimeSlot = _this.attr('data-time-slot');
+        let bookingDate = moment().format('MM.DD.YYYY');
+        let equipmentId = _this.attr('id');
+    
+        let modalContent = equipment.prepareModalForBookingCancel(bookingDate, selectedTimeSlot);
+        modal.find('div.modal-body').html(modalContent);
+        //alert('Hi');
+        modal.modal('show');
+        return false;
+      });
+
+    }
     bookEquipment() {
       let equipment = new Equipment;
 
@@ -122,6 +142,25 @@
         return false
       }
       return true;
+    }
+
+    prepareModalForBookingCancel(bookingDate, selectedTimeSlot) {
+      let stuff = '<h5 class="text-center">Are you sure you want to cancel this reservation</h5>';
+      let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
+      let info = '<h5 class="text-center">If it\'s correct press Cancel Now</h5><br>';
+      let timeSlot = selectedTimeSlot.split(',');
+
+      let slots = '<ul style="padding:0; list-style: none;">';
+        for(let i = 0; i < timeSlot.length; i++) {
+          slots += '<li class="text-center"><h4>'+timeSlot[i].trim()+'</h4></li>';
+        }
+        slots += '</ul>';
+
+        stuff += dateSelected;
+        stuff += slots;
+        stuff +=  info;
+
+      return stuff;
     }
 
     prepareModal(bookingDate, selectedTimeSlot) {
