@@ -78,7 +78,6 @@ class Booking extends Model
     {
         return $query
             ->where('user_id', $userId)
-            ->where('status', '=', 1)
             ->orderBy('id', 'DESC')
             ->get();
     }
@@ -87,7 +86,6 @@ class Booking extends Model
     {
         return $query
             ->where('id', $id)
-            ->where('status', '=', 1)
             ->first();
     }
 
@@ -95,7 +93,6 @@ class Booking extends Model
     {
         return $query
             ->where('user_id', $userId)
-            ->where('status','=', 1)
             ->first();
     }
 }
