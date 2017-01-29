@@ -3,6 +3,7 @@
 namespace LabEquipment\Http\Controllers;
 
 use Auth;
+use Carbon\Carbon;
 use LabEquipment\Booking;
 use LabEquipment\Equipment;
 use Illuminate\Http\Request;
@@ -37,7 +38,6 @@ class BookingController extends Controller
 
 		$timeSlot = $request->time_slot_id;
 		$timeZone = $request->timezone;
-		//Carbon::createFromFormat('Y-m-d H', '1975-05-21 22')->toDateTimeString(); 
 		$date = new \DateTime($request->booking_date);
 
 		if ($bookings->count() > 0) {

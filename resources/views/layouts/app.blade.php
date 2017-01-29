@@ -45,12 +45,13 @@
             $(function () {
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
                 $('#datetimepicker1').datepicker({
                     todayHighlight: true,
-                    startDate: today.toUTCString(),
+                    startDate: today,
                     format: "yyyy.mm.dd D",
                 });
-                $(document).find('span#time').text(today.toUTCString());
+                $(document).find('span#time').text(moment(today));
                 $("#datetimepicker1").on("changeDate", function (e) {
                     $(document).find('span#time').text(e.date);
                 });

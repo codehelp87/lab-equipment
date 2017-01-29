@@ -116,7 +116,7 @@
         let params = {
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
-          'booking_date': time,
+          'booking_date': moment(time).format('MM/DD/YYYY'),
           'time_slot_id': selectedTimeSlotId,
           'timezone': flag
         }
