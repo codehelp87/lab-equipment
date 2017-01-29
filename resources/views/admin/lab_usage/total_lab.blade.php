@@ -42,5 +42,5 @@
     <tbody>
     </tbody>
 </table>
-<span class="pull-left"><a href="#"><strong>Download as xlsx</strong></a></span>
+<span class="pull-left"><a href="#" id="download-by-equipment"><strong>Download as xlsx</strong></a></span>
 @include('admin.lab_usage.total_lab_modal')
