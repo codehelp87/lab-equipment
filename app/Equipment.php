@@ -36,6 +36,11 @@ class Equipment extends Model
         'user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('LabEquipment\User');
+    }
+
     public function lab()
     {
         return $this->belongsTo('LabEquipment\Lab');

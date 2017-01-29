@@ -18,23 +18,47 @@ class EquipmentController extends Controller
     {
         $equipment = Equipment::findOneById($id);
 
-        if ($equipment->count() > 0) {
-            // get daytime bookings
-            $dayTimeBookings = Booking::orderBy('id', 'DESC')
-                ->where([
-                    ['equipment_id' => $equipment->id],
-                    ['status' => 1],
-                    ['timezone_flag' => 'daytime']
-                ]);
+        $totalHourByDay = 0;
+        $totalHourByNight = 0;
 
-            // get nighttime bookings
-            $nightTimeBookings = Booking::orderBy('id', 'DESC')
-                ->where([
-                    ['equipment_id' => $equipment->id],
-                    ['status' => 1],
-                    ['timezone_flag' => 'nighttime']
-                ]);
+        if ($equipment->count() > 0) {
+            $equipmentPricePerUnitTime = $equipment->price_per_unit_time;
+            $totalCharge = (int) (($equipment->max_reservation_time * 60) * $equipmentPricePerUnitTime);
+            //get daytime bookings
+            $dayTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('status', 1)
+                ->where('timezone_flag', 'daytime')
+                ->get();
+
+            if ($dayTimeBookings->count() > 0) {
+                foreach($dayTimeBookings as $booking) {
+                    $totalHourByDay += (int) (count($booking->time_slot) * 10);
+                }
+            }
+
+            //get nighttime bookings
+            $nightTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('status', 1)
+                ->where('timezone_flag', 'nighttime')
+                ->get();
+
+            if ($nightTimeBookings->count() > 0) {
+                foreach ($nightTimeBookings as $booking) {
+                   $totalHourByNight += (int) (count($booking->time_slot) * 10);
+                }
+            }
         }
+
+        return response()->json([
+            'lab_prof' => $equipment->user->name,
+            'lab_prof_id' => $equipment->user->id,
+            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
+            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
+            'total_hour_by_day' => ($totalHourByDay / 60),
+            'total_hour_by_night' => ($totalHourByNight / 60),
+        ]);
     }
 
     public function TrainingUsers(Request $request, $id)

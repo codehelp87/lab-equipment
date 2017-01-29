@@ -29,21 +29,18 @@
     </div>
 </form>
 <table class="table table-responsive display_lab_usage" id="display_lab_usage">
+    <thead>
+        <tr>
+            <th>Lab</th>
+            <th>Hours</th>
+            <th>Charge</th>
+            <th>Lab</th>
+            <th>Hours</th>
+            <th>Charge</th>
+        </tr>
+    </thead>
     <tbody>
-        <tr>
-            <td>Larry</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
-        </tr>
-        <tr>
-            <td>Larry</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
-        </tr>
+        
     </tbody>
 </table>
 @include('admin.lab_usage.total_lab_modal')
