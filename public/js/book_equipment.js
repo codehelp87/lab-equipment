@@ -19,8 +19,6 @@
         let selectedTimeSlot = _this.attr('data-time-slot');
         let bookingDate = moment().format('MM.DD.YYYY');
         let bookingId = _this.attr('id');
-        let otherCancelBtn = $(document)
-          .find('button.cancel-booking#'+bookingId);
     
         let modalContent = equipment.prepareModalForBookingCancel(bookingDate, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
@@ -30,7 +28,9 @@
         const route = '/bookings/'+bookingId+'/cancel';
 
         okBtn.on('click', function() {
-          console.log('Size', otherCancelBtn.size());
+          let otherCancelBtn = $('body')
+          .find('button#'+bookingId);
+
           equipment.makeAjaxCall(route, '', 'GET')
           .done(function(data) {
             if (data.id != undefined) {
