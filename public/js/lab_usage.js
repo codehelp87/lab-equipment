@@ -39,7 +39,7 @@
             '<td>'+data.total_charge_by_day+'</td>' +
             '<td><a href="#" class="view-equipment-users" id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_night+'</td>' +
-            '<td>'+data.total_charge_by_day+'</td>' +
+            '<td>'+data.total_charge_by_night+'</td>' +
         '</tr>' +
         '<tr>' +
             '<td colspan="5" align="right"><strong>Total</strong></td>' +
