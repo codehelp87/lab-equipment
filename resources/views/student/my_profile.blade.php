@@ -66,7 +66,7 @@
                 </p>
                 <hr>
                 <p>
-                    <h5><strong>Booking History</strong></h5>
+                    <h5><strong>Booking History</strong></h5><br>
                     @if($bookings->count() > 0)
                     <table class="table table-hover">
                         <tbody>
