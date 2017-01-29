@@ -41,22 +41,6 @@
         <script src="{{ asset('js/add_equipment.js') }}"></script>
         <script src="{{ asset('js/book_equipment.js') }}"></script>
         <script src="{{ asset('js/training_request.js') }}"></script>
-        <script type="text/javascript">
-            $(function () {
-                var date = new Date();
-                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
-
-                $(document).find('span#time').text(moment(today).format('MM.DD.YYYY ddd'));
-
-                $('#datetimepicker1').datepicker({
-                    todayHighlight: true,
-                    startDate: today,
-                    dateFormat: 'yyy-dd-mm',
-                }).on("changeDate", function (e) {
-                    $(document).find('span#time').text(moment(e.date).format('MM.DD.YYYY ddd'));
-                });
-            });
-        </script>
         @include('student.cancel_booking_modal')
     </body>
 </html>

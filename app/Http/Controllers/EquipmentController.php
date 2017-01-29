@@ -8,6 +8,7 @@ use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\LabUser;
 use LabEquipment\Equipment;
+use LabEquipment\Booking;
 use LabEquipment\Training;
 use Illuminate\Http\Request;
 
@@ -65,11 +66,19 @@ class EquipmentController extends Controller
 
     public function bookEquipment(Request $request, $id)
     {
+        $bookingDate = $request->query->get('date');
+        $date = new \DateTime($bookingDate);
+        $bookingDate = date_format($date, 'Y-m-d');
+
         $equipment = Equipment::find($id);
+        $equipmentBookings = Booking::findBy([
+            ['equipment_id', '=', $id],
+            ['booking_date', '=', $bookingDate]
+        ]);
 
         if (count($equipment) > 0) {
             return view('student.book_equipment', 
-                compact('equipment')
+                compact('equipment', 'equipmentBookings')
             );
         }
         abort(404);

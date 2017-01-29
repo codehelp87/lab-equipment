@@ -1381,6 +1381,44 @@
                     });
                 });
             </script>
+            <script type="text/javascript">
+            $(function () {
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+                var currentDate = moment(today).format('YYYY-MM-DD ddd');
+                $(document).find('span#time').text(currentDate);
+
+                var newUrl = window.location.href.split('?');;
+                var url = window.location.href;
+
+                if (newUrl[1] != undefined) {
+                    $(document).find('span#time').text(moment(newUrl[1]).format('YYYY-MM-DD ddd'));
+                }
+
+                $('#datetimepicker1').datepicker({
+                    todayHighlight: true,
+                    startDate: today,
+                    dateFormat: 'yyy-dd-mm',
+                }).on("changeDate", function (e) {
+                    var currentDate = moment(e.date).format('YYYY-MM-DD');
+                    $(document)
+                      .find('span#time')
+                      .text(moment(e.date)
+                      .format('MM.DD.YYYY ddd'));
+                      $(document).find('span#time').text(currentDate);
+
+                      var url = window.location.href;  
+                        if (url.indexOf('?') > -1) {
+                            splitUrl = url.split('?');
+                            url = location.href.replace(splitUrl[1], "date="+currentDate);
+                        } else{
+                           url += '?date='+moment(e.date).format('YYYY-MM-DD')
+                        }
+                        window.location.href = url;
+                  });
+            });
+        </script>
             <style type="text/css">
                 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
                     position: inherit;
