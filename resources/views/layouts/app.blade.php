@@ -47,12 +47,11 @@
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $('#datetimepicker1').datepicker({
                     todayHighlight: true,
-                    startDate: today,
+                    startDate: today.toUTCString(),
                     format: "yyyy.mm.dd D",
                 });
-                $(document).find('span#time').text(today);
+                $(document).find('span#time').text(today.toUTCString());
                 $("#datetimepicker1").on("changeDate", function (e) {
-                    //console.log(e.date);
                     $(document).find('span#time').text(e.date);
                 });
             });

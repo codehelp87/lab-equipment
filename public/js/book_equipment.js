@@ -74,6 +74,8 @@
           .find('input[type="checkbox"]:checked').not('input[type="checkbox"]:disabled');
         let time = $(document).find('span#time').text();
 
+        return console.log('time', time);
+
         if (time == '') {
           toastr.error('Pls select date');
           return false
