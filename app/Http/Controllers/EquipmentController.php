@@ -54,8 +54,8 @@ class EquipmentController extends Controller
         return response()->json([
             'lab_prof' => $equipment->user->name,
             'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
-            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
+            'total_charge_by_day' => ($totalCharge * $totalHourByDay) / 60,
+            'total_charge_by_night' => ($totalCharge * $totalHourByNight) / 60,
             'total_hour_by_day' => ($totalHourByDay / 60),
             'total_hour_by_night' => ($totalHourByNight / 60),
         ]);
