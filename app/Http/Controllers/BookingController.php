@@ -14,16 +14,33 @@ class BookingController extends Controller
 
 	public function addBooking(Request $request)
 	{
+		$totalEquipmentBooking = 0;
+
 		$user = Auth::user();
 		$equipment = Equipment::findOneById($request->equipment);
+		$bookings = Booking::where('equipment_id', $request->equipment)->get();
+
+		$timeSlot = $request->time_slot_id;
+		$timeZone = $request->timezone;
+		$date = new \DateTime($request->booking_date);
+
+		if ($bookings->count() > 0) {
+			foreach($bookings as $booking) {
+				$totalEquipmentBooking +=  (int) (count($booking->time_slot) * 10);
+			}
+		}
 
 		if ($equipment->count() > 0) {
-			$timeSlot = $request->time_slot_id;
+			$maxTimeInMinutes = (int) ($equipment->max_reservation_time * 60);
 
-			$maxReservationTime = $equipment->max_reservation_time;
-			$maxTimeInMinutes = (int) ($maxReservationTime * 60);
+			if ($timeZone == 'daytime') {
+				if ($maxTimeInMinutes == $totalEquipmentBooking) {
+					return response()->json([
+						'message' => 'Maximum number booking exceeded for this Equipment'
+					], 400);
+				}
+			}
 
-			$date = new \DateTime($request->booking_date);
 			$booking = Booking::create([
 				'user_id' => $user->id,
 				'equipment_id' => $request->equipment,

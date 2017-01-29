@@ -39,16 +39,20 @@
           selectedTimeSlotId.push(_this.attr('id'));
         });
 
+        let flag = '';
+
         if (selectedTimeSlotId[0] <= 72 && selectedTimeSlotId[selectedTimeSlotId.length - 1] <= 72) {
           if (!equipment.checkDayToNight(selectedTimeSlotId)) {
             toastr.error('You can only select between 9:00AM - 9:00PM or 9:00PM - 9:00AM');
             return false;
           }
+          flag = 'daytime';
         } else {
           if (!equipment.checkNightToDay(selectedTimeSlotId)) {
             toastr.error('You can only select between 9:00PM - 9:00AM or 9:00AM - 9:00PM');
             return false;
           }
+          flag = 'nighttime';
         }
 
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
@@ -62,7 +66,8 @@
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
           'booking_date': time,
-          'time_slot_id': selectedTimeSlotId
+          'time_slot_id': selectedTimeSlotId,
+          'timezone': flag
         }
 
         okBtn.on('click', function() {
