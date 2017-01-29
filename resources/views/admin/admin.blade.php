@@ -169,21 +169,7 @@
             </p>
             <hr>
             <p>
-                <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5>
-                <table class="table table-hover">
-                    <tbody>
-                        @if ($bookings->count() > 0)
-                        <tr>
-                            <td><strong>{{ $bookings[count($bookings) - 1]->equipment->title }}</strong></td>
-                            <td>{{ $bookings[count($bookings) - 1]->equipment->model_no }}</td>
-                            <td>{{ date_format(new \DateTime($bookings[count($bookings) - 1]->booking_date), 'Y/m/d') }}</td>
-                            <td>@if (@$bookings[count($bookings) - 1]->time_slot != null) {{ implode(' , ', @$bookings[count($bookings) - 1]->time_slot) }}
-                            @endif </td>
-                            <td><button type="button" class="btn btn-default pull-right">Cancel</button></td>
-                        </tr>
-                        @endif
-                    </tbody>
-                </table>
+                @include('student.partials.upcoming_booking', ['bookins' => $bookings])
             </p>
             <hr>
             <p>
