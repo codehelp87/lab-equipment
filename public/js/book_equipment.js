@@ -22,8 +22,8 @@
     
         let modalContent = equipment.prepareModalForBookingCancel(bookingDate, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
-        //alert('Hi');
         modal.modal('show');
+
         return false;
       });
 
