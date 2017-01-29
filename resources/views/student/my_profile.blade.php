@@ -85,7 +85,7 @@
                                     @if($lastBookingTime < 60 && $booking->status == 1)
                                     <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $booking->time_slot) }}"> Cancel</button
                                     @endif
-                                    @if($lastBookingTime <= 60 && $booking->time_slot == null)
+                                    @if($booking->time_slot == null && $booking->status == 0)
                                     <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button
                                     @endif
                                 </td>
