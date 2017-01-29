@@ -15,6 +15,8 @@ class BookingController extends Controller
 
 		if ($booking->count() > 0) {
 			$booking->status = 0;
+			$booking->time_slot = null;
+			$booking->time_slot_id = null;
 			$booking->save();
 
 			return response()->json($booking, 200);
