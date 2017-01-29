@@ -14,7 +14,7 @@ class AddTimezoneStatusToBookingTable extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('timezone_flag');
+            $table->string('timezone_flag')->nullable();
         });
     }
 
