@@ -11,7 +11,7 @@
             <?php $lastBookingTime = $bookings[0]->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
             <td>
                 @if ($lastBookingTime >= 60)
-                <button type="button" class="btn btn-danger pull-right cancel-booking" id="{{ $bookings[0]->equipment->id }}" disabled="disabled"> Cancel</button>
+                <button type="button" class="btn btn-danger pull-right cancel-booking inActiveBtn" id="{{ $bookings[0]->equipment->id }}" disabled="disabled"> Cancel</button>
                 @else
                 <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $bookings[0]->equipment->id }}"> Cancel</button
                 @endif

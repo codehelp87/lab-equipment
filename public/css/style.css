@@ -1,3 +1,8 @@
+.inActiveBtn {
+	background-color: #9B9B9B !important;
+	color: #f8f8f8 !important;
+}
+
 input[type="radio"], 
 input[type="checkbox"] {
 	margin-top: -5px;

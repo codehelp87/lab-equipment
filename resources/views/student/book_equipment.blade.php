@@ -21,7 +21,7 @@
                         </td>
                         <td>
                             {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                            {{ $equipment->max_reservation_time}}<br>
+                            {{ $equipment->max_reservation_time}} hr(s)<br>
                         </td>
                     </tr>
                     @endif

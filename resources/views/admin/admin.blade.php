@@ -189,7 +189,7 @@
                             <td>
                                 {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
                                 {{ $equipment->price_per_unit_time}}<br>
-                                {{ $equipment->max_reservation_time}}<br>
+                                {{ $equipment->max_reservation_time}} hr(s)<br>
                             </td>
                             <td>
                                 <Strong>Open</Strong><br>
