@@ -27,8 +27,10 @@ Route::get('/training/register', 'UserController@requestForm')
 
 Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 
-Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
-	    ->name('training_confirmation');
+
+Route::get('request/training/confirmation', function() {
+    return view('student.training_request_confirmation');
+})->name('training_request_confirmation');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -49,9 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('equipments/training/completed', 'UserController@completeTraining')
 	    ->name('training_completed_confirmation');
 
-	Route::get('request/training/confirmation', function() {
-	    return view('student.training_request_confirmation');
-	})->name('training_request_confirmation');
+	Route::post('/equipments/training/confirmation', 'UserController@confirmTrainingRequest')
+	    ->name('training_confirmation');
 
 	Route::post('/labs/add', 'LabController@createLab');
 	Route::get('/labs/{id}/users', 'LabController@getLabUsers');

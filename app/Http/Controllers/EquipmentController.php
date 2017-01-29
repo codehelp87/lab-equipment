@@ -14,6 +14,29 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+    public function getEquipmentLabUsage(Request $request, $id)
+    {
+        $equipment = Equipment::findOneById($id);
+
+        if ($equipment->count() > 0) {
+            // get daytime bookings
+            $dayTimeBookings = Booking::orderBy('id', 'DESC')
+                ->where([
+                    ['equipment_id' => $equipment->id],
+                    ['status' => 1],
+                    ['timezone_flag' => 'daytime']
+                ]);
+
+            // get nighttime bookings
+            $nightTimeBookings = Booking::orderBy('id', 'DESC')
+                ->where([
+                    ['equipment_id' => $equipment->id],
+                    ['status' => 1],
+                    ['timezone_flag' => 'nighttime']
+                ]);
+        }
+    }
+
     public function TrainingUsers(Request $request, $id)
     {
         $students = [];
