@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('/labs/{id}/add', 'LabController@assignUserToLab');
 
 	Route::post('/equipments/booking', 'BookingController@addBooking');
+	Route::get('bookings/{id}/cancel', 'BookingController@cancelBooking');
 
 	Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
 	Route::get('equipments/{id}/trainings', 'EquipmentController@TrainingUsers');

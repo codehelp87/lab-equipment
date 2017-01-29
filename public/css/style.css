@@ -1,3 +1,8 @@
+.cancelled {
+	background-color: #ffffff !important;
+	color: red !important;
+}
+
 .inActiveBtn {
 	background-color: #9B9B9B !important;
 	color: #f8f8f8 !important;

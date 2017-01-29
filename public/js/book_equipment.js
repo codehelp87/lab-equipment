@@ -18,11 +18,35 @@
         let modal = $(document).find('div.cancel_booking');
         let selectedTimeSlot = _this.attr('data-time-slot');
         let bookingDate = moment().format('MM.DD.YYYY');
-        let equipmentId = _this.attr('id');
+        let bookingId = _this.attr('id');
     
         let modalContent = equipment.prepareModalForBookingCancel(bookingDate, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
+
+        let okBtn = modal.find('button.ok');
+        const route = '/bookings/'+bookingId+'/cancel';
+
+        okBtn.on('click', function() {
+          equipment.makeAjaxCall(route, '', 'GET')
+          .done(function(data) {
+            if (data.id != undefined) {
+              modal.modal('hide');
+
+              toastr.success('Your booking has been cancelled');
+
+              _this.addClass('cancelled');
+              _this.attr('disabled', true);
+              return _this.text('Cancelled');
+            }
+            return toastr.success(data.message);
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+
+          return false;
+        });
 
         return false;
       });

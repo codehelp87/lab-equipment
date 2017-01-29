@@ -9,8 +9,21 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-	const DAY_TO_NIGHT_MAX = 72; // 0 - 72
-	const NIGHT_TO_DAY_MIN = 72; // 72 to 149
+	public function cancelBooking(Request $request, $id)
+	{
+		$booking = Booking::findOneById($id);
+
+		if ($booking->count() > 0) {
+			$booking->status = 0;
+			$booking->save();
+
+			return response()->json($booking, 200);
+		}
+
+		return response()->json([
+			'message' => 'Booking not found'
+		], 404);
+	}
 
 	public function addBooking(Request $request)
 	{

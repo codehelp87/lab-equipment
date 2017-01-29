@@ -10,10 +10,14 @@
             @endif </td>
             <?php $lastBookingTime = $bookings[0]->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
             <td>
-                @if ($lastBookingTime >= 60)
-                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $bookings[0]->equipment->id }}" disabled="disabled"> Cancel</button>
-                @else
-                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $bookings[0]->equipment->id }}" data-time-slot="{{ implode(' , ', @$bookings[0]->time_slot) }}"> Cancel</button
+                @if ($lastBookingTime >= 60 && $bookings[0]->status == 1)
+                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $bookings[0]->id }}" disabled="disabled"> Cancel</button>
+                @endif
+                @if($lastBookingTime < 60 && $bookings[0]->status == 1)
+                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $bookings[0]->id }}" data-time-slot="{{ implode(' , ', @$bookings[0]->time_slot) }}"> Cancel</button
+                @endif
+                @if($lastBookingTime <= 60 && $bookings[0]->status == 0)
+                <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button
                 @endif
             </tr>
             @endif
