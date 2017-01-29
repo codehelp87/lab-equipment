@@ -75,9 +75,16 @@
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
                                 <td>{{ $booking->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
-                                <td>@if (@$booking->time_slot != null) {{ implode(' , ', @$booking->time_slot) }}
+                                <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
                                 @endif </td>
-                                <td><button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->equipment->id }}"> Cancel</button></td>
+                                <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
+                                <td>
+                                @if ($lastBookingTime >= 60)
+                                <button type="button" class="btn btn-danger pull-right cancel-booking" id="{{ $booking->equipment->id }}" disabled="disabled"> Cancel</button>
+                                @else
+                                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->equipment->id }}"> Cancel</button
+                                @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
