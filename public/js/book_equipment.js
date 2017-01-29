@@ -116,7 +116,7 @@
         let params = {
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
-          'booking_date': moment(time).format('MM/DD/YYYY'),
+          'booking_date': time,
           'time_slot_id': selectedTimeSlotId,
           'timezone': flag
         }
@@ -198,9 +198,9 @@
       let stuff = '<h5 class="text-center">You will book</h5>';
       let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
       let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
-      let slots = '<ul>';
+      let slots = '<ul style="padding:0; list-style: none;">';
         for(let i = 0; i < selectedTimeSlot.length; i++) {
-          slots += '<li>'+selectedTimeSlot[i]+'</li>';
+          slots += '<li class="text-center"><h4>'+selectedTimeSlot[i]+'</h4></li>';
         }
         slots += '</ul>';
 

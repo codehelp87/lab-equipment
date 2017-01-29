@@ -44,16 +44,16 @@
         <script type="text/javascript">
             $(function () {
                 var date = new Date();
-                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+
+                $(document).find('span#time').text(moment(today).format('MM.DD.YYYY ddd'));
 
                 $('#datetimepicker1').datepicker({
                     todayHighlight: true,
                     startDate: today,
-                    format: "yyyy.mm.dd D",
-                });
-                $(document).find('span#time').text(moment(today));
-                $("#datetimepicker1").on("changeDate", function (e) {
-                    $(document).find('span#time').text(e.date);
+                    dateFormat: 'yyy-dd-mm',
+                }).on("changeDate", function (e) {
+                    $(document).find('span#time').text(moment(e.date).format('MM.DD.YYYY ddd'));
                 });
             });
         </script>
