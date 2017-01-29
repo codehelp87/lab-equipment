@@ -76,7 +76,7 @@
             if (data.id != undefined) {
               modal.modal('hide');
               toastr.success('Your booking has been recorded');
-              return false;
+              return window.location.href = '/equipments/'+equipmentId+'/booking';
             }
             return toastr.success(data.message);
           })
