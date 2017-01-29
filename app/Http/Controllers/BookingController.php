@@ -31,6 +31,7 @@ class BookingController extends Controller
 	public function addBooking(Request $request)
 	{
 		$totalEquipmentBooking = 0;
+		$timezoneFlag = 'nighttime';
 
 		$user = Auth::user();
 		$equipment = Equipment::findOneById($request->equipment);
@@ -50,6 +51,7 @@ class BookingController extends Controller
 			$maxTimeInMinutes = (int) ($equipment->max_reservation_time * 60);
 
 			if ($timeZone == 'daytime') {
+				$timezoneFlag = 'daytime';
 				if ($maxTimeInMinutes == $totalEquipmentBooking) {
 					return response()->json([
 						'message' => 'Maximum number booking exceeded for this Equipment'
@@ -63,7 +65,8 @@ class BookingController extends Controller
 				'time_slot' => $request->time_slot,
 				'booking_date' => date_format($date, 'Y-m-d H:i:s'),
 				'session' => date_format($date, 'Y-m-d H:i:s'),
-				'time_slot_id' => $request->time_slot_id
+				'time_slot_id' => $request->time_slot_id,
+				'timezone_flag' => $timezoneFlag,
 			]);
 
 			if (count($booking) > 0) {

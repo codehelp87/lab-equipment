@@ -19,6 +19,7 @@ class Booking extends Model
         'session',
         'time_slot_id',
         'status',
+        'timezone_flag',
     ];
 
     /**
