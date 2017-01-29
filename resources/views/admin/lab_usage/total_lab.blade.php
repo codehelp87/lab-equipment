@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="edit-user-account">
+<form class="form-horizontal" id="calculate_lab_usage">
     <div class="form-group">
         <div class="col-sm-4">
             <select name="equipment" id="equipment" class="form-control" required="required">
@@ -28,7 +28,7 @@
         </div>
     </div>
 </form>
-<table class="table table-responsive">
+<table class="table table-responsive display_lab_usage" id="display_lab_usage">
     <tbody>
         <tr>
             <td>Larry</td>

@@ -35,12 +35,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="{{ asset('js/moment.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css" />
         <script src="{{ asset('js/user.js') }}"></script>
         <script src="{{ asset('js/lab.js') }}"></script>
         <script src="{{ asset('js/add_equipment.js') }}"></script>
         <script src="{{ asset('js/book_equipment.js') }}"></script>
         <script src="{{ asset('js/training_request.js') }}"></script>
+        <script src="{{ asset('js/lab_usage.js') }}"></script>
         @include('student.cancel_booking_modal')
     </body>
 </html>
