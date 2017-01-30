@@ -16,12 +16,19 @@
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
         let modal = $(document).find('div#total_lab_usage');
+        let modalTitle = modal.find('h4.modal-title');
+        let modalBody = modal.find('div.modal-body');
 
         let route = '/equipments/'+equipmentId+'/labusers/'+labProf;
 
         lab.makeAjaxCall(route, '', 'GET')
           .done(function(data) {
-            console.log(data);
+            modalTitle.html(data[0].lab_prof);
+            let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
+            modalBody.html(content);
+            modal.modal('show');
+            //console.log(data);
+            //
           })
           .fail(function(error) {
             console.log(error);
@@ -31,8 +38,19 @@
        });
     }
 
-    prepareLabUserTable() {
-      
+    prepareLabUserTable(data, equipmentAmount) {
+      let total = 0;
+      let table = '<table class="table table-hover" id="lab-equipment-users">';
+        table += '<tbody>';
+        for(let booking in data) {
+          table += '<tr><td><strong>'+data[booking].name+'</strong></td><td><strong>'+data[booking].total_time_booked+'</strong></td></tr>';
+          total += parseFloat(data[booking].total_time_booked);
+        }
+        table += '<tr><td><strong>Total Hours</strong></td><td><strong>'+total+'<strong></td></tr>';
+        table += '<tr><td><strong>Total Price</strong></td><td><strong>'+parseFloat(total * equipmentAmount)+'</strong></td></tr>';
+        table += '</tbody>';
+        table += '</table>';
+        return table;
     }
 
     getLabUsageByEquipment() {
