@@ -37,16 +37,21 @@ class EquipmentController extends Controller
                     ->where('status', 1)
                     ->where('equipment_id', $id)
                     ->get();
-                $sumSlot = 0;
-                foreach($userbookings as $index => $booking) {
-                    $sumSlot += count($booking->time_slot) * 10;
-                }
-                $userbookings = null;
-                array_push($response, [
-                    'name' => $user->name,
-                    'total_time_booked' => $sumSlot,
-                ]);
 
+                $sumSlot = 0;
+
+                if ($userbookings->count() > 0 ) {
+                    foreach($userbookings as $index => $booking) {
+                        $sumSlot += count($booking->time_slot) * 10;
+                    }
+
+                    $userbookings = null;
+
+                    array_push($response, [
+                        'name' => $user->name,
+                        'total_time_booked' => $sumSlot,
+                    ]);
+                }
                 $sumSlot = 0;// set slot back to 0
             }
 
