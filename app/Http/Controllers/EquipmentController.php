@@ -14,6 +14,44 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+    public function getLabUsers(Request $request, $id, $lab_user)
+    {
+        $users = [];
+        $response = [];
+
+        $bookings = Booking::findOneByEquipment($id);
+
+        if ($bookings->count() > 0) {
+            foreach($bookings as $index => $booking) {
+                $users[$index] = $booking->user_id;
+            }
+
+            $equipmentAmount = (int) ($booking->equipment->max_reservation_time * 60);
+            $labEquipment = ['lab_prof' => $booking->user->name, 'equipment_amount' => $equipmentAmount];
+            ///$equipmentPricePerUnitTime = (int) $booking->equipment->price_per_unit_time;
+            $uniqueUsers = array_unique($users); // get the unique user_id
+
+            foreach ($uniqueUsers as $user) {
+                $user = User::findOneById($user);
+                $userbookings = $user->bookings
+                    ->where('status', 1)
+                    ->where('equipment_id', $id);
+                $sumSlot = 0;
+                foreach($userbookings as $index => $booking) {
+                    $sumSlot += count($booking->time_slot) * 10;
+                }
+                array_push($response, [
+                    'name' => $user->name,
+                    'total_time_booked' => $sumSlot,
+                ]);
+
+                $sumSlot = 0;// set slot back to 0
+            }
+
+            return response()->json([$labEquipment, $response], 200);
+        }
+    }
+
     public function getEquipmentLabUsage(Request $request, $id)
     {
         $equipment = Equipment::findOneById($id);
@@ -22,8 +60,8 @@ class EquipmentController extends Controller
         $totalHourByNight = 0;
 
         if ($equipment->count() > 0) {
-            $equipmentPricePerUnitTime = $equipment->price_per_unit_time;
-            $totalCharge = (int) (($equipment->max_reservation_time * 60) * $equipmentPricePerUnitTime);
+            //$equipmentPricePerUnitTime = $equipment->price_per_unit_time;
+            $totalCharge = (int) ($equipment->max_reservation_time * 60);
             //get daytime bookings
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
@@ -55,8 +93,8 @@ class EquipmentController extends Controller
             'equipment_id' => $equipment->id,
             'lab_prof' => $equipment->user->name,
             'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ($totalCharge * $totalHourByDay) / 60,
-            'total_charge_by_night' => ($totalCharge * $totalHourByNight) / 60,
+            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
+            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
             'total_hour_by_day' => ($totalHourByDay / 60),
             'total_hour_by_night' => ($totalHourByNight / 60),
         ]);

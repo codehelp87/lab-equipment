@@ -82,11 +82,21 @@ class Booking extends Model
             ->get();
     }
 
-    public function scopeFindOneByEquipment($query, $userId)
+    public function scopeFindOneByEquipment($query, $id)
     {
         return $query
-            ->where('user_id', $userId)
+            ->where('equipment_id', $id)
             ->orderBy('id', 'DESC')
+            ->distinct()
+            ->get();
+    }
+
+    public function scopeFindOneByUserAndEquipment($query, $id, $userId)
+    {
+        return $query
+            ->where('equipment_id', $id)
+            ->where('user_id', $userId)
+            ->where('status', 1)
             ->get();
     }
 

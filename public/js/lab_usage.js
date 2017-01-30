@@ -15,9 +15,24 @@
         let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
+        let modal = $(document).find('div#total_lab_usage');
+
+        let route = '/equipments/'+equipmentId+'/labusers/'+labProf;
+
+        lab.makeAjaxCall(route, '', 'GET')
+          .done(function(data) {
+            console.log(data);
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
 
         return false;
        });
+    }
+
+    prepareLabUserTable() {
+      
     }
 
     getLabUsageByEquipment() {
