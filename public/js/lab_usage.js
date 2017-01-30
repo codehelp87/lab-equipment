@@ -34,7 +34,7 @@
 
     listEquipmentLab(data) {
       let table = '<tr>' +
-            '<td><a href="#" class="view-equipment-users" id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td><a href="#" class="view-equipment-users" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_day+'</td>' +
             '<td>'+data.total_charge_by_day+'</td>' +
             '<td><a href="#" class="view-equipment-users" id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +

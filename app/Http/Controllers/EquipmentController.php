@@ -52,6 +52,7 @@ class EquipmentController extends Controller
         }
 
         return response()->json([
+            'equipment_id' => $equipment->id,
             'lab_prof' => $equipment->user->name,
             'lab_prof_id' => $equipment->user->id,
             'total_charge_by_day' => ($totalCharge * $totalHourByDay) / 60,
