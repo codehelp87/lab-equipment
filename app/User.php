@@ -70,10 +70,10 @@ class User extends Authenticatable implements AuthContract
         return $this->hasOne('LabEquipment\Role');
     }
 
-    public function labUser()
-    {
-        return $this->hasMany('LabEquipment\LabUser');
-    }
+    // public function labUser()
+    // {
+    //     return $this->hasMany('LabEquipment\LabUser');
+    // }
 
     public function scopeFindOneByEmail($query, $email)
     {

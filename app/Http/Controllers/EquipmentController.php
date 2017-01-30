@@ -142,7 +142,12 @@ class EquipmentController extends Controller
             $user =  User::FindOneById($equipment->user_id);
             $labProfessor = $user->name;
 
-            $bookings = $equipment->bookings;
+            $bookings = Booking::where('status', 1)
+                ->where('timezone_flag', NULL)
+                ->where('equipment_id', $equipment->id)
+                ->distinct()
+                ->get();
+
             if (count($bookings) > 0) {
                 foreach($bookings as $index => $booking) {
                     $students[$index] = $booking->user;
