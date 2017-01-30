@@ -31,8 +31,8 @@ class EquipmentController extends Controller
             ///$equipmentPricePerUnitTime = (int) $booking->equipment->price_per_unit_time;
             $uniqueUsers = array_unique($users); // get the unique user_id
 
-            foreach ($uniqueUsers as $user) {
-                $user = User::findOneById($user);
+            foreach ($uniqueUsers as $userId) {
+                $user = User::findOneById($userId);
                 $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', 1)
                     ->where('equipment_id', $id)
