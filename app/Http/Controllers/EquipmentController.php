@@ -27,7 +27,7 @@ class EquipmentController extends Controller
             }
 
             $equipmentAmount = (int) ($booking->equipment->max_reservation_time * 60);
-            $labEquipment = ['lab_prof' => $booking->user->name, 'equipment_amount' => $equipmentAmount];
+            $labEquipment = ['lab_prof' => User::findOneById($lab_user)->name, 'equipment_amount' => $equipmentAmount];
             ///$equipmentPricePerUnitTime = (int) $booking->equipment->price_per_unit_time;
             $uniqueUsers = array_unique($users); // get the unique user_id
 
