@@ -48,9 +48,9 @@
                                 <td>
                                     <select name="book_equipment" id="book_equipment" class="form-control" required="required">
                                         <option value="">Select Equipment</option>
-                                        @if ($equipments->count() > 0)
-                                        @foreach($equipments as $equipment)
-                                        <option value="{{ $equipment->id }}">{{ $equipment->model_no }}</option>
+                                        @if ($trainings->count() > 0)
+                                        @foreach($trainings as $training)
+                                        <option value="{{ $training->equipment->id }}">{{ $training->equipment->model_no }}</option>
                                         @endforeach
                                         @endif
                                     </select>

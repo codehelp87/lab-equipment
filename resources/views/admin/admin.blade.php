@@ -160,12 +160,7 @@
                     <tbody>
                         <tr>
                             <td><strong>{{ Auth::user()-> name }}</strong></td>
-                            <?php 
-                                // $booking = LapEquipment\Booking::findOneByEquipment(Auth::user()->id);
-                                // dump($booking);
-                            ?>
-                            <td><strong>Lab: {{
-                            !is_null(Auth::user()->labUser->user->name)? Auth::user()->labUser->user->name: 'Nill' }}</strong></td>
+                            <td><strong>Lab: {{ $trainings[0]->equipment->user->name }}</strong></td>
                             <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                         </tr>
                     </tbody>
@@ -180,20 +175,20 @@
                 <h5>Book an Equipment</h5>
                 <table class="table table-responsive" id="book-equipment">
                     <tbody>
-                        @if($equipments->count() > 0)
-                        @foreach($equipments as $equipment)
-                        <tr id="edit-eqipment{{ $equipment->id }}">
-                            <td>{{ $equipment->model_no }}</td>
-                            <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                        @if($trainings->count() > 0)
+                        @foreach($trainings as $training)
+                        <tr id="edit-eqipment{{ $training->equipment->id }}">
+                            <td>{{ $training->equipment->model_no }}</td>
+                            <td><img src="{{ $training->equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                             <td>
                                 <Strong>Status</Strong><br>
                                 <Strong>Unit Time</Strong><br>
                                 <Strong>Max Time(per day)</Strong><br>
                             </td>
                             <td>
-                                {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                                {{ $equipment->price_per_unit_time}}<br>
-                                {{ $equipment->max_reservation_time}} hr(s)<br>
+                                {{ $training->equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                                {{ $training->equipment->price_per_unit_time}}<br>
+                                {{ $training->equipment->max_reservation_time}} hr(s)<br>
                             </td>
                             <td>
                                 <Strong>Open</Strong><br>
@@ -203,14 +198,14 @@
                                 <span>30 minutes before</span><br>
                                 <span>1 hour before</span><br>
                             </td>
-                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
+                            <td><a href="/equipments/{{ $training->equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="3">
                                 <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
                                 <span>Your usage for this month <strong>1:00</strong></span><br>
-                                <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked  day)</span><br>
+                                <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked in 5 days)</span><br>
                             </td>
                             <td colspan="1"></td>
                         </tr>

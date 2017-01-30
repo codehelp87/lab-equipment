@@ -55,7 +55,7 @@
           okBtn.on('click', function() {
             req.makeAjaxCall(route, params, 'POST')
             .done(function(data) {
-              if (data.length > 0) {
+              if (data.id != undefined) {
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');

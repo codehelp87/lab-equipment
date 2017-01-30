@@ -24,9 +24,9 @@ class Training extends Model
         return $this->belongsTo('LabEquipment\User');
     }
 
-    public function equipments()
+    public function equipment()
     {
-        return $this->hasMany('LabEquipment\Equipment');
+        return $this->belongsTo('LabEquipment\Equipment');
     }
 
 }
