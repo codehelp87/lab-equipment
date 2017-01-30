@@ -160,7 +160,7 @@
                     <tbody>
                         <tr>
                             <td><strong>{{ Auth::user()-> name }}</strong></td>
-                            <td><strong>Lab:  {{-- {{ $trainings[0]->equipment->user->name }} --}}</strong></td>
+                            <td><strong>Lab: {{ $trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill' }}</strong></td>
                             <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                         </tr>
                     </tbody>
