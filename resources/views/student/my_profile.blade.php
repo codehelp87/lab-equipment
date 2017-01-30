@@ -84,7 +84,7 @@
                                     @endif
                                     @if($lastBookingTime < 60 && $booking->status == 1)
                                     <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot ;} ?>
-                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}"> Cancel</button>
+                                    <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}"> Cancel</button>
                                     @endif
                                     @if($booking->time_slot == null && $booking->status == 0)
                                     <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>

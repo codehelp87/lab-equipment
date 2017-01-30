@@ -19,7 +19,7 @@ class EquipmentController extends Controller
         $users = [];
         $response = [];
 
-        $equipmentBookings = Booking::scopeFindOneByEquipmentUser($id);
+        $equipmentBookings = Booking::findOneByEquipmentUser($id);
 
         if ($equipmentBookings->count() > 0) {
             foreach($equipmentBookings as $index => $booking) {
