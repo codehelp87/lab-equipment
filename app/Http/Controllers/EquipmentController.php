@@ -36,6 +36,7 @@ class EquipmentController extends Controller
                 $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', 1)
                     ->where('equipment_id', $id)
+                    ->where('timezone_flag','!=', NULL)
                     ->get();
 
                 $sumSlot = 0;

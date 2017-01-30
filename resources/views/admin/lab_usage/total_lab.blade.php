@@ -43,13 +43,13 @@
     </tbody>
 </table>
 <span class="pull-left">
-   <a href="#" id="download-by-equipment class="download-by-equipment">
+   <a href="#" id="download-by-equipment" class="download-by-equipment">
       <strong>Download as xlsx</strong>
     </a>
 </span>
 <script>
 $(function() {
-    $('#download-by-equipment').click(function(){
+    $('a#download-by-equipment').click(function(){
         $('table#display_lab_usage').table2excel({
             // exclude CSS class
             exclude: '.noExl',
