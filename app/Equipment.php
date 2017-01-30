@@ -51,9 +51,9 @@ class Equipment extends Model
         return $this->hasMany('LabEquipment\Booking');
     }
 
-    public function trainings()
+    public function training()
     {
-        return $this->hasMany('LabEquipment\Training');
+        return $this->belongsTo('LabEquipment\Training');
     }
 
     public function scopeFindAll($query)

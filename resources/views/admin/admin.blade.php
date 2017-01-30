@@ -160,8 +160,12 @@
                     <tbody>
                         <tr>
                             <td><strong>{{ Auth::user()-> name }}</strong></td>
+                            <?php 
+                                // $booking = LapEquipment\Booking::findOneByEquipment(Auth::user()->id);
+                                // dump($booking);
+                            ?>
                             <td><strong>Lab: {{
-                            !is_null(@Auth::user()->labUser->user->name)? Auth::user()->labUser->user->name: 'Nill' }}</strong></td>
+                            !is_null(Auth::user()->labUser->user->name)? Auth::user()->labUser->user->name: 'Nill' }}</strong></td>
                             <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                         </tr>
                     </tbody>

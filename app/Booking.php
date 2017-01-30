@@ -86,6 +86,7 @@ class Booking extends Model
     {
         return $query
             ->where('user_id', $id)
+            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->distinct()
             ->get();
@@ -95,6 +96,7 @@ class Booking extends Model
     {
         return $query
             ->where('equipment_id', $id)
+            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->distinct()
             ->get();
