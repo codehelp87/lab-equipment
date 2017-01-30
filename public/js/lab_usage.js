@@ -3,10 +3,23 @@
     return $(this).each(() => {
       let lab = new LabUsage;
       lab.getLabUsageByEquipment();
+      lab.getLabUsers();
     });
   }
 
   class LabUsage {
+    getLabUsers() {
+       let lab = new LabUsage;
+
+       $('body').on('click', 'a.view-equipment-users', function() {
+        let _this = $(this);
+        let equipmentId = _this.attr('data-id');
+        let labProf = _this.attr('id');
+
+        return false;
+       });
+    }
+
     getLabUsageByEquipment() {
       let lab = new LabUsage;
       let selectEquipment = $(document)
