@@ -50,7 +50,10 @@
         table += '<tr><td><strong>Total Price</strong></td><td><strong>'+parseFloat(total * equipmentAmount)+'</strong></td></tr>';
         table += '</tbody>';
         table += '</table>';
-        return table;
+
+        let downloadLink = '<span class="pull-left"><a href="#" id="download-lab-users" class="download-lab-users">' + 
+            '<strong>Download as xlsx</strong></a></span><br><br>';
+        return table += downloadLink;
     }
 
     getLabUsageByEquipment() {

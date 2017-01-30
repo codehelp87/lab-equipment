@@ -42,7 +42,11 @@
     <tbody>
     </tbody>
 </table>
-<span class="pull-left"><a href="#" id="download-by-equipment"><strong>Download as xlsx</strong></a></span>
+<span class="pull-left">
+   <a href="#" id="download-by-equipment class="download-by-equipment">
+      <strong>Download as xlsx</strong>
+    </a>
+</span>
 <script>
 $(function() {
     $('#download-by-equipment').click(function(){
@@ -50,6 +54,16 @@ $(function() {
             // exclude CSS class
             exclude: '.noExl',
             name: 'lab_usage',
+            fileext: ".xls",
+            filename: 'lab_usage' //do not include extension
+        });
+    });
+
+    $('body').on('click', 'a#download-lab-users', function() {
+        $('table#lab-equipment-users').table2excel({
+            // exclude CSS class
+            exclude: '.noExl',
+            name: 'lab_users',
             fileext: ".xls",
             filename: 'lab_usage' //do not include extension
         });
