@@ -1393,7 +1393,8 @@
                 var url = window.location.href;
 
                 if (newUrl[1] != undefined) {
-                    $(document).find('span#time').text(moment(newUrl[1]).format('YYYY-MM-DD ddd'));
+                    var newDate =  newUrl[1].split('=');
+                    $(document).find('span#time').text(moment(newDate[1]).format('YYYY-MM-DD ddd'));
                 }
 
                 $('#datetimepicker1').datepicker({
@@ -1406,7 +1407,7 @@
                       .find('span#time')
                       .text(moment(e.date)
                       .format('MM.DD.YYYY ddd'));
-                      $(document).find('span#time').text(currentDate);
+                      //$(document).find('span#time').text(currentDate);
 
                       var url = window.location.href;  
                         if (url.indexOf('?') > -1) {
