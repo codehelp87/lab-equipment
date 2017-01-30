@@ -30,6 +30,7 @@ Route::get('request/training/confirmation', function() {
     return view('student.training_request_confirmation');
 })->name('training_request_confirmation');
 
+Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -43,7 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 	Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
 	Route::put('/users/{email}/password_change', 'UserController@changePassword');
-	Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
 	Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
 
 	Route::post('equipments/training/completed', 'UserController@completeTraining')
