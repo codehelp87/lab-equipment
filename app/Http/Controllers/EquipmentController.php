@@ -19,10 +19,10 @@ class EquipmentController extends Controller
         $users = [];
         $response = [];
 
-        $bookings = Booking::findOneByEquipment($id);
+        $equipmentBookings = Booking::findOneByEquipment($id);
 
-        if ($bookings->count() > 0) {
-            foreach($bookings as $index => $booking) {
+        if ($equipmentBookings->count() > 0) {
+            foreach($equipmentBookings as $index => $booking) {
                 $users[$index] = $booking->user_id;
             }
 
@@ -33,13 +33,15 @@ class EquipmentController extends Controller
 
             foreach ($uniqueUsers as $user) {
                 $user = User::findOneById($user);
-                $userbookings = $user->bookings
+                $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', 1)
-                    ->where('equipment_id', $id);
+                    ->where('equipment_id', $id)
+                    ->get();
                 $sumSlot = 0;
                 foreach($userbookings as $index => $booking) {
                     $sumSlot += count($booking->time_slot) * 10;
                 }
+                $userbookings = null;
                 array_push($response, [
                     'name' => $user->name,
                     'total_time_booked' => $sumSlot,
