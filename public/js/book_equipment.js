@@ -124,7 +124,7 @@
         okBtn.on('click', function() {
           equipment.makeAjaxCall(route, params, 'POST')
           .done(function(data) {
-            if (data.id != undefined) {
+            if (data[0].id != undefined) {
               modal.modal('hide');
               toastr.success('Your booking has been recorded');
               return window.location.href = '/equipments/'+equipmentId+'/booking';

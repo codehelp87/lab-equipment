@@ -30,12 +30,15 @@ class BookingController extends Controller
 
 	public function addBooking(Request $request)
 	{
+		$user = Auth::user();
 		$totalEquipmentBooking = 0;
 		$timezoneFlag = 'nighttime';
 
-		$user = Auth::user();
 		$equipment = Equipment::findOneById($request->equipment);
-		$bookings = Booking::where('equipment_id', $request->equipment)->get();
+
+		$bookings = Booking::where('equipment_id', $request->equipment)
+		    ->where('time_slot_id', '!=', NULL)
+		    ->get();
 
 		$timeSlot = $request->time_slot_id;
 		$timeZone = $request->timezone;
@@ -43,7 +46,7 @@ class BookingController extends Controller
 
 		if ($bookings->count() > 0) {
 			foreach($bookings as $booking) {
-				$totalEquipmentBooking +=  (int) (count($booking->time_slot) * 10);
+				$totalEquipmentBooking += (int) (count($booking->time_slot) * 10);
 			}
 		}
 
@@ -59,18 +62,25 @@ class BookingController extends Controller
 				}
 			}
 
-			$booking = Booking::create([
-				'user_id' => $user->id,
-				'equipment_id' => $request->equipment,
-				'time_slot' => $request->time_slot,
-				'booking_date' => date_format($date, 'Y-m-d H:i:s'),
-				'session' => date_format($date, 'Y-m-d H:i:s'),
-				'time_slot_id' => $request->time_slot_id,
-				'timezone_flag' => $timezoneFlag,
-			]);
+			foreach($request->time_slot as $index => $slot) {
+				$booking = Booking::create([
+					'user_id' => $user->id,
+					'equipment_id' => $request->equipment,
+					'time_slot' => [$request->time_slot[$index]],
+					'booking_date' => date_format($date, 'Y-m-d H:i:s'),
+					'session' => date_format($date, 'Y-m-d H:i:s'),
+					'time_slot_id' => [$request->time_slot_id[$index]],
+					'timezone_flag' => $timezoneFlag,
+				]);
+			}
 
-			if (count($booking) > 0) {
-				return response()->json($booking, 200);
+			$bookings = Booking::where('equipment_id', $request->equipment)
+			->where('user_id', $user->id)
+		    ->where('time_slot_id', '!=', NULL)
+		    ->get();
+
+			if (count($bookings) > 0) {
+				return response()->json($bookings, 200);
 			}
 		}
 
