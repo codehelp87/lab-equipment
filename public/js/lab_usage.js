@@ -46,7 +46,7 @@
           table += '<tr><td><strong>'+data[booking].name+'</strong></td><td><strong>'+data[booking].total_time_booked+'</strong></td></tr>';
           total += parseFloat(data[booking].total_time_booked);
         }
-        table += '<tr><td><strong>Total Hours</strong></td><td><strong>'+total+'<strong></td></tr>';
+        table += '<tr><td><strong>Total Hours</strong></td><td><strong>'+parseFloat(total/60)+'<strong></td></tr>';
         table += '<tr><td><strong>Total Price</strong></td><td><strong>'+parseFloat(total * equipmentAmount)+'</strong></td></tr>';
         table += '</tbody>';
         table += '</table>';
