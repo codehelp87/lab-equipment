@@ -77,7 +77,7 @@
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
                                 <td>{{ $booking->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
-                                <td>{{ 'NILL' }}</td>
+                                <td>{{ implode(' , ', $booking->cancelled_time_slot) }}</td>
                                 <td>
                                     @if ($lastBookingTime >= 60 && $booking->status == 1)
                                     <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
