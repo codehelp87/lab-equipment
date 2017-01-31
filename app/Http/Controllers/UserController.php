@@ -201,13 +201,24 @@ class UserController extends Controller
             ->get();
 
         $bookings =  $this->showMyBookingHistory();
+        $bookingHistories = $this->getBookingHistory();
 
-        return view('student.my_profile', compact('trainings', 'bookings'));
+        return view('student.my_profile', compact('trainings', 'bookings', 'bookingHistories'));
     }
 
     protected function showMyBookingHistory()
     {
         return Booking::findOneByEquipment(Auth::user()->id);
+    }
+
+    protected function getBookingHistory()
+    {
+        return Booking::where('user_id', Auth::user()->id)
+            ->where('status', 0)
+            ->where('time_slot_id', 'null')
+            ->where('timezone_flag', '!=', NULL)
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function editUserInfo(Request $request, $email)

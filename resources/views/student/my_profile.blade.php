@@ -67,30 +67,27 @@
                 <hr>
                 <p>
                     <h5><strong>Booking History</strong></h5><br>
-                    @if($bookings->count() > 0)
+                    @if($bookingHistories->count() > 0)
                     <table class="table table-hover">
                         <tbody>
-                            @foreach($bookings as $booking)
+                            @foreach($bookingHistories as $booking)
+                             <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
+                             @if ($lastBookingTime >= 60 && $booking->status == 1 || $booking->time_slot == null && $booking->status == 0)
                             <tr>
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
                                 <td>{{ $booking->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
-                                <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
-                                @endif </td>
-                                <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
+                                <td>{{ 'NILL' }}</td>
                                 <td>
                                     @if ($lastBookingTime >= 60 && $booking->status == 1)
                                     <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
-                                    @endif
-                                    @if($lastBookingTime < 60 && $booking->status == 1)
-                                    <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot ;} ?>
-                                    <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}"> Cancel</button>
                                     @endif
                                     @if($booking->time_slot == null && $booking->status == 0)
                                     <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
                                     @endif
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
