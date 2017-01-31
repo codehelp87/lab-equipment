@@ -2,8 +2,9 @@
 
 namespace LabEquipment\Console\Commands;
 
-use Illuminate\Console\Command;
 use LabEquipment\Booking;
+use Illuminate\Console\Command;
+use Carbon\Carbon;
 
 class BookingChecker extends Command
 {
@@ -19,7 +20,7 @@ class BookingChecker extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This checks booking time and make the them as completed';
 
     /**
      * Create a new command instance.
@@ -38,6 +39,7 @@ class BookingChecker extends Command
      */
     public function handle()
     {
+        $current = Carbon::now();
         $bookings = Booking::where('status', 1)
             ->where('time_slot_id', '!=', NULL)
             ->where('time_slot', '!=', NULL)
@@ -45,8 +47,35 @@ class BookingChecker extends Command
             ->get();
 
         if ($bookings->count() > 0) {
-            print 'I\'m a PHP Dev';
+            foreach($bookings as $booking) {
+                $bookingDate = $booking->booking_date;
+                $timeSlot = $booking->time_slot;
+
+                $getTime = $this->getHourAndMinutes($timeSlot);
+                $getBookingDate = explode('-', $bookingDate);
+
+                $dt = new \DateTime($booking->booking_date);
+                $carbon = Carbon::instance($dt);
+                $carbon->hour = (int) $getTime[0];
+                $carbon->minute = (int) $getTime[1];
+                $carbon->second = rand(10, 50);
+
+                $diffInMinutes = $carbon->diffInMinutes($current);
+
+                if ($diffInMinutes <= 120) {
+                    print 'Completed'.$diffInMinutes;
+                } else {
+                    print 'Uncompleted'.$diffInMinutes;
+                }
+            }
         }
-        //
+    }
+
+    public function getHourAndMinutes($time)
+    {
+        $splitTime = explode('-', $time[0]);
+        $getHourAndMinutes = explode(':', $splitTime[1]);
+
+        return $getHourAndMinutes;
     }
 }
