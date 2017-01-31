@@ -45,7 +45,7 @@ class LoginController extends Controller
     {
         $user = User::findOneByEmail($request->email);
 
-        if (Hash::check($request->password, $user->password)) {
+        if (Hash::check($request->password, $user->getAuthPassword())) {
             $user = User::where('status', 1)
             ->where('email', $request->get('email'))
             ->first();
