@@ -71,13 +71,14 @@ class BookingController extends Controller
 					'session' => date_format($date, 'Y-m-d H:i:s'),
 					'time_slot_id' => [$request->time_slot_id[$index]],
 					'timezone_flag' => $timezoneFlag,
+					'cancelled_time_slot' => [$request->time_slot[$index]],
 				]);
 			}
 
 			$bookings = Booking::where('equipment_id', $request->equipment)
-			->where('user_id', $user->id)
-		    ->where('time_slot_id', '!=', NULL)
-		    ->get();
+			    ->where('user_id', $user->id)
+		        ->where('time_slot_id', '!=', NULL)
+		        ->get();
 
 			if (count($bookings) > 0) {
 				return response()->json($bookings, 200);

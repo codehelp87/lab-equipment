@@ -20,7 +20,27 @@ class Booking extends Model
         'time_slot_id',
         'status',
         'timezone_flag',
+        'cancelled_time_slot',
     ];
+
+    /**
+     * Always json_decode time_slot so they are usable
+     */
+    public function getCancelledTimeSlotAttribute($value)
+    {
+        return json_decode($value);
+
+        // you could always make sure you get an array returned also
+        // return json_decode($value, true);
+    }
+
+    /**
+     * Always json_encode the time_slot when saving to the database
+     */
+    public function setCancelledTimeSlotAttribute($value)
+    {
+        $this->attributes['cancelled_time_slot'] = json_encode($value);
+    }
 
     /**
      * Always json_decode time_slot so they are usable
