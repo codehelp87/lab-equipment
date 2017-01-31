@@ -56,8 +56,9 @@ class BookingController extends Controller
 			if ($timeZone == 'daytime') {
 				$timezoneFlag = 'daytime';
 				if ($maxTimeInMinutes == $totalEquipmentBooking) {
+					$maxTime = (int)($maxTimeInMinutes / 60);
 					return response()->json([
-						'message' => 'Maximum hour of '.$maxTimeInMinutes / 60.' booking exceeded for this Equipment'
+						'message' => 'Maximum hour of ' .$maxTime. ' booking exceeded for this Equipment'
 					], 400);
 				}
 			}
