@@ -45,21 +45,22 @@ class LoginController extends Controller
     {
         $user = User::findOneByEmail($request->email);
 
-        if (Hash::check($request->password, $user->getAuthPassword())) {
-            $user = User::where('status', 1)
-            ->where('email', $request->get('email'))
-            ->first();
+        if (!is_null($user)) {
+            if (Hash::check($request->password, $user->getAuthPassword())) {
+                $user = User::where('status', 1)
+                ->where('email', $request->get('email'))
+                ->first();
 
-            if (count($user) > 0) {
-                Auth::login($user);
-
-                return redirect() ->route('dashboard');
+                if (count($user) > 0) {
+                    Auth::login($user);
+                    return redirect() ->route('dashboard');
+                }
             }
         } 
 
         return redirect()
-                ->route('load_login')
-                ->with('message', 'Invalid Username/Password')
-                ->withInput();
+            ->route('load_login')
+            ->with('message', 'Invalid Username/Password')
+            ->withInput();
     }
 }
