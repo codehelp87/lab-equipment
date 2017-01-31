@@ -87,6 +87,7 @@ class Booking extends Model
         return $query
             ->where('user_id', $id)
             ->where('status', 1)
+            ->where('time_slot_id', '!=', NULL)
             ->orderBy('id', 'DESC')
             ->distinct()
             ->get();

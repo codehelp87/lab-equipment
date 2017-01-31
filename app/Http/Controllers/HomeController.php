@@ -30,6 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $bookings = $this->showMyBookingHistory();
+
         $users = User::findAllWithTrashed();
         //$adminUsers = User::FindAllAdmin(); , 'adminUsers'
         $labs = Lab::findAll();
