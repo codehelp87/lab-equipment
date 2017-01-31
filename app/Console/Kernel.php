@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\BookingChecker::class
         //
     ];
 
@@ -24,6 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('booking:checker')
+           ->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
     }

@@ -186,7 +186,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($id);
         $equipmentBookings = Booking::findBy([
             ['equipment_id', '=', $id],
-            ['booking_date', '=', $bookingDate]
+            ['booking_date', '=', $bookingDate],
         ]);
 
         if (count($equipment) > 0) {
