@@ -26,9 +26,11 @@ class EquipmentController extends Controller
                 $users[$index] = $booking->user_id;
             }
 
-            $equipmentAmount = (int) ($booking->equipment->max_reservation_time * 60);
-            $labEquipment = ['lab_prof' => User::findOneById($lab_user)->name, 'equipment_amount' => $equipmentAmount];
-            ///$equipmentPricePerUnitTime = (int) $booking->equipment->price_per_unit_time;
+            $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
+            $labEquipment = [
+                'lab_prof' => User::findOneById($lab_user)->name, 
+                'equipment_amount' => $equipmentAmount
+            ];
             $uniqueUsers = array_unique($users); // get the unique user_id
 
             foreach ($uniqueUsers as $userId) {
@@ -69,7 +71,7 @@ class EquipmentController extends Controller
 
         if ($equipment->count() > 0) {
             //$equipmentPricePerUnitTime = $equipment->price_per_unit_time;
-            $totalCharge = (int) ($equipment->max_reservation_time * 60);
+            $totalCharge = (int) ($equipment->price_per_unit_time);
             //get daytime bookings
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
