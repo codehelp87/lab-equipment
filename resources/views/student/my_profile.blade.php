@@ -71,23 +71,20 @@
                     <table class="table table-hover">
                         <tbody>
                             @foreach($bookingHistories as $booking)
-                             <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
-                             @if ($lastBookingTime >= 60 && $booking->status == 1 || $booking->time_slot == null && $booking->status == 0)
                             <tr>
                                 <td><strong>{{ $booking->equipment->title }}</strong></td>
                                 <td>{{ $booking->equipment->model_no }}</td>
                                 <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
                                 <td>{{ implode(' , ', $booking->cancelled_time_slot) }}</td>
                                 <td>
-                                    @if ($lastBookingTime >= 60 && $booking->status == 1)
-                                    <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
+                                    @if($booking->time_slot == null && $booking->status == 2)
+                                    <button type="button" class="btn btn-default pull-right completed"> Completed</button>
                                     @endif
                                     @if($booking->time_slot == null && $booking->status == 0)
                                     <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
                                     @endif
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>

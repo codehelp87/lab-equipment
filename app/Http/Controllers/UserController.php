@@ -215,6 +215,7 @@ class UserController extends Controller
     {
         return Booking::where('user_id', Auth::user()->id)
             ->where('status', 0)
+            ->orWhere('status', 2)
             ->where('time_slot_id', 'null')
             ->where('timezone_flag', '!=', NULL)
             ->orderBy('id', 'desc')

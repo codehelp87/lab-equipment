@@ -62,11 +62,18 @@ class BookingChecker extends Command
 
                 $diffInMinutes = $carbon->diffInMinutes($current);
 
-                if ($diffInMinutes <= 120) {
-                    print 'Completed'.$diffInMinutes;
+                $diffInMinutes = (int) ($diffInMinutes - 60);
+
+                if ($diffInMinutes <= 0) {
+                    $booking->status = 2;
+                    $booking->time_slot = null;
+                    $booking->time_slot_id = null;
+                    $booking->save();
+                    print 'Completed'.$carbon.' # '.$diffInMinutes."\n";
                 } else {
-                    print 'Uncompleted'.$diffInMinutes;
+                    print 'Uncompleted'.$carbon.' # '.$diffInMinutes."\n";
                 }
+                 $diffInMinutes = 0;
             }
         }
     }

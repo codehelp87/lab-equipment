@@ -1,6 +1,11 @@
-.cancelled {
+.cancelled,
+.completed {
 	background-color: #ffffff !important;
 	color: red !important;
+}
+
+.completed {
+	color: #777 !important;
 }
 
 .inActiveBtn {
