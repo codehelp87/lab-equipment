@@ -3,7 +3,7 @@
     <tbody>
         @foreach($bookings as $booking)
         <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
-        @if($lastBookingTime < 60 && $booking->status == 1)
+        @if($lastBookingTime >= 60 && $booking->status == 1)
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
             <td>{{ $booking->equipment->model_no }}</td>
@@ -11,15 +11,12 @@
             <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
             @endif </td>
             <td>
-                {{-- @if ($lastBookingTime >= 60 && $booking->status == 1)
+                @if ($lastBookingTime >= 60 && $booking->status == 1)
                 <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
-                @endif --}}
+                @endif
                 @if($lastBookingTime < 60 && $booking->status == 1)
                 <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot ;} ?>
                 <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}"> Cancel</button>
-                @endif
-                @if($booking->time_slot == null && $booking->status == 0)
-                <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
                 @endif
             </td>
         </tr>

@@ -71,8 +71,9 @@ class BookingController extends Controller
 			foreach($request->time_slot as $index => $slot) {
 				// if the student selects yesterday date and today's date but he'/he boking extends till tomorrow
 	            // carbon should add one more day to the date selected
-	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING) {
-	            	$diffInDays = $bookingDate->diffInDays($current);
+	            $diffInDays = $bookingDate->diffInDays($current);
+
+	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING && $diffInDays <= 0) {
 	            	$bookingDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
 	            } else {

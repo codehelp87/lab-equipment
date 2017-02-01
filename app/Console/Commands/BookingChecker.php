@@ -52,7 +52,6 @@ class BookingChecker extends Command
                 $timeSlot = $booking->time_slot;
 
                 $getTime = $this->getHourAndMinutes($timeSlot);
-                $getBookingDate = explode('-', $bookingDate);
 
                 $dt = new \DateTime($booking->booking_date);
                 $carbon = Carbon::instance($dt);
