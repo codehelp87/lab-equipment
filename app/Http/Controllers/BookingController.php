@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+	const NIGHT_BOOKING = 90;
+	const MORNING_BOOKING = 72;
+
 	public function cancelBooking(Request $request, $id)
 	{
 		$booking = Booking::findOneById($id);
@@ -30,7 +33,8 @@ class BookingController extends Controller
 
 	public function addBooking(Request $request)
 	{
-		$user = Auth::user();
+		$current = Carbon::now();
+
 		$totalEquipmentBooking = 0;
 		$timezoneFlag = 'nighttime';
 
@@ -38,6 +42,7 @@ class BookingController extends Controller
 
 		$bookings = Booking::where('equipment_id', $request->equipment)
 		    ->where('time_slot_id', '!=', NULL)
+		    ->where('timezone_flag', 'daytime') // newly added
 		    ->get();
 
 		$timeSlot = $request->time_slot_id;
@@ -52,32 +57,42 @@ class BookingController extends Controller
 
 		if ($equipment->count() > 0) {
 			$maxTimeInMinutes = (int) ($equipment->max_reservation_time * 60);
-
-			if ($timeZone == 'daytime') {
-				$timezoneFlag = 'daytime';
-				if ($maxTimeInMinutes == $totalEquipmentBooking) {
-					$maxTime = (int)($maxTimeInMinutes / 60);
-					return response()->json([
-						'message' => 'Maximum hour of ' .$maxTime. ' booking exceeded for this Equipment'
-					], 400);
-				}
+			if ($maxTimeInMinutes == $totalEquipmentBooking) {
+				$maxTime = (int)($maxTimeInMinutes / 60);
+				return response()->json([
+					'message' => 'Maximum hour of ' .$maxTime. ' booking exceeded for this Equipment'
+				], 400);
 			}
 
+            $bookingDate = $carbon = Carbon::instance($date); //date_format($date, 'Y-m-d H:i:s')
+            $timeSlotId = $request->time_slot_id;
+            $timeSlot = $request->time_slot;
+
 			foreach($request->time_slot as $index => $slot) {
+				// if the student selects yesterday date and today's date but he'/he boking extends till tomorrow
+	            // carbon should add one more day to the date selected
+	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING) {
+	            	$diffInDays = $bookingDate->diffInDays($current);
+	            	$bookingDate = $bookingDate->addDays(1);
+	            	$timezoneFlag = 'nighttime';
+	            } else {
+	            	$timezoneFlag = 'daytime';
+	            }
+
 				$booking = Booking::create([
-					'user_id' => $user->id,
+					'user_id' => Auth::user()->id,
 					'equipment_id' => $request->equipment,
-					'time_slot' => [$request->time_slot[$index]],
-					'booking_date' => date_format($date, 'Y-m-d H:i:s'),
-					'session' => date_format($date, 'Y-m-d H:i:s'),
-					'time_slot_id' => [$request->time_slot_id[$index]],
+					'time_slot' => [$timeSlot[$index]],
+					'booking_date' => $bookingDate,
+					'session' => $bookingDate,
+					'time_slot_id' => [$timeSlotId[$index]],
 					'timezone_flag' => $timezoneFlag,
-					'cancelled_time_slot' => [$request->time_slot[$index]],
+					'cancelled_time_slot' => [$timeSlot[$index]],
 				]);
 			}
 
 			$bookings = Booking::where('equipment_id', $request->equipment)
-			    ->where('user_id', $user->id)
+			    ->where('user_id', Auth::user()->id)
 		        ->where('time_slot_id', '!=', NULL)
 		        ->get();
 

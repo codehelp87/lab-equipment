@@ -1369,7 +1369,6 @@
                     @if (count($booking->time_slot) > 0)
                     @foreach($booking->time_slot_id as $slot)
                     var slot = "{{ $slot }}"
-                    console.log(slot)
                     if (slot === _this.attr('id')) {
                         _this.attr({'checked': true, 'disabled': true});
                         _this.parent().css('text-decoration', 'line-through')

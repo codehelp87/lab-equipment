@@ -97,13 +97,12 @@
             toastr.error('You can only select between 9:00AM - 9:00PM or 9:00PM - 9:00AM');
             return false;
           }
-          flag = 'daytime';
         } else {
           if (!equipment.checkNightToDay(selectedTimeSlotId)) {
             toastr.error('You can only select between 9:00PM - 9:00AM or 9:00AM - 9:00PM');
             return false;
           }
-          flag = 'nighttime';
+          //flag = 'nighttime';
         }
 
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
@@ -117,8 +116,7 @@
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
           'booking_date': time,
-          'time_slot_id': selectedTimeSlotId,
-          'timezone': flag
+          'time_slot_id': selectedTimeSlotId //,'timezone': flag
         }
 
         okBtn.on('click', function() {
@@ -127,6 +125,7 @@
             if (data[0].id != undefined) {
               modal.modal('hide');
               toastr.success('Your booking has been recorded');
+              okBtn.unbind('click');
               return window.location.href = '/equipments/'+equipmentId+'/booking';
             }
             return toastr.success(data.message);
