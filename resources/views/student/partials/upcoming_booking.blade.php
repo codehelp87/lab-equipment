@@ -3,7 +3,6 @@
     <tbody>
         @foreach($bookings as $booking)
         <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
-        @if($lastBookingTime >= 60 && $booking->status == 1)
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
             <td>{{ $booking->equipment->model_no }}</td>
@@ -20,7 +19,6 @@
                 @endif
             </td>
         </tr>
-        @endif
         @endforeach
     </tbody>
 </table>
