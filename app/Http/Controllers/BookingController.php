@@ -89,7 +89,7 @@ class BookingController extends Controller
 					'user_id' => Auth::user()->id,
 					'equipment_id' => $request->equipment,
 					'time_slot' => [$timeSlot[$index]],
-					'booking_date' => $bookingDate,
+					'booking_date' => $bookdate,
 					'session' => $bookingDate,
 					'time_slot_id' => [$timeSlotId[$index]],
 					'timezone_flag' => $timezoneFlag,
