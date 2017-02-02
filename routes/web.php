@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/equipments/booking', 'BookingController@addBooking');
 	Route::get('bookings/{id}/cancel', 'BookingController@cancelBooking');
 
-	//'/equipments/'+equipmentId+'/labusers/'+labProf
+	Route::get('/equipments/{id}/lab_usage_by_session', 'EquipmentController@getLabUsersBySessionAndEquipment');
 	Route::get('/equipments/{id}/labusers/{lab_user}', 'EquipmentController@getLabUsers');
 	Route::get('/equipments/{id}/students', 'EquipmentController@EquipmentUsers');
 	Route::get('equipments/{id}/trainings', 'EquipmentController@TrainingUsers');

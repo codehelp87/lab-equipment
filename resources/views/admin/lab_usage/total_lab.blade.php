@@ -11,7 +11,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <select name="equipment" id="equipment" class="form-control" required="required">
+            <select name="session" id="session" class="form-control" required="required">
                 <option value="">Select booking date</option>
                 <?php
                     $year = date('Y');

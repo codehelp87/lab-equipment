@@ -7,6 +7,7 @@ use Cloudder;
 use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\LabUser;
+use Carbon\Carbon;
 use LabEquipment\Equipment;
 use LabEquipment\Booking;
 use LabEquipment\Training;
@@ -14,6 +15,64 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+    public function getLabUsersBySessionAndEquipment(Request $request, $id) 
+    {
+        $equipment = Equipment::findOneById($id);
+        $session = $request->session;
+
+        $totalHourByDay = 0;
+        $totalHourByNight = 0;
+
+        if ($equipment->count() > 0) {
+            $totalCharge = (int) ($equipment->price_per_unit_time);
+            //get daytime bookings
+            $dt = new \DateTime($session);
+            $carbon = Carbon::instance($dt);
+
+            $dayTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('status', 1)
+                ->where('timezone_flag', 'daytime')
+                 ->whereBetween('booking_date', array($carbon->toDateString(), $to))
+                //->whereDate('booking_date', '=', $carbon->toDateString())
+                // ->whereDay('booking_date', '=', date('d'))
+                // ->whereMonth('booking_date', '=', date('m'))
+                // ->whereYear('booking_date', '=', date('Y'))
+                ->get();
+
+                //dump($dayTimeBookings); exit;
+
+            if ($dayTimeBookings->count() > 0) {
+                foreach($dayTimeBookings as $booking) {
+                    $totalHourByDay += (int) (count($booking->time_slot) * 10);
+                }
+            }
+
+            //get nighttime bookings
+            $nightTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('status', 1)
+                ->where('timezone_flag', 'nighttime')
+                ->get();
+
+            if ($nightTimeBookings->count() > 0) {
+                foreach ($nightTimeBookings as $booking) {
+                   $totalHourByNight += (int) (count($booking->time_slot) * 10);
+                }
+            }
+        }
+
+        return response()->json([
+            'equipment_id' => $equipment->id,
+            'lab_prof' => $equipment->user->name,
+            'lab_prof_id' => $equipment->user->id,
+            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
+            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
+            'total_hour_by_day' => ($totalHourByDay / 60),
+            'total_hour_by_night' => ($totalHourByNight / 60),
+        ]);
+    }
+
     public function getLabUsers(Request $request, $id, $lab_user)
     {
         $users = [];

@@ -64,7 +64,12 @@ class BookingController extends Controller
 				], 400);
 			}
 
-            $bookingDate = $carbon = Carbon::instance($date); //date_format($date, 'Y-m-d H:i:s')
+            $bookingDate = $carbon = Carbon::instance($date);
+
+            // Create a new date using utc and default to asia time.
+            $bookdate = Carbon::createFromFormat('Y-m-d H:i:s', $date, 'Asia/Seoul');
+            $bookdate->setTimezone('UTC');
+
             $timeSlotId = $request->time_slot_id;
             $timeSlot = $request->time_slot;
 

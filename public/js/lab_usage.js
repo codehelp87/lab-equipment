@@ -4,10 +4,46 @@
       let lab = new LabUsage;
       lab.getLabUsageByEquipment();
       lab.getLabUsers();
+      lab.getLabUsageBySessionAndEquipment();
     });
   }
 
   class LabUsage {
+    getLabUsageBySessionAndEquipment() {
+      let lab = new LabUsage;
+      let session = $(document)
+        .find('form#calculate_lab_usage')
+        .find('select#session');
+
+        session.on('change', function() {
+          let _this = $(this);
+          let equipmentId = $(document)
+            .find('form#calculate_lab_usage')
+            .find('select#equipment')
+            .val();
+
+          if (equipment == '' || equipment == undefined) {
+            toastr.error('Please select an equipment');
+            return false;
+          }
+          let session = _this.val();
+
+          if (!session == '') {
+            let route = '/equipments/'+equipmentId+'/lab_usage_by_session'
+            let params = {
+              'session': session
+            }
+
+            lab.makeAjaxCall(route, params, 'GET')
+            .done(function(data) {
+              console.log(data);
+            })
+            .fail(function(error) {
+              console.log(error);
+            });
+          }
+        });
+    }
     getLabUsers() {
        let lab = new LabUsage;
 
