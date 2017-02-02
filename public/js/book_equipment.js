@@ -44,7 +44,8 @@
 
               _this.addClass('cancelled');
               _this.attr('disabled', true);
-              return _this.text('Cancelled');
+              _this.text('Cancelled');
+              return window.location.href = '/home/profile';
             }
             return toastr.success(data.message);
           })
