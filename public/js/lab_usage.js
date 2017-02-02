@@ -36,7 +36,9 @@
 
             lab.makeAjaxCall(route, params, 'GET')
             .done(function(data) {
-              table.html('');
+              if (data.total_charge_by_day == 0 && data.total_charge_by_night == 0) {
+                return  table.html(lab.NoEquipmentLabListing(data));
+              }
               table.html(lab.listEquipmentLab(data));
             })
             .fail(function(error) {
@@ -52,9 +54,15 @@
         let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
+
         let modal = $(document).find('div#total_lab_usage');
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
+
+        if (labProf == undefined && equipmentId == undefined) {
+          modalBody.html('No student bookings available!');
+          return modal.modal('show');
+        }
 
         let route = '/equipments/'+equipmentId+'/labusers/'+labProf;
 
@@ -122,6 +130,22 @@
             '<td>'+data.total_hour_by_day+'</td>' +
             '<td>'+data.total_charge_by_day+'</td>' +
             '<td><a href="#" class="view-equipment-users" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td>'+data.total_hour_by_night+'</td>' +
+            '<td>'+data.total_charge_by_night+'</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td colspan="5" align="right"><strong>Total</strong></td>' +
+            '<td><strong>'+parseInt(data.total_charge_by_day + data.total_charge_by_night)+'</strong></td>' +
+        '</tr>';
+        return table;
+    }
+
+    NoEquipmentLabListing(data) {
+      let table = '<tr>' +
+            '<td><a href="#" class="view-equipment-users">'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td>'+data.total_hour_by_day+'</td>' +
+            '<td>'+data.total_charge_by_day+'</td>' +
+            '<td><a href="#" class="view-equipment-users">'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_night+'</td>' +
             '<td>'+data.total_charge_by_night+'</td>' +
         '</tr>' +
