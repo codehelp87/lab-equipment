@@ -63,8 +63,8 @@ class EquipmentController extends Controller
             'equipment_id' => $equipment->id,
             'lab_prof' => $equipment->user->name,
             'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
-            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
+            'total_charge_by_day' => ((int) ($totalCharge / 10) * $totalHourByDay),
+            'total_charge_by_night' => ((int) ($totalCharge / 10) * $totalHourByNight),
             'total_hour_by_day' => ($totalHourByDay / 60),
             'total_hour_by_night' => ($totalHourByNight / 60),
         ]);
@@ -161,8 +161,8 @@ class EquipmentController extends Controller
             'equipment_id' => $equipment->id,
             'lab_prof' => $equipment->user->name,
             'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ($totalCharge * $totalHourByDay),
-            'total_charge_by_night' => ($totalCharge * $totalHourByNight),
+            'total_charge_by_day' => ((int) ($totalCharge / 10) * $totalHourByDay),
+            'total_charge_by_night' => ((int) ($totalCharge / 10) * $totalHourByNight),
             'total_hour_by_day' => ($totalHourByDay / 60),
             'total_hour_by_night' => ($totalHourByNight / 60),
         ]);
