@@ -29,20 +29,13 @@ class EquipmentController extends Controller
             $dt = new \DateTime($session);
             $carbon = Carbon::instance($dt);
 
-            print_r($this->getMonthDays($session)); exit;
-
+            $days = $this->getMonthDays($session);
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
                 ->where('timezone_flag', 'daytime')
-                 ->whereBetween('booking_date', array($carbon->toDateString(), $to))
-                //->whereDate('booking_date', '=', $carbon->toDateString())
-                // ->whereDay('booking_date', '=', date('d'))
-                // ->whereMonth('booking_date', '=', date('m'))
-                // ->whereYear('booking_date', '=', date('Y'))
+                ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
-
-                //dump($dayTimeBookings); exit;
 
             if ($dayTimeBookings->count() > 0) {
                 foreach($dayTimeBookings as $booking) {
@@ -55,6 +48,7 @@ class EquipmentController extends Controller
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
                 ->where('timezone_flag', 'nighttime')
+                ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
             if ($nightTimeBookings->count() > 0) {
