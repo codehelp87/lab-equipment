@@ -14,13 +14,12 @@
       let session = $(document)
         .find('form#calculate_lab_usage')
         .find('select#session');
-
-        session.on('change', function() {
-          let _this = $(this);
-          let equipmentId = $(document)
+        let equipment = $(document)
             .find('form#calculate_lab_usage')
             .find('select#equipment')
             .val();
+        session.on('change', function() {
+          let _this = $(this);
           let table = $(document).find('table#display_lab_usage tbody');
 
           if (equipment == '' || equipment == undefined) {
@@ -29,8 +28,8 @@
           }
           let session = _this.val();
 
-          if (!session == '') {
-            let route = '/equipments/'+equipmentId+'/lab_usage_by_session'
+          if (session != '') {
+            let route = '/equipments/'+equipment+'/lab_usage_by_session'
             let params = {
               'session': session
             }
