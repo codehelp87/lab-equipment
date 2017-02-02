@@ -33,30 +33,28 @@ class EquipmentController extends Controller
 
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
-                ->where('status', 1)
-                ->where('status', 2)
+                ->where('status', '>=', 1)
                 ->where('timezone_flag', 'daytime')
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
             if ($dayTimeBookings->count() > 0) {
                 foreach($dayTimeBookings as $booking) {
-                    $totalHourByDay += (int) (count($booking->time_slot) * 10);
+                    $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
                 }
             }
 
             //get nighttime bookings
             $nightTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
-                ->where('status', 1)
-                ->where('status', 2)
+                ->where('status', '>=', 1)
                 ->where('timezone_flag', 'nighttime')
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
             if ($nightTimeBookings->count() > 0) {
                 foreach ($nightTimeBookings as $booking) {
-                   $totalHourByNight += (int) (count($booking->time_slot) * 10);
+                   $totalHourByNight += (int) (count($booking->cancelled_time_slot) * 10);
                 }
             }
         }
@@ -94,7 +92,7 @@ class EquipmentController extends Controller
             foreach ($uniqueUsers as $userId) {
                 $user = User::findOneById($userId);
                 $userbookings = Booking::where('user_id', $user->id)
-                    ->where('status', 1)
+                    ->where('status', '>=', 1)
                     ->where('equipment_id', $id)
                     ->where('timezone_flag','!=', NULL)
                     ->get();
@@ -103,7 +101,7 @@ class EquipmentController extends Controller
 
                 if ($userbookings->count() > 0 ) {
                     foreach($userbookings as $index => $booking) {
-                        $sumSlot += count($booking->time_slot) * 10;
+                        $sumSlot += count($booking->cancelled_time_slot) * 10;
                     }
 
                     $userbookings = null;
@@ -134,14 +132,13 @@ class EquipmentController extends Controller
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('cancelled_time_slot', '!=', NULL)
-                ->where('status', 1)
-                ->orwhere('status', 2)
+                ->where('status', '>=', 1)
                 ->where('timezone_flag', 'daytime')
                 ->get();
 
             if ($dayTimeBookings->count() > 0) {
                 foreach($dayTimeBookings as $booking) {
-                    $totalHourByDay += (int) (count($booking->time_slot) * 10);
+                    $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
                 }
             }
 
@@ -149,14 +146,13 @@ class EquipmentController extends Controller
             $nightTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('cancelled_time_slot', '!=', NULL)
-                ->where('status', 1)
-                ->orwhere('status', 2)
+                ->where('status', '>=', 1)
                 ->where('timezone_flag', 'nighttime')
                 ->get();
 
             if ($nightTimeBookings->count() > 0) {
                 foreach ($nightTimeBookings as $booking) {
-                   $totalHourByNight += (int) (count($booking->time_slot) * 10);
+                   $totalHourByNight += (int) (count($booking->cancelled_time_slot) * 10);
                 }
             }
         }
