@@ -14,11 +14,11 @@
       let session = $(document)
         .find('form#calculate_lab_usage')
         .find('select#session');
-        let equipment = $(document)
+        session.on('change', function() {
+          let equipment = $(document)
             .find('form#calculate_lab_usage')
             .find('select#equipment')
             .val();
-        session.on('change', function() {
           let _this = $(this);
           let table = $(document).find('table#display_lab_usage tbody');
 
