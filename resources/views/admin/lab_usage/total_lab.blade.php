@@ -20,7 +20,7 @@
                     for ($m = 1; $m <= 12; $m++) {
                         if ($m >= $month) {
                             $month = date('F', mktime(0, 0, 0, $m, 1, date('Y')));
-                            print '<option value='.$year.'-'.$m.'-'.$m.'>'.$year.'.'.$month. '</option>';
+                            print '<option value='.$year.'-'.$m.'-'.'1>'.$year.'.'.$month. '</option>';
                         }
                     }
                 ?>

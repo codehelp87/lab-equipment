@@ -21,6 +21,7 @@
             .find('form#calculate_lab_usage')
             .find('select#equipment')
             .val();
+          let table = $(document).find('table#display_lab_usage tbody');
 
           if (equipment == '' || equipment == undefined) {
             toastr.error('Please select an equipment');
@@ -36,7 +37,8 @@
 
             lab.makeAjaxCall(route, params, 'GET')
             .done(function(data) {
-              console.log(data);
+              table.html('');
+              table.html(lab.listEquipmentLab(data));
             })
             .fail(function(error) {
               console.log(error);
@@ -63,8 +65,6 @@
             let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
             modalBody.html(content);
             modal.modal('show');
-            //console.log(data);
-            //
           })
           .fail(function(error) {
             console.log(error);
