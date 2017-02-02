@@ -29,6 +29,8 @@ class EquipmentController extends Controller
             $dt = new \DateTime($session);
             $carbon = Carbon::instance($dt);
 
+            print_r($this->getMonthDays($session)); exit;
+
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
@@ -347,5 +349,13 @@ class EquipmentController extends Controller
         ]);
 
         return  Cloudder::getResult()['url'];
+    }
+
+    public function getMonthDays($date)
+    {
+        $explodeDate = explode('-', $date);
+        $days = cal_days_in_month(CAL_GREGORIAN, $explodeDate[1], $explodeDate[0]);
+
+        return $days;
     }
 }
