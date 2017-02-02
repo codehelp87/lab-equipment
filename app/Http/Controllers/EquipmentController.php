@@ -133,8 +133,9 @@ class EquipmentController extends Controller
             //get daytime bookings
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
+                ->where('cancelled_time_slot', '!=', NULL)
                 ->where('status', 1)
-                ->where('status', 2)
+                ->orwhere('status', 2)
                 ->where('timezone_flag', 'daytime')
                 ->get();
 
@@ -147,8 +148,9 @@ class EquipmentController extends Controller
             //get nighttime bookings
             $nightTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
+                ->where('cancelled_time_slot', '!=', NULL)
                 ->where('status', 1)
-                ->where('status', 2)
+                ->orwhere('status', 2)
                 ->where('timezone_flag', 'nighttime')
                 ->get();
 

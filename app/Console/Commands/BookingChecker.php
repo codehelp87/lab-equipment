@@ -59,7 +59,7 @@ class BookingChecker extends Command
                 $carbon->minute = (int) $getTime[1];
                 $carbon->second = rand(10, 50);
 
-                $diffInMinutes = $carbon->diffInMinutes($current);
+                $diffInMinutes = $current->diffInMinutes($carbon);
 
                 $diffInMinutes = (int) ($diffInMinutes - 60);
 
