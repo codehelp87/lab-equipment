@@ -30,6 +30,7 @@ class EquipmentController extends Controller
             $carbon = Carbon::instance($dt);
 
             $days = $this->getMonthDays($session);
+
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
@@ -348,7 +349,8 @@ class EquipmentController extends Controller
     public function getMonthDays($date)
     {
         $explodeDate = explode('-', $date);
-        $days = cal_days_in_month(CAL_GREGORIAN, $explodeDate[1], $explodeDate[0]);
+        //$days = cal_days_in_month(CAL_GREGORIAN, $explodeDate[1], $explodeDate[0]);
+        $days = date('t', mktime(0, 0, 0, $explodeDate[1], 1, $explodeDate[0])); 
 
         return $days;
     }
