@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         JD\Cloudder\CloudderServiceProvider::class,
         Grimthorr\LaravelToast\ServiceProvider::class,
+        GeneaLabs\LaravelCaffeine\Providers\LaravelCaffeineService::class,
 
         /*
          * Package Service Providers...

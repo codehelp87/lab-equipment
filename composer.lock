@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2b9b0c8ddef0b7bbbcc9805b12981b6b",
-    "content-hash": "83890ef247f1cf859c1406b4cc32f227",
+    "hash": "4d9d61961a93d900741c75ae41624a3c",
+    "content-hash": "6a772a2c7f0d466eab334b28785e64c9",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -294,33 +294,29 @@
             "time": "2015-11-06 14:35:42"
         },
         {
-            "name": "grimthorr/laravel-toast",
-            "version": "1.1.0",
+            "name": "genealabs/laravel-caffeine",
+            "version": "0.3.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Grimthorr/laravel-toast.git",
-                "reference": "2c433a6ce6c978aa15820887b3769b36d4ff9e8d"
+                "url": "https://github.com/GeneaLabs/laravel-caffeine.git",
+                "reference": "166e2ca08af7cc62a59360f33e03d1cb8478df6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Grimthorr/laravel-toast/zipball/2c433a6ce6c978aa15820887b3769b36d4ff9e8d",
-                "reference": "2c433a6ce6c978aa15820887b3769b36d4ff9e8d",
+                "url": "https://api.github.com/repos/GeneaLabs/laravel-caffeine/zipball/166e2ca08af7cc62a59360f33e03d1cb8478df6a",
+                "reference": "166e2ca08af7cc62a59360f33e03d1cb8478df6a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "5.*",
-                "illuminate/database": "5.*",
-                "illuminate/support": "5.*",
-                "php": ">=5.4.0"
+                "illuminate/routing": "~5.1",
+                "illuminate/support": "~5.1",
+                "php": ">=5.5.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Grimthorr\\LaravelToast\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
+                    "GeneaLabs\\LaravelCaffeine\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -328,14 +324,12 @@
             ],
             "authors": [
                 {
-                    "name": "Grimthorr",
-                    "email": "phil@hughesbox.co.uk",
-                    "homepage": "http://hughesbox.co.uk"
+                    "name": "Mike Bronner",
+                    "email": "hello@genealabs.com"
                 }
             ],
-            "description": "Simple toast messages for Laravel 5.",
-            "homepage": "https://github.com/Grimthorr/laravel-toast",
-            "time": "2015-03-24 11:18:05"
+            "description": "Keeping Your Laravel Forms Awake",
+            "time": "2016-09-25 01:24:03"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2524,6 +2518,50 @@
                 "fixtures"
             ],
             "time": "2016-04-29 12:21:54"
+        },
+        {
+            "name": "grimthorr/laravel-toast",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grimthorr/laravel-toast.git",
+                "reference": "2c433a6ce6c978aa15820887b3769b36d4ff9e8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grimthorr/laravel-toast/zipball/2c433a6ce6c978aa15820887b3769b36d4ff9e8d",
+                "reference": "2c433a6ce6c978aa15820887b3769b36d4ff9e8d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.*",
+                "illuminate/database": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Grimthorr\\LaravelToast\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grimthorr",
+                    "email": "phil@hughesbox.co.uk",
+                    "homepage": "http://hughesbox.co.uk"
+                }
+            ],
+            "description": "Simple toast messages for Laravel 5.",
+            "homepage": "https://github.com/Grimthorr/laravel-toast",
+            "time": "2015-03-24 11:18:05"
         },
         {
             "name": "hamcrest/hamcrest-php",

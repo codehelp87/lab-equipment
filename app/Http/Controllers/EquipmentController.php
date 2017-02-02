@@ -34,6 +34,7 @@ class EquipmentController extends Controller
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
+                ->where('status', 2)
                 ->where('timezone_flag', 'daytime')
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
@@ -48,6 +49,7 @@ class EquipmentController extends Controller
             $nightTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
+                ->where('status', 2)
                 ->where('timezone_flag', 'nighttime')
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
@@ -132,6 +134,7 @@ class EquipmentController extends Controller
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
+                ->where('status', 2)
                 ->where('timezone_flag', 'daytime')
                 ->get();
 
@@ -145,6 +148,7 @@ class EquipmentController extends Controller
             $nightTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', 1)
+                ->where('status', 2)
                 ->where('timezone_flag', 'nighttime')
                 ->get();
 
