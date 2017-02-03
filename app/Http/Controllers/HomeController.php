@@ -35,18 +35,32 @@ class HomeController extends Controller
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
 
+        $trainedEquipments = $this->getTrainedEquipments();
+
         $trainings = Training::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->orderBy('id', 'desc')
             ->get();
 
         return view('admin.admin', compact(
-            'users', 'labs', 'equipments', 'bookings', 'trainings'
+            'users', 'labs', 'equipments', 'bookings', 'trainings', 'trainedEquipments'
         ));
     }
 
     protected function showMyBookingHistory()
     {
         return Booking::findOneByEquipment(Auth::user()->id);
+    }
+
+    public function getTrainedEquipments()
+    {
+        $equipmentIds = [];
+        $trainedEquipment = Training::getTrainedEquipments(Auth::user()->id);
+
+        foreach ($trainedEquipment as $key => $tEquipment) {
+           $equipmentIds[$key] = $tEquipment->equipment_id;
+        }
+
+        return $equipmentIds;
     }
 }

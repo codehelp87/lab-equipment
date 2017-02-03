@@ -29,4 +29,12 @@ class Training extends Model
         return $this->belongsTo('LabEquipment\Equipment');
     }
 
+    public function scopeGetTrainedEquipments($query, $userId)
+    {
+        return $query
+            ->orderBy('id', 'DESC')
+            ->where('user_id', $userId)
+            ->get();
+    }
+
 }
