@@ -97,8 +97,6 @@ class EquipmentController extends Controller
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
-                dd($dayTimeBookings);
-
             if ($dayTimeBookings->count() > 0) {
                 foreach($dayTimeBookings as $booking) {
                     $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
@@ -110,6 +108,7 @@ class EquipmentController extends Controller
                 ->where('equipment_id', $equipment->id)
                 ->where('status', '>=', 1)
                 ->where('timezone_flag', 'nighttime')
+                ->where('cancelled_time_slot', '!=', NULL)
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
