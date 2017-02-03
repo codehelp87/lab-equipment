@@ -137,6 +137,7 @@ class Booking extends Model
         return $query
             ->where('equipment_id', $id)
             ->where('user_id', $userId)
+            ->where('cancelled_time_slot', '!=', NULL)
             ->where('status','>=', 1)
             ->get();
     }
