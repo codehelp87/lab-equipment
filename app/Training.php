@@ -34,6 +34,7 @@ class Training extends Model
         return $query
             ->orderBy('id', 'DESC')
             ->where('user_id', $userId)
+            ->where('status', 1)
             ->get();
     }
 

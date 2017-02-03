@@ -290,9 +290,25 @@ class UserController extends Controller
                 foreach($equipments as $index => $equipment) {
                     $labEquipment = Equipment::findOneByIdWithTrashed($equipmentIds[$index]);
                     if ($equipments[$index] == 0) {
-                        $labEquipment->destroy($labEquipment->id);
+                        // Searchn for existing booking history
+                        $training = $this->checkTrainingHistory($equipmentIds[$index], $user);
+                        // If the user has been approved for the equipment before and the status is set to 0
+                        // then set the status to 0
+                        if (!is_null($training)) {
+                            $training->status = 0;
+                            $training->save();
+                        } else { // add it and set the status to 0
+                            $this->addStudentToEquipment($status = 0, $equipmentIds[$index], $user);
+                        }
                     } else {
-                        $labEquipment->restore();
+                        //Searchn for existing booking history
+                        $existingTraining = $this->checkTrainingHistory($equipmentIds[$index], $user);
+                        if (is_null($existingTraining)) {
+                            $this->addStudentToEquipment($status = 1, $equipmentIds[$index], $user);
+                        } else {
+                            $existingTraining->status = 1;
+                            $existingTraining->save();
+                        }
                     }
                 }
             }
@@ -300,6 +316,24 @@ class UserController extends Controller
             return response()->json($user, 200);
         }
         return response()->json(['message' => 'Error updating user Account'], 400);
+    }
+
+    protected function addStudentToEquipment($status, $equipmentId, $user)
+    {
+        return Training::create([
+            'user_id' => $user->id,
+            'date_of_training_session' => new \DateTime(),
+            'location' => 'NILL',
+            'equipment_id' => $equipmentId,
+            'status' => $status,
+        ]);
+    }
+
+    protected function checkTrainingHistory($equipmentId, $user)
+    {
+        return Training::where('equipment_id', $equipmentId)
+            ->where('user_id', $user->id)
+            ->first();
     }
 
     public function gettUserStatus(Request $request, $status)
