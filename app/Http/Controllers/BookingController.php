@@ -78,6 +78,8 @@ class BookingController extends Controller
 	            $bookingDate = $carbon = Carbon::instance($date);
 	            $diffInDays = $bookingDate->diffInDays($current);
 
+	            $bDate = $bookingDate;
+
 	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING && $diffInDays <= 0) {
 	            	$bDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
