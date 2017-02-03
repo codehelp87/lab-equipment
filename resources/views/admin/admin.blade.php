@@ -175,20 +175,20 @@
                 <h5>Book an Equipment</h5>
                 <table class="table table-responsive" id="book-equipment">
                     <tbody>
-                        @if($trainings->count() > 0)
-                        @foreach($trainings as $training)
-                        <tr id="edit-eqipment{{ $training->equipment->id }}">
-                            <td>{{ $training->equipment->model_no }}</td>
-                            <td><img src="{{ $training->equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                        @if($equipments->count() > 0)
+                        @foreach($equipments as $equipment)
+                        <tr id="edit-eqipment{{ $equipment->id }}">
+                            <td>{{ $equipment->model_no }}</td>
+                            <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                             <td>
                                 <Strong>Status</Strong><br>
                                 <Strong>Unit Time</Strong><br>
                                 <Strong>Max Time(per day)</Strong><br>
                             </td>
                             <td>
-                                {{ $training->equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                                {{ $training->equipment->price_per_unit_time}}<br>
-                                {{ $training->equipment->max_reservation_time}} hr(s)<br>
+                                {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                                {{ $equipment->price_per_unit_time}}<br>
+                                {{ $equipment->max_reservation_time}} hr(s)<br>
                             </td>
                             <td>
                                 <Strong>Open</Strong><br>
@@ -198,7 +198,7 @@
                                 <span>30 minutes before</span><br>
                                 <span>1 hour before</span><br>
                             </td>
-                            <td><a href="/equipments/{{ $training->equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
+                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>

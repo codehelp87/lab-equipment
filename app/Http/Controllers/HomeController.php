@@ -32,7 +32,6 @@ class HomeController extends Controller
         $bookings = $this->showMyBookingHistory();
 
         $users = User::findAllWithTrashed();
-        //$adminUsers = User::FindAllAdmin(); , 'adminUsers'
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
 
