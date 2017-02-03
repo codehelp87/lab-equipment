@@ -93,6 +93,7 @@ class EquipmentController extends Controller
                 ->where('equipment_id', $equipment->id)
                 ->where('status', '>=', 1)
                 ->where('timezone_flag', 'daytime')
+                ->where('cancelled_time_slot', '!=', NULL)
                 ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->get();
 
