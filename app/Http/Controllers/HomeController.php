@@ -35,7 +35,7 @@ class HomeController extends Controller
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
 
-        $trainedEquipments = $this->getTrainedEquipments();
+        $trainedEquipments = $this->getTrainedEquipments(Auth::user()->id);
 
         $trainings = Training::where('user_id', Auth::user()->id)
             ->where('status', 1)
@@ -52,10 +52,10 @@ class HomeController extends Controller
         return Booking::findOneByEquipment(Auth::user()->id);
     }
 
-    public function getTrainedEquipments()
+    public function getTrainedEquipments($userId)
     {
         $equipmentIds = [];
-        $trainedEquipment = Training::getTrainedEquipments(Auth::user()->id);
+        $trainedEquipment = Training::getTrainedEquipments($userId);
 
         foreach ($trainedEquipment as $key => $tEquipment) {
            $equipmentIds[$key] = $tEquipment->equipment_id;

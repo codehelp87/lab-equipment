@@ -259,8 +259,11 @@ class UserController extends Controller
             return response()->json(['message' => 'Account De-activated'], 200);
         }
 
+        $equipments = Equipment::findAll();
+        $trainedEquipments = $this->getTrainedEquipments($user->id);
+
         return view('admin.manage_user_account.update_user_account', 
-            compact('user')
+            compact('user', 'trainedEquipments', 'equipments')
         );
     }
 
@@ -315,5 +318,17 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => 'Users not found'], 404);
+    }
+
+    public function getTrainedEquipments($userId)
+    {
+        $equipmentIds = [];
+        $trainedEquipment = Training::getTrainedEquipments($userId);
+
+        foreach ($trainedEquipment as $key => $tEquipment) {
+           $equipmentIds[$key] = $tEquipment->equipment_id;
+        }
+
+        return $equipmentIds;
     }
 }

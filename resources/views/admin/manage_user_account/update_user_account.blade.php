@@ -69,27 +69,38 @@
 		</div>
 	</div>
 	<hr>
-	@if (!is_null($user->bookings))
+	@if (!is_null($equipments))
 	<?php $id = '';?>
 	<h6>Status by equipment</h6>
-	@foreach($user->bookings as $index => $booking)
-	@if(!is_null(@$booking->equipment))
-	<?php $id .= $booking->equipment->id.'##'; ?>
+	@foreach($equipments as $index => $equipment)
+	<?php $id .= $equipment->id.'##'; ?>
+	@if (in_array($equipment->id, $trainedEquipments))
 	<div class="form-group">
-		<label for="equipment[]" class="col-sm-2 control-label"> {{ $booking->equipment->title }}</label>
+		<label for="equipment[]" class="col-sm-2 control-label"> {{ $equipment->title }}</label>
 		<div class="col-sm-6">
 			<select name="equipment[]" id="equipment[]" class="form-control" required="required">
 				<option value="">Status</option>
-				@if ($booking->equipment->availability == 1)
+				@if ($equipment->availability == 1)
 				<option value="1" selected="selected">Active</option>
 				@else
 				<option value="1">Active</option>
 				@endif
-				@if ($booking->equipment->availability == 0)
+				@if ($equipment->availability == 0)
 				<option value="0" selected="selected">Inactive</option>
 				@else
 				<option value="0">Inactive</option>
 				@endif
+			</select>
+		</div>
+	</div>
+	@else
+	<div class="form-group">
+		<label for="equipment[]" class="col-sm-2 control-label"> {{ $equipment->title }}</label>
+		<div class="col-sm-6">
+			<select name="equipment[]" id="equipment[]" class="form-control" required="required">
+				<option value="">Status</option>
+				<option value="1">Active</option>
+				<option value="0" selected="selected">Inactive</option>
 			</select>
 		</div>
 	</div>

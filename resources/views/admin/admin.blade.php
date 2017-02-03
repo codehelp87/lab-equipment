@@ -168,7 +168,7 @@
             </p>
             <hr>
             <p>
-                @include('student.partials.upcoming_booking', ['bookins' => $bookings])
+                @include('student.partials.upcoming_booking', ['bookings' => $bookings])
             </p>
             <hr>
             <p>
