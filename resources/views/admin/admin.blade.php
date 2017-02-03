@@ -206,7 +206,7 @@
                         <td colspan="3">
                              <?php 
                                  $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                                 $created = new \Carbon\Carbon($bookings[0]->created_at);
+                                 $created = new \Carbon\Carbon(@$bookings[0]->created_at);
                                  $now = \Carbon\Carbon::now();
                                  $difference = $created->diff($now)->days;
                              ?>
