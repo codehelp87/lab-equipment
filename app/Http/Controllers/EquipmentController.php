@@ -39,8 +39,8 @@ class EquipmentController extends Controller
             $uniqueUsers = array_unique($users); // get the unique user_id
 
             $dt = new \DateTime($session);
-            $carbon = Carbon::instance($dt);
             $days = $this->getMonthDays($session);
+            $monthEnd = date('Y-m-d h:i:s', strtotime($session. '+'.($days - 1).'days'));
 
             foreach ($uniqueUsers as $userId) {
                 $user = User::findOneById($userId);
@@ -49,7 +49,7 @@ class EquipmentController extends Controller
                     ->where('equipment_id', $id)
                     ->where('timezone_flag','!=', NULL)
                     ->where('cancelled_time_slot', '!=', NULL)
-                    ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
+                    ->whereBetween('booking_date', array($dt, $monthEnd))
                     ->get();
 
                 $sumSlot = 0;
@@ -85,19 +85,18 @@ class EquipmentController extends Controller
             $totalCharge = (int) ($equipment->price_per_unit_time);
             //get daytime bookings
             $dt = new \DateTime($session);
-            $carbon = Carbon::instance($dt);
 
             $days = $this->getMonthDays($session);
+
+            $monthEnd = date('Y-m-d h:i:s', strtotime($session. '+'.($days - 1).'days'));
 
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', '>=', 1)
                 ->where('timezone_flag', 'daytime')
                 ->where('cancelled_time_slot', '!=', NULL)
-                ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
+                ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
-
-                print $carbon->toDateString(). ' ======== '.$carbon->addDays($days);
 
             if ($dayTimeBookings->count() > 0) {
                 foreach($dayTimeBookings as $booking) {
@@ -111,7 +110,8 @@ class EquipmentController extends Controller
                 ->where('status', '>=', 1)
                 ->where('timezone_flag', 'nighttime')
                 ->where('cancelled_time_slot', '!=', NULL)
-                ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
+                //->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
+                ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
 
             if ($nightTimeBookings->count() > 0) {
