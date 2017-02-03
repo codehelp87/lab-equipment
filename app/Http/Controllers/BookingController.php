@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-	const NIGHT_BOOKING = 90;
+	const NIGHT_BOOKING = 72;
 	const MORNING_BOOKING = 72;
 
 	public function cancelBooking(Request $request, $id)
