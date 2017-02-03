@@ -231,7 +231,9 @@
                             <span>30 minutes before</span><br>
                             <span>1 hour before</span><br>
                         </td>
-                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a></td>
+                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br>
+                        <a href="#">Contact the administrator</a>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3"></td>
