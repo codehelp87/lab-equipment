@@ -51,7 +51,7 @@ class BookingController extends Controller
 
 		if ($bookings->count() > 0) {
 			foreach($bookings as $booking) {
-				$totalEquipmentBooking += (int) (count($booking->time_slot) * 10);
+				$totalEquipmentBooking += (int) (count($booking->cancelled_time_slot) * 10);
 			}
 		}
 
@@ -64,8 +64,7 @@ class BookingController extends Controller
 				], 400);
 			}
 
-            $bookingDate = $carbon = Carbon::instance($date);
-            $bookingDate->setTimezone('UTC');
+            //$bookingDate->setTimezone('UTC');
             // Create a new date using utc and default to asia time.
             //$bookdate = Carbon::createFromFormat('Y-m-d H:i:s', $bookingDate->toSt, 'Asia/Seoul');
             //$bookdate->setTimezone('UTC');
@@ -76,10 +75,11 @@ class BookingController extends Controller
 			foreach($request->time_slot as $index => $slot) {
 				// if the student selects yesterday date and today's date but he'/he boking extends till tomorrow
 	            // carbon should add one more day to the date selected
+	            $bookingDate = $carbon = Carbon::instance($date);
 	            $diffInDays = $bookingDate->diffInDays($current);
 
 	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING && $diffInDays <= 0) {
-	            	$bookingDate = $bookingDate->addDays(1);
+	            	$bDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
 	            } else {
 	            	$timezoneFlag = 'daytime';
@@ -89,8 +89,8 @@ class BookingController extends Controller
 					'user_id' => Auth::user()->id,
 					'equipment_id' => $request->equipment,
 					'time_slot' => [$timeSlot[$index]],
-					'booking_date' => $bookingDate,
-					'session' => $bookingDate,
+					'booking_date' => $bDate,
+					'session' => $bDate,
 					'time_slot_id' => [$timeSlotId[$index]],
 					'timezone_flag' => $timezoneFlag,
 					'cancelled_time_slot' => [$timeSlot[$index]],
