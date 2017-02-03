@@ -211,7 +211,8 @@
                                  $difference = $created->diff($now)->days;
                              ?>
                             <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
-                            <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong><br>(Your account will be blocked in 5 days)</span><br>
+                            <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong><br>
+                              (Your account will be blocked in {{ $difference }} days)</span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
