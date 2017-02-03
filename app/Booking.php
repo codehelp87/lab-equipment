@@ -132,6 +132,15 @@ class Booking extends Model
             ->get();
     }
 
+    public function scopeFindTotalLabUsage($query, $id, $userId)
+    {
+        return $query
+            ->where('equipment_id', $id)
+            ->where('user_id', $userId)
+            ->where('status','>=', 1)
+            ->get();
+    }
+
     public function scopeFindOneById($query, $id)
     {
         return $query

@@ -204,7 +204,8 @@
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="3">
-                            <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
+                             <?php $training = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);?>
+                            <span>Your Lab usage for this month: <strong>{{ (float) ($training->count() * 10) }} mins</strong></span><br>
                             <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked in 5 days)</span><br>
                         </td>
                         <td colspan="1"></td>
@@ -231,15 +232,15 @@
                             <span>30 minutes before</span><br>
                             <span>1 hour before</span><br>
                         </td>
-                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br>
+                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br><br>
                         <a href="#">Contact the administrator</a>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="3">
-                            <span>Your Lab usage for this month: <strong>2:00</strong></span><br>
-                            <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked in 5 days)</span><br>
+                            <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
+                            <span>You have not used this Equipment for : <strong>0 days</strong><br>(Your account will be blocked in 5 days)</span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
