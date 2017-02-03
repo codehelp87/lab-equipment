@@ -214,8 +214,7 @@ class UserController extends Controller
     protected function getBookingHistory()
     {
         return Booking::where('user_id', Auth::user()->id)
-            ->where('status', 0)
-            ->orWhere('status', 2)
+            ->where('status', '>=' 1)
             ->where('time_slot_id', 'null')
             ->where('timezone_flag', '!=', NULL)
             ->orderBy('id', 'desc')
