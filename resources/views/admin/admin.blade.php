@@ -204,9 +204,14 @@
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="3">
-                             <?php $training = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);?>
-                            <span>Your Lab usage for this month: <strong>{{ (float) ($training->count() * 10) }} mins</strong></span><br>
-                            <span>You have not used this Equipment for : <strong>10 days</strong><br>(Your account will be blocked in 5 days)</span><br>
+                             <?php 
+                                 $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                 $created = new \Carbon\Carbon($bookings[0]->created_at);
+                                 $now = \Carbon\Carbon::now();
+                                 $difference = $created->diff($now)->days;
+                             ?>
+                            <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
+                            <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong><br>(Your account will be blocked in 5 days)</span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
