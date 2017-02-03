@@ -36,12 +36,12 @@
 		<div class="col-sm-6">
 			<select name="status" id="status" class="form-control" required="required">
 				<option value="">Status</option>
-				@if(is_null($user->status) || $user->status == 1)
+				@if($user->status == 1)
 				<option value="1" selected="selected">Active</option>
 				@else
 				<option value="1">Active</option>
 				@endif
-				@if(!is_null($user->status) || $user->status == 0)
+				@if($user->status == 0)
 				<option value="0" selected="selected">Inactive</option>
 				@else
 				<option value="0">Inactive</option>
