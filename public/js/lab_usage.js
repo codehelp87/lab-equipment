@@ -5,10 +5,41 @@
       lab.getLabUsageByEquipment();
       lab.getLabUsers();
       lab.getLabUsageBySessionAndEquipment();
+      lab.getSessionLabUser();
     });
   }
 
   class LabUsage {
+    getSessionLabUser() {
+      let lab = new LabUsage;
+
+       $('body').on('click', 'a.view-equipment-users-with-session', function() {
+        let _this = $(this);
+        let equipmentId = _this.attr('data-id');
+        let labProf = _this.attr('id');
+        let session = $(document).find('select#session').val();
+
+        let modal = $(document).find('div#total_lab_usage');
+        let modalTitle = modal.find('h4.modal-title');
+        let modalBody = modal.find('div.modal-body');
+
+        let route = '/equipments/'+equipmentId+'/labusers/sessions';
+
+        lab.makeAjaxCall(route, {session: session, prof: labProf}, 'GET')
+          .done(function(data) {
+            modalTitle.html(data[0].lab_prof);
+            let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
+            modalBody.html(content);
+            modal.modal('show');
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+
+        return false;
+       });
+    }
+
     getLabUsageBySessionAndEquipment() {
       let lab = new LabUsage;
       let session = $(document)
@@ -39,7 +70,7 @@
               if (data.total_charge_by_day == 0 && data.total_charge_by_night == 0) {
                 return  table.html(lab.NoEquipmentLabListing(data));
               }
-              table.html(lab.listEquipmentLab(data));
+              table.html(lab.NoEquipmentLabListing(data));
             })
             .fail(function(error) {
               console.log(error);
@@ -142,10 +173,10 @@
 
     NoEquipmentLabListing(data) {
       let table = '<tr>' +
-            '<td><a href="#" class="view-equipment-users">'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td><a href="#" class="view-equipment-users-with-session" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_day+'</td>' +
             '<td>'+data.total_charge_by_day+'</td>' +
-            '<td><a href="#" class="view-equipment-users">'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td><a href="#" class="view-equipment-users-with-session" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a</td>' +
             '<td>'+data.total_hour_by_night+'</td>' +
             '<td>'+data.total_charge_by_night+'</td>' +
         '</tr>' +

@@ -15,6 +15,63 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+    
+    public function getLabUsersBySession(Request $request, $id)
+    {
+        $users = [];
+        $response = [];
+        $session = $request->session;
+        $lab_user = $request->prof;
+
+        $dt = new \DateTime($session);
+        $carbon = Carbon::instance($dt);
+
+        $days = $this->getMonthDays($session);
+
+        $equipmentBookings = Booking::findOneByEquipmentUser($id);
+
+        if ($equipmentBookings->count() > 0) {
+            foreach($equipmentBookings as $index => $booking) {
+                $users[$index] = $booking->user_id;
+            }
+
+            $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
+            $labEquipment = [
+                'lab_prof' => User::findOneById($lab_user)->name, 
+                'equipment_amount' => $equipmentAmount
+            ];
+            $uniqueUsers = array_unique($users); // get the unique user_id
+
+            foreach ($uniqueUsers as $userId) {
+                $user = User::findOneById($userId);
+                $userbookings = Booking::where('user_id', $user->id)
+                    ->where('status', '>=', 1)
+                    ->where('equipment_id', $id)
+                    ->where('timezone_flag','!=', NULL)
+                    ->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
+                    ->get();
+
+                $sumSlot = 0;
+
+                if ($userbookings->count() > 0 ) {
+                    foreach($userbookings as $index => $booking) {
+                        $sumSlot += count($booking->cancelled_time_slot) * 10;
+                    }
+
+                    $userbookings = null;
+
+                    array_push($response, [
+                        'name' => $user->name,
+                        'total_time_booked' => $sumSlot,
+                    ]);
+                }
+                $sumSlot = 0;// set slot back to 0
+            }
+
+            return response()->json([$labEquipment, $response], 200);
+        }
+    }
+
     public function getLabUsersBySessionAndEquipment(Request $request, $id) 
     {
         $equipment = Equipment::findOneById($id);
