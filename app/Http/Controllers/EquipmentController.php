@@ -18,17 +18,13 @@ class EquipmentController extends Controller
     
     public function getLabUsersBySession(Request $request, $id)
     {
-        $users = [];
-        $response = [];
-        $session = $request->session;
-        $lab_user = $request->prof;
+       $users = [];
+       $response = [];
 
-        $dt = new \DateTime($session);
-        $carbon = Carbon::instance($dt);
+       $labUser = $request->prof;
+       $session = $request->session;
 
-        $days = $this->getMonthDays($session);
-
-        $equipmentBookings = Booking::findOneByEquipmentUser($id);
+       $equipmentBookings = Booking::findOneByEquipmentUser($id);
 
         if ($equipmentBookings->count() > 0) {
             foreach($equipmentBookings as $index => $booking) {
@@ -37,10 +33,14 @@ class EquipmentController extends Controller
 
             $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
             $labEquipment = [
-                'lab_prof' => User::findOneById($lab_user)->name, 
+                'lab_prof' => User::findOneById($labUser)->name, 
                 'equipment_amount' => $equipmentAmount
             ];
             $uniqueUsers = array_unique($users); // get the unique user_id
+
+            $dt = new \DateTime($session);
+            $carbon = Carbon::instance($dt);
+            $days = $this->getMonthDays($session);
 
             foreach ($uniqueUsers as $userId) {
                 $user = User::findOneById($userId);

@@ -27,7 +27,8 @@
 
         lab.makeAjaxCall(route, {session: session, prof: labProf}, 'GET')
           .done(function(data) {
-            modalTitle.html(data[0].lab_prof);
+             console.log(data)
+            modalTitle.html(data.lab_prof);
             let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
             modalBody.html(content);
             modal.modal('show');
@@ -68,7 +69,7 @@
             lab.makeAjaxCall(route, params, 'GET')
             .done(function(data) {
               if (data.total_charge_by_day == 0 && data.total_charge_by_night == 0) {
-                return  table.html(lab.NoEquipmentLabListing(data));
+                return table.html(lab.NoEquipmentLabListing(data));
               }
               table.html(lab.NoEquipmentLabListing(data));
             })
