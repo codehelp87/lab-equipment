@@ -3,6 +3,7 @@
 namespace LabEquipment\Http\Controllers;
 
 use Auth;
+use Carbon\Carbon;
 use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\Booking;
@@ -36,6 +37,27 @@ class HomeController extends Controller
         $equipments = Equipment::findAll();
 
         $trainedEquipments = $this->getTrainedEquipments(Auth::user()->id);
+
+        foreach($equipments as $equipment) {
+            if (in_array($equipment->id, $trainedEquipments)) {
+                // Check for last booking date
+                $bookings = Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                $created = new Carbon(@$bookings[0]->created_at);
+                $now = Carbon::now();
+                $difference = $created->diff($now)->days;
+
+                if ($difference >= 90) {
+                    // deactivate this equipment
+                    $training = Training::where('user_id', Auth::user()->id)
+                        ->where('equipment_id', $equipment->id)
+                        ->first();
+                    // Set the status to 0 to deactivate the equipment
+                    $training->status = 0;
+                    $training->save();
+                }
+                // End of last booking date
+            }
+        }
 
         $trainings = Training::where('user_id', Auth::user()->id)
             ->where('status', 1)

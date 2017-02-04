@@ -205,21 +205,10 @@
                             <td colspan="3"></td>
                             <td colspan="3">
                                 <?php
-                                $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                                
-                                $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                                $now = \Carbon\Carbon::now();
-                                $difference = $created->diff($now)->days;
-
-                                if ($difference >= 90) {
-                                    // deactivate this equipment
-                                    $training = LabEquipment\Training::where('user_id', Auth::user()->id)
-                                        ->where('equipment_id', $equipment->id)
-                                        ->first();
-                                    // Set the status to 0 to deactivate the equipment
-                                    $training->status = 0;
-                                    $training->save();
-                                }
+                                    $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                    $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                                    $now = \Carbon\Carbon::now();
+                                    $difference = $created->diff($now)->days;
                                 ?>
                                 <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
                                 <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong></span><br>
@@ -255,8 +244,11 @@
                                 <span>30 minutes before</span><br>
                                 <span>1 hour before</span><br>
                             </td>
-                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br><br>
-                            <a href="#">Contact the administrator</a>
+                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right inActiveBtn" disabled="disabled">Book Now</a>
+                            <p class="pull-right"><br>
+                            <a href="#" class="pull-right">Contact the administrator</a>
+                            </p> 
+                            
                         </td>
                     </tr>
                     <tr>
