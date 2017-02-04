@@ -15,16 +15,16 @@
         let smtBtn = $("form#notification").find('button#save-notification');
         evt.preventDefault();
         let formData = new FormData($(this)[0]);
+        let tableBody = $(document).find('table#admin-notification-list tbody');
 
         notify.makeAjaxCall('/notifications/add', formData, 'POST')
           .done(function(data) {
-            toastr.success('Your Notification was saved successfully');
+            console.log(data);
             let newNotification = notify.addNewNotificationToHtmlTable(data.notification);
-            $('table#admin-notification-list')
-              .append(newNotification)
-              .css('display', 'block');
+            tableBody.prepend(newNotification);
 
             notify.clearFormFields();
+            toastr.success('Your Notification was saved successfully');
 
             return false
           })
@@ -37,16 +37,19 @@
   }
 
   addNewNotificationToHtmlTable(data) {
+    console.log(data);
     let date = moment().format('YYYY/MM/DD');
     let tableRow = '<tr>';
-      tableRow += '<td>'+data.title+'</td>';
+      tableRow += '<td class="text-left">'+data.title+'</td>';
       tableRow += '<td>'+date+'</td>';
+      tableRow += '<td class="text-right"><a href="/notification/'+data.id+'/edit" class="edit-notification" id="notify'+data.id+'">';
+      tableRow += '<i class="glyphicon glyphicon-pencil"></i> Edit</a> </td>';
       tableRow += '</tr>';
     return tableRow;
   }
 
   clearFormFields() {
-    $('form.notification')
+    $('form#notification')
       .find('input[type="text"], textarea')
       .each(function(index, el) {
         $(this).val('');

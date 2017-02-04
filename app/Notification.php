@@ -17,4 +17,11 @@ class Notification extends Model
     {
     	return $this->hasMany('LabEquipment\NotifiedUser');
     }
+
+    public function scopeFindAll($query)
+    {
+    	return $query
+    	    ->orderBy('id', 'DESC')
+    	    ->get();
+    }
 }

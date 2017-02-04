@@ -9,6 +9,7 @@ use LabEquipment\User;
 use LabEquipment\Booking;
 use LabEquipment\Training;
 use LabEquipment\Equipment;
+use LabEquipment\Notification;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -35,6 +36,8 @@ class HomeController extends Controller
         $users = User::findAllWithTrashed();
         $labs = Lab::findAll();
         $equipments = Equipment::findAll();
+
+        $notifications = Notification::findAll();
 
         $trainedEquipments = $this->getTrainedEquipments(Auth::user()->id);
 
@@ -65,7 +68,7 @@ class HomeController extends Controller
             ->get();
 
         return view('admin.admin', compact(
-            'users', 'labs', 'equipments', 'bookings', 'trainings', 'trainedEquipments'
+            'users', 'labs', 'equipments', 'bookings', 'trainings', 'trainedEquipments', 'notifications'
         ));
     }
 

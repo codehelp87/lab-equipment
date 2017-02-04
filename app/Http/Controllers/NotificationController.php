@@ -29,7 +29,7 @@ class NotificationController extends Controller
 						'notification_id' => $notification->id
 					]);
 				}
-				return response()->json(['nofication' => $notification], 200);
+				return response()->json(['notification' => $notification], 200);
 			}
 
 			return response()->json(['message' => 'Notication cannot be created'], 400);
