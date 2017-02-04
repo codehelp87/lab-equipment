@@ -213,7 +213,7 @@
                                 ?>
                                 <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
                                 <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong></span><br>
-                                <span class="text-default"><strong>(Your account will be blocked in {{ $difference }} days)</strong></span><br>
+                                <span class="text-default"><strong>(Your account will be blocked in {{ (int) (90 - $difference) }} days)</strong></span><br>
                             </td>
                             <td colspan="1"></td>
                         </tr>

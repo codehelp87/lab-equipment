@@ -74,10 +74,10 @@
                                     $year = date('Y');
                                     $month = date('M');
                                     for ($m = 1; $m <= 12; $m++) {
-                                    if ($m >= $month) {
-                                    $month = date('F', mktime(0, 0, 0, $m, 1, date('Y')));
-                                    echo '<option value='.$year.'-'.$m.'-'.$m.'>'.$year.'.'.$month. '</option>';
-                                    }
+                                        if ($m >= $month) {
+                                            $month = date('F', mktime(0, 0, 0, $m, 1, date('Y')));
+                                            echo '<option value='.$year.'-'.$m.'-'.$m.'>'.$year.'.'.$month. '</option>';
+                                        }
                                     }
                                     ?>
                                 </select>
