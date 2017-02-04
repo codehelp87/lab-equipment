@@ -28,6 +28,7 @@ class User extends Authenticatable implements AuthContract
         'office_location',
         'phone',
         'status',
+        'last_login_time',
     ];
 
     /**
