@@ -6,9 +6,9 @@
             <h5><a href="/home"> << Home </a></h5>
             <hr>
             <h5>My Notifications</h5>
+             @if (Auth::user()->notifications->count() > 0)
             <table class="table table-hover notifications">
                 <tbody>
-                    @if (Auth::user()->notifications->count() > 0)
                     @foreach(Auth::user()->notifications as $notification)
                     <tr>
                         <td><a href="#" class="read-notification" id="{{ $notification->notification->id }}">{{ $notification->notification->title }}</a></td>
@@ -18,9 +18,11 @@
                         <td colspan="2">{{ $notification->notification->content }}</td>
                     </tr>
                     @endforeach
-                    @endif
                 </tbody>
             </table>
+            @else
+            <h4>Notifications not available for display</h4>
+            @endif
         </div>
     </div>
 </div>
