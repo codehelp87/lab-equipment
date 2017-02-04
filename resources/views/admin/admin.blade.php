@@ -137,21 +137,19 @@
             @include('admin.manage_user_account.logout')
             <hr>
             <p>
-                <h5>Notifications <a class="pull-right">Read all</a></h5>
+                <h5>Notifications <a class="pull-right" href="/my_notifications">Read all</a></h5>
                 <table class="table table-hover">
                     <tbody>
+                        @if (Auth::user()->notifications->count() > 0)
+                        @foreach(Auth::user()->notifications as $notification)
+                        @if ($loop->index < 3)
                         <tr>
-                            <td> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</td>
-                            <td>{{ date('Y/m/d') }}</td>
+                            <td><a href="#">{{ $notification->notification->title }}</a></td>
+                            <td class="text-right">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->notification->created_at)->format('Y/m/d') }}</td>
                         </tr>
-                        <tr>
-                            <td> dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</td>
-                            <td>{{ date('Y/m/d') }}</td>
-                        </tr>
-                        <tr>
-                            <td> Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, </td>
-                            <td>{{ date('Y/m/d') }}</td>
-                        </tr>
+                        @endif
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </p>
@@ -205,10 +203,10 @@
                             <td colspan="3"></td>
                             <td colspan="3">
                                 <?php
-                                    $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                                    $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                                    $now = \Carbon\Carbon::now();
-                                    $difference = $created->diff($now)->days;
+                                $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                                $now = \Carbon\Carbon::now();
+                                $difference = $created->diff($now)->days;
                                 ?>
                                 <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
                                 <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong></span><br>
@@ -218,10 +216,10 @@
                         </tr>
                         @else
                         <?php
-                            $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                            $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                            $now = \Carbon\Carbon::now();
-                            $difference = $created->diff($now)->days;
+                        $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                        $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                        $now = \Carbon\Carbon::now();
+                        $difference = $created->diff($now)->days;
                         ?>
                         <tr id="edit-eqipment{{ $equipment->id }}">
                             <td>{{ $equipment->model_no }}</td>
@@ -246,8 +244,8 @@
                             </td>
                             <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right inActiveBtn" disabled="disabled">Book Now</a>
                             <p class="pull-right"><br>
-                            <a href="#" class="pull-right">Contact the administrator</a>
-                            </p> 
+                                <a href="#" class="pull-right">Contact the administrator</a>
+                            </p>
                             
                         </td>
                     </tr>
