@@ -14,7 +14,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="save-notification">Publish now</button>
-            <a class="btn btn-link admin-notification-list" href="#">See list</a>
+            <a class="btn btn-link admin-notification-list open" href="#">See lists</a>
         </div>
     </div>
 </form>
