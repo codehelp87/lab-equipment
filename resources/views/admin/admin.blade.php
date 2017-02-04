@@ -217,6 +217,12 @@
                             <td colspan="1"></td>
                         </tr>
                         @else
+                        <?php
+                            $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                            $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                            $now = \Carbon\Carbon::now();
+                            $difference = $created->diff($now)->days;
+                        ?>
                         <tr id="edit-eqipment{{ $equipment->id }}">
                             <td>{{ $equipment->model_no }}</td>
                             <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
