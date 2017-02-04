@@ -135,6 +135,7 @@ class Booking extends Model
     public function scopeFindTotalLabUsage($query, $id, $userId)
     {
         return $query
+            ->orderBy('id', 'DESC')
             ->where('equipment_id', $id)
             ->where('user_id', $userId)
             ->where('cancelled_time_slot', '!=', NULL)

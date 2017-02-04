@@ -206,9 +206,11 @@
                             <td colspan="3">
                                 <?php
                                 $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                
                                 $created = new \Carbon\Carbon(@$bookings[0]->created_at);
                                 $now = \Carbon\Carbon::now();
                                 $difference = $created->diff($now)->days;
+
                                 if ($difference >= 90) {
                                     // deactivate this equipment
                                     $training = LabEquipment\Training::where('user_id', Auth::user()->id)
@@ -262,7 +264,7 @@
                         <td colspan="3">
                             <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
                             <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
-                            <span class="text-danger"><strong>(Your account will be blocked in {{ $difference }} days)</strong></span><br>
+                            <span class="text-danger"><strong>(Your have not used this equipment for {{ $difference }} days)</strong></span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
