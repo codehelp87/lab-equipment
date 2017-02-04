@@ -246,7 +246,7 @@
                         <td colspan="3"></td>
                         <td colspan="3">
                             <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
-                            <span>You have not used this Equipment for : <strong>0 days</strong><br>(Your account will be blocked in 5 days)</span><br>
+                            <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
