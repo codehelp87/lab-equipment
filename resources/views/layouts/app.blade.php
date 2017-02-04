@@ -43,6 +43,7 @@
         <script src="{{ asset('js/book_equipment.js') }}"></script>
         <script src="{{ asset('js/training_request.js') }}"></script>
         <script src="{{ asset('js/lab_usage.js') }}"></script>
+        <script src="{{ asset('js/notification.js') }}"></script>
         @include('student.cancel_booking_modal')
     </body>
 </html>

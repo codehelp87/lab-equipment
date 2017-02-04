@@ -73,4 +73,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/equipments/{id}/lab_usage', 'EquipmentController@getEquipmentLabUsage');
 	Route::post('/equipments/add', 'EquipmentController@createEquipment');
 	Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
+
+	Route::POST('/notifications/add', 'NotificationController@addNotification');
 });
