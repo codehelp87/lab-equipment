@@ -11,7 +11,6 @@
     createNotification() {
       let notify = new Notification;
       $("form#notification").submit(function(evt) {
-        // Change button text to loading
         let smtBtn = $("form#notification").find('button#save-notification');
         evt.preventDefault();
         let formData = new FormData($(this)[0]);
@@ -19,7 +18,6 @@
 
         notify.makeAjaxCall('/notifications/add', formData, 'POST')
           .done(function(data) {
-            console.log(data);
             let newNotification = notify.addNewNotificationToHtmlTable(data.notification);
             tableBody.prepend(newNotification);
 

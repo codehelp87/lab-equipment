@@ -22,14 +22,18 @@
     <tbody>
     @if($notifications->count() > 0)
         @foreach($notifications as $notification)
-            <tr>
+            <tr id="edit-notification{{ $notification->id }}">
                 <td>{{ $notification->title }}</td>
                 <td >{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at)->format('Y/m/d') }}</td>
                 <td class="text-right"><a href="/notification/{{ $notification->id }}/edit" class="edit-notification" id="notify{{ $notification->id }}"> <i class="glyphicon glyphicon-pencil"></i> Edit</a>
                 </td>
             </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="display{{ $notification->id }}" id="edit-notification{{ $notification->id }}" style="display: none;"></div>
+                </td>
+            </tr>
         @endforeach
     @endif
-    <tr></tr>
     </tbody>
 </table>
