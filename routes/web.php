@@ -20,8 +20,12 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/training/register', 'UserController@requestForm')
     ->name('request_training');
- Route::post('/training/request/create', 'UserController@createTrainingRequest')
+Route::post('/training/request/create', 'UserController@createTrainingRequest')
 	    ->name('create-training-request');
+
+Route::get('users/account/blocked', function() {
+    return view('student.account_blocked');
+})->name('account_blocked');
 
 Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
 

@@ -4,6 +4,7 @@ namespace LabEquipment\Http\Controllers\Auth;
 
 use Auth;
 use Hash;
+use Carbon\Carbon;
 use LabEquipment\User;
 use Symfony\Component\HttpFoundation\Request;
 use LabEquipment\Http\Controllers\Controller;
@@ -50,12 +51,21 @@ class LoginController extends Controller
                 $user = User::where('status', 1)
                 ->where('email', $request->get('email'))
                 ->first();
+                //Check the last user login time
+                $created = new Carbon($user->last_login_time);
+                $now = Carbon::now();
+                $difference = $created->diff($now)->days;
+                // Calculate days different
+                if ($difference >= 90) {
+                    return redirect()->route('account_blocked');
+                    //Redirect the user to the information page;
+                }
 
                 if (count($user) > 0) {
                     $user->last_login_time = new \DateTime();
                     $user->save();
                     Auth::login($user);
-                    return redirect() ->route('dashboard');
+                    return redirect()->route('dashboard');
                 }
             }
         } 
