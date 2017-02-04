@@ -6,10 +6,23 @@
       notify.createNotification();
       notify.editNotification();
       notify.updateNotification();
+      notify.readNotification();
     });
   }
 
   class Notification {
+    readNotification() {
+      let notify = new Notification;
+      let readLink = $(document)
+        .find('table.notifications')
+        .find('a.read-notification');
+
+        readLink.on('click', function() {
+          let _this = $(this);
+          _this.parents('tr').next().toggle(300);
+          return false;
+        });
+    }
     createNotification() {
       let notify = new Notification;
       $("form#notification").submit(function(evt) {
