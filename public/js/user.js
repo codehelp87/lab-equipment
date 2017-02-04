@@ -9,10 +9,39 @@
       user.getUserByStatus();
       user.changePassword();
       user.resetPassword();
+      user.deleteUser();
     });
   }
 
   class User {
+    deleteUser() {
+      let user = new User;
+      $('body').on('click', 'a.student-delete', function() {
+        let _this = $(this);
+
+        let $btn = _this.button('loading');
+        let studentId = _this.attr('id');
+        let route = _this.attr('rel');
+        bootbox.confirm('Are you sure to delete?', function(result)  {
+          if (result) {
+            user.makeAjaxCall(route, {}, 'DELETE')
+              .done(function(data) {
+                if (data.message == 'deleted') {
+                  $btn.button('reset');
+                  _this.parents('#student-edit'+studentId).remove();
+                  return toastr.success('User account has been successfully deleted ');
+                }
+                return toastr.error(data.message);
+              })
+              .fail(function(error) {
+                console.log(error);
+              })
+          }
+        })
+
+      });
+    }
+
     resetPassword() {
       let user = new User;
       let submitBtn = $('a#send-reset-password-link');
@@ -73,7 +102,7 @@
         user.makeAjaxCall('/users/'+email+'/password_change', params, 'PUT')
           .done(function(data) {
             // business logic...
-            $btn.button('reset')
+            $btn.button('reset');
             toastr.success(data.message);
             user.clearFormFields();
             return false
@@ -167,7 +196,6 @@
           tableRow += '</td>' + 
           '<td><a href="#"  class="student-edit" id='+data.id+'>Edit</a></td>';
          tableRow += '</tr>';
-         console.log(counter);
          counter ++;
       //}
       return tableRow;

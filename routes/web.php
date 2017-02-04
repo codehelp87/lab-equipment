@@ -39,16 +39,17 @@ Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
 Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('/home', 'HomeController@index')->name('dashboard');
-
 	Route::get('/home/profile', 'UserController@viewMyProfile')
 	    ->name('my_profile');
 
-	Route::put('/users/{email}', 'UserController@editUserInfo');
+	Route::put('/users/{email}', 'UserController@editUserInfo'); //delete_user
 	Route::get('/users/{status}/view', 'UserController@gettUserStatus');
 	Route::get('/users/{userId}/edit', 'UserController@editUserAccount');
 	Route::post('/users/{userId}/update', 'UserController@updateUserAccount');
 	Route::put('/users/{email}/password_change', 'UserController@changePassword');
 	Route::post('users/password/reset', 'Auth\ForgotPasswordController@getEmail');
+	Route::delete('/users/{id}/delete', 'UserController@deleteUserAccount')
+	    ->name('delete_user');
 
 	Route::post('equipments/training/completed', 'UserController@completeTraining')
 	    ->name('training_completed_confirmation');
@@ -77,7 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/my_notifications', function() {
     	return view('student.my_notifications');
     });
- 
+
 	Route::POST('/notifications/add', 'NotificationController@addNotification');
 	Route::get('/notifications/{id}', 'NotificationController@editNotification');
 	Route::post('/notifications/{id}/update', 'NotificationController@updateNotification');

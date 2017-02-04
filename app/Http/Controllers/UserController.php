@@ -15,6 +15,19 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserController extends Controller
 {
+    public function deleteUserAccount(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user->count() > 0) {
+            $user->status = 0;
+            $user->forceDelete();
+
+            return response()->json(['message' => 'deleted']);
+        }
+        return response()->json(['message' => 'Error deleting user account']);
+    }
+
     public function activateUserAccount(Request $request, $hash)
     {
         $email = base64_decode($request->hash);
