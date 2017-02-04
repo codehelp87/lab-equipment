@@ -59,6 +59,8 @@ class LoginController extends Controller
                     $difference = $created->diff($now)->days;
                     // Calculate days different
                     if ($difference >= 90) {
+                        $user->status = 0;
+                        $user->save();
                         return redirect()->route('account_blocked');
                         //Redirect the user to the information page;
                     }
