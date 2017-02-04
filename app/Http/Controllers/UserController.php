@@ -277,8 +277,13 @@ class UserController extends Controller
             $user->office_location = $request->office;
             $user->student_id = $request->student_id;
             $user->role_id = $request->role;
-
             $status = $request->status == 0? 0: 1;
+
+            // Check if the user account has been activated and change his logged in time
+            // to the day and time his account was activated
+            if ($status == 1) {
+                $user->last_login_time = new \DateTime();
+            }
             $user->status = $status;
             $user->save();
             // For Equipment
