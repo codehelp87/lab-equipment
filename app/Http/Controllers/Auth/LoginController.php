@@ -52,6 +52,8 @@ class LoginController extends Controller
                 ->first();
 
                 if (count($user) > 0) {
+                    $user->last_login_time = new \DateTime();
+                    $user->save();
                     Auth::login($user);
                     return redirect() ->route('dashboard');
                 }
