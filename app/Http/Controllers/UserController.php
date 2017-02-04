@@ -139,6 +139,7 @@ class UserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => bcrypt($newPassword),
+            'last_login_time' => new \DateTime(),
         ]);
 
         // lab user 
