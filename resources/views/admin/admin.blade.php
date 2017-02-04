@@ -133,7 +133,7 @@
             <!-- panel-group -->
         </div>
         @else
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             @include('admin.manage_user_account.logout')
             <hr>
             <p>
@@ -213,7 +213,7 @@
                                 ?>
                                 <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
                                 <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong></span><br>
-                                <span class="text-default"><strong>(Your account will be blocked in {{ (int) (90 - $difference) }} days)</strong></span><br>
+                                <span class="text-default"><strong><small>(Your account will expired after 90 days without usage)</small></strong></span><br>
                             </td>
                             <td colspan="1"></td>
                         </tr>
@@ -257,7 +257,7 @@
                         <td colspan="3">
                             <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
                             <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
-                            <span class="text-danger"><strong>(Your have not used this equipment for {{ $difference }} days)</strong></span><br>
+                            <span class="text-danger"><strong>Your have not used this equipment for {{ $difference }} day(s)</strong></span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
