@@ -10,10 +10,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Basic Info
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -25,10 +25,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingTwo">
                         <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Training Requests
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -40,10 +40,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingThree">
                         <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Training Completion
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -55,10 +55,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Total usage by Lab
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
@@ -70,10 +70,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingFive">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Manage user accounts
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -85,10 +85,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingSix">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Manage Equipments
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
@@ -102,10 +102,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Manage Lab
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
@@ -117,10 +117,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingEight">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Notification
-                            </a>
+                        </a>
                         </h4>
                     </div>
                     <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseEight">
@@ -137,34 +137,34 @@
             @include('admin.manage_user_account.logout')
             <hr>
             <p>
-            <h5>Notifications <a class="pull-right">Read all</a></h5>
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <td> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</td>
-                        <td>{{ date('Y/m/d') }}</td>
-                    </tr>
-                    <tr>
-                        <td> dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</td>
-                        <td>{{ date('Y/m/d') }}</td>
-                    </tr>
-                    <tr>
-                        <td> Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, </td>
-                        <td>{{ date('Y/m/d') }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                <h5>Notifications <a class="pull-right">Read all</a></h5>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                        <tr>
+                            <td> dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                        <tr>
+                            <td> Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, </td>
+                            <td>{{ date('Y/m/d') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </p>
             <p>
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <td><strong>{{ Auth::user()-> name }}</strong></td>
-                        <td><strong>Lab: {{ $trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill' }}</strong></td>
-                        <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td><strong>{{ Auth::user()-> name }}</strong></td>
+                            <td><strong>Lab: {{ $trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill' }}</strong></td>
+                            <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </p>
             <hr>
             <p>
@@ -172,74 +172,74 @@
             </p>
             <hr>
             <p>
-            <h5>Book an Equipment</h5>
-            <table class="table table-responsive" id="book-equipment">
-                <tbody>
-                    @if($equipments->count() > 0)
-                    @foreach($equipments as $equipment)
-                    @if (in_array($equipment->id, $trainedEquipments))
-                    <tr id="edit-eqipment{{ $equipment->id }}">
-                        <td>{{ $equipment->model_no }}</td>
-                        <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
-                        <td>
-                            <Strong>Status</Strong><br>
-                            <Strong>Unit Time</Strong><br>
-                            <Strong>Max Time(per day)</Strong><br>
-                        </td>
-                        <td>
-                            {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                            {{ $equipment->price_per_unit_time}}<br>
-                            {{ $equipment->max_reservation_time}} hr(s)<br>
-                        </td>
-                        <td>
-                            <Strong>Open</Strong><br>
-                            <Strong>Cancel</Strong><br>
-                        </td>
-                        <td>
-                            <span>30 minutes before</span><br>
-                            <span>1 hour before</span><br>
-                        </td>
-                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td colspan="3">
-                             <?php 
-                                 $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                                 $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                                 $now = \Carbon\Carbon::now();
-                                 $difference = $created->diff($now)->days;
-                             ?>
-                            <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
-                            <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong><br>
-                              (Your account will be blocked in {{ $difference }} days)</span><br>
-                        </td>
-                        <td colspan="1"></td>
-                    </tr>
-                    @else
-                    <tr id="edit-eqipment{{ $equipment->id }}">
-                        <td>{{ $equipment->model_no }}</td>
-                        <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
-                        <td>
-                            <Strong>Status</Strong><br>
-                            <Strong>Unit Time</Strong><br>
-                            <Strong>Max Time(per day)</Strong><br>
-                        </td>
-                        <td>
-                            {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                            {{ $equipment->price_per_unit_time}}<br>
-                            {{ $equipment->max_reservation_time}} hr(s)<br>
-                        </td>
-                        <td>
-                            <Strong>Open</Strong><br>
-                            <Strong>Cancel</Strong><br>
-                        </td>
-                        <td>
-                            <span>30 minutes before</span><br>
-                            <span>1 hour before</span><br>
-                        </td>
-                        <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br><br>
-                        <a href="#">Contact the administrator</a>
+                <h5>Book an Equipment</h5>
+                <table class="table table-responsive" id="book-equipment">
+                    <tbody>
+                        @if($equipments->count() > 0)
+                        @foreach($equipments as $equipment)
+                        @if (in_array($equipment->id, $trainedEquipments))
+                        <tr id="edit-eqipment{{ $equipment->id }}">
+                            <td>{{ $equipment->model_no }}</td>
+                            <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                            <td>
+                                <Strong>Status</Strong><br>
+                                <Strong>Unit Time</Strong><br>
+                                <Strong>Max Time(per day)</Strong><br>
+                            </td>
+                            <td>
+                                {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                                {{ $equipment->price_per_unit_time}}<br>
+                                {{ $equipment->max_reservation_time}} hr(s)<br>
+                            </td>
+                            <td>
+                                <Strong>Open</Strong><br>
+                                <Strong>Cancel</Strong><br>
+                            </td>
+                            <td>
+                                <span>30 minutes before</span><br>
+                                <span>1 hour before</span><br>
+                            </td>
+                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="3">
+                                <?php
+                                $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                                $now = \Carbon\Carbon::now();
+                                $difference = $created->diff($now)->days;
+                                ?>
+                                <span>Your Lab usage for this month: <strong>{{ (float) ($bookings->count() * 10) }} mins</strong></span><br>
+                                <span>You have not used this Equipment for : <strong> {{ $difference }} day(s)</strong></span><br>
+                                <span class="text-default"><strong>(Your account will be blocked in {{ $difference }} days)</strong></span><br>
+                            </td>
+                            <td colspan="1"></td>
+                        </tr>
+                        @else
+                        <tr id="edit-eqipment{{ $equipment->id }}">
+                            <td>{{ $equipment->model_no }}</td>
+                            <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                            <td>
+                                <Strong>Status</Strong><br>
+                                <Strong>Unit Time</Strong><br>
+                                <Strong>Max Time(per day)</Strong><br>
+                            </td>
+                            <td>
+                                {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
+                                {{ $equipment->price_per_unit_time}}<br>
+                                {{ $equipment->max_reservation_time}} hr(s)<br>
+                            </td>
+                            <td>
+                                <Strong>Open</Strong><br>
+                                <Strong>Cancel</Strong><br>
+                            </td>
+                            <td>
+                                <span>30 minutes before</span><br>
+                                <span>1 hour before</span><br>
+                            </td>
+                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right" disabled="disabled">Book Now</a> <br><br>
+                            <a href="#">Contact the administrator</a>
                         </td>
                     </tr>
                     <tr>
@@ -247,6 +247,7 @@
                         <td colspan="3">
                             <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
                             <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
+                            <span class="text-danger"><strong>(Your account will be blocked in {{ $difference }} days)</strong></span><br>
                         </td>
                         <td colspan="1"></td>
                     </tr>
@@ -255,10 +256,10 @@
                     @endif
                 </tbody>
             </table>
-            </p>
-        </div>
-        @endif
+        </p>
     </div>
+    @endif
+</div>
 </div>
 <!-- container -->
 @endsection
