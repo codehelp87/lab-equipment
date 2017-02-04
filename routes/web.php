@@ -74,6 +74,10 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/equipments/add', 'EquipmentController@createEquipment');
 	Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
 
+    Route::get('/my_notifications', function() {
+    	return view('student.my_notifications');
+    });
+ 
 	Route::POST('/notifications/add', 'NotificationController@addNotification');
 	Route::get('/notifications/{id}', 'NotificationController@editNotification');
 	Route::post('/notifications/{id}/update', 'NotificationController@updateNotification');
