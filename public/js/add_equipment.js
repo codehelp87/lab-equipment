@@ -68,7 +68,6 @@
             return false
           })
           .fail(function(error) {
-            console.log(JSON.stringify(error));
             toastr.error(JSON.stringify(error));
           });
         return false;
