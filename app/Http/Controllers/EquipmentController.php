@@ -13,9 +13,21 @@ use LabEquipment\Booking;
 use LabEquipment\Training;
 use Illuminate\Http\Request;
 
-class EquipmentController extends Controller
+class EquipmentController extends Controller 
 {
-    
+    public function deleteEquipment(Request $request, $id)
+    {
+        $equipment = Equipment::find($id);
+
+        if ($equipment->count() > 0) {
+            $equipment->status = 0;
+            $equipment->forceDelete();
+
+            return response()->json(['message' => 'deleted']);
+        }
+        return response()->json(['message' => 'Error deleting equipment']);
+    }
+
     public function getLabUsersBySession(Request $request, $id)
     {
        $users = [];

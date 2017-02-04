@@ -25,6 +25,7 @@
                     <span>1 hour before</span><br>
                 </td>
                 <td><a href="#" class="edit-eqipment" id="{{ $equipment->id }}" title="{{ $equipment->title }}">Edit</a></td>
+                <td><a href="#"  class="delete-equipment" id="{{ $equipment->id }}" rel= "{{ route('delete_equipment', ['id' => $equipment->id ]) }}">Delete</a></td>
             </tr>
             <tr>
                 <td colspan="7">

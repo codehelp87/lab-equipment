@@ -6,10 +6,39 @@
       equipment.createEquipment();
       equipment.editEquipment();
       equipment.updateEquipment();
+      equipment.deleteEquipment();
     });
   }
 
   class Equipment {
+    deleteEquipment() {
+     let equipment = new Equipment;
+      $('body').on('click', 'a.delete-equipment', function() {
+        let _this = $(this);
+
+        let $btn = _this.button('loading');
+        let equipmentId = _this.attr('id');
+        let route = _this.attr('rel');
+        bootbox.confirm('Are you sure to delete?', function(result)  {
+          if (result) {
+            equipment.makeAjaxCall(route, {}, 'DELETE')
+              .done(function(data) {
+                if (data.message == 'deleted') {
+                  $btn.button('reset');
+                  _this.parents('#edit-eqipment'+equipmentId).remove();
+                  return toastr.success('Equipment has been successfully deleted ');
+                }
+                return toastr.error(data.message);
+              })
+              .fail(function(error) {
+                console.log(error);
+              })
+          }
+          return $btn.button('reset');
+        })
+      });
+    }
+
     createEquipment() {
       let equipment = new Equipment;
       $("form#add_more_equipment").submit(function(evt){
@@ -77,7 +106,7 @@
   editEquipment() {
     let equipment = new Equipment;
     $(function() {
-      $('body').on('click', 'table#list-equipment a', function() {
+      $('body').on('click', 'table#list-equipment a.edit-eqipment', function() {
       let _this = $(this)
       let $btn = _this.button('loading');;
       let id = _this.attr('id');

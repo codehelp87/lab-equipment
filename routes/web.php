@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/equipments/{id}/lab_usage', 'EquipmentController@getEquipmentLabUsage');
 	Route::post('/equipments/add', 'EquipmentController@createEquipment');
 	Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
+	Route::delete('/equipments/{id}/delete', 'EquipmentController@deleteEquipment')
+	    ->name('delete_equipment');
 
     Route::get('/my_notifications', function() {
     	return view('student.my_notifications');

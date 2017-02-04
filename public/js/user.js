@@ -37,8 +37,8 @@
                 console.log(error);
               })
           }
+          return $btn.button('reset');
         })
-
       });
     }
 
