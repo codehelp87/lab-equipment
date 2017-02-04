@@ -9,6 +9,19 @@ use LabEquipment\NotifiedUser;
 
 class NotificationController extends Controller
 {
+	public function editNotification(Request $request, $id)
+    {
+        $notification = Notification::find($id);
+ 
+        if (count($notification) > 0) {
+            return view('admin.notification.edit_notification', 
+                compact('notification')
+            );
+        }
+
+        abort(404);
+    }
+
 	public function addNotification(Request $request)
 	{
 		if ($request->has('title') && $request->has('content')) {
@@ -34,5 +47,23 @@ class NotificationController extends Controller
 
 			return response()->json(['message' => 'Notication cannot be created'], 400);
 		}
+	}
+
+	public function updateNotification(Request $request, $id)
+	{
+		$notification = Notification::find($id);
+
+		if ($notification->count() > 0) {
+			$notification->title = $request->title;
+			$notification->content = $request->content;
+			$notification->save();
+
+			return response()->json([
+                'message' => 'Notification was updated successfully',
+                'notification' => $notification,
+            ], 200);
+		}
+
+		return response()->json(['message' => 'Notication cannot be updated'], 400);
 	}
 }

@@ -1,6 +1,7 @@
 <form class="form-horizontal edit_notification" id="{{ $notification->id }}">
+<h5 style="padding-left: 20px;">Edit | {{ $notification->title }} </h5>
     <div class="form-group">
-        <label for="title" class="col-sm-2 control-label">Edit | {{ $notification->title }}</label>
+        <label for="title" class="col-sm-2 control-label">Title</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" name="title" id="title" placeholder="Title" required="required" value="{{ $notification->title }}">
         </div>

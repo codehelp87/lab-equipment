@@ -129,7 +129,7 @@
 
   checkforEmptyFields() {
     let error = [];
-    $('form.add_more_equipment')
+    $('form#add_more_equipment, form.edit_equipment')
       .find('input')
       .each(function(index, el) {
         let _this = $(this);
@@ -144,7 +144,7 @@
   }
 
   clearFormFields() {
-    $('form.add_more_equipment')
+    $('form#add_more_equipment, form.edit_equipment')
       .find('input[type="text"]')
       .each(function(index, el) {
         $(this).val('');

@@ -18,14 +18,14 @@
         </div>
     </div>
 </form>
-<table class="table table-hover" id="admin-notification-list">
+<table class="table table-hover" id="list-notification">
     <tbody>
     @if($notifications->count() > 0)
         @foreach($notifications as $notification)
             <tr id="edit-notification{{ $notification->id }}">
                 <td>{{ $notification->title }}</td>
                 <td >{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at)->format('Y/m/d') }}</td>
-                <td class="text-right"><a href="/notification/{{ $notification->id }}/edit" class="edit-notification" id="notify{{ $notification->id }}"> <i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                <td class="text-right"><a href="/notification/{{ $notification->id }}/edit" class="edit-notification" id="{{ $notification->id }}"> <i class="glyphicon glyphicon-pencil"></i> Edit</a>
                 </td>
             </tr>
             <tr>

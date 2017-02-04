@@ -75,4 +75,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/equipments/{id}', 'EquipmentController@editEquipment');
 
 	Route::POST('/notifications/add', 'NotificationController@addNotification');
+	Route::get('/notifications/{id}', 'NotificationController@editNotification');
+	Route::post('/notifications/{id}/update', 'NotificationController@updateNotification');
 });
