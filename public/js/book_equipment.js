@@ -129,8 +129,11 @@
         let choosenDate = moment(time)
           choosenDate.add(parseInt(hm[0]), 'hours');
           choosenDate.add(parseInt(hm[1]), 'minutes');
+
         // Calculate the time differences in minutes
         let currentDate = moment(dateNow);
+
+         console.log('currentDate', currentDate);
         let bookAhead = choosenDate.diff(currentDate, 'minutes');
         // Check if the selected date is less than 30 minutes
         if (bookAhead < MAX_BOOKING_AHEAD) {
