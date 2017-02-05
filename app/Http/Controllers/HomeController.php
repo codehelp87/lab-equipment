@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
+    use \LabEquipment\Http\Controllers\CurrentDateTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -51,8 +53,7 @@ class HomeController extends Controller
                 $bookings = Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
                 $created = new Carbon(@$bookings[0]->created_at);
 
-                $now = Carbon::now(new DateTimeZone('Africa/Lagos'));
-                //$now = Carbon::now(new DateTimeZone('Asia/Seoul'));
+                $now = $this->getNow();
 
                 $difference = $created->diff($now)->days;
 

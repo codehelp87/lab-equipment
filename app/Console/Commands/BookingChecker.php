@@ -62,8 +62,6 @@ class BookingChecker extends Command
                 $carbon->second = rand(10, 50);
 
                 $hourdiff = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
-
-                print($hourdiff);
                 
                 if ($hourdiff <= 1) {
                     $booking->status = 2;
