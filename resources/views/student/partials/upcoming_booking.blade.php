@@ -14,7 +14,7 @@
             $bookingDate->addMinutes($hm[1]);
 
             $lastBookingTime = $booking->created_at->diffInMinutes($bookingDate); 
-            //dump(); exit;
+            //dump(); exit; 11:10am - 11:20am 10:09am
         ?>
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>

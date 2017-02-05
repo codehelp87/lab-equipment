@@ -1387,6 +1387,7 @@
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
                 var currentDate = moment(today).format('YYYY-MM-DD ddd');
+                console.log('currentDate', currentDate);
                 $(document).find('span#time').text(currentDate);
 
                 var newUrl = window.location.href.split('?');;
