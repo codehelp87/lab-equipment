@@ -59,20 +59,21 @@ class BookingChecker extends Command
                 $carbon->minute = (int) $getTime[1];
                 $carbon->second = rand(10, 50);
 
-                $diffInMinutes = $current->diffInMinutes($carbon);
-
-                $diffInMinutes = (int) ($diffInMinutes - 60);
-
-                if ($diffInMinutes <= 0) {
+                $hourdiff = round((strtotime($current) - strtotime($carbon)) / 3600, 1);
+                //$diffInMinutes = $current->diffInMinutes($carbon);
+                //$diffInMinutes = (int) ($diffInMinutes - 60);
+                if ($hourdiff >= 1) {
                     $booking->status = 2;
                     $booking->time_slot = null;
                     $booking->time_slot_id = null;
                     $booking->save();
-                    print 'Completed'.$carbon.' # '.$diffInMinutes."\n";
-                } else {
-                    print 'Uncompleted'.$carbon.' # '.$diffInMinutes."\n";
-                }
-                 $diffInMinutes = 0;
+                    //print 'Completed'.$carbon.' # '.$diffInMinutes."\n";
+                } 
+                //else {
+                    //print 'Uncompleted'.$carbon.' # '.$diffInMinutes."\n";
+                //}
+                 $hourdiff = 0;
+                 //$diffInMinutes = 0;
             }
         }
     }

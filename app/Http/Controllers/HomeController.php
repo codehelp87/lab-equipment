@@ -11,6 +11,7 @@ use LabEquipment\Training;
 use LabEquipment\Equipment;
 use LabEquipment\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $exitCode = Artisan::call('booking:check', []);
+
         $userBookings = $this->showMyBookingHistory();
 
         $users = User::findAllWithTrashed();
