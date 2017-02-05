@@ -1407,7 +1407,6 @@
                       .find('span#time')
                       .text(moment(e.date)
                       .format('MM.DD.YYYY ddd'));
-                      //$(document).find('span#time').text(currentDate);
 
                       var url = window.location.href;  
                         if (url.indexOf('?') > -1) {
