@@ -15,7 +15,7 @@ class AddBookingSlotAndBookingDateToBookingTable extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->string('time_slot');
-            $table->dateTimeTz('booking_date');
+            $table->dateTime('booking_date');
         });
     }
 
