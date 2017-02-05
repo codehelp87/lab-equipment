@@ -49,7 +49,10 @@ class HomeController extends Controller
                 // Check for last booking date
                 $bookings = Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
                 $created = new Carbon(@$bookings[0]->created_at);
-                $now = Carbon::now();
+
+                $now = Carbon::now(new DateTimeZone('Africa/Lagos'));
+                //$now = Carbon::now(new DateTimeZone('Asia/Seoul'));
+
                 $difference = $created->diff($now)->days;
 
                 if ($difference >= 90) {

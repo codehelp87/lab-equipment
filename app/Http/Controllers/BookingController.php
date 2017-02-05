@@ -14,6 +14,8 @@ class BookingController extends Controller
 	const NIGHT_BOOKING = 90;
 	const MORNING_BOOKING = 72;
 
+	use \LabEquipment\Http\Controllers\CurrentDateTrait;
+
 	public function checkEquipmentBooking(Request $request)
 	{
 		//call the check booking
@@ -42,7 +44,7 @@ class BookingController extends Controller
 
 	public function addBooking(Request $request)
 	{
-		$current = Carbon::now();
+		$current = $this->getNow();
 
 		$totalEquipmentBooking = 0;
 		$timezoneFlag = 'nighttime';
@@ -72,11 +74,6 @@ class BookingController extends Controller
 					'message' => 'Maximum hour of ' .$maxTime. ' booking exceeded for this Equipment'
 				], 400);
 			}
-
-            //$bookingDate->setTimezone('UTC');
-            // Create a new date using utc and default to asia time.
-            //$bookdate = Carbon::createFromFormat('Y-m-d H:i:s', $bookingDate->toSt, 'Asia/Seoul');
-            //$bookdate->setTimezone('UTC');
 
             $timeSlotId = $request->time_slot_id;
             $timeSlot = $request->time_slot;

@@ -3,18 +3,21 @@
     <tbody>
         @foreach($bookings as $booking)
         <?php 
-            $bookingDate = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $booking->booking_date);
-
+            //$current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
+            $current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
             $selectedTimeSlot = $booking->time_slot;
 
             $lastTimeSelected = $selectedTimeSlot[count($selectedTimeSlot) - 1];
             $hourAndMinute = explode('-', $lastTimeSelected);
             $hm = explode(':', $hourAndMinute[0]);
-            $bookingDate->addHours($hm[0]);
-            $bookingDate->addMinutes($hm[1]);
 
-            $lastBookingTime = $booking->created_at->diffInMinutes($bookingDate); 
-            //dump(); exit; 11:10am - 11:20am 10:09am
+            $dt = new \DateTime($booking->booking_date);
+            $carbon = Carbon\Carbon::instance($dt);
+            $carbon->hour = (int) $hm[0];
+            $carbon->minute = (int) $hm[1];
+            $carbon->second = rand(10, 50);
+
+            $lastBookingTime = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
         ?>
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
@@ -23,12 +26,12 @@
             <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
             @endif </td>
             <td>
-                @if ($lastBookingTime >= 60 && $booking->status == 1)
-                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn" id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
-                @endif
-                @if($lastBookingTime < 60 && $booking->status == 1)
-                <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot ;} ?>
-                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}"> Cancel</button>
+                @if ($lastBookingTime < 1 && $booking->status == 1)
+                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn"  id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
+                @else
+                <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot; } ?>
+                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}" > Cancel</button>
+                <?php $bookingSlot = []; ?>
                 @endif
             </td>
         </tr>

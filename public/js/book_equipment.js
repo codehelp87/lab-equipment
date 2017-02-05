@@ -57,6 +57,7 @@
               _this.addClass('cancelled');
               _this.attr('disabled', true);
               _this.text('Cancelled');
+              okBtn.unbind('click');
               return window.location.href = '/home/profile';
             }
             return toastr.success(data.message);
@@ -132,8 +133,6 @@
 
         // Calculate the time differences in minutes
         let currentDate = moment(dateNow);
-
-         console.log('currentDate', currentDate);
         let bookAhead = choosenDate.diff(currentDate, 'minutes');
         // Check if the selected date is less than 30 minutes
         if (bookAhead < MAX_BOOKING_AHEAD) {
@@ -144,6 +143,8 @@
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
+
+        bookBtn.unbind('click');
 
         let okBtn = modal.find('button.ok');
         const route = '/equipments/booking';

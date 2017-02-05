@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class BookingChecker extends Command
 {
+    use \LabEquipment\Http\Controllers\CurrentDateTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -39,7 +41,8 @@ class BookingChecker extends Command
      */
     public function handle()
     {
-        $current = Carbon::now();
+       $current = $this->getNow();
+
         $bookings = Booking::where('status', 1)
             ->where('time_slot_id', '!=', NULL)
             ->where('time_slot', '!=', NULL)
@@ -59,20 +62,15 @@ class BookingChecker extends Command
                 $carbon->second = rand(10, 50);
 
                 $hourdiff = round((strtotime($current) - strtotime($carbon)) / 3600, 1);
-                //$diffInMinutes = $current->diffInMinutes($carbon);
-                //$diffInMinutes = (int) ($diffInMinutes - 60);
-                if ($hourdiff >= 1) {
+                
+                if ($hourdiff <= 1) {
                     $booking->status = 2;
                     $booking->time_slot = null;
                     $booking->time_slot_id = null;
                     $booking->save();
-                    //print 'Completed'.$carbon.' # '.$diffInMinutes."\n";
-                } 
-                //else {
-                    //print 'Uncompleted'.$carbon.' # '.$diffInMinutes."\n";
-                //}
-                 $hourdiff = 0;
-                 //$diffInMinutes = 0;
+                }
+ 
+                $hourdiff = 0;
             }
         }
     }

@@ -24,6 +24,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    use \LabEquipment\Http\Controllers\CurrentDateTrait;
 
     /**
      * Where to redirect users after login.
@@ -55,7 +56,7 @@ class LoginController extends Controller
                 if (count($user) > 0) {
                     //Check the last user login time
                     $created = new Carbon($user->last_login_time);
-                    $now = Carbon::now();
+                    $now = $this->getNow();
                     $difference = $created->diff($now)->days;
                     // Calculate days different
                     if ($difference >= 90) {
