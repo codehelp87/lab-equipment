@@ -200,7 +200,7 @@
                                 <span>30 minutes before</span><br>
                                 <span>1 hour before</span><br>
                             </td>
-                            <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right">Book Now</a></td>
+                            <td><a href="/equipments/{{ base64_encode($equipment->id) }}/booking" class="btn btn-default pull-right">Book Now</a></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>

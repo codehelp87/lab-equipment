@@ -50,7 +50,7 @@
                                         <option value="">Select Equipment</option>
                                         @if ($trainings->count() > 0)
                                         @foreach($trainings as $training)
-                                        <option value="{{ $training->equipment->id }}">{{ $training->equipment->model_no }}</option>
+                                        <option value="{{ base64_encode($training->equipment->id) }}">{{ $training->equipment->model_no }}</option>
                                         @endforeach
                                         @endif
                                     </select>

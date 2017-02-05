@@ -7,7 +7,7 @@
 			<p class="text-left">
 				Dear {{ $name }} ,<br><br>
 				Congratulations!
-You have completed the traing session and you can now use the following equipment..<br><br>
+You have completed the training session and you can now use the following equipment..<br><br>
 				Equipment: {{ $equipment }}<br><br>
 				Please <a href="<?php echo $_SERVER['HTTP_HOST'];?>/users/{{ base64_encode($email) }}/activate">click here</a> to update your account informaion.
 				Thanks,<br><br>
