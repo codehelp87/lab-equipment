@@ -2,7 +2,20 @@
 <table class="table table-hover">
     <tbody>
         @foreach($bookings as $booking)
-        <?php $lastBookingTime = $booking->created_at->diffInMinutes( Carbon\Carbon::now()); ?>
+        <?php 
+            $bookingDate = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $booking->booking_date);
+
+            $selectedTimeSlot = $booking->time_slot;
+
+            $lastTimeSelected = $selectedTimeSlot[count($selectedTimeSlot) - 1];
+            $hourAndMinute = explode('-', $lastTimeSelected);
+            $hm = explode(':', $hourAndMinute[0]);
+            $bookingDate->addHours($hm[0]);
+            $bookingDate->addMinutes($hm[1]);
+
+            $lastBookingTime = $booking->created_at->diffInMinutes($bookingDate); 
+            //dump(); exit;
+        ?>
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
             <td>{{ $booking->equipment->model_no }}</td>

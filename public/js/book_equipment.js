@@ -121,9 +121,6 @@
         let currentDate = moment(dateNow);
         let bookAhead = choosenDate.diff(currentDate, 'minutes');
         // Check if the selected date is less than 30 minutes
-        console.log('currentDate: ' + currentDate + ' : ' + choosenDate);
-        console.log('TimeDifference', bookAhead);
-
         if (bookAhead < MAX_BOOKING_AHEAD) {
           toastr.error('You can only book 30 minutes ahead from Now');
           return false;
