@@ -4,6 +4,7 @@ namespace LabEquipment\Http\Controllers;
 
 use Auth;
 use Carbon\Carbon;
+use DateTimeZone;
 use LabEquipment\Lab;
 use LabEquipment\User;
 use LabEquipment\Booking;

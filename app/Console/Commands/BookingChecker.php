@@ -61,7 +61,9 @@ class BookingChecker extends Command
                 $carbon->minute = (int) $getTime[1];
                 $carbon->second = rand(10, 50);
 
-                $hourdiff = round((strtotime($current) - strtotime($carbon)) / 3600, 1);
+                $hourdiff = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
+
+                print($hourdiff);
                 
                 if ($hourdiff <= 1) {
                     $booking->status = 2;
@@ -69,7 +71,7 @@ class BookingChecker extends Command
                     $booking->time_slot_id = null;
                     $booking->save();
                 }
- 
+
                 $hourdiff = 0;
             }
         }
