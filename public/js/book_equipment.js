@@ -112,7 +112,7 @@
         // get the user last booking timeslot
         let lastTimeSelected = selectedTimeSlot[selectedTimeSlot.length - 1];
         let hourAndMinute = lastTimeSelected.split('-');
-        let hm = hourAndMinute[1].split(':');
+        let hm = hourAndMinute[0].split(':');
         // Add the choosen slot to the date selected by the student
         let choosenDate = moment(time)
           choosenDate.add(parseInt(hm[0]), 'hours');
