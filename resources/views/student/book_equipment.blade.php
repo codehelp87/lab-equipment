@@ -1386,11 +1386,6 @@
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-                var myDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
-
-                console.log(moment(myDate).format('YYYY-MM-DD HH:mm'));
-
-
                 var currentDate = moment(today).format('YYYY-MM-DD ddd');
                 $(document).find('span#time').text(currentDate);
 
