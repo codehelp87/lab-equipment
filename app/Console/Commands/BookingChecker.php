@@ -50,7 +50,6 @@ class BookingChecker extends Command
             foreach($bookings as $booking) {
                 $bookingDate = $booking->booking_date;
                 $timeSlot = $booking->time_slot;
-
                 $getTime = $this->getHourAndMinutes($timeSlot);
 
                 $dt = new \DateTime($booking->booking_date);

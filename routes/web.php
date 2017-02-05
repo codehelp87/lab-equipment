@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::post('/equipments/booking', 'BookingController@addBooking');
 	Route::get('bookings/{id}/cancel', 'BookingController@cancelBooking');
+	Route::get('/equipment/booking/checking', 'BookingController@checkEquipmentBooking');
 
 	Route::get('/equipments/{id}/lab_usage_by_session', 'EquipmentController@getLabUsersBySessionAndEquipment');
 	Route::get('/equipments/{id}/labusers/sessions', 'EquipmentController@getLabUsersBySession');

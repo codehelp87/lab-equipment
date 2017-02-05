@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css" />
         <script src="{{ asset('js/bootbox.min.js') }}"></script>
         <script src="{{ asset('js/jquery.table2excel.min.js') }}"></script>
+        <script src="{{ asset('js/keep_alive.js') }}"></script>
         <script src="{{ asset('js/user.js') }}"></script>
         <script src="{{ asset('js/lab.js') }}"></script>
         <script src="{{ asset('js/add_equipment.js') }}"></script>

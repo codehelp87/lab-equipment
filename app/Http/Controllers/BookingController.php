@@ -7,11 +7,20 @@ use Carbon\Carbon;
 use LabEquipment\Booking;
 use LabEquipment\Equipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class BookingController extends Controller
 {
 	const NIGHT_BOOKING = 90;
 	const MORNING_BOOKING = 72;
+
+	public function checkEquipmentBooking(Request $request)
+	{
+		//call the check booking
+		Artisan::call('booking:check', []);
+
+		return response()->json(['message' => 'done'], 200);
+	}
 
 	public function cancelBooking(Request $request, $id)
 	{

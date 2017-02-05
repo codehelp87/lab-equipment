@@ -5,10 +5,22 @@
       equipment.linkToBookingDetails();
       equipment.bookEquipment();
       equipment.cancelBooking();
+      equipment.releaseEquipmentFromBooking();
     });
   }
 
   class Equipment {
+    releaseEquipmentFromBooking() {
+      let equipment = new Equipment;
+      let minutes = 2;
+      let interval = 1000 * 60 * minutes; // where X is your every X minutes
+      let route = '/equipment/booking/checking';
+
+      $.fn.keepAlive({url: route, timer: interval}, function(response) {
+        console.log(response);
+      });//
+    }
+
     cancelBooking(){
       let equipment = new Equipment;
       let cancelBtn = $(document).find('button.cancel-booking');
@@ -253,16 +265,19 @@
     }
 
   makeAjaxCall(url, params, method) {
-      return $.ajax({
-        headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
-      },
-        url: url,
-        type: method,
-        dataType: 'json',
-        data: params,
-      });
-    }
+    return $.ajax({
+      headers:{
+      'X-CSRF-Token': $('input[name="_token"]').val()
+    },
+    beforeSend: function(data) {
+      console.log('Running......')
+    },
+      url: url,
+      type: method,
+      dataType: 'json',
+      data: params,
+    });
+  }
 }
 })(jQuery);
 
