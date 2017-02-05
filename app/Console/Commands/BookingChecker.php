@@ -59,11 +59,12 @@ class BookingChecker extends Command
                 $carbon = Carbon::instance($dt);
                 $carbon->hour = (int) $getTime[0];
                 $carbon->minute = (int) $getTime[1];
-                $carbon->second = rand(10, 50);
+                $carbon->second = rand(10, 30);
 
-                $hourdiff = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
+                $hourdiff = round((strtotime($carbon) - strtotime($current)) / 3600, 2);
+                $minutes = ($hourdiff * 60);
                 
-                if ($hourdiff <= 1) {
+                if ($minutes <= 0) {
                     $booking->status = 2;
                     $booking->time_slot = null;
                     $booking->time_slot_id = null;
@@ -78,7 +79,7 @@ class BookingChecker extends Command
     public function getHourAndMinutes($time)
     {
         $splitTime = explode('-', $time[0]);
-        $getHourAndMinutes = explode(':', $splitTime[1]);
+        $getHourAndMinutes = explode(':', $splitTime[0]);
 
         return $getHourAndMinutes;
     }

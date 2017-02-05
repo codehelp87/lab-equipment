@@ -18,6 +18,7 @@
             $carbon->second = rand(10, 50);
 
             $lastBookingTime = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
+            $minutes = ($lastBookingTime * 60);
         ?>
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
@@ -26,7 +27,7 @@
             <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
             @endif </td>
             <td>
-                @if ($lastBookingTime < 1 && $booking->status == 1)
+                @if ($minutes <= 60 && $booking->status == 1)
                 <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn"  id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
                 @else
                 <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot; } ?>

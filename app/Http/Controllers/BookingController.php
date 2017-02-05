@@ -87,6 +87,7 @@ class BookingController extends Controller
 	            $bDate = $bookingDate;
 
 	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING && $diffInDays <= 0) {
+	            	print('Different: '.$diffInDays); exit;
 	            	$bDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
 	            } else {
