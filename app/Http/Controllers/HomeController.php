@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bookings = $this->showMyBookingHistory();
+        $userBookings = $this->showMyBookingHistory();
 
         $users = User::findAllWithTrashed();
         $labs = Lab::findAll();
@@ -68,7 +68,7 @@ class HomeController extends Controller
             ->get();
 
         return view('admin.admin', compact(
-            'users', 'labs', 'equipments', 'bookings', 'trainings', 'trainedEquipments', 'notifications'
+            'users', 'labs', 'equipments', 'userBookings', 'trainings', 'trainedEquipments', 'notifications'
         ));
     }
 

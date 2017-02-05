@@ -169,7 +169,7 @@
             </p>
             <hr>
             <p>
-                @include('student.partials.upcoming_booking', ['bookings' => $bookings])
+                @include('student.partials.upcoming_booking', ['bookings' => $userBookings])
             </p>
             <hr>
             <p>
