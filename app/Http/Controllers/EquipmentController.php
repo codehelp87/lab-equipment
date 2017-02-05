@@ -315,7 +315,8 @@ class EquipmentController extends Controller
         $date = new \DateTime($bookingDate);
         $bookingDate = date_format($date, 'Y-m-d');
 
-        $equipment = Equipment::find(base64_decode($id));
+        $decodedId = base64_decode($id);
+        $equipment = Equipment::find($decodedId);
         $equipmentBookings = Booking::findBy([
             ['equipment_id', '=', $id],
             ['booking_date', '=', $bookingDate],
