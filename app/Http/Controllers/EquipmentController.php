@@ -316,6 +316,7 @@ class EquipmentController extends Controller
         $bookingDate = date_format($date, 'Y-m-d');
 
         $decodedId = base64_decode($id);
+        dd($decodedId);
         $equipment = Equipment::find($decodedId);
         $equipmentBookings = Booking::findBy([
             ['equipment_id', '=', $id],
