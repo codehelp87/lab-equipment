@@ -133,12 +133,15 @@
 
         // Calculate the time differences in minutes
         let currentDate = moment(dateNow);
-        let bookAhead = choosenDate.diff(currentDate, 'minutes');
+        let bookAhead = parseInt(choosenDate.diff(currentDate, 'minutes'));
 
+        if (parseInt(selectedTimeSlotId[0]) >= 90 && bookAhead <= 0) {
+          let newcurrent = currentDate.add(1, 'day');
+          bookAhead = newcurrent.diff(choosenDate, 'minutes');
+        }
         //console.log(currentDate + ' = ' + choosenDate);
         // Check if the selected date is less than 30 minutes
-        
-        console.log(bookAhead + ' = ' + MAX_BOOKING_AHEAD);
+        //console.log('BookAhead', bookAhead + ' = ' + MAX_BOOKING_AHEAD);
         if (bookAhead < MAX_BOOKING_AHEAD) {
           toastr.error('You can only book 30 minutes ahead from Now');
           return false;
@@ -147,8 +150,6 @@
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
-
-        bookBtn.unbind('click');
 
         let okBtn = modal.find('button.ok');
         const route = '/equipments/booking';
@@ -166,7 +167,8 @@
               modal.modal('hide');
               toastr.success('Your booking has been recorded');
               okBtn.unbind('click');
-              //return window.location.href = '/equipments/'+equipment.base64Encode().encode(equipmentId)+'/booking';
+              bookBtn.unbind('click');
+              return window.location.href = '/equipments/'+equipment.base64Encode().encode(equipmentId)+'/booking';
             }
             return toastr.success(data.message);
           })
