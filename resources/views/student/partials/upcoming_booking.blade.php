@@ -19,6 +19,8 @@
 
             $lastBookingTime = round((strtotime($carbon) - strtotime($current)) / 3600, 1);
             $minutes = ($lastBookingTime * 60);
+            
+            print $minutes.'<br>';
         ?>
         <tr>
             <td><strong>{{ $booking->equipment->title }}</strong></td>
