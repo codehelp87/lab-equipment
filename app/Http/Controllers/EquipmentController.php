@@ -319,7 +319,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($decodedId);
         $equipmentBookings = Booking::findBy([
             ['equipment_id', '=', $decodedId],
-            ['booking_date', '>=', $bookingDate],
+            ['booking_date', '=', $bookingDate],
             ['status', 1],
         ]);
 

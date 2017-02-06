@@ -55,7 +55,9 @@ class BookingController extends Controller
 
 		$bookings = Booking::where('equipment_id', $request->equipment)
 		    ->where('time_slot_id', '!=', NULL)
-		    ->where('timezone_flag', 'daytime') // newly added
+		    ->where('timezone_flag', 'daytime')
+		    ->where('status', '>=', 1) // newly added
+		    ->where('user_id', Auth::user()->id)
 		    ->get();
 
 		$timeSlot = $request->time_slot_id;
@@ -72,8 +74,8 @@ class BookingController extends Controller
 			if ($maxTimeInMinutes == $totalEquipmentBooking) {
 				$maxTime = (int)($maxTimeInMinutes / 60);
 				return response()->json([
-					'message' => 'Maximum hour of ' .$maxTime. ' booking exceeded for this Equipment'
-				], 400);
+					'message' => 'Maximum hour of ' .$maxTime. ' hrs booking exceeded for this Equipment'
+				], 200);
 			}
 
             $timeSlotId = $request->time_slot_id;
