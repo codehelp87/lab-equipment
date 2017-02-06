@@ -893,7 +893,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:00 - 01:10">
-                                                :01 - 10
+                                                :00 - 10
                                             </label>
                                         </div>
                                     </td>
@@ -901,7 +901,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:10 - 01:20">
-                                                :01 - 20
+                                                :10 - 20
                                             </label>
                                         </div>
                                     </td>
@@ -909,7 +909,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:20 - 01:30">
-                                                :01 - 30
+                                                :20 - 30
                                             </label>
                                         </div>
                                     </td>
@@ -917,7 +917,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:30 - 01:40">
-                                                :01 - 10
+                                                :30 - 40
                                             </label>
                                         </div>
                                     </td>
@@ -925,7 +925,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:40 - 01:50">
-                                                :01 - 50
+                                                :40 - 50
                                             </label>
                                         </div>
                                     </td>
@@ -934,7 +934,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:50 - 02:00">
-                                                :05 - 00
+                                                :50 - 00
                                             </label>
                                         </div>
                                     </td>
@@ -1285,7 +1285,7 @@
                                     <td>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="08:40 - 08:40">
+                                                <input type="checkbox" value="08:40 - 08:50">
                                                 :40 - 50
                                             </label>
                                         </div>
@@ -1299,57 +1299,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>9:00</td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:00 - 09:10">
-                                                :00 - 10
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:10 - 09:20">
-                                                :10 - 20
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:20 - 09:30">
-                                                :20 - 30
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:30 - 09:40">
-                                                :30 - 40
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:40 - 09:50">
-                                                :40 - 50
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:50 - 10:00">
-                                                :50 - 00
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-default book-now" data-id="<?php echo e($equipment->id); ?>" id="book-now">Book Now</button>

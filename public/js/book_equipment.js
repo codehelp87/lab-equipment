@@ -120,8 +120,6 @@
         let currentDate = moment(dateNow);
         let bookAhead = parseInt(currentDate.diff(choosenDate, 'minutes'));
         let bookAheadHours = parseInt(choosenDate.diff(currentDate, 'hours'));
-
-        console.log('Max', bookAheadHours+ ' :max: '+selectedTimeSlotId[0]);
         
         if (bookAheadHours >= 6 && bookAheadHours <= 19) {
           if (!equipment.checkNightToDay(selectedTimeSlotId)) {

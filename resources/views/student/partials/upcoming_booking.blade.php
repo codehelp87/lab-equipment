@@ -3,8 +3,8 @@
     <tbody>
         @foreach($bookings as $booking)
         <?php 
-            $current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
-            ///$current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
+            //$current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
+            $current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
             $selectedTimeSlot = $booking->time_slot;
 
             $lastTimeSelected = $selectedTimeSlot[count($selectedTimeSlot) - 1];

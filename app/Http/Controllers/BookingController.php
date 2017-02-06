@@ -95,16 +95,22 @@ class BookingController extends Controller
 
 	            $diffInHours = $bookingDate->diffInHours($current);
 
-
 	            if (
 	            	$timeSlotId[$index] >= static::NIGHT_TO_DAY_MIN && 
 	            	$timeSlotId[$index] <= static::MAX_NIGHT_TO_DAY_MIN && 
 	            	$diffInHours > 6) {
 	            	$bDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
+	            } elseif ($timeSlotId[$index] >= static::NIGHT_TO_DAY_MIN && 
+	            	$timeSlotId[$index] <= static::MAX_NIGHT_TO_DAY_MIN && 
+	            	$diffInHours <= 6) {
+	            	$timezoneFlag = 'nighttime';
 	            } else {
 	            	$timezoneFlag = 'daytime';
 	            }
+
+	            //Switch date format
+	            $bookingDate = date_format($bookingDate, 'Y-m-d');
 
 				$booking = Booking::create([
 					'user_id' => Auth::user()->id,
