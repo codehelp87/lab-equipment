@@ -1,7 +1,7 @@
 <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5> <br>
 <table class="table table-hover">
     <tbody>
-        @foreach($bookings as $booking)
+        <?php $__currentLoopData = $bookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 
             $current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
             ///$current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
@@ -21,21 +21,22 @@
             $minutes = ($lastBookingTime * 60);
         ?>
         <tr>
-            <td><strong>{{ $booking->equipment->title }}</strong></td>
-            <td>{{ $booking->equipment->model_no }}</td>
-            <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
-            <td>@if ($booking->time_slot != null) {{ implode(' , ', $booking->time_slot) }}
-            @endif </td>
+            <td><strong><?php echo e($booking->equipment->title); ?></strong></td>
+            <td><?php echo e($booking->equipment->model_no); ?></td>
+            <td><?php echo e(date_format(new \DateTime($booking->booking_date), 'Y/m/d')); ?></td>
+            <td><?php if($booking->time_slot != null): ?> <?php echo e(implode(' , ', $booking->time_slot)); ?>
+
+            <?php endif; ?> </td>
             <td>
-                @if ($minutes <= 60 && $booking->status == 1)
-                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn"  id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
-                @else
+                <?php if($minutes <= 60 && $booking->status == 1): ?>
+                <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn"  id="<?php echo e($booking->id); ?>" disabled="disabled"> Cancel</button>
+                <?php else: ?>
                 <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot; } ?>
-                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}" > Cancel</button>
+                <button type="button" class="btn btn-default pull-right cancel-booking" id="<?php echo e($booking->id); ?>" data-time-slot="<?php echo e(implode(' , ', $bookingSlot)); ?>" > Cancel</button>
                 <?php $bookingSlot = []; ?>
-                @endif
+                <?php endif; ?>
             </td>
         </tr>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
     </tbody>
 </table>

@@ -104,24 +104,10 @@
           selectedTimeSlotId.push(_this.attr('id'));
         });
 
-        let flag = '';
-
-        if (selectedTimeSlotId[0] <= 72 && selectedTimeSlotId[selectedTimeSlotId.length - 1] <= 72) {
-          if (!equipment.checkDayToNight(selectedTimeSlotId)) {
-            toastr.error('You can only select between 9:00AM - 9:00PM or 9:00PM - 9:00AM');
-            return false;
-          }
-        } else {
-          if (!equipment.checkNightToDay(selectedTimeSlotId)) {
-            toastr.error('You can only select between 9:00PM - 9:00AM or 9:00AM - 9:00PM');
-            return false;
-          }
-        }
         ///// Check for 30 minutes differences between now and the last select date of the students
         let date = new Date();
         let myDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
         let dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
-
         // get the user last booking timeslot
         let lastTimeSelected = selectedTimeSlot[selectedTimeSlot.length - 1];
         let hourAndMinute = lastTimeSelected.split('-');
@@ -130,19 +116,30 @@
         let choosenDate = moment(time)
           choosenDate.add(parseInt(hm[0]), 'hours');
           choosenDate.add(parseInt(hm[1]), 'minutes');
-
         // Calculate the time differences in minutes
         let currentDate = moment(dateNow);
-        let bookAhead = parseInt(choosenDate.diff(currentDate, 'minutes'));
+        let bookAhead = parseInt(currentDate.diff(choosenDate, 'minutes'));
+        let bookAheadHours = parseInt(choosenDate.diff(currentDate, 'hours'));
 
-        if (parseInt(selectedTimeSlotId[0]) >= 90 && bookAhead <= 0) {
-          let newcurrent = currentDate.add(1, 'day');
-          bookAhead = newcurrent.diff(choosenDate, 'minutes');
+        console.log('Max', bookAheadHours+ ' :max: '+selectedTimeSlotId[0]);
+        
+        if (bookAheadHours >= 6 && bookAheadHours <= 19) {
+          if (!equipment.checkNightToDay(selectedTimeSlotId)) {
+            toastr.error('You can only select between 9:00PM - 9:00AM');
+            return false;
+          }
+        } else {
+          if (bookAheadHours >= 6 && bookAheadHours <= 18) {
+            if (!equipment.checkDayToNight(selectedTimeSlotId)) {
+              toastr.error('You can only select between 9:00AM - 9:00PM');
+              return false;
+            }
+         }
         }
-        //console.log(currentDate + ' = ' + choosenDate);
-        // Check if the selected date is less than 30 minutes
-        //console.log('BookAhead', bookAhead + ' = ' + MAX_BOOKING_AHEAD);
-        if (bookAhead < MAX_BOOKING_AHEAD) {
+
+        let bookAheadMinutes = parseInt(choosenDate.diff(currentDate, 'minutes'));
+        // Check for 30 minutes ahead
+        if (bookAheadMinutes < MAX_BOOKING_AHEAD) {
           toastr.error('You can only book 30 minutes ahead from Now');
           return false;
         }
@@ -157,7 +154,7 @@
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
           'booking_date': time,
-          'time_slot_id': selectedTimeSlotId //,'timezone': flag
+          'time_slot_id': selectedTimeSlotId
         }
 
         okBtn.on('click', function() {
@@ -184,12 +181,12 @@
     }
 
     checkDayToNight(timeSlots) {
-      const DAY_TO_NIGHT_MAX = 72; // 0 - 72
+      const DAY_TO_NIGHT_MAX = 71; // 0 - 72
       let timeCount = timeSlots.length;
       let minCounter = 0;
 
       for (let i = 0; i < timeSlots.length; i++) {
-        if (timeSlots[i] <= DAY_TO_NIGHT_MAX) {
+        if (DAY_TO_NIGHT_MAX >= 0 && timeSlots[i] <= DAY_TO_NIGHT_MAX) {
           minCounter ++;
         }
       }
@@ -201,12 +198,13 @@
     }
 
     checkNightToDay(timeSlots) {
-      const NIGHT_TO_DAY_MIN = 72; // 72 to 149
+      const NIGHT_TO_DAY_MIN = 72; // 72 to 143
+      const MAX_NIGHT_TO_DAY_MIN = 143;
       let timeCount = timeSlots.length;
       let maxCounter = 0;
 
       for (let i = 0; i < timeSlots.length; i++) {
-        if (timeSlots[i] >= NIGHT_TO_DAY_MIN) {
+        if (parseInt(timeSlots[i]) >= NIGHT_TO_DAY_MIN && parseInt(timeSlots[i]) <= MAX_NIGHT_TO_DAY_MIN) {
           maxCounter ++;
         }
       }

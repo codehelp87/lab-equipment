@@ -9,7 +9,7 @@ trait CurrentDateTrait
 {
 	public function getNow() 
 	{
-		//return Carbon::now(new DateTimeZone('Africa/Lagos'));
-	    return Carbon::now(new DateTimeZone('Asia/Seoul'));
+		return Carbon::now(new DateTimeZone('Africa/Lagos'));
+	    //return Carbon::now(new DateTimeZone('Asia/Seoul'));
 	}
 }

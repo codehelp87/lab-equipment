@@ -51,12 +51,14 @@ class BookingChecker extends Command
 
         if ($bookings->count() > 0) {
             foreach($bookings as $booking) {
+                $currentTimezone = $current->timezoneName;
                 $bookingDate = $booking->booking_date;
                 $timeSlot = $booking->time_slot;
                 $getTime = $this->getHourAndMinutes($timeSlot);
 
                 $dt = new \DateTime($booking->booking_date);
                 $carbon = Carbon::instance($dt);
+                $carbon->timezone = $currentTimezone;
                 $carbon->hour = (int) $getTime[0];
                 $carbon->minute = (int) $getTime[1];
                 $carbon->second = rand(10, 30);

@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Artisan;
 
 class BookingController extends Controller
 {
-	const NIGHT_BOOKING = 90;
+	const NIGHT_BOOKING = 72;
 	const MORNING_BOOKING = 72;
+	const MAX_NIGHT_TO_DAY_MIN = 143;
+	const NIGHT_TO_DAY_MIN = 72; // 72 to 143
 
 	use \LabEquipment\Http\Controllers\CurrentDateTrait;
 
@@ -57,7 +59,6 @@ class BookingController extends Controller
 		    ->get();
 
 		$timeSlot = $request->time_slot_id;
-		$timeZone = $request->timezone;
 		$date = new \DateTime($request->booking_date);
 
 		if ($bookings->count() > 0) {
@@ -81,12 +82,24 @@ class BookingController extends Controller
 			foreach($request->time_slot as $index => $slot) {
 				// if the student selects yesterday date and today's date but he'/he boking extends till tomorrow
 	            // carbon should add one more day to the date selected
-	            $bookingDate = $carbon = Carbon::instance($date);
+	            $currentTimezone = $current->timezoneName;
+
+	            $bookingDate = Carbon::instance($date);
+	            $bookingDate->timezone = $currentTimezone;
+	            $getTime = $this->getHourAndMinutes($slot);
+
+	            $bookingDate->hour = (int) $getTime[0];
+                $bookingDate->minute = (int) $getTime[1];
+                $bookingDate->second = rand(10, 30);
 	            $diffInDays = $bookingDate->diffInDays($current);
 
-	            $bDate = $bookingDate;
+	            $diffInHours = $bookingDate->diffInHours($current);
 
-	            if ($timeSlotId[$index] >= self::NIGHT_BOOKING && $diffInDays <= 0) {
+
+	            if (
+	            	$timeSlotId[$index] >= static::NIGHT_TO_DAY_MIN && 
+	            	$timeSlotId[$index] <= static::MAX_NIGHT_TO_DAY_MIN && 
+	            	$diffInHours > 6) {
 	            	$bDate = $bookingDate->addDays(1);
 	            	$timezoneFlag = 'nighttime';
 	            } else {
@@ -97,8 +110,8 @@ class BookingController extends Controller
 					'user_id' => Auth::user()->id,
 					'equipment_id' => $request->equipment,
 					'time_slot' => [$timeSlot[$index]],
-					'booking_date' => $bDate,
-					'session' => $bDate,
+					'booking_date' => $bookingDate,
+					'session' => $bookingDate,
 					'time_slot_id' => [$timeSlotId[$index]],
 					'timezone_flag' => $timezoneFlag,
 					'cancelled_time_slot' => [$timeSlot[$index]],
@@ -117,4 +130,12 @@ class BookingController extends Controller
 
 		return response()->json(['message' => 'Error creating booking'], 400);
 	}
+
+	public function getHourAndMinutes($time)
+    {
+        $splitTime = explode('-', $time);
+        $getHourAndMinutes = explode(':', $splitTime[0]);
+
+        return $getHourAndMinutes;
+    }
 }

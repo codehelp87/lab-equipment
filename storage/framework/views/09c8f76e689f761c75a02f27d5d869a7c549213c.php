@@ -1,36 +1,35 @@
-@extends('layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
-            <h5><a href="{{ route('my_profile') }}" class="pull-left"> << My page </a></h5><br>
+            <input type="hidden" name="_token" id="_token" class="form-control" value="<?php echo e(csrf_token()); ?>">
+            <h5><a href="<?php echo e(route('my_profile')); ?>" class="pull-left"> << My page </a></h5><br>
             <hr>
             <h5>Book an equipment</h5>
             <table class="table table-responsive" id="book-equipment">
                 <tbody>
-                    @if($equipment->count() > 0)
-                    <tr id="edit-eqipment{{ $equipment->id }}">
-                        <td><strong>{{ $equipment->title }}</strong></td>
-                        <td>{{ $equipment->model_no }}</td>
-                        <td>{{ $equipment->maker }}</td>
-                        <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
+                    <?php if($equipment->count() > 0): ?>
+                    <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
+                        <td><strong><?php echo e($equipment->title); ?></strong></td>
+                        <td><?php echo e($equipment->model_no); ?></td>
+                        <td><?php echo e($equipment->maker); ?></td>
+                        <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
                         <td>
                             <Strong>Status</Strong><br>
                             <Strong>Max Time(per day)</Strong><br>
                         </td>
                         <td>
-                            {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                            {{ $equipment->max_reservation_time}} hr(s)<br>
+                            <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
+                            <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
                         </td>
                     </tr>
-                    @endif
+                    <?php endif; ?>
                 </tbody>
             </table>
             <hr>
             <h5>Calendar</h5>
             <hr>
-            {{-- <div class="container"> --}}
+            
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -43,7 +42,7 @@
                         </div>
                         <hr>
                         <h5>Daytime (9am - 9pm)</h5>
-                        <h5>Maximum reservation time: {{ $equipment->max_reservation_time }}hr(s)</h5>
+                        <h5>Maximum reservation time: <?php echo e($equipment->max_reservation_time); ?>hr(s)</h5>
                         <hr>
                         <h5>Night Time (9pm - 9am)</h5>
                         <h5>Maximum reservation time: Unlimited</h5>
@@ -894,7 +893,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:00 - 01:10">
-                                                :00 - 10
+                                                :01 - 10
                                             </label>
                                         </div>
                                     </td>
@@ -902,7 +901,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:10 - 01:20">
-                                                :10 - 20
+                                                :01 - 20
                                             </label>
                                         </div>
                                     </td>
@@ -910,7 +909,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:20 - 01:30">
-                                                :20 - 30
+                                                :01 - 30
                                             </label>
                                         </div>
                                     </td>
@@ -918,7 +917,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:30 - 01:40">
-                                                :30 - 40
+                                                :01 - 10
                                             </label>
                                         </div>
                                     </td>
@@ -926,7 +925,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:40 - 01:50">
-                                                :40 - 50
+                                                :01 - 50
                                             </label>
                                         </div>
                                     </td>
@@ -935,7 +934,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="01:50 - 02:00">
-                                                :50 - 00
+                                                :05 - 00
                                             </label>
                                         </div>
                                     </td>
@@ -1286,7 +1285,7 @@
                                     <td>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="08:40 - 08:50">
+                                                <input type="checkbox" value="08:40 - 08:40">
                                                 :40 - 50
                                             </label>
                                         </div>
@@ -1300,7 +1299,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                               {{--  <tr>
+                                <tr>
                                     <td>9:00</td>
                                     <td>
                                         <div class="checkbox">
@@ -1350,13 +1349,13 @@
                                             </label>
                                         </div>
                                     </td>
-                                </tr> --}}
+                                </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now">Book Now</button>
+                        <button type="button" class="btn btn-default book-now" data-id="<?php echo e($equipment->id); ?>" id="book-now">Book Now</button>
                     </div>
                 </div>
-            {{-- </div> --}}
+            
             <script>
                 $(function() {
                     var index = 1;
@@ -1364,19 +1363,19 @@
                     checkbox.each(function(index, el) {
                         var _this = $(this);
                         _this.attr('id', index);
-                        @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
-                        @foreach($equipmentBookings as $booking)
-                    @if (count($booking->time_slot) > 0)
-                    @foreach($booking->time_slot_id as $slot)
-                    var slot = "{{ $slot }}"
+                        <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
+                        <?php $__currentLoopData = $equipmentBookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                    <?php if(count($booking->time_slot) > 0): ?>
+                    <?php $__currentLoopData = $booking->time_slot_id; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slot): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                    var slot = "<?php echo e($slot); ?>"
                     if (slot === _this.attr('id')) {
                         _this.attr({'checked': true, 'disabled': true});
                         _this.parent().css('text-decoration', 'line-through')
                     }
-                    @endforeach
-                    @endif
-                    @endforeach
-                    @endif
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    <?php endif; ?>
                     index ++;
                     });
                 });
@@ -1430,5 +1429,6 @@
         </div>
     </div>
 </div>
-@include('student.booking_detail_modal')
-@endsection
+<?php echo $__env->make('student.booking_detail_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
