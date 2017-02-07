@@ -58,6 +58,7 @@
               _this.attr('disabled', true);
               _this.text('Cancelled');
               okBtn.unbind('click');
+              cancelBtn.unbind('click');
               return window.location.href = '/home/profile';
             }
             return toastr.success(data.message);
@@ -75,12 +76,15 @@
     }
     bookEquipment() {
       const MAX_BOOKING_AHEAD = 30;
+
       let equipment = new Equipment;
       let bookBtn = $(document).find('button#book-now');
 
       bookBtn.on('click', function() {
         let selectedTimeSlot = [];
         let selectedTimeSlotId = [];
+        let selectedDate = [];
+
         let equipmentId = $(this).attr('data-id');
         let modal = $(document).find('div.booking-detail');
         let checkBox = $(document)
@@ -101,47 +105,33 @@
         checkBox.each(function(index, el) {
           var _this = $(this);
           selectedTimeSlot.push(_this.val());
+          selectedDate.push(_this.attr('date-time'));
           selectedTimeSlotId.push(_this.attr('id'));
         });
 
-        ///// Check for 30 minutes differences between now and the last select date of the students
         let date = new Date();
-        let myDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+        let myDate = new Date(
+          date.getFullYear(), 
+          date.getMonth(), 
+          date.getDate(), 
+          date.getHours(), 
+          date.getMinutes(),
+          date.getSeconds()
+        );
+
         let dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
-        // get the user last booking timeslot
-        let lastTimeSelected = selectedTimeSlot[selectedTimeSlot.length - 1];
-        let hourAndMinute = lastTimeSelected.split('-');
-        let hm = hourAndMinute[0].split(':');
-        // Add the choosen slot to the date selected by the student
-        let choosenDate = moment(time)
-          choosenDate.add(parseInt(hm[0]), 'hours');
-          choosenDate.add(parseInt(hm[1]), 'minutes');
-        // Calculate the time differences in minutes
-        let currentDate = moment(dateNow);
-        let bookAhead = parseInt(currentDate.diff(choosenDate, 'minutes'));
-        let bookAheadHours = parseInt(choosenDate.diff(currentDate, 'hours'));
-        
-        if (bookAheadHours >= 6 && bookAheadHours <= 19) {
-          if (!equipment.checkNightToDay(selectedTimeSlotId)) {
-            toastr.error('You can only select between 9:00PM - 9:00AM');
-            return false;
+
+        for(let i = 0; i < selectedDate.length; i++) {
+          let currentDate = moment(dateNow);
+          let dateSelected = moment(selectedDate[i]);
+          let dateBehindCheck = dateSelected.diff(currentDate, 'minutes');
+
+          if (dateBehindCheck < MAX_BOOKING_AHEAD) {
+            toastr.error('Time selected: '+selectedDate[i]+ ' must be 30 minutes ahead');
+            return false
           }
-        } else {
-          if (bookAheadHours >= 6 && bookAheadHours <= 18) {
-            if (!equipment.checkDayToNight(selectedTimeSlotId)) {
-              toastr.error('You can only select between 9:00AM - 9:00PM');
-              return false;
-            }
-         }
         }
-
-        let bookAheadMinutes = parseInt(choosenDate.diff(currentDate, 'minutes'));
-        // Check for 30 minutes ahead
-        if (bookAheadMinutes < MAX_BOOKING_AHEAD) {
-          toastr.error('You can only book 30 minutes ahead from Now');
-          return false;
-        }
-
+        
         let modalContent = equipment.prepareModal(time, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
@@ -152,7 +142,8 @@
           'equipment': equipmentId,
           'time_slot': selectedTimeSlot,
           'booking_date': time,
-          'time_slot_id': selectedTimeSlotId
+          'time_slot_id': selectedTimeSlotId,
+          'selected_date': selectedDate
         }
 
         okBtn.on('click', function() {
@@ -176,40 +167,6 @@
 
         return false;
       });
-    }
-
-    checkDayToNight(timeSlots) {
-      const DAY_TO_NIGHT_MAX = 71; // 0 - 72
-      let timeCount = timeSlots.length;
-      let minCounter = 0;
-
-      for (let i = 0; i < timeSlots.length; i++) {
-        if (DAY_TO_NIGHT_MAX >= 0 && timeSlots[i] <= DAY_TO_NIGHT_MAX) {
-          minCounter ++;
-        }
-      }
-
-      if (minCounter < timeCount) {
-        return false
-      }
-      return true;
-    }
-
-    checkNightToDay(timeSlots) {
-      const NIGHT_TO_DAY_MIN = 72; // 72 to 143
-      const MAX_NIGHT_TO_DAY_MIN = 143;
-      let timeCount = timeSlots.length;
-      let maxCounter = 0;
-
-      for (let i = 0; i < timeSlots.length; i++) {
-        if (parseInt(timeSlots[i]) >= NIGHT_TO_DAY_MIN && parseInt(timeSlots[i]) <= MAX_NIGHT_TO_DAY_MIN) {
-          maxCounter ++;
-        }
-      }
-      if (maxCounter < timeCount) {
-        return false
-      }
-      return true;
     }
 
     prepareModalForBookingCancel(bookingDate, selectedTimeSlot) {

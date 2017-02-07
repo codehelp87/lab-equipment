@@ -723,7 +723,6 @@
                                         </div>
                                     </td>
                                     <td>
-                                        
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" value="21:50 - 22:00">
@@ -1300,93 +1299,19 @@
                                         </div>
                                     </td>
                                 </tr>
-                               {{--  <tr>
-                                    <td>9:00</td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:00 - 09:10">
-                                                :00 - 10
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:10 - 09:20">
-                                                :10 - 20
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:20 - 09:30">
-                                                :20 - 30
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:30 - 09:40">
-                                                :30 - 40
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:40 - 09:50">
-                                                :40 - 50
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="09:50 - 10:00">
-                                                :50 - 00
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr> --}}
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now">Book Now</button>
                     </div>
                 </div>
             {{-- </div> --}}
+
             <script>
-                $(function() {
-                    var index = 1;
-                    var checkbox = $('div.checkbox input[type="checkbox"]');
-                    checkbox.each(function(index, el) {
-                        var _this = $(this);
-                        _this.attr('id', index);
-                        @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
-                        @foreach($equipmentBookings as $booking)
-                    @if (count($booking->time_slot) > 0)
-                    @foreach($booking->time_slot_id as $slot)
-                    var slot = "{{ $slot }}"
-                    if (slot === _this.attr('id')) {
-                        _this.attr({'checked': true, 'disabled': true});
-                        _this.parent().css('text-decoration', 'line-through')
-                    }
-                    @endforeach
-                    @endif
-                    @endforeach
-                    @endif
-                    index ++;
-                    });
-                });
-            </script>
-            <script type="text/javascript">
             $(function () {
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
                 var currentDate = moment(today).format('YYYY-MM-DD ddd');
+
                 $(document).find('span#time').text(currentDate);
 
                 var newUrl = window.location.href.split('?');;
@@ -1419,6 +1344,52 @@
                   });
             });
         </script>
+        <script>
+                $(function() {
+                    let currentTime = $(document)
+                      .find('span#time')
+                      .text();
+                               
+                    var index = 1;
+                    var checkbox = $('div.checkbox input[type="checkbox"]');
+
+                    checkbox.each(function(index, el) {
+                        var _this = $(this);
+                        _this.attr('id', index);
+
+                        // This spaces assign dates based on the user selected date
+                        var timeSlot =  $(this).val();
+                        let choosenDate = moment(currentTime);
+                        let hourAndMinute = timeSlot.split('-');
+                        let hm = hourAndMinute[0].split(':');
+                            choosenDate.add(parseInt(hm[0]), 'hours');
+                            choosenDate.add(parseInt(hm[1]), 'minutes');
+
+                        // This space assign date and time based on the time of the day
+                        if (_this.attr('id') < 90) {
+                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        } else {
+                            choosenDate.add(1, 'day');
+                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        }
+
+                        @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
+                        @foreach($equipmentBookings as $booking)
+                    @if (count($booking->time_slot) > 0)
+                    @foreach($booking->time_slot_id as $slot)
+                    var slot = "{{ $slot }}"
+                    if (slot === _this.attr('id')) {
+                        _this.attr({'checked': true, 'disabled': true});
+                        _this.parent().css('text-decoration', 'line-through')
+                    }
+                    @endforeach
+                    @endif
+                    @endforeach
+                    @endif
+                    index ++;
+                    });
+                });
+            </script>
             <style type="text/css">
                 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
                     position: inherit;

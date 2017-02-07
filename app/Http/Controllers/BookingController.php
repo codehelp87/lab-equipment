@@ -46,10 +46,8 @@ class BookingController extends Controller
 
 	public function addBooking(Request $request)
 	{
-		$current = $this->getNow();
-
 		$totalEquipmentBooking = 0;
-		$timezoneFlag = 'nighttime';
+		$timezoneFlag = 'daytime';
 
 		$equipment = Equipment::findOneById($request->equipment);
 
@@ -61,7 +59,6 @@ class BookingController extends Controller
 		    ->get();
 
 		$timeSlot = $request->time_slot_id;
-		$date = new \DateTime($request->booking_date);
 
 		if ($bookings->count() > 0) {
 			foreach($bookings as $booking) {
@@ -80,39 +77,20 @@ class BookingController extends Controller
 
             $timeSlotId = $request->time_slot_id;
             $timeSlot = $request->time_slot;
+            $dateSelected = $request->selected_date;
 
-			foreach($request->time_slot as $index => $slot) {
-				// if the student selects yesterday date and today's date but he'/he boking extends till tomorrow
-	            // carbon should add one more day to the date selected
-	            $currentTimezone = $current->timezoneName;
-
-	            $bookingDate = Carbon::instance($date);
-	            $bookingDate->timezone = $currentTimezone;
-	            $getTime = $this->getHourAndMinutes($slot);
-
-	            $bookingDate->hour = (int) $getTime[0];
-                $bookingDate->minute = (int) $getTime[1];
-                $bookingDate->second = rand(10, 30);
-	            $diffInDays = $bookingDate->diffInDays($current);
-
-	            $diffInHours = $bookingDate->diffInHours($current);
-
-	            if (
-	            	$timeSlotId[$index] >= static::NIGHT_TO_DAY_MIN && 
-	            	$timeSlotId[$index] <= static::MAX_NIGHT_TO_DAY_MIN && 
-	            	$diffInHours > 6) {
-	            	$bDate = $bookingDate->addDays(1);
-	            	$timezoneFlag = 'nighttime';
-	            } elseif ($timeSlotId[$index] >= static::NIGHT_TO_DAY_MIN && 
-	            	$timeSlotId[$index] <= static::MAX_NIGHT_TO_DAY_MIN && 
-	            	$diffInHours <= 6) {
+			foreach($dateSelected as $index => $slot) {
+				// Check the selected date as either night booking
+				// or daytime booking
+	            if ($timeSlotId >= 90 && $timeSlotId <= 143) {
 	            	$timezoneFlag = 'nighttime';
 	            } else {
 	            	$timezoneFlag = 'daytime';
 	            }
 
 	            //Switch date format
-	            $bookingDate = date_format($bookingDate, 'Y-m-d');
+	            $date = new \DateTime($dateSelected[$index]);
+	            $bookingDate = date_format($date, 'Y-m-d');
 
 				$booking = Booking::create([
 					'user_id' => Auth::user()->id,
@@ -138,12 +116,4 @@ class BookingController extends Controller
 
 		return response()->json(['message' => 'Error creating booking'], 400);
 	}
-
-	public function getHourAndMinutes($time)
-    {
-        $splitTime = explode('-', $time);
-        $getHourAndMinutes = explode(':', $splitTime[0]);
-
-        return $getHourAndMinutes;
-    }
 }
