@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\Artisan;
 
 class BookingController extends Controller
 {
-	const NIGHT_BOOKING = 72;
-	const MORNING_BOOKING = 72;
-	const MAX_NIGHT_TO_DAY_MIN = 143;
-	const NIGHT_TO_DAY_MIN = 72; // 72 to 143
+	const MAX_NIGHT_TO_DAY = 143;
+	const MIN_NIGHT_TO_DAY = 90;
 
 	use \LabEquipment\Http\Controllers\CurrentDateTrait;
 
@@ -82,7 +80,7 @@ class BookingController extends Controller
 			foreach($dateSelected as $index => $slot) {
 				// Check the selected date as either night booking
 				// or daytime booking
-	            if ($timeSlotId >= 90 && $timeSlotId <= 143) {
+	            if ($timeSlotId >= self::MIN_NIGHT_TO_DAY && $timeSlotId <= self::MAX_NIGHT_TO_DAY) {
 	            	$timezoneFlag = 'nighttime';
 	            } else {
 	            	$timezoneFlag = 'daytime';
