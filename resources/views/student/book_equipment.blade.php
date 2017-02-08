@@ -1346,7 +1346,7 @@
         </script>
         <script>
             $(function() {
-                let currentTime = $(document)
+                var currentTime = $(document)
                   .find('span#time')
                   .text();
                            
@@ -1358,9 +1358,9 @@
                     _this.attr('id', index);
                     // This spaces assign dates based on the user selected date
                     var timeSlot =  $(this).val();
-                    let choosenDate = moment(currentTime);
-                    let hourAndMinute = timeSlot.split('-');
-                    let hm = hourAndMinute[0].split(':');
+                    var choosenDate = moment(currentTime);
+                    var hourAndMinute = timeSlot.split('-');
+                    var hm = hourAndMinute[0].split(':');
                         choosenDate.add(parseInt(hm[0]), 'hours');
                         choosenDate.add(parseInt(hm[1]), 'minutes');
                     // This space assign date and time based on the time of the day
@@ -1374,9 +1374,21 @@
                     @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
                         @foreach($equipmentBookings as $booking)
                             @if (count($booking->time_slot) > 0)
-                                @foreach($booking->time_slot_id as $slot)
+                                @foreach($booking->time_slot as $slot)
                                 var slot = "{{ $slot }}"
-                                if (slot === _this.attr('id')) {
+                                // if (slot === _this.attr('id')) {
+                                //     _this.attr({'checked': true, 'disabled': true});
+                                //     _this.parent().css('text-decoration', 'line-through')
+                                // }
+
+                                var bookingDate = moment("{{ $booking->booking_date }}");
+
+                                var hourAndMinute = slot.split('-');
+                                var hm = hourAndMinute[0].split(':');
+                                bookingDate.add(parseInt(hm[0]), 'hours');
+                                bookingDate.add(parseInt(hm[1]), 'minutes');
+
+                                if (bookingDate.format('YYYY-MM-DD HH:mm') === _this.attr('date-time')) {
                                     _this.attr({'checked': true, 'disabled': true});
                                     _this.parent().css('text-decoration', 'line-through')
                                 }
