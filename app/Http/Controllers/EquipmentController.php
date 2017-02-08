@@ -248,7 +248,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::FindOneById($id);
 
         if (count($equipment) > 0) {
-            $user =  User::FindOneByIdWithStatus($equipment->user_id);
+            $user =  User::findOneAdminById($equipment->user_id);
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
@@ -258,7 +258,7 @@ class EquipmentController extends Controller
 
             if (count($trainings) > 0) {
                 foreach($trainings as $index => $training) {
-                    $students[$index] = User::findOneById($training->user_id)->first();
+                    $students[$index] = User::findOneByIdWithRole($training->user_id);
                 }
             }
             return response()->json([$labProfessor, $students], 200);
