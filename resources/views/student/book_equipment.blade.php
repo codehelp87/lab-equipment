@@ -1377,7 +1377,7 @@
                         choosenDate.add(parseInt(hm[1]), 'minutes');
 
                      var formattedChoosenDate = moment(choosenDate).format('YYYY-MM-DD HH:mm');
-                     // choosenDate = moment(formattedChoosenDate);
+                      choosenDate = moment(formattedChoosenDate);
 
                     // This space assign date and time based on the time of the day
                     if (_this.attr('id') < 90) {
@@ -1385,11 +1385,11 @@
                     } else {
                         dateNow = moment(dateNow);
                         // timeNow = moment(timeNow);
-                        var hourDifference = dateNow.diff(formattedChoosenDate, 'hours');
+                        var hourDifference = dateNow.diff(choosenDate, 'hours');
                         console.log('TimeChoosen', hourDifference);
                          if (hourDifference > 8) {
-                            formattedChoosenDate.add(1, 'day');
-                            _this.attr('date-time', formattedChoosenDate);
+                            choosenDate.add(1, 'day');
+                            _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));
                          } else {
                             _this.attr('date-time', formattedChoosenDate);
                          }
