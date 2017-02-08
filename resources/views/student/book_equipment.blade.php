@@ -1376,14 +1376,23 @@
                         choosenDate.add(parseInt(hm[0]), 'hours');
                         choosenDate.add(parseInt(hm[1]), 'minutes');
 
+                     var formattedChoosenDate = moment(choosenDate).format('YYYY-MM-DD HH:mm');
+                     // choosenDate = moment(formattedChoosenDate);
+
                     // This space assign date and time based on the time of the day
                     if (_this.attr('id') < 90) {
-                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        _this.attr('date-time', formattedChoosenDate);
                     } else {
+                        dateNow = moment(dateNow);
+                        choosenDate = moment(formattedChoosenDate);
+
                         var dayDifference = dateNow.diff(choosenDate, 'hours');
+
+                        console.log('Day diff',dayDifference);
+
                          if (dayDifference > 0) {
                             choosenDate.add(1, 'day');
-                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                            _this.attr('date-time', formattedChoosenDate);
                          }
                     }
 
