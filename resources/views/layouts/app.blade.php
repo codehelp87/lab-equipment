@@ -47,5 +47,6 @@
         <script src="{{ asset('js/lab_usage.js') }}"></script>
         <script src="{{ asset('js/notification.js') }}"></script>
         @include('student.cancel_booking_modal')
+        @include('student.contact_the_admin_modal')
     </body>
 </html>

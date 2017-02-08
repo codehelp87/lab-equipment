@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-large btn-default request-training">Send</button>
-                                <a class="btn btn-link" href="<?php echo e(url('/login')); ?>">
+                                <a class="btn btn-link open-modal" href="#">
                                     Have a question?
                                 </a>
                             </div>

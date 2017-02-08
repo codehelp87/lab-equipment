@@ -47,5 +47,6 @@
         <script src="<?php echo e(asset('js/lab_usage.js')); ?>"></script>
         <script src="<?php echo e(asset('js/notification.js')); ?>"></script>
         <?php echo $__env->make('student.cancel_booking_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('student.contact_the_admin_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </body>
 </html>

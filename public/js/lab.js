@@ -21,17 +21,32 @@
       selectLab.on('change', function() {
         let _this = $(this);
         let labId = _this.val();
+
         const route = '/labs/'+labId+'/equipments';
+
+        let modalDialog = $(document)
+        .find('div.contact-admin');
+
+        if (_this.val() != '')
         lab.makeAjaxCall(route, '', 'GET')
         .done(function(data) {
-          if (data.length > 0 && data[0].availability != undefined) {
+          let labEquipments = data[1];
+
+          if (labEquipments.length > 0 && labEquipments[0].availability != undefined) {
             let options = '';
-            for (let equipment in data) {
-              options += '<option value='+data[equipment].id+'>'+data[equipment].model_no+'</option>'
+            // Get the lab professor details and add it to the modal form
+            let modal = modalDialog.find('div.modal-body');//.html(lab.adminInfo(data[0]));
+            let content = lab.adminInfo(data[0]);
+            modal.html(content);
+
+            for (let equipment in labEquipments) {
+              options += '<option value='+labEquipments[equipment].id+'>'+labEquipments[equipment].model_no+'</option>'
             }
             equipments.html(options);
+
             return toastr.success('Lab Equipments has been added');
           }
+
           return toastr.error('Lab Equipments not available');
         })
         .fail(function(error) {
@@ -39,6 +54,16 @@
         })
         return false;
       });
+    }
+
+    adminInfo(profDetails) {
+      let content = '<span>Please contact the admin via email</span> <br> ' +
+        '<address> '+
+          'Name: ' + decodeURI(profDetails.name)+' <br> '+
+          'Email: ' + decodeURI(profDetails.email) +
+        '</address> ';
+
+        return content;
     }
 
 
