@@ -259,8 +259,9 @@ class EquipmentController extends Controller
             if (count($trainings) > 0) {
                 foreach($trainings as $index => $training) {
                     $student = User::findOneByIdWithRole($training->user_id);
-                if ($student->count() > 0) {
-                    $students[$index] = $student;
+                    if ($student->count() > 0) {
+                        $students[$index] = $student;
+                    }
                 }
             }
             return response()->json([$labProfessor, $students], 200);
