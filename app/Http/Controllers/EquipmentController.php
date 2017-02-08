@@ -252,7 +252,7 @@ class EquipmentController extends Controller
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
-                ->where('status', 1)
+                //->where('status', 1)
                 ->distinct()
                 ->get();
 
