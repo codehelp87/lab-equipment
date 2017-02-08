@@ -2,10 +2,10 @@
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 		<div class="modal-body">
-			<span>Please contact the admin via email</span> <br>
+			<span class="text-center"><strong>Please contact the admin via email</strong></span> <br><br>
 			<address>
-			    Name: Diwesh Saxena <br>
-				Email: diweshsaxena@gmail.com
+			    <strong>Name:</strong> Diwesh Saxena <br>
+				<strong>Email:</strong> diweshsaxena@gmail.com
 			</address>
 		</div>
 			<div class="modal-footer">

@@ -5,10 +5,21 @@
       lab.createLab();
       lab.assignUserToLab();
       lab.getLabEquipment();
+      lab.contactAdmin();
     });
   }
 
   class Lab {
+
+    contactAdmin() {
+      let link = $(document).find('a.open-modal');
+      link.on('click', function() {
+        let modalDialog = $(document)
+        .find('div.contact-admin');
+        modalDialog.modal('show')
+        return false;
+      });
+    }
     getLabEquipment() {
       let lab = new Lab;
       let selectLab = $(document)
@@ -57,10 +68,10 @@
     }
 
     adminInfo(profDetails) {
-      let content = '<span>Please contact the admin via email</span> <br> ' +
+      let content = '<span class="text-center"><strong>Please contact the admin via email</strong></span> <br><br>' +
         '<address> '+
-          'Name: ' + decodeURI(profDetails.name)+' <br> '+
-          'Email: ' + decodeURI(profDetails.email) +
+          '<strong>Name:</strong> ' + decodeURI(profDetails.name)+' <br> '+
+          '<strong>Email:</strong> ' + decodeURI(profDetails.email) +
         '</address> ';
 
         return content;
