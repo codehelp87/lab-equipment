@@ -125,7 +125,7 @@ class User extends Authenticatable implements AuthContract
     {
         return $query
             ->where('id', $userId)
-            ->where('role_id', 1)
+            ->where('role_id', 2)
             ->first();
     }
 
