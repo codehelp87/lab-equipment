@@ -1384,14 +1384,13 @@
                         _this.attr('date-time', formattedChoosenDate);
                     } else {
                         dateNow = moment(dateNow);
-                        choosenDate = moment(formattedChoosenDate);
-
-                        var dayDifference = dateNow.diff(choosenDate, 'hours');
-
-                        console.log('Day diff',dayDifference);
-
+                        // timeNow = moment(timeNow);
+                        var dayDifference = dateNow.diff(formattedChoosenDate, 'days');
+                        console.log('TimeChoosen', dayDifference);
                          if (dayDifference > 0) {
                             choosenDate.add(1, 'day');
+                            _this.attr('date-time', formattedChoosenDate);
+                         } else {
                             _this.attr('date-time', formattedChoosenDate);
                          }
                     }
