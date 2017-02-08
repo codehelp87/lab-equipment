@@ -252,8 +252,9 @@ class EquipmentController extends Controller
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
-            ->distinct()
-            ->get();
+                ->where('status', 1);
+                ->distinct()
+                ->get();
 
             if (count($trainings) > 0) {
                 foreach($trainings as $index => $training) {

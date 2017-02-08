@@ -3,8 +3,8 @@
     <tbody>
         <?php $__currentLoopData = $bookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 
-            $current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
-            //$current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
+            //$current = Carbon\Carbon::now(new DateTimeZone('Africa/Lagos'));
+            $current = Carbon\Carbon::now(new DateTimeZone('Asia/Seoul'));
             $selectedTimeSlot = $booking->time_slot;
 
             $lastTimeSelected = $selectedTimeSlot[count($selectedTimeSlot) - 1];
