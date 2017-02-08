@@ -121,6 +121,14 @@ class User extends Authenticatable implements AuthContract
             ->first();
     }
 
+    public function scopeFindOneByIdWithStatus($query, $userId)
+    {
+        return $query
+            ->where('id', $userId)
+            ->where('role_id', 1)
+            ->first();
+    }
+
     public function scopeFindAllStudents($query)
     {
         return $query

@@ -248,7 +248,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::FindOneById($id);
 
         if (count($equipment) > 0) {
-            $user =  User::FindOneById($equipment->user_id);
+            $user =  User::FindOneByIdWithStatus($equipment->user_id);
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
