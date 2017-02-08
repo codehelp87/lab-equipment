@@ -1344,50 +1344,48 @@
             });
         </script>
         <script>
-                $(function() {
-                    let currentTime = $(document)
-                      .find('span#time')
-                      .text();
-                               
-                    var index = 1;
-                    var checkbox = $('div.checkbox input[type="checkbox"]');
+            $(function() {
+                let currentTime = $(document)
+                  .find('span#time')
+                  .text();
+                           
+                var index = 1;
+                var checkbox = $('div.checkbox input[type="checkbox"]');
 
-                    checkbox.each(function(index, el) {
-                        var _this = $(this);
-                        _this.attr('id', index);
-
-                        // This spaces assign dates based on the user selected date
-                        var timeSlot =  $(this).val();
-                        let choosenDate = moment(currentTime);
-                        let hourAndMinute = timeSlot.split('-');
-                        let hm = hourAndMinute[0].split(':');
-                            choosenDate.add(parseInt(hm[0]), 'hours');
-                            choosenDate.add(parseInt(hm[1]), 'minutes');
-
-                        // This space assign date and time based on the time of the day
-                        if (_this.attr('id') < 90) {
-                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
-                        } else {
-                            choosenDate.add(1, 'day');
-                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
-                        }
-
-                        <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
-                        <?php $__currentLoopData = $equipmentBookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                    <?php if(count($booking->time_slot) > 0): ?>
-                    <?php $__currentLoopData = $booking->time_slot_id; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slot): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                    var slot = "<?php echo e($slot); ?>"
-                    if (slot === _this.attr('id')) {
-                        _this.attr({'checked': true, 'disabled': true});
-                        _this.parent().css('text-decoration', 'line-through')
+                checkbox.each(function(index, el) {
+                    var _this = $(this);
+                    _this.attr('id', index);
+                    // This spaces assign dates based on the user selected date
+                    var timeSlot =  $(this).val();
+                    let choosenDate = moment(currentTime);
+                    let hourAndMinute = timeSlot.split('-');
+                    let hm = hourAndMinute[0].split(':');
+                        choosenDate.add(parseInt(hm[0]), 'hours');
+                        choosenDate.add(parseInt(hm[1]), 'minutes');
+                    // This space assign date and time based on the time of the day
+                    if (_this.attr('id') < 90) {
+                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                    } else {
+                        choosenDate.add(1, 'day');
+                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
                     }
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                    <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+
+                    <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
+                        <?php $__currentLoopData = $equipmentBookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                            <?php if(count($booking->time_slot) > 0): ?>
+                                <?php $__currentLoopData = $booking->time_slot_id; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slot): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                var slot = "<?php echo e($slot); ?>"
+                                if (slot === _this.attr('id')) {
+                                    _this.attr({'checked': true, 'disabled': true});
+                                    _this.parent().css('text-decoration', 'line-through')
+                                }
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                     <?php endif; ?>
                     index ++;
-                    });
                 });
+            });
             </script>
             <style type="text/css">
                 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
