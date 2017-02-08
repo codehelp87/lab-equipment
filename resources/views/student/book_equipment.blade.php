@@ -1385,9 +1385,9 @@
                     } else {
                         dateNow = moment(dateNow);
                         // timeNow = moment(timeNow);
-                        var dayDifference = dateNow.diff(formattedChoosenDate, 'days');
-                        console.log('TimeChoosen', dayDifference);
-                         if (dayDifference > 0) {
+                        var hourDifference = dateNow.diff(formattedChoosenDate, 'hours');
+                        console.log('TimeChoosen', hourDifference);
+                         if (hourDifference > 8) {
                             choosenDate.add(1, 'day');
                             _this.attr('date-time', formattedChoosenDate);
                          } else {
