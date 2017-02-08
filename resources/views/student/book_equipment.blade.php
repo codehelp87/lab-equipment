@@ -1349,6 +1349,18 @@
                 var currentTime = $(document)
                   .find('span#time')
                   .text();
+
+                let date = new Date();
+                let myDate = new Date(
+                  date.getFullYear(), 
+                  date.getMonth(), 
+                  date.getDate(), 
+                  date.getHours(), 
+                  date.getMinutes(),
+                  date.getSeconds()
+                );
+
+                let dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
                            
                 var index = 1;
                 var checkbox = $('div.checkbox input[type="checkbox"]');
@@ -1363,12 +1375,16 @@
                     var hm = hourAndMinute[0].split(':');
                         choosenDate.add(parseInt(hm[0]), 'hours');
                         choosenDate.add(parseInt(hm[1]), 'minutes');
+
                     // This space assign date and time based on the time of the day
                     if (_this.attr('id') < 90) {
                         _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
                     } else {
-                        choosenDate.add(1, 'day');
-                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        var dayDifference = dateNow.diff(choosenDate, 'hours');
+                         if (dayDifference > 0) {
+                            choosenDate.add(1, 'day');
+                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                         }
                     }
 
                     @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
