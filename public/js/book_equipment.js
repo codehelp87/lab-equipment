@@ -132,7 +132,7 @@
           }
         }
         
-        let modalContent = equipment.prepareModal(time, selectedTimeSlot);
+        let modalContent = equipment.prepareModal(selectedDate, selectedTimeSlot);
         modal.find('div.modal-body').html(modalContent);
         modal.modal('show');
 
@@ -190,7 +190,7 @@
 
     prepareModal(bookingDate, selectedTimeSlot) {
       let stuff = '<h5 class="text-center">You will book</h5>';
-      let dateSelected = '<h5 class="text-center">'+bookingDate+'</h5>';
+      let dateSelected = '<h5 class="text-center">'+moment(bookingDate[bookingDate.length - 1]).format('MM.DD.YYYY ddd')+'</h5>';
       let info = '<h5 class="text-center">If it\'s correct press ok</h5>';
       let slots = '<ul style="padding:0; list-style: none;">';
         for(let i = 0; i < selectedTimeSlot.length; i++) {
