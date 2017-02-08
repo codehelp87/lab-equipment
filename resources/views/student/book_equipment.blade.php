@@ -1389,7 +1389,7 @@
                         console.log('TimeChoosen', hourDifference);
                          if (hourDifference > 8) {
                             choosenDate.add(1, 'day');
-                            _this.attr('date-time', formattedChoosenDate);
+                            _this.attr('date-time', choosenDate);
                          } else {
                             _this.attr('date-time', formattedChoosenDate);
                          }
