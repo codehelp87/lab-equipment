@@ -80,7 +80,7 @@ class BookingController extends Controller
 			foreach($dateSelected as $index => $slot) {
 				// Check the selected date as either night booking
 				// or daytime booking
-	            if ($timeSlotId >= self::MIN_NIGHT_TO_DAY && $timeSlotId <= self::MAX_NIGHT_TO_DAY) {
+	            if ($timeSlotId[$index] >= self::MIN_NIGHT_TO_DAY && $timeSlotId[$index] <= self::MAX_NIGHT_TO_DAY) {
 	            	$timezoneFlag = 'nighttime';
 	            } else {
 	            	$timezoneFlag = 'daytime';
