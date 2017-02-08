@@ -12,7 +12,7 @@
                         <small>Your Account has been de-activated<br> because it's been idle for 90 days.</small>
                     </p>
                     <h5 class="text-center">Please contact the adminstrator to re-activate your account. </h5>
-                    <h5 class="text-center"><a href="#">Contact the Administrator</a></h5>
+                    <h5 class="text-center"><a href="#" class="open-modal">Contact the Administrator</a></h5>
                 </div>
             </div>
         </div>

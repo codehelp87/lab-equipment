@@ -167,7 +167,7 @@ class UserController extends Controller
                 'equipmentName' => $equipment,
                 'studentName' => $request->name,
             ];
-            $email = 'temitope.olotin@andela.com';
+            $email = 'diweshsaxena@gmail.com'; // Admin Email
 
             $this->sendTrainingRequestToLabProfessor($data, $email);
         }

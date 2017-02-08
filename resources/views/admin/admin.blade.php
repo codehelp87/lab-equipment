@@ -219,10 +219,10 @@
                         </tr>
                         @else
                         <?php
-                        $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                        $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                        $now = \Carbon\Carbon::now();
-                        $difference = $created->diff($now)->days;
+                            $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                            $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                            $now = \Carbon\Carbon::now();
+                            $difference = $created->diff($now)->days;
                         ?>
                         <tr id="edit-eqipment{{ $equipment->id }}">
                             <td>{{ $equipment->model_no }}</td>
@@ -247,7 +247,7 @@
                             </td>
                             <td><a href="/equipments/{{ $equipment->id }}/booking" class="btn btn-default pull-right inActiveBtn" disabled="disabled">Book Now</a><br>
                             <p class="pull-right"><br>
-                                <a href="#" class="pull-right">Contact the administrator</a>
+                                <a href="#" class="pull-right open-modal">Contact the administrator</a>
                             </p>
                             
                         </td>
