@@ -1388,8 +1388,8 @@
                         var hourDifference = dateNow.diff(formattedChoosenDate, 'hours');
                         console.log('TimeChoosen', hourDifference);
                          if (hourDifference > 8) {
-                            choosenDate.add(1, 'day');
-                            _this.attr('date-time', choosenDate);
+                            formattedChoosenDate.add(1, 'day');
+                            _this.attr('date-time', formattedChoosenDate);
                          } else {
                             _this.attr('date-time', formattedChoosenDate);
                          }
