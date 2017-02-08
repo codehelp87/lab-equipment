@@ -160,6 +160,16 @@ class UserController extends Controller
                 'booking_date' => $request->session,
                 'session' => $request->session
             ]);
+
+            // send email
+            $equipment = Equipment::find($request->equipment)->first()->title;
+            $data = [
+                'equipmentName' => $equipment,
+                'studentName' => $request->name,
+            ];
+            $email = 'temitope.olotin@andela.com';
+
+            $this->sendTrainingRequestToLabProfessor($data, $email);
         }
 
         return redirect()->route('training_request_confirmation');
@@ -172,6 +182,14 @@ class UserController extends Controller
             $message->to($email)->subject('Training Request');
         });
     }
+
+    protected function sendTrainingRequestToLabProfessor($data, $email)
+    {
+        Mail::send('student.lab_professor_email', $data, function ($message) use ($email) {
+            $message->from('lab-equipment@domain.com', 'Student Training Request');
+            $message->to($email)->subject('Student Training Request');
+        });
+    }   
 
     protected function sendTrainingCompletionEmail($data, $email)
     {

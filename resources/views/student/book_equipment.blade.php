@@ -1345,50 +1345,48 @@
             });
         </script>
         <script>
-                $(function() {
-                    let currentTime = $(document)
-                      .find('span#time')
-                      .text();
-                               
-                    var index = 1;
-                    var checkbox = $('div.checkbox input[type="checkbox"]');
+            $(function() {
+                let currentTime = $(document)
+                  .find('span#time')
+                  .text();
+                           
+                var index = 1;
+                var checkbox = $('div.checkbox input[type="checkbox"]');
 
-                    checkbox.each(function(index, el) {
-                        var _this = $(this);
-                        _this.attr('id', index);
-
-                        // This spaces assign dates based on the user selected date
-                        var timeSlot =  $(this).val();
-                        let choosenDate = moment(currentTime);
-                        let hourAndMinute = timeSlot.split('-');
-                        let hm = hourAndMinute[0].split(':');
-                            choosenDate.add(parseInt(hm[0]), 'hours');
-                            choosenDate.add(parseInt(hm[1]), 'minutes');
-
-                        // This space assign date and time based on the time of the day
-                        if (_this.attr('id') < 90) {
-                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
-                        } else {
-                            choosenDate.add(1, 'day');
-                            _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
-                        }
-
-                        @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
-                        @foreach($equipmentBookings as $booking)
-                    @if (count($booking->time_slot) > 0)
-                    @foreach($booking->time_slot_id as $slot)
-                    var slot = "{{ $slot }}"
-                    if (slot === _this.attr('id')) {
-                        _this.attr({'checked': true, 'disabled': true});
-                        _this.parent().css('text-decoration', 'line-through')
+                checkbox.each(function(index, el) {
+                    var _this = $(this);
+                    _this.attr('id', index);
+                    // This spaces assign dates based on the user selected date
+                    var timeSlot =  $(this).val();
+                    let choosenDate = moment(currentTime);
+                    let hourAndMinute = timeSlot.split('-');
+                    let hm = hourAndMinute[0].split(':');
+                        choosenDate.add(parseInt(hm[0]), 'hours');
+                        choosenDate.add(parseInt(hm[1]), 'minutes');
+                    // This space assign date and time based on the time of the day
+                    if (_this.attr('id') < 90) {
+                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                    } else {
+                        choosenDate.add(1, 'day');
+                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
                     }
-                    @endforeach
-                    @endif
-                    @endforeach
+
+                    @if(count($equipmentBookings) > 0 && !is_null($equipmentBookings))
+                        @foreach($equipmentBookings as $booking)
+                            @if (count($booking->time_slot) > 0)
+                                @foreach($booking->time_slot_id as $slot)
+                                var slot = "{{ $slot }}"
+                                if (slot === _this.attr('id')) {
+                                    _this.attr({'checked': true, 'disabled': true});
+                                    _this.parent().css('text-decoration', 'line-through')
+                                }
+                                @endforeach
+                            @endif
+                        @endforeach
                     @endif
                     index ++;
-                    });
                 });
+            });
             </script>
             <style type="text/css">
                 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {

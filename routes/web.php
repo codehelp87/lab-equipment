@@ -34,6 +34,10 @@ Route::get('request/training/confirmation', function() {
     return view('student.training_request_confirmation');
 })->name('training_request_confirmation');
 
+Route::get('admin/request/confirmation', function() {
+    return view('student.register_confirmation');
+})->name('admin_request_confirmation');
+
 Route::get('users/{hash}/activate', 'UserController@activateUserAccount');
 
 Route::group(['middleware' => ['auth']], function () {
