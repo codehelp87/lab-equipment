@@ -1301,7 +1301,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now">Book Now</button>
+                        <button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now" style="margin-bottom: 20px;">Book Now</button>
                     </div>
                 </div>
             {{-- </div> --}}
