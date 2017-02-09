@@ -32,6 +32,7 @@ class EquipmentController extends Controller
     {
        $users = [];
        $response = [];
+       $bookingMode = is_null($request->get('mode'))? 'daytime': 'nighttime';
 
        $labUser = $request->prof;
        $session = $request->session;
@@ -59,7 +60,7 @@ class EquipmentController extends Controller
                 $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', '>=', 1)
                     ->where('equipment_id', $id)
-                    ->where('timezone_flag','!=', NULL)
+                    ->where('timezone_flag', '=', trim($bookingMode))
                     ->where('cancelled_time_slot', '!=', NULL)
                     ->whereBetween('booking_date', array($dt, $monthEnd))
                     ->get();

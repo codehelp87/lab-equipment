@@ -7,10 +7,42 @@
       lab.getLabUsageBySessionAndEquipment();
       lab.getSessionLabUser();
       lab.getLabUsersByNight();
+      lab.getSessionLabUserByNight();
     });
   }
 
   class LabUsage {
+    getSessionLabUserByNight() {
+      let lab = new LabUsage;
+
+       $('body').on('click', 'a.view-equipment-users-with-session-bynight', function() {
+        let _this = $(this);
+        let equipmentId = _this.attr('data-id');
+        let labProf = _this.attr('id');
+        let session = $(document).find('select#session').val();
+
+        let modal = $(document).find('div#total_lab_usage');
+        let modalTitle = modal.find('h4.modal-title');
+        let modalBody = modal.find('div.modal-body');
+
+        let route = '/equipments/'+equipmentId+'/labusers/sessions?mode=night';
+
+        lab.makeAjaxCall(route, {session: session, prof: labProf}, 'GET')
+          .done(function(data) {
+             console.log(data)
+            modalTitle.html(data.lab_prof);
+            let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
+            modalBody.html(content);
+            modal.modal('show');
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+
+        return false;
+       });
+    }
+
     getSessionLabUser() {
       let lab = new LabUsage;
 
@@ -212,7 +244,7 @@
             '<td><a href="#" class="view-equipment-users-with-session" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_day+'</td>' +
             '<td>'+data.total_charge_by_day+'</td>' +
-            '<td><a href="#" class="view-equipment-users-with-session" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a</td>' +
+            '<td><a href="#" class="view-equipment-users-with-session-bynight" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a</td>' +
             '<td>'+data.total_hour_by_night+'</td>' +
             '<td>'+data.total_charge_by_night+'</td>' +
         '</tr>' +
