@@ -195,6 +195,7 @@
           }
           tableRow += '</td>' + 
           '<td><a href="#"  class="student-edit" id='+data.id+'>Edit</a></td>';
+          tableRow += '<td><a href="#"  class="student-delete" id='+data.id+' rel="/users/'+data.id+'/delete">Delete</a></td>';
          tableRow += '</tr>';
          counter ++;
       //}
