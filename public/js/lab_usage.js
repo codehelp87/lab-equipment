@@ -6,6 +6,7 @@
       lab.getLabUsers();
       lab.getLabUsageBySessionAndEquipment();
       lab.getSessionLabUser();
+      lab.getLabUsersByNight();
     });
   }
 
@@ -91,12 +92,46 @@
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
 
-        if (labProf == undefined && equipmentId == undefined) {
+        if (labProf == undefined || equipmentId == undefined) {
           modalBody.html('No student bookings available!');
           return modal.modal('show');
         }
 
         let route = '/equipments/'+equipmentId+'/labusers/'+labProf;
+
+        lab.makeAjaxCall(route, '', 'GET')
+          .done(function(data) {
+            modalTitle.html(data[0].lab_prof);
+            let content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
+            modalBody.html(content);
+            modal.modal('show');
+          })
+          .fail(function(error) {
+            console.log(error);
+          });
+
+        return false;
+       });
+    }
+
+    getLabUsersByNight() {
+       let lab = new LabUsage;
+
+       $('body').on('click', 'a.view-equipment-users-by-night', function() {
+        let _this = $(this);
+        let equipmentId = _this.attr('data-id');
+        let labProf = _this.attr('id');
+
+        let modal = $(document).find('div#total_lab_usage');
+        let modalTitle = modal.find('h4.modal-title');
+        let modalBody = modal.find('div.modal-body');
+
+        if (labProf == undefined || equipmentId == undefined) {
+          modalBody.html('No student bookings available!');
+          return modal.modal('show');
+        }
+
+        let route = '/equipments/'+equipmentId+'/labusers/'+labProf+'?mode=night';
 
         lab.makeAjaxCall(route, '', 'GET')
           .done(function(data) {
@@ -161,7 +196,7 @@
             '<td><a href="#" class="view-equipment-users" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_day+'</td>' +
             '<td>'+data.total_charge_by_day+'</td>' +
-            '<td><a href="#" class="view-equipment-users" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
+            '<td><a href="#" class="view-equipment-users-by-night" data-id='+data.equipment_id+' id='+data.lab_prof_id+'>'+decodeURI(data.lab_prof)+'</a></td>' +
             '<td>'+data.total_hour_by_night+'</td>' +
             '<td>'+data.total_charge_by_night+'</td>' +
         '</tr>' +

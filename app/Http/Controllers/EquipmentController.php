@@ -122,7 +122,6 @@ class EquipmentController extends Controller
                 ->where('status', '>=', 1)
                 ->where('timezone_flag', 'nighttime')
                 ->where('cancelled_time_slot', '!=', NULL)
-                //->whereBetween('booking_date', array($carbon->toDateString(), $carbon->addDays($days)))
                 ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
 
@@ -149,6 +148,8 @@ class EquipmentController extends Controller
         $users = [];
         $response = [];
 
+        $bookingMode = is_null($request->get('mode'))? 'daytime': 'nighttime';
+
         $equipmentBookings = Booking::findOneByEquipmentUser($id);
 
         if ($equipmentBookings->count() > 0) {
@@ -168,7 +169,7 @@ class EquipmentController extends Controller
                 $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', '>=', 1)
                     ->where('equipment_id', $id)
-                    ->where('timezone_flag','!=', NULL)
+                    ->where('timezone_flag','=', trim($bookingMode))
                     ->get();
 
                 $sumSlot = 0;
@@ -192,6 +193,7 @@ class EquipmentController extends Controller
         }
     }
 
+
     public function getEquipmentLabUsage(Request $request, $id)
     {
         $equipment = Equipment::findOneById($id);
@@ -200,7 +202,6 @@ class EquipmentController extends Controller
         $totalHourByNight = 0;
 
         if ($equipment->count() > 0) {
-            //$equipmentPricePerUnitTime = $equipment->price_per_unit_time;
             $totalCharge = (int) ($equipment->price_per_unit_time);
             //get daytime bookings
             $dayTimeBookings = Booking::orderBy('id', 'desc')
