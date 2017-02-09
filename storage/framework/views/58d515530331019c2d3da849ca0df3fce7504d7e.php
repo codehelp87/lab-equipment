@@ -41,7 +41,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-4">
-                                            
+                                            <button type="submit" class="btn btn-default">
+                                            Login
+                                            </button>
                                             <a class="btn btn-link" href="<?php echo e(route('request_training')); ?>">
                                                 Need to signup?
                                             </a>
@@ -49,14 +51,6 @@
                                     </div>
                             </div>
                         
-                        <div class="col-md-3" style="margin-left: -15px;">
-                            <button type="submit" class="btn  btn-large btn-default" style="    margin-top: 15px;
-    float: left;
-    padding: 15px;
-    width: 120px;">
-                            Login
-                            </button>
-                        </div>
                     </div>
                     </form>
                 </div>
