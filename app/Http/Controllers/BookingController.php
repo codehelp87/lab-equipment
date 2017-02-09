@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 class BookingController extends Controller
 {
 	const MAX_NIGHT_TO_DAY = 143;
-	const MIN_NIGHT_TO_DAY = 90;
+	const MIN_NIGHT_TO_DAY = 72;
 
 	use \LabEquipment\Http\Controllers\CurrentDateTrait;
 
