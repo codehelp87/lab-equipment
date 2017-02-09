@@ -27,9 +27,16 @@
                 <div class="clearfix"> </div>
             </div>
             <?php echo $__env->yieldContent('content'); ?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <span class="text-center">Copyright UNIST, Department of Chemistry &copy <?php echo date('Y'); ?> all rights reserved</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Scripts -->
-        <script src="/js/jquery.min.js"></script> 
+        <script src="/js/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
