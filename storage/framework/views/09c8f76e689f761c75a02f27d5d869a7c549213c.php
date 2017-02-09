@@ -1348,6 +1348,18 @@
                 var currentTime = $(document)
                   .find('span#time')
                   .text();
+
+                let date = new Date();
+                let myDate = new Date(
+                  date.getFullYear(), 
+                  date.getMonth(), 
+                  date.getDate(), 
+                  date.getHours(), 
+                  date.getMinutes(),
+                  date.getSeconds()
+                );
+
+                let dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
                            
                 var index = 1;
                 var checkbox = $('div.checkbox input[type="checkbox"]');
@@ -1362,12 +1374,24 @@
                     var hm = hourAndMinute[0].split(':');
                         choosenDate.add(parseInt(hm[0]), 'hours');
                         choosenDate.add(parseInt(hm[1]), 'minutes');
+
+                     var formattedChoosenDate = moment(choosenDate).format('YYYY-MM-DD HH:mm');
+                      choosenDate = moment(formattedChoosenDate);
+
                     // This space assign date and time based on the time of the day
                     if (_this.attr('id') < 90) {
-                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        _this.attr('date-time', formattedChoosenDate);
                     } else {
-                        choosenDate.add(1, 'day');
-                        _this.attr('date-time', moment(choosenDate).format('YYYY-MM-DD HH:mm'));
+                        dateNow = moment(dateNow);
+                        // timeNow = moment(timeNow);
+                        var hourDifference = dateNow.diff(choosenDate, 'hours');
+                        console.log('TimeChoosen', hourDifference);
+                         if (hourDifference > 8) {
+                            choosenDate.add(1, 'day');
+                            _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));
+                         } else {
+                            _this.attr('date-time', formattedChoosenDate);
+                         }
                     }
 
                     <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
