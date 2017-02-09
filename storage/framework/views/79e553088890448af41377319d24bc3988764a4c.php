@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <span class="text-center" style="padding: 20px;">Copyright UNIST, Department of Chemistry &copy <?php echo date('Y'); ?> all rights reserved</span>
+                        <div class="text-center" style="padding: 20px;">Copyright UNIST, Department of Chemistry &copy <?php echo date('Y'); ?> all rights reserved</div>
                     </div>
                 </div>
             </div>
