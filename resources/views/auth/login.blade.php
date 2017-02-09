@@ -6,49 +6,62 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><h4>Chemistry Dept. Equipment User System</h4></div>
                 <div class="panel-body">
-                    @if (session('message'))
-                    <div class="alert alert-danger text-center">
-                        {{ session('message') }}
-                    </div>
-                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">ID</label>
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                                @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                        <div class="row">
+                            <div class="col-md-9">
+                                @if (session('message'))
+                                <div class="alert alert-danger text-center">
+                                    {{ session('message') }}
+                                </div>
                                 @endif
+                                {{-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}"> --}}
+                                    {{ csrf_field() }}
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <label for="email" class="col-md-4 control-label">ID</label>
+                                        <div class="col-md-6">
+                                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                            @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                        <label for="password" class="col-md-4 control-label">PWD</label>
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control" name="password" required>
+                                            @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-8 col-md-offset-4">
+                                            {{-- <button type="submit" class="btn btn-default">
+                                            Login
+                                            </button> --}}
+                                            <a class="btn btn-link" href="{{ route('request_training') }}">
+                                                Need to signup?
+                                            </a>
+                                        </div>
+                                    </div>
                             </div>
+                        {{-- </div> --}}
+                        <div class="col-md-3" style="margin-left: -15px;">
+                            <button type="submit" class="btn  btn-large btn-default" style="    margin-top: 15px;
+    float: left;
+    padding: 15px;
+    width: 120px;">
+                            Login
+                            </button>
                         </div>
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">PWD</label>
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-default">
-                                Login
-                                </button>
-                                <a class="btn btn-link" href="{{ route('request_training') }}">
-                                    Need to signup?
-                                </a>
-                            </div>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
