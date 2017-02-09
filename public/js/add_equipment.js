@@ -133,7 +133,7 @@
 
   addNewEquipmentToHtmlTable(data) {
     let status = data.availability == 1? 'Available': 'Unavailable'
-    let tableRow = '<tr>';
+    let tableRow = '<tr id="edit-eqipment'+data.id+'">';
       tableRow += '<td>'+data.model_no+'</td>';
       tableRow += '<td><img src='+data.equipment_photo+' style="width: 50px; height: 50px;"></td>';
       tableRow += '<td>';
@@ -141,7 +141,7 @@
         '<strong>Unit Time</strong><br>' +
         '<strong>Max Time(per day)</strong><br>' + 
         '</td>';
-      tableRow += '<td>'+status+'<br>'+data.price_per_unit_time+'<br>'+data.max_reservation_time+'<br></td>';
+      tableRow += '<td>'+status+'<br>'+data.time_unit+' mins <br>'+data.max_reservation_time+' hours<br></td>';
       tableRow += '<td>' +
             '<strong>Open</strong><br>' +
             '<strong>Cancel</strong><br>' +
@@ -151,6 +151,7 @@
             '<span>1 hour before</span><br>' +
             '</td>' +
             '<td><a href="#" class="edit-eqipment" id='+data.id+' title='+data.title+'>Edit</a></td>' +
+            '<td><a href="#"  class="delete-equipment" id='+data.id+' rel="/equipments/'+data.id+'/delete">Delete</a></td>' +
       '</tr>';
     return tableRow;
   }

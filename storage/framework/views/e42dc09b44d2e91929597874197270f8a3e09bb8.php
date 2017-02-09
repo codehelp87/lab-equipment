@@ -13,8 +13,8 @@
                 </td>
                 <td>
                     <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
-                    <?php echo e($equipment->price_per_unit_time); ?><br>
-                    <?php echo e($equipment->max_reservation_time); ?><br>
+                    <?php echo e($equipment->time_unit); ?> mins<br>
+                    <?php echo e($equipment->max_reservation_time); ?> hours<br>
                 </td>
                 <td>
                     <Strong>Open</Strong><br>
@@ -28,7 +28,7 @@
                 <td><a href="#"  class="delete-equipment" id="<?php echo e($equipment->id); ?>" rel= "<?php echo e(route('delete_equipment', ['id' => $equipment->id ])); ?>">Delete</a></td>
             </tr>
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     <div class="display<?php echo e($equipment->id); ?>" id="edit-eqipment<?php echo e($equipment->id); ?>" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
                 </td>
             </tr>

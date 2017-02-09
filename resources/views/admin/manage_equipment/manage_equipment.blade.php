@@ -13,8 +13,8 @@
                 </td>
                 <td>
                     {{ $equipment->availability == 1? 'Available': 'Unavailable'}}<br>
-                    {{ $equipment->price_per_unit_time }}<br>
-                    {{ $equipment->max_reservation_time }}<br>
+                    {{ $equipment->time_unit }} mins<br>
+                    {{ $equipment->max_reservation_time }} hours<br>
                 </td>
                 <td>
                     <Strong>Open</Strong><br>
@@ -28,7 +28,7 @@
                 <td><a href="#"  class="delete-equipment" id="{{ $equipment->id }}" rel= "{{ route('delete_equipment', ['id' => $equipment->id ]) }}">Delete</a></td>
             </tr>
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     <div class="display{{ $equipment->id }}" id="edit-eqipment{{ $equipment->id }}" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
                 </td>
             </tr>
