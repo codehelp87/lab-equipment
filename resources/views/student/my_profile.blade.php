@@ -6,7 +6,8 @@
             @include('admin.manage_user_account.logout')
             <hr>
             <h5>My Page <a href="/home" class="pull-right"> << Home </a></h5>
-            <table class="table table-hover">
+             <div class="table-responsive">
+            <table class="table table-hover table-responsive">
                 <tbody>
                     <tr>
                         <td>
@@ -41,8 +42,10 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p>
-                    <table class="table table-hover">
+                 <div class="table-responsive">
+                    <table class="table table-hover table-responsive">
                         <tbody>
                             <tr>
                                 <td>
@@ -59,6 +62,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </p>
                 <hr>
                 <p>
@@ -68,7 +72,8 @@
                 <p>
                     <h5><strong>Booking History</strong></h5><br>
                     @if($bookingHistories->count() > 0)
-                    <table class="table table-hover">
+                     <div class="table-responsive">
+                    <table class="table table-hover table-responsive">
                         <tbody>
                             @foreach($bookingHistories as $booking)
                             <tr>
@@ -88,6 +93,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                     @else
                     <h5>No booking history found</h5>
                     @endif

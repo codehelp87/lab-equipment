@@ -5,16 +5,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><h4>Chemistry Dept. Equipment User System</h4></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/login')); ?>">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <?php if(session('message')): ?>
                                 <div class="alert alert-danger text-center">
                                     <?php echo e(session('message')); ?>
 
                                 </div>
                                 <?php endif; ?>
-                                
+                                <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/login')); ?>">
                                     <?php echo e(csrf_field()); ?>
 
                                     <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
@@ -49,10 +48,10 @@
                                             </a>
                                         </div>
                                     </div>
+                                </form>
                             </div>
-                        
+                        </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

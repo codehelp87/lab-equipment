@@ -5,7 +5,8 @@
             <?php echo $__env->make('admin.manage_user_account.logout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <hr>
             <h5>My Page <a href="/home" class="pull-right"> << Home </a></h5>
-            <table class="table table-hover">
+             <div class="table-responsive">
+            <table class="table table-hover table-responsive">
                 <tbody>
                     <tr>
                         <td>
@@ -41,8 +42,10 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p>
-                    <table class="table table-hover">
+                 <div class="table-responsive">
+                    <table class="table table-hover table-responsive">
                         <tbody>
                             <tr>
                                 <td>
@@ -59,6 +62,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </p>
                 <hr>
                 <p>
@@ -68,7 +72,8 @@
                 <p>
                     <h5><strong>Booking History</strong></h5><br>
                     <?php if($bookingHistories->count() > 0): ?>
-                    <table class="table table-hover">
+                     <div class="table-responsive">
+                    <table class="table table-hover table-responsive">
                         <tbody>
                             <?php $__currentLoopData = $bookingHistories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                             <tr>
@@ -88,6 +93,7 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php else: ?>
                     <h5>No booking history found</h5>
                     <?php endif; ?>

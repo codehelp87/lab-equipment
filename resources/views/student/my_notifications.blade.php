@@ -7,6 +7,7 @@
             <hr>
             <h5>My Notifications</h5>
              @if (Auth::user()->notifications->count() > 0)
+              <div class="table-responsive">
             <table class="table table-hover notifications">
                 <tbody>
                     @foreach(Auth::user()->notifications as $notification)
@@ -20,6 +21,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @else
             <h4>Notifications not available for display</h4>
             @endif

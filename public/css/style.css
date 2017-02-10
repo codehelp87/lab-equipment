@@ -5,7 +5,7 @@ h4.panel-title {
 .cancelled,
 .completed {
 	background-color: #ffffff !important;
-	color: red !important;
+	color:  #ED1A3B !important;
 }
 
 .completed {
@@ -14,7 +14,12 @@ h4.panel-title {
 
 .inActiveBtn {
 	background-color: #DBDBDB !important;
-	color: #f8f8f8 !important;
+	color: #ffffff !important;
+}
+
+a.btn-default {
+	line-height: 30px;
+	font-weight: bold;
 }
 
 input[type="radio"], 
@@ -84,4 +89,21 @@ button.btn-default {
 	border-radius: 4px !important;
 	border: none;
 	padding: 10px;
+}
+
+@media (max-width: 767px) {
+	span.text-danger {
+		width: 50%;
+	}
+	table.table-responsive, h1, h2, h3, h4, h5, h6 {
+		padding: 5px;
+	}
+	p.pull-right a {
+		font-size: 12px;
+	}
+}
+@media (min-width: 480px) {
+	span.text-danger {
+		width: 50%;
+	}
 }

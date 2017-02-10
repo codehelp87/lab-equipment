@@ -6,15 +6,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><h4>Chemistry Dept. Equipment User System</h4></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 @if (session('message'))
                                 <div class="alert alert-danger text-center">
                                     {{ session('message') }}
                                 </div>
                                 @endif
-                                {{-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}"> --}}
+                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                     {{ csrf_field() }}
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                         <label for="email" class="col-md-4 control-label">ID</label>
@@ -48,10 +47,10 @@
                                             </a>
                                         </div>
                                     </div>
+                                </form>
                             </div>
-                        {{-- </div> --}}
+                        </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

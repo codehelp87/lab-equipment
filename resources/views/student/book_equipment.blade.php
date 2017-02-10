@@ -7,6 +7,7 @@
             <h5><a href="{{ route('my_profile') }}" class="pull-left"> << My page </a></h5><br>
             <hr>
             <h5>Book an equipment</h5>
+             <div class="table-responsive">
             <table class="table table-responsive" id="book-equipment">
                 <tbody>
                     @if($equipment->count() > 0)
@@ -1301,6 +1302,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                         <button type="button" class="btn btn-default book-now" data-id="{{ $equipment->id }}" id="book-now" style="margin-bottom: 20px;">Book Now</button>
                     </div>
                 </div>

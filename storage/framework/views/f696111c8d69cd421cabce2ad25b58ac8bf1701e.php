@@ -137,7 +137,8 @@
             <hr>
             <p>
                 <h5>Notifications <a class="pull-right" href="/my_notifications">Read all</a></h5>
-                <table class="table table-hover notifications">
+                <div class="table-responsive">
+                <table class="table table-hover table-responsive notifications">
                     <tbody>
                         <?php if(Auth::user()->notifications->count() > 0): ?>
                         <?php $__currentLoopData = Auth::user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
@@ -154,9 +155,12 @@
                         <?php endif; ?>
                     </tbody>
                 </table>
+                </div>
+                </div>
             </p>
             <p>
-                <table class="table table-hover">
+            <div class="table-responsive">
+                <table class="table table-hover table-responsive">
                     <tbody>
                         <tr>
                             <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
@@ -165,6 +169,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </p>
             <hr>
             <p>
@@ -173,6 +178,7 @@
             <hr>
             <p>
                 <h5>Book an Equipment</h5>
+                <div class="table-responsive">
                 <table class="table table-responsive" id="book-equipment">
                     <tbody>
                         <?php if($equipments->count() > 0): ?>
@@ -265,6 +271,7 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            </div>
         </p>
     </div>
     <?php endif; ?>
