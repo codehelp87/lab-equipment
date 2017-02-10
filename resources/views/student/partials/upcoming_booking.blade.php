@@ -1,4 +1,5 @@
 <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5> <br>
+ <div class="table-responsive">
 <table class="table table-hover">
     <tbody>
         @foreach($bookings as $booking)
@@ -39,3 +40,4 @@
         @endforeach
     </tbody>
 </table>
+</div>
