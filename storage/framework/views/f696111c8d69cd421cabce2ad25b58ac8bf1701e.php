@@ -176,7 +176,7 @@
             </p>
             <hr>
             <p>
-                <h5>Book an Equipment</h5>
+                <h5><strong>Book an Equipment</strong></h5>
                 <div class="table-responsive">
                     <table class="table table-responsive" id="book-equipment">
                         <tbody>
