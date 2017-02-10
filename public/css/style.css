@@ -1,3 +1,7 @@
+h4.panel-title {
+	font-size: 16px;
+	font-weight: 400;
+}
 .cancelled,
 .completed {
 	background-color: #ffffff !important;
@@ -9,7 +13,7 @@
 }
 
 .inActiveBtn {
-	background-color: #9B9B9B !important;
+	background-color: #DBDBDB !important;
 	color: #f8f8f8 !important;
 }
 
@@ -21,7 +25,7 @@ input[type="checkbox"] {
 body {
 	color: #616161;
 	font-family: 'Lato', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 }
 
 h4.admin{
@@ -79,4 +83,5 @@ button.btn-default {
 	color: #ffffff;
 	border-radius: 4px !important;
 	border: none;
+	padding: 10px;
 }

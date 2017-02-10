@@ -18,6 +18,7 @@
         </div>
     </div>
 </form>
+<div class="table-responsive">
 <table class="table table-hover" id="list-notification">
     <tbody>
     @if($notifications->count() > 0)
@@ -37,3 +38,4 @@
     @endif
     </tbody>
 </table>
+</div>

@@ -28,6 +28,7 @@
         </div>
     </div>
 </form>
+<div class="table-responsive">
 <table class="table table-responsive display_lab_usage" id="display_lab_usage">
     <thead>
         <tr>
@@ -42,6 +43,7 @@
     <tbody>
     </tbody>
 </table>
+</div>
 <span class="pull-left">
    <a href="#" id="download-by-equipment" class="download-by-equipment">
       <strong>Download as xlsx</strong>

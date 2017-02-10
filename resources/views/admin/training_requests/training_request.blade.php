@@ -14,10 +14,12 @@
     </div>
     <div class="form-group">
         <div class="col-sm-12">
+        <div class="table-responsive">
             <table class="table table-responsive" id="display-training-request">
                 <tbody>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     <div class="form-group">

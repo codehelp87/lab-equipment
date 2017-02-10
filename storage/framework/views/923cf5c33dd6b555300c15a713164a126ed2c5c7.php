@@ -20,6 +20,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-12">
+        <div class="table-responsive">
             <table class="table table-responsive user-account-list">
                 <tbody>
                     <?php if($users->count() > 0): ?>
@@ -46,6 +47,7 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </form>

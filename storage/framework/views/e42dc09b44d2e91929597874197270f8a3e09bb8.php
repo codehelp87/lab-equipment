@@ -1,4 +1,5 @@
 <div class="col-sm-12">
+<div class="table-responsive">
     <table class="table table-responsive" id="list-equipment">
         <tbody>
             <?php if($equipments->count() > 0): ?>
@@ -36,4 +37,5 @@
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 </div>
