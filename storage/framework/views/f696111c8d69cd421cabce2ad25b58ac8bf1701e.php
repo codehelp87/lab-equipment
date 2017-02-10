@@ -134,9 +134,10 @@
         <?php else: ?>
         <div class="col-md-10 col-md-offset-1">
             <?php echo $__env->make('admin.manage_user_account.logout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <br>
             <hr>
             <p>
-                <h5>Notifications <a class="pull-right" href="/my_notifications">Read all</a></h5>
+                <h5><strong>Notifications</strong> <a class="pull-right" href="/my_notifications">Read all</a></h5>
                 <div class="table-responsive">
                     <table class="table table-hover table-responsive notifications">
                         <tbody>
