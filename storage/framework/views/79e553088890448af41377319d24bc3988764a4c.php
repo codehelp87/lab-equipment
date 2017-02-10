@@ -28,6 +28,7 @@
             <?php echo $__env->yieldContent('content'); ?>
             <div class="container">
                 <div class="row">
+                 <hr>
                     <div class="col-md-6 col-md-offset-3">
                         <div class="text-center" style="padding: 20px;">Copyright UNIST, Department of Chemistry &copy <?php echo date('Y'); ?> all rights reserved</div>
                     </div>

@@ -1,6 +1,6 @@
 <h5><strong>Upcoming Booking</strong> <span class="text-danger pull-right">Cancellation is allowed until 1hr. before your reservation</span></h5> <br>
  <div class="table-responsive">
-<table class="table table-hover">
+<table class="table table-hover table-responsive">
     <tbody>
         <?php $__currentLoopData = $bookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 

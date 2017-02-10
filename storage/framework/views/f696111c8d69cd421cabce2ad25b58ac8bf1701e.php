@@ -138,37 +138,36 @@
             <p>
                 <h5>Notifications <a class="pull-right" href="/my_notifications">Read all</a></h5>
                 <div class="table-responsive">
-                <table class="table table-hover table-responsive notifications">
-                    <tbody>
-                        <?php if(Auth::user()->notifications->count() > 0): ?>
-                        <?php $__currentLoopData = Auth::user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                        <?php if($loop->index < 3): ?>
-                        <tr>
-                            <td><a href="#" class="read-notification" id="<?php echo e($notification->notification->id); ?>"><?php echo e($notification->notification->title); ?></a></td>
-                            <td class="text-right"><?php echo e(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->notification->created_at)->format('Y/m/d')); ?></td>
-                        </tr>
-                         <tr id="view-content<?php echo e($notification->notification->id); ?>" style="display: none;">
-                             <td colspan="2"><?php echo e($notification->notification->content); ?></td>
-                         </tr>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-                </div>
+                    <table class="table table-hover table-responsive notifications">
+                        <tbody>
+                            <?php if(Auth::user()->notifications->count() > 0): ?>
+                            <?php $__currentLoopData = Auth::user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                            <?php if($loop->index < 3): ?>
+                            <tr>
+                                <td><a href="#" class="read-notification" id="<?php echo e($notification->notification->id); ?>"><?php echo e($notification->notification->title); ?></a></td>
+                                <td class="text-right"><?php echo e(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->notification->created_at)->format('Y/m/d')); ?></td>
+                            </tr>
+                            <tr id="view-content<?php echo e($notification->notification->id); ?>" style="display: none;">
+                                <td colspan="2"><?php echo e($notification->notification->content); ?></td>
+                            </tr>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </p>
             <p>
-            <div class="table-responsive">
-                <table class="table table-hover table-responsive">
-                    <tbody>
-                        <tr>
-                            <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
-                            <td><strong>Lab: <?php echo e($trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill'); ?></strong></td>
-                            <td><a  class="pull-right" href="<?php echo e(route('my_profile')); ?>" title="<?php echo e(Auth::user()-> name); ?>"><strong>See my page</strong></a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover table-responsive">
+                        <tbody>
+                            <tr>
+                                <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
+                                <td><strong>Lab: <?php echo e($trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill'); ?></strong></td>
+                                <td><a  class="pull-right" href="<?php echo e(route('my_profile')); ?>" title="<?php echo e(Auth::user()-> name); ?>"><strong>See my page</strong></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </p>
             <hr>
@@ -179,98 +178,98 @@
             <p>
                 <h5>Book an Equipment</h5>
                 <div class="table-responsive">
-                <table class="table table-responsive" id="book-equipment">
-                    <tbody>
-                        <?php if($equipments->count() > 0): ?>
-                        <?php $__currentLoopData = $equipments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipment): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                        <?php if(in_array($equipment->id, $trainedEquipments)): ?>
-                        <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
-                            <td><?php echo e($equipment->model_no); ?></td>
-                            <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
-                            <td>
-                                <Strong>Status</Strong><br>
-                                <Strong>Unit Time</Strong><br>
-                                <Strong>Max Time(per day)</Strong><br>
-                            </td>
-                            <td>
-                                <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
-                                <?php echo e($equipment->price_per_unit_time); ?><br>
-                                <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
-                            </td>
-                            <td>
-                                <Strong>Open</Strong><br>
-                                <Strong>Cancel</Strong><br>
-                            </td>
-                            <td>
-                                <span>30 minutes before</span><br>
-                                <span>1 hour before</span><br>
-                            </td>
-                            <td><a href="/equipments/<?php echo e(base64_encode($equipment->id)); ?>/booking" class="btn btn-default pull-right">Book Now</a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td colspan="3">
-                                <?php
-                                $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
-                                $created = new \Carbon\Carbon(@$bookings[0]->created_at);
-                                $now = \Carbon\Carbon::now();
-                                $difference = $created->diff($now)->days;
-                                ?>
-                                <span>Your Lab usage for this month: <strong><?php echo e((float) ($bookings->count() * 10)); ?> mins</strong></span><br>
-                                <span>You have not used this Equipment for : <strong> <?php echo e($difference); ?> day(s)</strong></span><br>
-                                <span class="text-default"><strong><small>(Your account will expired after 90 days without usage)</small></strong></span><br>
-                            </td>
-                            <td colspan="1"></td>
-                        </tr>
-                        <?php else: ?>
-                        <?php
+                    <table class="table table-responsive" id="book-equipment">
+                        <tbody>
+                            <?php if($equipments->count() > 0): ?>
+                            <?php $__currentLoopData = $equipments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipment): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                            <?php if(in_array($equipment->id, $trainedEquipments)): ?>
+                            <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
+                                <td><?php echo e($equipment->model_no); ?></td>
+                                <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
+                                <td>
+                                    <Strong>Status</Strong><br>
+                                    <Strong>Unit Time</Strong><br>
+                                    <Strong>Max Time(per day)</Strong><br>
+                                </td>
+                                <td>
+                                    <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
+                                    <?php echo e($equipment->price_per_unit_time); ?><br>
+                                    <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
+                                </td>
+                                <td>
+                                    <Strong>Open</Strong><br>
+                                    <Strong>Cancel</Strong><br>
+                                </td>
+                                <td>
+                                    <span>30 minutes before</span><br>
+                                    <span>1 hour before</span><br>
+                                </td>
+                                <td><a href="/equipments/<?php echo e(base64_encode($equipment->id)); ?>/booking" class="btn btn-default pull-right">Book Now</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="3">
+                                    <?php
+                                    $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
+                                    $created = new \Carbon\Carbon(@$bookings[0]->created_at);
+                                    $now = \Carbon\Carbon::now();
+                                    $difference = $created->diff($now)->days;
+                                    ?>
+                                    <span>Your Lab usage for this month: <strong><?php echo e((float) ($bookings->count() * 10)); ?> mins</strong></span><br>
+                                    <span>You have not used this Equipment for : <strong> <?php echo e($difference); ?> day(s)</strong></span><br>
+                                    <span class="text-default"><strong><small>(Your account will expired after 90 days without usage)</small></strong></span><br>
+                                </td>
+                                <td colspan="1"></td>
+                            </tr>
+                            <?php else: ?>
+                            <?php
                             $bookings = LabEquipment\Booking::findTotalLabUsage($equipment->id, Auth::user()->id);
                             $created = new \Carbon\Carbon(@$bookings[0]->created_at);
                             $now = \Carbon\Carbon::now();
                             $difference = $created->diff($now)->days;
-                        ?>
-                        <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
-                            <td><?php echo e($equipment->model_no); ?></td>
-                            <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
-                            <td>
-                                <Strong>Status</Strong><br>
-                                <Strong>Unit Time</Strong><br>
-                                <Strong>Max Time(per day)</Strong><br>
+                            ?>
+                            <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
+                                <td><?php echo e($equipment->model_no); ?></td>
+                                <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
+                                <td>
+                                    <Strong>Status</Strong><br>
+                                    <Strong>Unit Time</Strong><br>
+                                    <Strong>Max Time(per day)</Strong><br>
+                                </td>
+                                <td>
+                                    <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
+                                    <?php echo e($equipment->price_per_unit_time); ?><br>
+                                    <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
+                                </td>
+                                <td>
+                                    <Strong>Open</Strong><br>
+                                    <Strong>Cancel</Strong><br>
+                                </td>
+                                <td>
+                                    <span>30 minutes before</span><br>
+                                    <span>1 hour before</span><br>
+                                </td>
+                                <td><a href="/equipments/<?php echo e($equipment->id); ?>/booking" class="btn btn-default pull-right inActiveBtn" disabled="disabled">Book Now</a><br>
+                                <p class="pull-right"><br>
+                                    <a href="#" class="pull-right open-modal">Contact the administrator</a>
+                                </p>
+                                
                             </td>
-                            <td>
-                                <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
-                                <?php echo e($equipment->price_per_unit_time); ?><br>
-                                <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="3">
+                                <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
+                                <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
+                                <span class="text-danger"><strong>Your have not used this equipment for <?php echo e($difference); ?> day(s)</strong></span><br>
                             </td>
-                            <td>
-                                <Strong>Open</Strong><br>
-                                <Strong>Cancel</Strong><br>
-                            </td>
-                            <td>
-                                <span>30 minutes before</span><br>
-                                <span>1 hour before</span><br>
-                            </td>
-                            <td><a href="/equipments/<?php echo e($equipment->id); ?>/booking" class="btn btn-default pull-right inActiveBtn" disabled="disabled">Book Now</a><br>
-                            <p class="pull-right"><br>
-                                <a href="#" class="pull-right open-modal">Contact the administrator</a>
-                            </p>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td colspan="3">
-                            <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
-                            <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
-                            <span class="text-danger"><strong>Your have not used this equipment for <?php echo e($difference); ?> day(s)</strong></span><br>
-                        </td>
-                        <td colspan="1"></td>
-                    </tr>
-                    <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                            <td colspan="1"></td>
+                        </tr>
+                        <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </p>
     </div>

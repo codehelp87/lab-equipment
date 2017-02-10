@@ -9,6 +9,7 @@ h4.panel-title {
 
 span.text-danger {
 	color: #ED1A3B;
+	font-weight: bold;
 }
 
 .cancelled,
