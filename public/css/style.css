@@ -27,6 +27,10 @@ span.text-danger {
 	color: #ffffff !important;
 }
 
+.completed {
+	color: #f7f7f7;
+}
+
 a.btn-default {
 	line-height: 30px;
 	font-weight: bold;

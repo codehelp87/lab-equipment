@@ -98,7 +98,7 @@
         }
 
         if (checkBox.size() <= 0) {
-          toastr.error('Pls select time slot');
+          toastr.error('Pls select a time slot');
           return false
         }
 
