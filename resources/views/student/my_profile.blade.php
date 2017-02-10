@@ -4,8 +4,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             @include('admin.manage_user_account.logout')
+            <br>
             <hr>
-            <h5>My Page <a href="/home" class="pull-right"> << Home </a></h5>
+            <h5><strong>My Page </strong><a href="/home" class="pull-right"> << Home </a></h5>
             <div class="table-responsive">
                 <table class="table table-hover table-responsive">
                     <tbody>
