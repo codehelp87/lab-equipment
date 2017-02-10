@@ -1,4 +1,4 @@
-;(($) =>  {
+(function($) {
   $.fn.LabEquipment = () => {
     return $(this).each(() => {
       let req = new TrainingRequest;

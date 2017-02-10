@@ -1,5 +1,4 @@
-
-;(($) =>  {
+(function($) {
   $.fn.UpdateEquipment = () => {
     return $(this).each(() => {
       let equipment = new Equipment;
@@ -194,11 +193,6 @@
       contentType: false,
       enctype: 'multipart/form-data',
       processData: false
-      // beforeSend: function() {
-      //   $("form#add_more_equipment")
-      //   .find('button#save-equipment')
-      //   .text('Loading...');
-      // }
     });
   }
 
@@ -216,11 +210,6 @@
       contentType: false,
       enctype: 'multipart/form-data',
       processData: false
-      // beforeSend: function() {
-      //   $("form#add_more_equipment")
-      //   .find('button#save-equipment')
-      //   .text('Loading...');
-      // }
     });
   }
 }

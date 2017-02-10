@@ -1,5 +1,4 @@
-
-;(($) =>  {
+(function($) {
   $.fn.NotifyAll = () => {
     return $(this).each(() => {
       let notify = new Notification;

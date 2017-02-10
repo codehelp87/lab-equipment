@@ -1,4 +1,4 @@
-;(($) =>  {
+(function($) {
   $.fn.BookEquipment = () => {
     return $(this).each(() => {
       let equipment = new Equipment;

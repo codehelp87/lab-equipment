@@ -1,4 +1,4 @@
-;(($) =>  {
+(function($) {
   $.fn.UpdateUserInfo = () => {
     return $(this).each(() => {
       let user = new User;
