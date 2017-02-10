@@ -6,6 +6,7 @@
             <h5><a href="<?php echo e(route('my_profile')); ?>" class="pull-left"> << My page </a></h5><br>
             <hr>
             <h5>Book an equipment</h5>
+             <div class="table-responsive">
             <table class="table table-responsive" id="book-equipment">
                 <tbody>
                     <?php if($equipment->count() > 0): ?>
@@ -26,6 +27,7 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            </div>
             <hr>
             <h5>Calendar</h5>
             <hr>
@@ -53,6 +55,7 @@
                     </div>
                     <div class="col-md-8">
                         <h5>You select <span id="time"></span></h5>
+                        <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
@@ -1300,6 +1303,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                         <button type="button" class="btn btn-default book-now" data-id="<?php echo e($equipment->id); ?>" id="book-now" style="margin-bottom: 20px;">Book Now</button>
                     </div>
                 </div>

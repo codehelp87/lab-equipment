@@ -28,6 +28,7 @@
                     @endif
                 </tbody>
             </table>
+            </div>
             <hr>
             <h5>Calendar</h5>
             <hr>
@@ -55,6 +56,7 @@
                     </div>
                     <div class="col-md-8">
                         <h5>You select <span id="time"></span></h5>
+                        <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
