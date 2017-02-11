@@ -49,8 +49,8 @@
       <strong>Download as xlsx</strong>
     </a>
 </span>
-<script>
-$(function() {
+<script type="text/javascript">
+jQuery(document).ready(function() {
     $('a#download-by-equipment').click(function(){
         $('table#display_lab_usage').table2excel({
             // exclude CSS class

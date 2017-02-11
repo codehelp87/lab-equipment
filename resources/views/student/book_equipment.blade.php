@@ -1310,7 +1310,7 @@
                 </div>
             {{-- </div> --}}
 
-            <script>
+            <script type="text/javascript">
             $(function () {
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -1348,7 +1348,7 @@
                   });
             });
         </script>
-        <script>
+        <script type="text/javascript">
             $(function() {
                 var currentTime = $(document)
                   .find('span#time')
