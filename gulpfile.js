@@ -1,7 +1,4 @@
-const elixir = require('laravel-elixir');
-
-require('laravel-elixir-vue-2');
-
+var elixir = require('laravel-elixir');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,7 +10,34 @@ require('laravel-elixir-vue-2');
  |
  */
 
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+elixir(function(mix) {
+
+    /**
+     * Merge all online community js files into scripts.js in public/js
+     *
+     * run gulp --production to minify
+     */
+    mix.scripts([
+        'jquery.min.js',
+        'keep_alive.js',
+        'add_equipment.js',
+        'bootbox.min.js',
+        'book_equipment.js',
+        'jquery.table2excel.min.js',
+        'lab.js',
+        'lab_usage.js',
+        'moment.js',
+        'notification.js',
+        'training_request.js',
+        'user.js',
+    ], 'public/js/main.js', 'public/js');
+
+    /**
+     * Merge css files into styles.css in public/css
+     */
+    mix.styles([
+        'main.css',
+        'bootstrap.css',
+        'app.css',
+    ], 'public/css/main.css', 'public/css');
 });
