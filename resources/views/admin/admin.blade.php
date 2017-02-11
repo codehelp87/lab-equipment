@@ -262,8 +262,8 @@
                             <td colspan="3"></td>
                             <td colspan="3">
                                 <span>Your Lab usage for this month: <strong>0 mins</strong></span><br>
-                                <span>You have not used this Equipment for : <strong>{{ $difference }} days</strong><br></span><br>
-                                <span class="text-danger"><strong>Your have not used this equipment for {{ $difference }} day(s)</strong></span><br>
+                                <span>You have not used this Equipment for : <strong>0 days</strong><br></span><br>
+                                <span class="text-danger"><strong>Your have not used this equipment for 0 day(s)</strong></span><br>
                             </td>
                             <td colspan="1"></td>
                         </tr>

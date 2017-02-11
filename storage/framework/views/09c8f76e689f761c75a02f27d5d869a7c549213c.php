@@ -1348,92 +1348,80 @@
             });
         </script>
         <script type="text/javascript">
-            $(function() {
-                var currentTime = $(document)
-                  .find('span#time')
-                  .text();
+        'use strict';
 
-                let date = new Date();
-                let myDate = new Date(
-                  date.getFullYear(), 
-                  date.getMonth(), 
-                  date.getDate(), 
-                  date.getHours(), 
-                  date.getMinutes(),
-                  date.getSeconds()
-                );
+    $(function () {
+        var currentTime = $(document).find('span#time').text();
 
-                let dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
-                           
-                var index = 1;
-                var checkbox = $('div.checkbox input[type="checkbox"]');
+        var date = new Date();
+        var myDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
 
-                checkbox.each(function(index, el) {
-                    var _this = $(this);
-                    _this.attr('id', index);
-                    // This spaces assign dates based on the user selected date
-                    var timeSlot =  $(this).val();
-                    var choosenDate = moment(currentTime);
-                    var hourAndMinute = timeSlot.split('-');
-                    var hm = hourAndMinute[0].split(':');
-                        choosenDate.add(parseInt(hm[0]), 'hours');
-                        choosenDate.add(parseInt(hm[1]), 'minutes');
+        var dateNow = moment(myDate).format('YYYY-MM-DD HH:mm');
 
-                     var formattedChoosenDate = moment(choosenDate).format('YYYY-MM-DD HH:mm');
-                      choosenDate = moment(formattedChoosenDate);
+        var index = 1;
+        var checkbox = $('div.checkbox input[type="checkbox"]');
 
-                    // This space assign date and time based on the time of the day
-                    if (_this.attr('id') < 90) {
-                        _this.attr('date-time', formattedChoosenDate);
-                    } else {
-                        dateNow = moment(dateNow);
-                        // timeNow = moment(timeNow);
-                        var hourDifference = dateNow.diff(choosenDate, 'hours');
-                         if (hourDifference > 8) {
-                            choosenDate.add(1, 'day');
-                            _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));
-                         } else {
-                            _this.attr('date-time', formattedChoosenDate);
-                         }
-                    }
+    checkbox.each(function (index, el) {
+        var _this = $(this);
+        _this.attr('id', index);
+        // This spaces assign dates based on the user selected date
+        var timeSlot = $(this).val();
+        var choosenDate = moment(currentTime);
+        var hourAndMinute = timeSlot.split('-');
+        var hm = hourAndMinute[0].split(':');
+        choosenDate.add(parseInt(hm[0]), 'hours');
+        choosenDate.add(parseInt(hm[1]), 'minutes');
 
-                    <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
-                        <?php $__currentLoopData = $equipmentBookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                            <?php if(count($booking->time_slot) > 0): ?>
-                                <?php $__currentLoopData = $booking->time_slot; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slot): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                var slot = "<?php echo e($slot); ?>"
-                                // if (slot === _this.attr('id')) {
-                                //     _this.attr({'checked': true, 'disabled': true});
-                                //     _this.parent().css('text-decoration', 'line-through')
-                                // }
+        var formattedChoosenDate = moment(choosenDate).format('YYYY-MM-DD HH:mm');
+        choosenDate = moment(formattedChoosenDate);
 
-                                var bookingDate = moment("<?php echo e($booking->booking_date); ?>");
+        // This space assign date and time based on the time of the day
+        if (_this.attr('id') < 90) {
+            _this.attr('date-time', formattedChoosenDate);
+        } else {
+            dateNow = moment(dateNow);
+            // timeNow = moment(timeNow);
+            var hourDifference = dateNow.diff(choosenDate, 'hours');
+            if (hourDifference > 8) {
+                choosenDate.add(1, 'day');
+                _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));
+            } else {
+                _this.attr('date-time', formattedChoosenDate);
+            }
+        }
 
-                                var hourAndMinute = slot.split('-');
-                                var hm = hourAndMinute[0].split(':');
-                                bookingDate.add(parseInt(hm[0]), 'hours');
-                                bookingDate.add(parseInt(hm[1]), 'minutes');
+        <?php if(count($equipmentBookings) > 0 && !is_null($equipmentBookings)): ?>
+            <?php $__currentLoopData = $equipmentBookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                <?php if(count($booking->time_slot) > 0): ?>
+                    <?php $__currentLoopData = $booking->time_slot; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slot): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                        var slot = "<?php echo e($slot); ?>"
+                        var bookingDate = moment("<?php echo e($booking->booking_date); ?>");
 
-                                if (bookingDate.format('YYYY-MM-DD HH:mm') === _this.attr('date-time')) {
-                                    _this.attr({'checked': true, 'disabled': true});
-                                    _this.parent().css('text-decoration', 'line-through')
-                                }
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                            <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                    <?php endif; ?>
-                    index ++;
-                });
-            });
-            </script>
-            <style type="text/css">
-                .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-                    position: inherit;
-                }
-                table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-                    vertical-align: middle;
-                }
-            </style>
+                        var hourAndMinute = slot.split('-');
+                        var hm = hourAndMinute[0].split(':');
+                        bookingDate.add(parseInt(hm[0]), 'hours');
+                        bookingDate.add(parseInt(hm[1]), 'minutes');
+
+                        if (bookingDate.format('YYYY-MM-DD HH:mm') === _this.attr('date-time')) {
+                            _this.attr({'checked': true, 'disabled': true});
+                            _this.parent().css('text-decoration', 'line-through')
+                        }
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+        <?php endif; ?>
+        index++;
+    });
+});
+</script>
+<style type="text/css">
+    .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+        position: inherit;
+    }
+    table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        vertical-align: middle;
+    }
+</style>
         </div>
     </div>
 </div>
