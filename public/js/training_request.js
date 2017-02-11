@@ -1,6 +1,6 @@
-(function($) {
-  $.fn.LabEquipment = () => {
-    return $(this).each(() => {
+(function(jQuery) {
+  jQuery.fn.LabEquipment = () => {
+    return jQuery(this).each(() => {
       let req = new TrainingRequest;
       req.getLabEquipment();
       req.selectTrainingRequest();
@@ -14,17 +14,17 @@
       let req = new TrainingRequest;
       let selectedStudents = [];
       let studentIds = [];
-      let modal = $('div#list-complete-training');
-      let smtBtn = $(document)
+      let modal = jQuery('div#list-complete-training');
+      let smtBtn = jQuery(document)
         .find('form#complete-training button.btn-default');
         smtBtn.on('click', function() {
-          let equipmentId = $(document)
+          let equipmentId = jQuery(document)
             .find('form#complete-training select#equipment')
             .val();
-          let equipmentName = $(document)
+          let equipmentName = jQuery(document)
             .find('form#complete-training select#equipment option:selected')
             .text();
-          let checkBox = $(document)
+          let checkBox = jQuery(document)
             .find('table#display-complete-training')
             .find('input[type="checkbox"]:checked');
 
@@ -34,7 +34,7 @@
           }
 
           checkBox.each(function(index, el) {
-            let _this = $(this);
+            let _this = jQuery(this);
             selectedStudents.push(_this.attr('data-name'));
             studentIds.push(_this.val());
           });
@@ -75,25 +75,25 @@
       let selectedStudents = [];
       let studentIds = [];
       let req = new TrainingRequest;
-      let smtBtn = $(document)
+      let smtBtn = jQuery(document)
         .find('form#approve-request button.btn-default');
 
       smtBtn.on('click', function() {
-        let equipmentId = $(document)
+        let equipmentId = jQuery(document)
         .find('form#approve-request select#equipment').val();
 
-        let modal = $('div#list-accepted-request');
-        let checkBox = $(document)
+        let modal = jQuery('div#list-accepted-request');
+        let checkBox = jQuery(document)
           .find('table#display-training-request')
           .find('input[type="checkbox"]:checked');
 
-        let location = $(document)
+        let location = jQuery(document)
           .find('form#approve-request input#location').val();
-        let month = $(document)
+        let month = jQuery(document)
           .find('form#approve-request select#month').val();
-        let day = $(document)
+        let day = jQuery(document)
           .find('form#approve-request select#day').val();
-        let year = $(document)
+        let year = jQuery(document)
           .find('form#approve-request select#year').val();
 
         if (year == '') {
@@ -122,7 +122,7 @@
         }
 
         checkBox.each(function(index, el) {
-          let _this = $(this);
+          let _this = jQuery(this);
           selectedStudents.push(_this.attr('data-name'));
           studentIds.push(_this.val());
         });
@@ -144,9 +144,9 @@
         }
 
         okBtn.on('click', function() {
-          $.ajax({
+          jQuery.ajax({
               headers:{
-                'X-CSRF-Token': $('input[name="_token"]').val()
+                'X-CSRF-Token': jQuery('input[name="_token"]').val()
               },
               url: route,
               type: 'POST',
@@ -172,21 +172,21 @@
     }
 
     clearFields() {
-      let location = $(document)
+      let location = jQuery(document)
           .find('form#approve-request input#location').val('');
-        let month = $(document)
+        let month = jQuery(document)
           .find('form#approve-request select#month').val('');
-        let day = $(document)
+        let day = jQuery(document)
           .find('form#approve-request select#day').val('');
-        let year = $(document)
+        let year = jQuery(document)
           .find('form#approve-request select#year').val('');
 
-        let checkBox = $(document)
+        let checkBox = jQuery(document)
           .find('table#display-training-request, table#display-complete-training')
           .find('input[type="checkbox"]');
 
         checkBox.each(function(index, el) {
-          $(this).attr('checked', false);
+          jQuery(this).attr('checked', false);
         });
     }
 
@@ -229,16 +229,16 @@
 
     getTrainingStudents() {
       let req = new TrainingRequest;
-      let selectEquipment = $(document)
+      let selectEquipment = jQuery(document)
         .find('form#complete-training')
         .find('select#equipment');
 
-      let tableBody = $(document)
+      let tableBody = jQuery(document)
         .find('form#complete-training')
         .find('table#display-complete-training tbody');
 
       selectEquipment.on('change', function() {
-        let _this = $(this);
+        let _this = jQuery(this);
         let equipmentId = _this.val();
         const route = '/equipments/'+equipmentId+'/trainings';
         if (_this.val() != '') {
@@ -266,16 +266,16 @@
     getLabEquipment() {
       let req = new TrainingRequest;
 
-      let selectEquipment = $(document)
+      let selectEquipment = jQuery(document)
         .find('form#approve-request')
         .find('select#equipment');
 
-      let tableBody = $(document)
+      let tableBody = jQuery(document)
         .find('form#approve-request')
         .find('table#display-training-request tbody');
 
       selectEquipment.on('change', function() {
-        let _this = $(this);
+        let _this = jQuery(this);
         let equipmentId = _this.val();
         const route = '/equipments/'+equipmentId+'/students';
         if (_this.val() != '') {
@@ -318,9 +318,9 @@
     }
 
     makeAjaxCall(url, params, method) {
-      return $.ajax({
+      return jQuery.ajax({
         headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
+        'X-CSRF-Token': jQuery('input[name="_token"]').val()
       },
       url: url,
       type: method,
@@ -331,4 +331,4 @@
   }
   })(jQuery);
 
-  $('form#approve-request').LabEquipment();
+  jQuery('form#approve-request').LabEquipment();

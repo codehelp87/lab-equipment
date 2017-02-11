@@ -1,6 +1,6 @@
-(function($) {
-  $.fn.NotifyAll = () => {
-    return $(this).each(() => {
+(function(jQuery) {
+  jQuery.fn.NotifyAll = () => {
+    return jQuery(this).each(() => {
       let notify = new Notification;
       notify.createNotification();
       notify.editNotification();
@@ -12,23 +12,23 @@
   class Notification {
     readNotification() {
       let notify = new Notification;
-      let readLink = $(document)
+      let readLink = jQuery(document)
         .find('table.notifications')
         .find('a.read-notification');
 
         readLink.on('click', function() {
-          let _this = $(this);
+          let _this = jQuery(this);
           _this.parents('tr').next().toggle(300);
           return false;
         });
     }
     createNotification() {
       let notify = new Notification;
-      $("form#notification").submit(function(evt) {
-        let smtBtn = $("form#notification").find('button#save-notification');
+      jQuery("form#notification").submit(function(evt) {
+        let smtBtn = jQuery("form#notification").find('button#save-notification');
         evt.preventDefault();
-        let formData = new FormData($(this)[0]);
-        let tableBody = $(document).find('table#list-notification tbody');
+        let formData = new FormData(jQuery(this)[0]);
+        let tableBody = jQuery(document).find('table#list-notification tbody');
 
         notify.makeAjaxCall('/notifications/add', formData, 'POST')
           .done(function(data) {
@@ -50,12 +50,12 @@
 
   editNotification() {
     let notify = new Notification;
-    $(function() {
-      $('body').on('click', 'table#list-notification a', function() {
-      let _this = $(this)
-      let $btn = _this.button('loading');
+    jQuery(function() {
+      jQuery('body').on('click', 'table#list-notification a', function() {
+      let _this = jQuery(this)
+      let jQuerybtn = _this.button('loading');
       let id = _this.attr('id');
-      let editMode =  $('table#list-notification')
+      let editMode =  jQuery('table#list-notification')
           .find('tr > td div.display'+id);
           
           notify.makeAjaxRequest('/notifications/'+id, '', 'GET')
@@ -64,11 +64,11 @@
               .slideDown()
               .html(data)
               .css('display', 'block');
-              $btn.button('reset')
+              jQuerybtn.button('reset')
           })
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
-            $btn.button('reset')
+            jQuerybtn.button('reset')
           });
 
           return false;
@@ -78,10 +78,10 @@
 
   updateNotification() {
       let notify = new Notification;
-      $('body').on('submit', 'form.edit_notification', function(evt) {
+      jQuery('body').on('submit', 'form.edit_notification', function(evt) {
         evt.preventDefault();
-        let form = $(document).find('form.edit_notification');
-        let id = $(this).attr('id');
+        let form = jQuery(document).find('form.edit_notification');
+        let id = jQuery(this).attr('id');
         
         let formData = new FormData(form[0]);
 
@@ -89,8 +89,8 @@
           .done(function(res) {
             toastr.success(res.message);
             let newEquipment = notify.addNewNotificationToHtmlTable(res.notification);
-            $(document).find('table tr#edit-notification'+id).replaceWith(newEquipment);
-            $(document).find('div#edit-notification'+id).slideUp();
+            jQuery(document).find('table tr#edit-notification'+id).replaceWith(newEquipment);
+            jQuery(document).find('div#edit-notification'+id).slideUp();
             notify.clearFormFields();
             return false
           })
@@ -113,17 +113,17 @@
   }
 
   clearFormFields() {
-    $('form#notification')
+    jQuery('form#notification')
       .find('input[type="text"], textarea')
       .each(function(index, el) {
-        $(this).val('');
+        jQuery(this).val('');
     });
   }
 
   makeAjaxCall(url, params, method) {
-    return $.ajax({
+    return jQuery.ajax({
       headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
+        'X-CSRF-Token': jQuery('input[name="_token"]').val()
       },
       url: url,
       type: method,
@@ -138,9 +138,9 @@
   }
 
   makeAjaxRequest(url, params, method) {
-    return $.ajax({
+    return jQuery.ajax({
       headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
+        'X-CSRF-Token': jQuery('input[name="_token"]').val()
       },
       url: url,
       type: method,
@@ -156,4 +156,4 @@
 }
 })(jQuery);
 
-$('body').NotifyAll();
+jQuery('body').NotifyAll();

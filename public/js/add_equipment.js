@@ -1,6 +1,6 @@
-(function($) {
-  $.fn.UpdateEquipment = () => {
-    return $(this).each(() => {
+(function(jQuery) {
+  jQuery.fn.UpdateEquipment = () => {
+    return jQuery(this).each(() => {
       let equipment = new Equipment;
       equipment.createEquipment();
       equipment.editEquipment();
@@ -12,10 +12,10 @@
   class Equipment {
     deleteEquipment() {
      let equipment = new Equipment;
-      $('body').on('click', 'a.delete-equipment', function() {
-        let _this = $(this);
+      jQuery('body').on('click', 'a.delete-equipment', function() {
+        let _this = jQuery(this);
 
-        let $btn = _this.button('loading');
+        let jQuerybtn = _this.button('loading');
         let equipmentId = _this.attr('id');
         let route = _this.attr('rel');
         bootbox.confirm('Are you sure to delete?', function(result)  {
@@ -23,7 +23,7 @@
             equipment.makeAjaxCall(route, {}, 'DELETE')
               .done(function(data) {
                 if (data.message == 'deleted') {
-                  $btn.button('reset');
+                  jQuerybtn.button('reset');
                   _this.parents('#edit-eqipment'+equipmentId).remove();
                   return toastr.success('Equipment has been successfully deleted ');
                 }
@@ -33,20 +33,20 @@
                 console.log(error);
               })
           }
-          return $btn.button('reset');
+          return jQuerybtn.button('reset');
         })
       });
     }
 
     createEquipment() {
       let equipment = new Equipment;
-      $("form#add_more_equipment").submit(function(evt){
+      jQuery("form#add_more_equipment").submit(function(evt){
         // Change button text to loading
-        let smtBtn = $("form#add_more_equipment").find('button#save-equipment');
+        let smtBtn = jQuery("form#add_more_equipment").find('button#save-equipment');
         evt.preventDefault();
-        let formData = new FormData($(this)[0]);
-        let assignedLab = $('form#add_more_equipment').find('#assign_lab').val();//assign_lab;
-        let availability = $('form#add_more_equipment').find('#availability').val();//availability
+        let formData = new FormData(jQuery(this)[0]);
+        let assignedLab = jQuery('form#add_more_equipment').find('#assign_lab').val();//assign_lab;
+        let availability = jQuery('form#add_more_equipment').find('#availability').val();//availability
 
         if (assignedLab == '') {
           toastr.error('Assign a lab!');
@@ -61,10 +61,10 @@
           .done(function(data) {
             toastr.success(data.message);
             let newEquipment = equipment.addNewEquipmentToHtmlTable(data.equipment);
-            $('table#list-equipment').append(newEquipment);
+            jQuery('table#list-equipment').append(newEquipment);
             equipment.clearFormFields();
             smtBtn.text('Save');
-            return false
+            return false;
           })
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
@@ -76,24 +76,24 @@
 
   updateEquipment() {
       let equipment = new Equipment;
-      $('body').on('submit', 'form.edit_equipment', function(evt) {
+      jQuery('body').on('submit', 'form.edit_equipment', function(evt) {
         evt.preventDefault();
-        let form = $(document).find('form.edit_equipment');
-        let id = $(this).attr('id');
+        let form = jQuery(document).find('form.edit_equipment');
+        let id = jQuery(this).attr('id');
         
         let formData = new FormData(form[0]);
 
-        let assignedLab = $('form.edit_equipment').find('#assign_lab').val();//assign_lab;
-        let availability = $('form.edit_equipment').find('#availability').val();//availability
+        let assignedLab = jQuery('form.edit_equipment').find('#assign_lab').val();//assign_lab;
+        let availability = jQuery('form.edit_equipment').find('#availability').val();//availability
 
         equipment.makeAjaxCall('/equipments/'+id+'/update', formData, 'POST')
           .done(function(res) {
             toastr.success(res.message);
             let newEquipment = equipment.addNewEquipmentToHtmlTable(res.equipment);
-            $(document).find('table tr#edit-eqipment'+id).replaceWith(newEquipment);
-            $(document).find('div#edit-eqipment'+id).slideUp();
+            jQuery(document).find('table tr#edit-eqipment'+id).replaceWith(newEquipment);
+            jQuery(document).find('div#edit-eqipment'+id).slideUp();
             equipment.clearFormFields();
-            return false
+            return false;
           })
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
@@ -104,12 +104,12 @@
 
   editEquipment() {
     let equipment = new Equipment;
-    $(function() {
-      $('body').on('click', 'table#list-equipment a.edit-eqipment', function() {
-      let _this = $(this)
-      let $btn = _this.button('loading');;
+    jQuery(function() {
+      jQuery('body').on('click', 'table#list-equipment a.edit-eqipment', function() {
+      let _this = jQuery(this);
+      let jQuerybtn = _this.button('loading');;
       let id = _this.attr('id');
-      let editMode =  $('table#list-equipment')
+      let editMode =  jQuery('table#list-equipment')
           .find('tr > td div.display'+id);
           
           equipment.makeAjaxRequest('/equipments/'+id, '', 'GET')
@@ -118,11 +118,11 @@
               .slideDown()
               .html(data)
               .css('display', 'block');
-              $btn.button('reset')
+              jQuerybtn.button('reset');
           })
           .fail(function(error) {
             toastr.error(JSON.stringify(error));
-            $btn.button('reset')
+            jQuerybtn.button('reset');
           });
 
           return false;
@@ -157,10 +157,10 @@
 
   checkforEmptyFields() {
     let error = [];
-    $('form#add_more_equipment, form.edit_equipment')
+    jQuery('form#add_more_equipment, form.edit_equipment')
       .find('input')
       .each(function(index, el) {
-        let _this = $(this);
+        let _this = jQuery(this);
         if (_this.val() == '') {
           error.push(_this.attr('id'));
           _this.css('border', '1px solid red');
@@ -172,17 +172,17 @@
   }
 
   clearFormFields() {
-    $('form#add_more_equipment, form.edit_equipment')
+    jQuery('form#add_more_equipment, form.edit_equipment')
       .find('input[type="text"]')
       .each(function(index, el) {
-        $(this).val('');
+        jQuery(this).val('');
     });
   }
 
   makeAjaxCall(url, params, method) {
-    return $.ajax({
+    return jQuery.ajax({
       headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
+        'X-CSRF-Token': jQuery('input[name="_token"]').val()
       },
       url: url,
       type: method,
@@ -197,9 +197,9 @@
   }
 
   makeAjaxRequest(url, params, method) {
-    return $.ajax({
+    return jQuery.ajax({
       headers:{
-        'X-CSRF-Token': $('input[name="_token"]').val()
+        'X-CSRF-Token': jQuery('input[name="_token"]').val()
       },
       url: url,
       type: method,
@@ -215,4 +215,4 @@
 }
 })(jQuery);
 
-$('body').UpdateEquipment();
+jQuery('body').UpdateEquipment();
