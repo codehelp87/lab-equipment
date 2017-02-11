@@ -1390,7 +1390,6 @@
                         dateNow = moment(dateNow);
                         // timeNow = moment(timeNow);
                         var hourDifference = dateNow.diff(choosenDate, 'hours');
-                        console.log('TimeChoosen', hourDifference);
                          if (hourDifference > 8) {
                             choosenDate.add(1, 'day');
                             _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));

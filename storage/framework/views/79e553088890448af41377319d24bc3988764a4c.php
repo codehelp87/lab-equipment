@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css" />
-         <script type="text/javascript" src="<?php echo e(asset('js/jquery.v3.js')); ?>"></script>
+         <script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
          <script type="text/javascript" src="<?php echo e(asset('lib/es6-shim/es6-shim.min.js')); ?>"></script>
     </head>
     <body>

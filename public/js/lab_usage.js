@@ -1,6 +1,6 @@
-(function(jQuery) {
+(function($) {
   jQuery.fn.LabEquipmentUsage = () => {
-    return jQuery(this).each(() => {
+    return $(this).each(() => {
       let lab = new LabUsage;
       lab.getLabUsageByEquipment();
       lab.getLabUsers();
@@ -15,13 +15,13 @@
     getSessionLabUserByNight() {
       let lab = new LabUsage;
 
-       jQuery('body').on('click', 'a.view-equipment-users-with-session-bynight', function() {
-        let _this = jQuery(this);
+       $('body').on('click', 'a.view-equipment-users-with-session-bynight', function() {
+        let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
-        let session = jQuery(document).find('select#session').val();
+        let session = $(document).find('select#session').val();
 
-        let modal = jQuery(document).find('div#total_lab_usage');
+        let modal = $(document).find('div#total_lab_usage');
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
 
@@ -46,13 +46,13 @@
     getSessionLabUser() {
       let lab = new LabUsage;
 
-       jQuery('body').on('click', 'a.view-equipment-users-with-session', function() {
-        let _this = jQuery(this);
+       $('body').on('click', 'a.view-equipment-users-with-session', function() {
+        let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
-        let session = jQuery(document).find('select#session').val();
+        let session = $(document).find('select#session').val();
 
-        let modal = jQuery(document).find('div#total_lab_usage');
+        let modal = $(document).find('div#total_lab_usage');
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
 
@@ -76,16 +76,16 @@
 
     getLabUsageBySessionAndEquipment() {
       let lab = new LabUsage;
-      let session = jQuery(document)
+      let session = $(document)
         .find('form#calculate_lab_usage')
         .find('select#session');
         session.on('change', function() {
-          let equipment = jQuery(document)
+          let equipment = $(document)
             .find('form#calculate_lab_usage')
             .find('select#equipment')
             .val();
-          let _this = jQuery(this);
-          let table = jQuery(document).find('table#display_lab_usage tbody');
+          let _this = $(this);
+          let table = $(document).find('table#display_lab_usage tbody');
 
           if (equipment == '' || equipment == undefined) {
             toastr.error('Please select an equipment');
@@ -115,12 +115,12 @@
     getLabUsers() {
        let lab = new LabUsage;
 
-       jQuery('body').on('click', 'a.view-equipment-users', function() {
-        let _this = jQuery(this);
+       $('body').on('click', 'a.view-equipment-users', function() {
+        let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
 
-        let modal = jQuery(document).find('div#total_lab_usage');
+        let modal = $(document).find('div#total_lab_usage');
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
 
@@ -149,12 +149,12 @@
     getLabUsersByNight() {
        let lab = new LabUsage;
 
-       jQuery('body').on('click', 'a.view-equipment-users-by-night', function() {
-        let _this = jQuery(this);
+       $('body').on('click', 'a.view-equipment-users-by-night', function() {
+        let _this = $(this);
         let equipmentId = _this.attr('data-id');
         let labProf = _this.attr('id');
 
-        let modal = jQuery(document).find('div#total_lab_usage');
+        let modal = $(document).find('div#total_lab_usage');
         let modalTitle = modal.find('h4.modal-title');
         let modalBody = modal.find('div.modal-body');
 
@@ -200,14 +200,14 @@
 
     getLabUsageByEquipment() {
       let lab = new LabUsage;
-      let selectEquipment = jQuery(document)
+      let selectEquipment = $(document)
         .find('form#calculate_lab_usage')
         .find('#equipment');
 
         selectEquipment.on('change', function() {
-          let _this = jQuery(this);
+          let _this = $(this);
           let equipmentId = _this.val();
-          let table = jQuery(document).find('table#display_lab_usage tbody');
+          let table = $(document).find('table#display_lab_usage tbody');
           if (equipmentId != '') {
             let route = '/equipments/'+equipmentId+'/lab_usage';
 
@@ -256,9 +256,9 @@
     }
 
     makeAjaxCall(url, params, method) {
-      return jQuery.ajax({
+      return $.ajax({
         headers:{
-        'X-CSRF-Token': jQuery('input[name="_token"]').val()
+        'X-CSRF-Token': $('input[name="_token"]').val()
       },
         url: url,
         type: method,
@@ -269,4 +269,4 @@
 }
 })(jQuery);
 
-jQuery('body').LabEquipmentUsage();
+$('body').LabEquipmentUsage();

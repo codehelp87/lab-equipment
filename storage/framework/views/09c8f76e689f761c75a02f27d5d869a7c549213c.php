@@ -1309,7 +1309,7 @@
                 </div>
             
 
-            <script>
+            <script type="text/javascript">
             $(function () {
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -1347,7 +1347,7 @@
                   });
             });
         </script>
-        <script>
+        <script type="text/javascript">
             $(function() {
                 var currentTime = $(document)
                   .find('span#time')
@@ -1389,7 +1389,6 @@
                         dateNow = moment(dateNow);
                         // timeNow = moment(timeNow);
                         var hourDifference = dateNow.diff(choosenDate, 'hours');
-                        console.log('TimeChoosen', hourDifference);
                          if (hourDifference > 8) {
                             choosenDate.add(1, 'day');
                             _this.attr('date-time', choosenDate.format('YYYY-MM-DD HH:mm'));

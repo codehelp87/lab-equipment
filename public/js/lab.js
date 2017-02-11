@@ -1,6 +1,6 @@
-(function(jQuery) {
+(function($) {
   jQuery.fn.UpdateEquipmentLab = () => {
-    return jQuery(this).each(() => {
+    return $(this).each(() => {
       let lab = new Lab;
       lab.createLab();
       lab.assignUserToLab();
@@ -12,9 +12,9 @@
   class Lab {
 
     contactAdmin() {
-      let link = jQuery(document).find('a.open-modal');
+      let link = $(document).find('a.open-modal');
       link.on('click', function() {
-        let modalDialog = jQuery(document)
+        let modalDialog = $(document)
         .find('div.contact-admin');
         modalDialog.modal('show')
         return false;
@@ -22,20 +22,20 @@
     }
     getLabEquipment() {
       let lab = new Lab;
-      let selectLab = jQuery(document)
+      let selectLab = $(document)
         .find('form#training_request')
         .find('select#lab');
-      let equipments = jQuery(document)
+      let equipments = $(document)
         .find('form#training_request')
         .find('select#equipment');
 
       selectLab.on('change', function() {
-        let _this = jQuery(this);
+        let _this = $(this);
         let labId = _this.val();
 
         const route = '/labs/'+labId+'/equipments';
 
-        let modalDialog = jQuery(document)
+        let modalDialog = $(document)
         .find('div.contact-admin');
 
         if (_this.val() != '')
@@ -80,11 +80,11 @@
 
     assignUserToLab() {
       let lab = new Lab;
-      let saveBtn = jQuery('#save-lab-user');
+      let saveBtn = $('#save-lab-user');
       saveBtn.on('click', function() {
-        var jQuerybtn = jQuery(this).button('loading')
-        let user = jQuery('form#assign_user_to_lab').find('#user').val();
-        let labId = jQuery('form#assign_user_to_lab').find('#lab').val();
+        var $btn = $(this).button('loading')
+        let user = $('form#assign_user_to_lab').find('#user').val();
+        let labId = $('form#assign_user_to_lab').find('#lab').val();
 
         if (user == '') {
           toastr.error('Choose a user to assign to lab!');
@@ -101,7 +101,7 @@
         lab.makeAjaxCall('/labs/'+labId+'/add', params, 'PUT')
           .done(function(data) {
             // business logic...
-            jQuerybtn.button('reset')
+            $btn.button('reset')
             if (data.message == 200) {
               toastr.success('User was assigned to Lab successfully');
               return false
@@ -111,7 +111,7 @@
           })
           .fail(function(error) {
             // business logic...
-            jQuerybtn.button('reset')
+            $btn.button('reset')
             toastr.error(error.toString());
           });
         return false;
@@ -120,10 +120,10 @@
 
     createLab() {
       let lab = new Lab;
-      let saveBtn = jQuery('#save-lab');
+      let saveBtn = $('#save-lab');
       saveBtn.on('click', function() {
-        let title = jQuery('form#manage_lab').find('#title').val();
-        let modelNo = jQuery('form#manage_lab').find('#model_no').val();
+        let title = $('form#manage_lab').find('#title').val();
+        let modelNo = $('form#manage_lab').find('#model_no').val();
 
         if (lab.checkforEmptyFields().length > 0) {
           toastr.error('Filled the fields in red!');
@@ -150,10 +150,10 @@
 
     checkforEmptyFields() {
       let error = [];
-      jQuery('form#manage_lab')
+      $('form#manage_lab')
         .find('input')
         .each(function(index, el) {
-          let _this = jQuery(this);
+          let _this = $(this);
           if (_this.val() == '') {
             error.push(_this.attr('id'));
             _this.css('border', '1px solid red');
@@ -165,17 +165,17 @@
     }
 
     clearFormFields() {
-      jQuery('form#manage_lab')
+      $('form#manage_lab')
         .find('input[type="text"]')
         .each(function(index, el) {
-          jQuery(this).val('');
+          $(this).val('');
       });
     }
 
     makeAjaxCall(url, params, method) {
-      return jQuery.ajax({
+      return $.ajax({
         headers:{
-        'X-CSRF-Token': jQuery('input[name="_token"]').val()
+        'X-CSRF-Token': $('input[name="_token"]').val()
       },
         url: url,
         type: method,
@@ -186,4 +186,4 @@
   }
   })(jQuery);
 
-  jQuery('form#manage_lab').UpdateEquipmentLab();
+  $('form#manage_lab').UpdateEquipmentLab();

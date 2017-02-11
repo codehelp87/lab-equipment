@@ -1,6 +1,6 @@
-(function(jQuery) {
+(function($) {
   jQuery.fn.BookEquipment = () => {
-    return jQuery(this).each(() => {
+    return $(this).each(() => {
       let equipment = new Equipment;
       equipment.linkToBookingDetails();
       equipment.bookEquipment();
@@ -16,18 +16,18 @@
       let interval = 1000 * 60 * minutes; // where X is your every X minutes
       let route = '/equipment/booking/checking';
 
-      jQuery.fn.keepAlive({url: route, timer: interval}, function(response) {
+      $.fn.keepAlive({url: route, timer: interval}, function(response) {
         console.log(response);
       });//
     }
 
     cancelBooking(){
       let equipment = new Equipment;
-      let cancelBtn = jQuery(document).find('button.cancel-booking');
+      let cancelBtn = $(document).find('button.cancel-booking');
 
       cancelBtn.on('click', function() {
-        let _this = jQuery(this);
-        let modal = jQuery(document).find('div.cancel_booking');
+        let _this = $(this);
+        let modal = $(document).find('div.cancel_booking');
         let selectedTimeSlot = _this.attr('data-time-slot');
         let bookingDate = moment().format('MM.DD.YYYY');
         let bookingId = _this.attr('id');
@@ -40,7 +40,7 @@
         const route = '/bookings/'+bookingId+'/cancel';
 
         okBtn.on('click', function() {
-          let otherCancelBtn = jQuery('body')
+          let otherCancelBtn = $('body')
           .find('button#'+bookingId);
 
           equipment.makeAjaxCall(route, '', 'GET')
@@ -78,19 +78,19 @@
       const MAX_BOOKING_AHEAD = 30;
 
       let equipment = new Equipment;
-      let bookBtn = jQuery(document).find('button#book-now');
+      let bookBtn = $(document).find('button#book-now');
 
       bookBtn.on('click', function() {
         let selectedTimeSlot = [];
         let selectedTimeSlotId = [];
         let selectedDate = [];
 
-        let equipmentId = jQuery(this).attr('data-id');
-        let modal = jQuery(document).find('div.booking-detail');
-        let checkBox = jQuery(document)
+        let equipmentId = $(this).attr('data-id');
+        let modal = $(document).find('div.booking-detail');
+        let checkBox = $(document)
           .find('div.checkbox')
           .find('input[type="checkbox"]:checked').not('input[type="checkbox"]:disabled');
-        let time = jQuery(document).find('span#time').text();
+        let time = $(document).find('span#time').text();
 
         if (time == '') {
           toastr.error('Pls select date');
@@ -103,7 +103,7 @@
         }
 
         checkBox.each(function(index, el) {
-          var _this = jQuery(this);
+          var _this = $(this);
           selectedTimeSlot.push(_this.val());
           selectedDate.push(_this.attr('date-time'));
           selectedTimeSlotId.push(_this.attr('id'));
@@ -206,9 +206,9 @@
     }
 
     linkToBookingDetails() {
-      let linkBtn = jQuery(document).find('button#book-equipment');
+      let linkBtn = $(document).find('button#book-equipment');
       linkBtn.on('click', function() {
-        let bookItem = jQuery(document)
+        let bookItem = $(document)
           .find('select#book_equipment')
           .val();
 
@@ -228,9 +228,9 @@
     }
 
   makeAjaxCall(url, params, method) {
-    return jQuery.ajax({
+    return $.ajax({
       headers:{
-      'X-CSRF-Token': jQuery('input[name="_token"]').val()
+      'X-CSRF-Token': $('input[name="_token"]').val()
     },
     beforeSend: function(data) {
       console.log('Running......')
@@ -244,4 +244,4 @@
 }
 })(jQuery);
 
-jQuery('body').BookEquipment();
+$('body').BookEquipment();
