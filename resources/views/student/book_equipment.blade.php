@@ -1403,11 +1403,6 @@
                             @if (count($booking->time_slot) > 0)
                                 @foreach($booking->time_slot as $slot)
                                 var slot = "{{ $slot }}"
-                                // if (slot === _this.attr('id')) {
-                                //     _this.attr({'checked': true, 'disabled': true});
-                                //     _this.parent().css('text-decoration', 'line-through')
-                                // }
-
                                 var bookingDate = moment("{{ $booking->booking_date }}");
 
                                 var hourAndMinute = slot.split('-');

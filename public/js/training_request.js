@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.LabEquipment = () => {
-    return $(this).each(() => {
+  jQuery.fn.LabEquipment = function() {
+    return $(this).each(function() {
       let req = new TrainingRequest;
       req.getLabEquipment();
       req.selectTrainingRequest();

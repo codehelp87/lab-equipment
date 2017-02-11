@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.NotifyAll = () => {
-    return $(this).each(() => {
+  jQuery.fn.NotifyAll = function() {
+    return $(this).each(function() {
       let notify = new Notification;
       notify.createNotification();
       notify.editNotification();

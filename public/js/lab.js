@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.UpdateEquipmentLab = () => {
-    return $(this).each(() => {
+  jQuery.fn.UpdateEquipmentLab = function() {
+    return $(this).each(function() {
       let lab = new Lab;
       lab.createLab();
       lab.assignUserToLab();

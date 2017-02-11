@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.LabEquipmentUsage = () => {
-    return $(this).each(() => {
+  jQuery.fn.LabEquipmentUsage = function() {
+    return $(this).each(function() {
       let lab = new LabUsage;
       lab.getLabUsageByEquipment();
       lab.getLabUsers();

@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.UpdateEquipment = () => {
-    return $(this).each(() => {
+  jQuery.fn.UpdateEquipment = function() {
+    return $(this).each(function() {
       let equipment = new Equipment;
       equipment.createEquipment();
       equipment.editEquipment();

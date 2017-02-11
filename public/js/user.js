@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.UpdateUserInfo = () => {
-    return $(this).each(() => {
+  jQuery.fn.UpdateUserInfo = function() {
+    return $(this).each(function() {
       let user = new User;
       user.updateProfile();
       user.editUserAccount();

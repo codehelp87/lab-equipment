@@ -1,6 +1,6 @@
 (function($) {
-  jQuery.fn.BookEquipment = () => {
-    return $(this).each(() => {
+  jQuery.fn.BookEquipment = function() {
+    return $(this).each(function() {
       let equipment = new Equipment;
       equipment.linkToBookingDetails();
       equipment.bookEquipment();
