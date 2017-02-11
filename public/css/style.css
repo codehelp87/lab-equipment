@@ -1,57 +1,62 @@
-h4 {
-	color: #616161;
+input[type="checkbox"] {
+    width: 40px;
 }
 
-h4.panel-title, h5 {
-	font-size: 16px;
-	font-weight: 400;
+h4 {
+    color: #616161;
+}
+
+h4.panel-title,
+h5 {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 span.text-danger {
-	color: #ED1A3B;
-	font-weight: bold;
+    font-weight: bold;
+    color: #ED1A3B;
 }
 
 .cancelled,
 .completed {
-	background-color: #ffffff !important;
-	color:  #ED1A3B !important;
+    color: #ED1A3B !important;
+    background-color: #ffffff !important;
 }
 
 .completed {
-	color: #777 !important;
+    color: #777 !important;
 }
 
 .inActiveBtn {
-	background-color: #DBDBDB !important;
-	color: #ffffff !important;
+    color: #ffffff !important;
+    background-color: #DBDBDB !important;
 }
 
 .completed {
-	color: #f7f7f7;
+    color: #f7f7f7;
 }
 
 a.btn-default {
-	line-height: 30px;
-	font-weight: bold;
-	border-radius: 4px !important;
+    border-radius: 4px !important;
+    font-weight: bold;
+    line-height: 30px;
 }
 
-input[type="radio"], 
+input[type="radio"],
 input[type="checkbox"] {
-	margin-top: -5px;
+    margin-top: -5px;
 }
 
 body {
-	color: #616161;
-	font-family: 'Lato', sans-serif;
-	font-size: 16px;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+    color: #616161;
 }
 
-h4.admin{
-	color: #616161;
-	font-size: 16px;
-	font-weight: 400;
+h4.admin {
+    font-size: 16px;
+    font-weight: 400;
+    color: #616161;
 }
 
 .panel-group .panel {
@@ -88,37 +93,67 @@ h4.admin{
 }
 
 /* Flatten das boostrap */
-.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid {
- 	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-	-webkit-border-radius: 0px !important;
-	-moz-border-radius: 0px !important;
-	border-radius: 0px !important;
-	border-collapse: collapse !important;
-	background-image: none !important;
-}
-button.btn-default {
-	background: #616161;
-	color: #ffffff;
-	border-radius: 4px !important;
-	border: none;
-	padding: 10px;
+
+.well,
+.navbar-inner,
+.popover,
+.btn,
+.tooltip,
+input,
+select,
+textarea,
+pre,
+.progress,
+.modal,
+.add-on,
+.alert,
+.table-bordered,
+.nav > .active>a,
+.dropdown-menu,
+.tooltip-inner,
+.badge,
+.label,
+.img-polaroid {
+    border-collapse: collapse !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background-image: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
-@media (max-width: 767px) {
-	span.text-danger {
-		width: 50%;
-	}
-	table.table-responsive, h1, h2, h3, h4, h5, h6 {
-		padding: 5px;
-	}
-	p.pull-right a {
-		font-size: 12px;
-	}
+button.btn-default {
+    padding: 10px;
+    border: none;
+    border-radius: 4px !important;
+    color: #ffffff;
+    background: #616161;
 }
-@media (min-width: 480px) {
-	span.text-danger {
-		width: 50%;
-	}
+
+@media(max-width:767px) {
+    span.text-danger {
+        width: 50%;
+    }
+
+    table.table-responsive,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        padding: 5px;
+    }
+
+    p.pull-right a {
+        font-size: 12px;
+    }
+}
+
+@media(min-width:480px) {
+    span.text-danger {
+        width: 50%;
+    }
 }
