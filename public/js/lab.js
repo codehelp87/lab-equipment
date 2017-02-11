@@ -186,4 +186,4 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }();
 })(jQuery);
 
-$('form#manage_lab').UpdateEquipmentLab();
+$('body').UpdateEquipmentLab();

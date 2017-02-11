@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-large btn-default request-training">Send</button>
-                                <a class="btn btn-link open-modal" href="#">
+                                <a class="btn btn-link open-modal" href="#" data-target="#contact-admin">
                                     Have a question?
                                 </a>
                             </div>
