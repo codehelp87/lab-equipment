@@ -279,4 +279,9 @@
 </div>
 </div>
 <!-- container -->
+<style type="text/css">
+    input[type="checkbox"] {
+    width: 40px;
+}
+</style>
 @endsection
