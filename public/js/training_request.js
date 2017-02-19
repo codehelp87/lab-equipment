@@ -184,6 +184,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'prepareModal',
       value: function prepareModal(bookingDate, selectedStudents, location) {
         var students = '';
+        var bookingTime = moment().format('h:mm:ss a');
         var stuff = '<h5 class="text-center">Are you sure to confirm this request and send a confirmation email?</h5>';
         var dateSelected = '<h5 class="text-center">' + bookingDate + '</h5>';
         var trainingLocation = '<h5 class="text-center">' + location + '</h5>';
@@ -197,6 +198,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         stuff += students;
         stuff += dateSelected;
         stuff += trainingLocation;
+        stuff += bookingTime;
         stuff += info;
 
         return stuff;
