@@ -39,7 +39,9 @@
                 <option value="">Select Month</option>
                 <?php 
                   for($m = 1; $m <= 12; $m++) {
-                    echo '<option value='.$m.'>'.getMonth()[$m].'</option>';
+                    if ($m >= date('m')) {
+                        echo '<option value='.$m.'>'.getMonth()[$m].'</option>';
+                    }
                   }
 
                   function getMonth() {
