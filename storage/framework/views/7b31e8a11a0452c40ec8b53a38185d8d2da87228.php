@@ -18,15 +18,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="time_unit" class="col-sm-2 control-label">Time Unit</label>
+        <label for="time_unit" class="col-sm-2 control-label">Unit Time</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="time_unit" name="time_unit" placeholder="Time Unit" required="required">
+            <input type="text" class="form-control" id="time_unit" name="time_unit" placeholder="Min" required="required">
         </div>
     </div>
     <div class="form-group">
         <label for="reservation_time" class="col-sm-2 control-label">Max Reservation Time</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="reservation_time" name="reservation_time" placeholder="Max Reservation Time" required="required">
+            <input type="text" class="form-control" id="reservation_time" name="reservation_time" placeholder="3 hrs" required="required">
         </div>
     </div>
     <div class="form-group">
@@ -45,23 +45,11 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label for="assign_lab" class="col-sm-2 control-label">Assign to Lab</label>
-        <div class="col-sm-10">
-            <select name="assign_lab" id="assign_lab" name="assign_lab" class="form-control" required="required">
-                <option value="0">Choose Lab</option>
-                <?php if($labs->count() > 0): ?>
-                <?php $__currentLoopData = $labs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lab): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                <option value="<?php echo e($lab->id); ?>"><?php echo e($lab->title); ?></option>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                <?php endif; ?>
-            </select>
-        </div>
-    </div>
+    
     <div class="form-group">
         <label for="photo" class="col-sm-2 control-label">Photo</label>
         <div class="col-sm-10">
-            <input type="file" name="photo" id="photo" class="form-control" value="" required="required">
+            <input type="file" name="photo" id="photo" class="form-control" required="required">
         </div>
     </div>
     <div class="form-group">
