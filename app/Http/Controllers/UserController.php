@@ -101,6 +101,7 @@ class UserController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'date' => $request->booking_date,
+                    'time' => $request->time,
                     'location' => $request->location,
                 ];
                 $this->sendEmail($data, $user->email);

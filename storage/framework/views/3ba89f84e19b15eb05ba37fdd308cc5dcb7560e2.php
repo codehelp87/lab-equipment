@@ -6,7 +6,7 @@
 			<p class="text-left">
 				Dear <?php echo e($name); ?> ,<br><br>
 				You have signed up for the basic equipment training session.<br><br>
-				<span>Date: <?php echo e(date_format($newDate,'F')); ?> <?php echo e(date_format($newDate,'d')); ?>, <?php echo e(date_format($newDate,'Y')); ?> </span><br><br>
+				<span>Date: <?php echo e(date_format($newDate,'F')); ?> <?php echo e(date_format($newDate,'d')); ?>, <?php echo e(date_format($newDate,'Y')); ?>  <?php echo e($time); ?></span><br><br>
 				Location: <?php echo e($location); ?><br><br>
 				Please be on time.<br><br>
 				Thanks,<br><br>

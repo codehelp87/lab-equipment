@@ -144,7 +144,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'equipment': equipmentId,
             'students': studentIds,
             'booking_date': bookingDate,
-            'location': location
+            'location': location,
+            'time': time
           };
 
           okBtn.on('click', function () {
