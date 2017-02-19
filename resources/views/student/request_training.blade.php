@@ -12,7 +12,8 @@
                     <form class="form-horizontal training_request" id="training_request" action="{{ route('create-training-request') }}" method="post">
                         <input type="hidden" name="_token" id="_token" class="form-control" value="{{ csrf_token() }}">
                         <p class="text-center">
-                            <small>Welcome to the Chemistry Department Equipment User System.  In order to use a Chemistry Department instruments, an user should first receive the user training . Every first Wed. of the month. Max 5 persons.   Please sign up for the training session by filling out the form below.
+                            <small><strong>Welcome to the Chemistry Department Equipment User System.</strong><br>  In order to use a Chemistry Department instruments, an user should first receive the <strong>user training</strong>.<br>  Every first Wed. of the month. Max 5 persons. <br>
+                              Please <strong>sign up for the training session</strong> by filling out the form below.<br>
                             You can reserve and use the instrument only after the training session and approval of the instructor.</small>
                         </p>
                         <div class="form-group">
