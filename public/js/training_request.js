@@ -153,6 +153,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');
+                smtBtn.unbind('click');
                 return toastr.success('Your confirmation has been sent');
               }
               return toastr.success(data.message);
