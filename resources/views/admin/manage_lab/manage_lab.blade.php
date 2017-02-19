@@ -3,22 +3,22 @@
     <div class="form-group">
         <label for="title" class="col-sm-2 control-label">Lab Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Lab Name">
         </div>
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="model_no" class="col-sm-2 control-label">Lab Location</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="model_no" name="model_no" placeholder="Lab Location">
         </div>
-    </div>
+    </div> --}}
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="save-lab">Save</button>
         </div>
     </div>
 </form>
-<hr>
+{{-- <hr>
 <h6>Assign Professor to Lab</h6>
 <hr>
 <form class="form-horizontal" id="assign_user_to_lab">
@@ -54,4 +54,4 @@
             <button type="submit" class="btn btn-large btn-default" id="save-lab-user">Save</button>
         </div>
     </div>
-</form>
+</form> --}}
