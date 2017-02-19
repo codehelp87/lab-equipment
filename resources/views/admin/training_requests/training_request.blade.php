@@ -62,6 +62,22 @@
                 ?>
             </select>
         </div>
+        <div class="col-sm-2">
+            <select name="time" id="time" class="form-control" required="required">
+                <option value="">Select Time</option>
+                <?php 
+                  for($t = 1; $t <= 24; $t++) {
+                    if ($t <= 11) {
+                        echo '<option value='.$t.'>'.$t.':00 am</option>';
+                    } elseif ($t > 11 && $t <= 23) {
+                        echo '<option value='.$t.'>'.$t.':00 pm</option>';
+                    } else {
+                        echo '<option value='.$t.'>'.$t.':00 am</option>';
+                    }
+                  }
+                ?>
+            </select>
+        </div>
     </div>
     <div class="form-group">
         <label for="location" class="col-sm-2 control-label">Location</label>

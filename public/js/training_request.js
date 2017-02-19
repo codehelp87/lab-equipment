@@ -63,6 +63,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');
+                smtBtn.unbind('click');
                 return toastr.success('Your confirmation has been sent');
               }
             }).fail(function (error) {
@@ -91,6 +92,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var month = $(document).find('form#approve-request select#month').val();
           var day = $(document).find('form#approve-request select#day').val();
           var year = $(document).find('form#approve-request select#year').val();
+          var time = $(document).find('form#approve-request select#time').val();
 
           if (year == '') {
             toastr.error('Pls select year');
@@ -104,6 +106,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (day == '') {
             toastr.error('Pls select day');
+            return false;
+          }
+
+          if (time == '') {
+            toastr.error('Pls select time');
             return false;
           }
 
@@ -124,8 +131,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
 
           var bookingDate = year + '/' + month + '/' + day;
+          var bookingTime = time;
 
-          var modalContent = req.prepareModal(bookingDate, selectedStudents, location);
+          var modalContent = req.prepareModal(bookingDate, bookingTime, selectedStudents, location);
           modal.find('div.modal-body').html(modalContent);
           selectedStudents = [];
           modal.modal('show');
@@ -183,9 +191,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }, {
       key: 'prepareModal',
-      value: function prepareModal(bookingDate, selectedStudents, location) {
+      value: function prepareModal(bookingDate, bookingTime, selectedStudents, location) {
         var students = '';
-        var bookingTime = moment().format('h:mm:ss a');
+        //var bookingTime = moment().format('h:mm:ss a');
         var stuff = '<h5 class="text-center">Are you sure to confirm this request and send a confirmation email?</h5>';
         var dateSelected = '<h5 class="text-center">' + bookingDate + '</h5>';
         var trainingLocation = '<h5 class="text-center">' + location + '</h5>';
