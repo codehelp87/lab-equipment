@@ -68,13 +68,13 @@
             <select name="time" id="time" class="form-control" required="required">
                 <option value="">Select Time</option>
                 <?php 
-                  for($t = 1; $t <= 24; $t++) {
+                  for($t = 1; $t <= 24; $t += 1) {
                     if ($t <= 11) {
-                        echo '<option value='.$t.'>'.$t.':00 am</option>';
+                        echo '<option value="'.$t.' :00 am">'.$t.':00 am</option>';
                     } elseif ($t > 11 && $t <= 23) {
-                        echo '<option value='.$t.'>'.$t.':00 pm</option>';
+                        echo '<option value="'.$t.':00 pm">'.$t.':00 pm</option>';
                     } else {
-                        echo '<option value='.$t.'>'.$t.':00 am</option>';
+                        echo '<option value="'.$t.':00 am">'.$t.':00 am</option>';
                     }
                   }
                 ?>
