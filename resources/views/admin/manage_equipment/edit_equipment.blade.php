@@ -19,21 +19,21 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="time_unit" class="col-sm-2 control-label">Time Unit</label>
+        <label for="time_unit" class="col-sm-2 control-label">Unit Time</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="time_unit" name="time_unit" placeholder="Time Unit" required="required" value="{{ $equipment->time_unit }}">
+            <input type="text" class="form-control" id="time_unit" name="time_unit" placeholder="10 Min" required="required" value="{{ $equipment->time_unit }}">
         </div>
     </div>
     <div class="form-group">
         <label for="reservation_time" class="col-sm-2 control-label">Max Reservation Time</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="reservation_time" name="reservation_time" placeholder="Max Reservation Time" required="required" value="{{ $equipment->max_reservation_time }}">
+            <input type="text" class="form-control" id="reservation_time" name="reservation_time" placeholder="3 hrs" required="required" value="{{ $equipment->max_reservation_time }}">
         </div>
     </div>
     <div class="form-group">
         <label for="price_per_unit" class="col-sm-2 control-label">Price per unit Time</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="price_per_unit" name="price_per_unit" placeholder="Price per unit Time" required="required" value="{{ $equipment->price_per_unit_time }}">
+            <input type="text" class="form-control" id="price_per_unit" name="price_per_unit" placeholder="KRW" required="required" value="{{ $equipment->price_per_unit_time }}">
         </div>
     </div>
     <div class="form-group">
@@ -54,7 +54,7 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="assign_lab" class="col-sm-2 control-label">Assign to Lab</label>
         <div class="col-sm-10">
             <select name="assign_lab" id="assign_lab" name="assign_lab" class="form-control" required="required">
@@ -70,7 +70,7 @@
                 @endif
             </select>
         </div>
-    </div>
+    </div> --}}
     <div class="form-group">
         <label for="photo" class="col-sm-2 control-label">Photo</label>
         <div class="col-sm-10">

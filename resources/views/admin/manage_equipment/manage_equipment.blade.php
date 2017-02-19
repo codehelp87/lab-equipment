@@ -5,11 +5,15 @@
             @if($equipments->count() > 0)
             @foreach($equipments as $equipment)
             <tr id="edit-eqipment{{ $equipment->id }}">
-                <td>{{ $equipment->model_no }}</td>
+                <td>
+                   {{ $equipment->title }}<br>
+                   {{ $equipment->model_no }}<br>
+                   {{ $equipment->maker }}<br>
+                </td>
                 <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                 <td>
                     <Strong>Status</Strong><br>
-                    <Strong>Unit Time</Strong><br>
+                    <Strong>Time Unit</Strong><br>
                     <Strong>Max Time(per day)</Strong><br>
                 </td>
                 <td>

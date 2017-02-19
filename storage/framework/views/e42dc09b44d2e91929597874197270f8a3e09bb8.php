@@ -5,11 +5,15 @@
             <?php if($equipments->count() > 0): ?>
             <?php $__currentLoopData = $equipments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipment): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tr id="edit-eqipment<?php echo e($equipment->id); ?>">
-                <td><?php echo e($equipment->model_no); ?></td>
+                <td>
+                   <?php echo e($equipment->title); ?><br>
+                   <?php echo e($equipment->model_no); ?><br>
+                   <?php echo e($equipment->maker); ?><br>
+                </td>
                 <td><img src="<?php echo e($equipment->equipment_photo); ?>" style="width: 50px; height: 50px;"></td>
                 <td>
                     <Strong>Status</Strong><br>
-                    <Strong>Unit Time</Strong><br>
+                    <Strong>Time Unit</Strong><br>
                     <Strong>Max Time(per day)</Strong><br>
                 </td>
                 <td>
