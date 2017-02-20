@@ -37,7 +37,7 @@ class UserController extends Controller
             $user->status = 1;
             $user->save();
             Auth::login($user);
-            return redirect() ->route('dashboard');
+            return redirect()->route('dashboard');
         }
         return redirect()->route('request_training');
     }

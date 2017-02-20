@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEquipmentIdAndStatusToTraining extends Migration
+class AddLabIdToBooking extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,10 @@ class AddEquipmentIdAndStatusToTraining extends Migration
      */
     public function up()
     {
-        Schema::table('trainings', function (Blueprint $table) {
-            $table->integer('status')->default(0);
-
-            $table->integer('equipment_id')
-                ->unsigned()
-                ->default(1);
-
+        Schema::table('bookings', function (Blueprint $table) {
             $table->integer('lab_id')
                 ->unsigned()
                 ->default(1);
-
-            $table->foreign('equipment_id')
-                ->references('id')
-                ->on('equipments')
-                ->onDelete('cascade');
-
             $table->foreign('lab_id')
                 ->references('id')
                 ->on('labs')
@@ -43,8 +31,6 @@ class AddEquipmentIdAndStatusToTraining extends Migration
      */
     public function down()
     {
-        Schema::table('trainings', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('bookings');
     }
 }
