@@ -346,7 +346,6 @@ class EquipmentController extends Controller
             'time_unit' => $request->time_unit,
             'max_reservation_time' => $request->reservation_time,
             'price_per_unit_time' => $request->price_per_unit,
-            'lab_id' => $request->assign_lab,
             'availability' => $request->availability,
             'equipment_photo' => $this->handleCloudinaryFileUpload($request),
             'user_id' => Auth::user()->id,
@@ -375,7 +374,6 @@ class EquipmentController extends Controller
             $equipment->time_unit = $request->time_unit;
             $equipment->max_reservation_time = $request->reservation_time;
             $equipment->price_per_unit_time = $request->price_per_unit;
-            $equipment->lab_id = $request->assign_lab;
             $equipment->availability = $request->availability;
             if (!is_null($request->file('photo'))) {
                 $equipment->equipment_photo = $this->handleCloudinaryFileUpload($request);

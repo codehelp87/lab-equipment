@@ -14,14 +14,6 @@ class AddLabIdToEquipments extends Migration
     public function up()
     {
         Schema::table('equipments', function (Blueprint $table) {
-            $table->integer('lab_id')
-                ->unsigned()
-                ->default(1);
-            $table->foreign('lab_id')
-                ->references('id')
-                ->on('labs')
-                ->onDelete('cascade');
-
             $table->integer('user_id')
                 ->unsigned()
                 ->default(1);
