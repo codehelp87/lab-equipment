@@ -10,7 +10,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var lab = new Lab();
       lab.createLab();
       lab.assignUserToLab();
-      lab.getLabEquipment();
+      //lab.getLabEquipment();
       lab.contactAdmin();
     });
   };
