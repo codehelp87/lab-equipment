@@ -203,7 +203,8 @@ class UserController extends Controller
     public function requestForm()
     {
         $labs = Lab::findAll();
-        return view('student.request_training', compact('labs'));
+        $equipments = Equipment::findAll();
+        return view('student.request_training', compact('labs', 'equipments'));
     }
 
     public function changePassword(Request $request, $email)
