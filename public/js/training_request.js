@@ -62,8 +62,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (data.id != undefined) {
                 modal.modal('hide');
                 req.clearFields();
-                okBtn.unbind('click');
-                smtBtn.unbind('click');
+                //okBtn.unbind('click');
+                //smtBtn.unbind('click');
                 return toastr.success('Your confirmation has been sent');
               }
             }).fail(function (error) {
