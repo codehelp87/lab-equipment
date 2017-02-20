@@ -123,7 +123,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var saveBtn = $('#save-lab');
         saveBtn.on('click', function () {
           var title = $('form#manage_lab').find('#title').val();
-          var modelNo = $('form#manage_lab').find('#model_no').val();
+          //var modelNo = $('form#manage_lab').find('#model_no').val();
 
           if (lab.checkforEmptyFields().length > 0) {
             toastr.error('Filled the fields in red!');
@@ -132,12 +132,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // make a put request to the server side
           var params = {
             'title': title,
-            'model_no': modelNo
+            //'model_no': modelNo
           };
 
           lab.makeAjaxCall('/labs/add', params, 'POST').done(function (data) {
             toastr.success(data.message);
             lab.checkforEmptyFields();
+            lab.clearFormFields();
             return false;
           }).fail(function (error) {
             toastr.error(error.toString());
