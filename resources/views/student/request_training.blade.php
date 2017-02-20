@@ -78,7 +78,7 @@
                                     <option value="0">Choose session</option>
                                     <?php
                                     $year = date('Y');
-                                    $month = date('M');
+                                    $month = date('m');
                                     for ($m = 1; $m <= 12; $m++) {
                                         if ($m >= $month) {
                                             $month = date('F', mktime(0, 0, 0, $m, 1, date('Y')));
