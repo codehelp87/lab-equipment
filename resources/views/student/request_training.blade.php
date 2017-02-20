@@ -63,6 +63,11 @@
                             <div class="col-sm-10">
                                 <select id="equipment" name="equipment" class="form-control" required="required">
                                     <option value="">Choose equipment</option>
+                                    @if ($equipments->count() > 0)
+                                    @foreach($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}">{{ $equipment->title }}</option>
+                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>

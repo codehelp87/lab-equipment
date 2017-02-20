@@ -63,6 +63,11 @@
                             <div class="col-sm-10">
                                 <select id="equipment" name="equipment" class="form-control" required="required">
                                     <option value="">Choose equipment</option>
+                                    <?php if($equipments->count() > 0): ?>
+                                    <?php $__currentLoopData = $equipments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipment): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                    <option value="<?php echo e($equipment->id); ?>"><?php echo e($equipment->title); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                    <?php endif; ?>
                                 </select>
                             </div>
                         </div>
