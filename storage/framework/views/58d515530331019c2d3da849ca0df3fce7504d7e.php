@@ -46,6 +46,9 @@
                                             <a class="btn btn-link" href="<?php echo e(route('request_training')); ?>">
                                                 Need to signup?
                                             </a>
+                                            <a class="btn btn-link open-modal" href="#" data-target="#contact-admin">
+                                    Forgot your Password?
+                                </a>
                                         </div>
                                     </div>
                                 </form>
