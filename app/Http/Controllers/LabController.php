@@ -9,6 +9,53 @@ use Illuminate\Http\Request;
 
 class LabController extends Controller
 {
+    public function updateLab(Request $request, $id)
+    {
+        $lab = Lab::find($id);
+
+        if (count($lab) > 0) {
+            $lab->title = $request->title;
+        }
+
+        $lab->save();
+
+        if (count($lab) > 0) {
+            return response()->json([
+                'message' => 'Lab was updated successfully',
+                'lab' => $lab,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Error creating Lab'
+        ]);
+    }
+
+    public function editLab(Request $request, $id)
+    {
+        $lab = Lab::find($id);
+
+        if (count($lab) > 0) {
+            return view('admin.manage_lab.edit_lab', 
+                compact('lab')
+            );
+        }
+
+        abort(404);
+    }
+
+    public function deleteLab(Request $request, $id)
+    {
+        $lab = Lab::find($id);
+
+        if ($lab->count() > 0) {
+            $lab->forceDelete();
+
+            return response()->json(['message' => 'deleted']);
+        }
+        return response()->json(['message' => 'Error deleting lab']);
+    }
+
     public function getLabEquipments(Request $request, $id) 
     {
         $lab = Lab::findOneById($id);

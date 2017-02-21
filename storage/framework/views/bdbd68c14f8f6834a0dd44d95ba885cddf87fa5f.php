@@ -7,13 +7,13 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-1 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="save-lab">Save</button>
         </div>
     </div>
 </form>
 
-<div class="col-sm-8">
+<div class="col-sm-10 col-sm-offset-1">
 <div class="table-responsive">
     <table class="table table-responsive" id="list-labs">
         <tbody>
@@ -24,11 +24,11 @@
                    <?php echo e($lab->title); ?><br>
                 </td>
                 <td><a href="#" class="edit-lab" id="<?php echo e($lab->id); ?>" title="<?php echo e($lab->title); ?>">Edit</a></td>
-                <td><a href="#"  class="delete-lab" id="<?php echo e($lab->id); ?>" rel= "<?php echo e(route('delete_equipment', ['id' => $lab->id ])); ?>">Delete</a></td>
+                <td><a href="#"  class="delete-lab" id="<?php echo e($lab->id); ?>" rel= "<?php echo e(route('delete_lab', ['id' => $lab->id ])); ?>">Delete</a></td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <div class="display<?php echo e($lab->id); ?>" id="edit-eqipment<?php echo e($lab->id); ?>" style="display: none;"></div>
+                    <div class="display<?php echo e($lab->id); ?>" id="edit-lab<?php echo e($lab->id); ?>" style="display: none;"></div>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>

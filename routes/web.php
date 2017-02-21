@@ -28,6 +28,10 @@ Route::get('users/account/blocked', function() {
 })->name('account_blocked');
 
 Route::get('/labs/{id}/equipments', 'LabController@getLabEquipments');
+Route::get('/labs/{id}', 'LabController@editLab');
+Route::post('/labs/{id}/update', 'LabController@updateLab');
+Route::delete('/labs/{id}/delete', 'LabController@deleteLab')
+	    ->name('delete_lab');
 
 
 Route::get('request/training/confirmation', function() {

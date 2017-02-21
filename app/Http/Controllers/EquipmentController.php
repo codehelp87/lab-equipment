@@ -390,7 +390,7 @@ class EquipmentController extends Controller
         }
 
         return response()->json([
-            'message' => 'Error creating Lab'
+            'message' => 'Error creating Equipment'
         ]);
     }
 

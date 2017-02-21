@@ -10,8 +10,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var lab = new Lab();
       lab.createLab();
       lab.assignUserToLab();
-      //lab.getLabEquipment();
+      lab.editLab();
       lab.contactAdmin();
+      lab.updateLab();
     });
   };
 
@@ -130,12 +131,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           // make a put request to the server side
           var params = {
-            'title': title,
-            //'model_no': modelNo
+            'title': title
           };
 
           lab.makeAjaxCall('/labs/add', params, 'POST').done(function (data) {
-            console.log(data);
             var newLab = lab.appendNewLab(data.lab);
             $('table#list-labs').append(newLab);
 
@@ -150,6 +149,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     },
+     {
+      key: 'editLab',
+      value: function editLab() {
+        var lab = new Lab();
+        $(function () {
+          $('body').on('click', 'table#list-labs a.edit-lab', function () {
+            var _this = $(this);
+            var $btn = _this.button('loading');
+            var id = _this.attr('id');
+            var editMode = $('table#list-labs').find('tr > td div.display' + id);
+
+            lab.makeAjaxRequest('/labs/' + id, '', 'GET').done(function (data) {
+              editMode.slideDown().html(data).css('display', 'block');
+              $btn.button('reset');
+            }).fail(function (error) {
+              toastr.error(JSON.stringify(error));
+              $btn.button('reset');
+            });
+
+            return false;
+          });
+        });
+      }
+    },
+    {
+      key: 'updateLab',
+      value: function updateLab() {
+        $(function() {
+          var lab = new Lab();
+          $('body').on('click', 'button.edit-lab', function () {
+            var title = $('body').find('form.edit_lab').find('#title').val();
+            var labId = $(this).attr('data-id');
+
+            if (title == '' || title == undefined) {
+              toastr.error('Filled the fields in red!');
+              return false;
+            }
+            // make a put request to the server side
+            var params = {
+              'title': title
+            };
+
+            lab.makeAjaxCall('/labs/' + labId + '/update', params, 'POST').done(function (data) {
+              var existingLab = lab.appendNewLab(data.lab);
+              $(document).find('table tr#edit-lab' + labId).replaceWith(existingLab);
+              $(document).find('div#edit-lab' + labId).slideUp();
+
+              toastr.success(data.message);
+              lab.clearFormFields();
+              return false;
+            }).fail(function (error) {
+              toastr.error(error.toString());
+            });
+            return false;
+          });
+        });
+      }
+    }
+    ,
     {
       key: 'appendNewLab',
       value: function appendNewLab(data) {
@@ -165,7 +223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'checkforEmptyFields',
       value: function checkforEmptyFields() {
         var error = [];
-        $('form#manage_lab').find('input').each(function (index, el) {
+        $('form#manage_lab, form.edit_lab').find('input').each(function (index, el) {
           var _this = $(this);
           if (_this.val() == '') {
             error.push(_this.attr('id'));
@@ -179,7 +237,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'clearFormFields',
       value: function clearFormFields() {
-        $('form#manage_lab').find('input[type="text"]').each(function (index, el) {
+        $('form#manage_lab, form.edit_lab').find('input[type="text"]').each(function (index, el) {
           $(this).val('');
         });
       }
@@ -194,6 +252,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: method,
           dataType: 'json',
           data: params
+        });
+      }
+    }, {
+      key: 'makeAjaxRequest',
+      value: function makeAjaxRequest(url, params, method) {
+        return $.ajax({
+          headers: {
+            'X-CSRF-Token': $('input[name="_token"]').val()
+          },
+          url: url,
+          type: method,
+          dataType: 'html',
+          data: params,
+          async: false,
+          cache: false,
+          contentType: false,
+          enctype: 'multipart/form-data',
+          processData: false
         });
       }
     }]);
