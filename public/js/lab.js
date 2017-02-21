@@ -13,6 +13,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       lab.editLab();
       lab.contactAdmin();
       lab.updateLab();
+      lab.closeForm();
     });
   };
 
@@ -206,8 +207,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         });
       }
-    }
-    ,
+    },
+    {
+      key: 'closeForm',
+      value: function closeForm() {
+        $('body').on('click', 'button.close-lab', function () {
+          var labId = $(this).attr('id');
+          $(document).find('div#edit-lab' + labId).slideUp();
+          return false;
+        });
+      }
+    },
     {
       key: 'appendNewLab',
       value: function appendNewLab(data) {
