@@ -33,12 +33,19 @@
     <thead>
         <tr>
             <th>Lab</th>
-            <th>Hours</th>
-            <th>Charge</th>
+            <th colspan="2">Daytime (9am - 9pm)</th>
             <th>Lab</th>
-            <th>Hours</th>
-            <th>Charge</th>
+            <th colspan="2">Nighttime (9pm - 9am)</th>
         </tr>
+        <tr>
+           <td></td>
+           <td>Hours</td>
+            <td>Charge</td>
+            <td></td>
+           <td>Hours</td>
+            <td>Charge</td>
+        </tr>
+        
     </thead>
     <tbody>
     </tbody>
