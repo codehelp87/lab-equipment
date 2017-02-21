@@ -14,6 +14,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       lab.contactAdmin();
       lab.updateLab();
       lab.closeForm();
+      lab.deleteLab();
     });
   };
 
@@ -215,6 +216,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var labId = $(this).attr('id');
           $(document).find('div#edit-lab' + labId).slideUp();
           return false;
+        });
+      }
+    },
+    {
+      key: 'deleteLab',
+      value: function deleteLab() {
+        var lab = new Lab();
+        $('body').on('click', 'a.delete-lab', function () {
+          var _this = $(this);
+          var $btn = _this.button('loading');
+          var labId = _this.attr('id');
+          var route = _this.attr('rel');
+
+          bootbox.confirm('Are you sure to delete?', function (result) {
+            if (result) {
+              lab.makeAjaxCall(route, {}, 'DELETE').done(function (data) {
+                if (data.message == 'deleted') {
+                  $btn.button('reset');
+                  var tr = _this.parents('#edit-lab' + labId);
+                  tr.next().remove();
+                  tr.remove();
+                  return toastr.success('Lab has been successfully deleted ');
+                }
+                return toastr.error(data.message);
+              }).fail(function (error) {
+                console.log(error);
+              });
+            }
+            return $btn.button('reset');
+          });
         });
       }
     },
