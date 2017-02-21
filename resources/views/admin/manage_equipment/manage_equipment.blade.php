@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="display{{ $equipment->id }}" id="edit-eqipment{{ $equipment->id }}" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
+                    <div class="display{{ $equipment->id }}" id="edit-eqipment{{ $equipment->id }}" style="display: none;"></div>
                 </td>
             </tr>
             @endforeach

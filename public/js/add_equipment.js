@@ -146,6 +146,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         tableRow += '<strong>Status</strong><br>' + '<strong>Unit Time</strong><br>' + '<strong>Max Time(per day)</strong><br>' + '</td>';
         tableRow += '<td>' + status + '<br>' + data.time_unit + ' mins <br>' + data.max_reservation_time + ' hours<br></td>';
         tableRow += '<td>' + '<strong>Open</strong><br>' + '<strong>Cancel</strong><br>' + '</td>' + '<td>' + '<span>30 minutes before</span><br>' + '<span>1 hour before</span><br>' + '</td>' + '<td><a href="#" class="edit-eqipment" id=' + data.id + ' title=' + data.title + '>Edit</a></td>' + '<td><a href="#"  class="delete-equipment" id=' + data.id + ' rel="/equipments/' + data.id + '/delete">Delete</a></td>' + '</tr>';
+        tableRow += '<tr>';
+        tableRow += '<td colspan="8">';
+        tableRow += '<div class="display' + data.id + '" id="edit-eqipment' + data.id + '" style="display: none;"></div>' +
+                '</td></tr>'
         return tableRow;
       }
     }, {

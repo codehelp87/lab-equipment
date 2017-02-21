@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="display<?php echo e($equipment->id); ?>" id="edit-eqipment<?php echo e($equipment->id); ?>" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
+                    <div class="display<?php echo e($equipment->id); ?>" id="edit-eqipment<?php echo e($equipment->id); ?>" style="display: none;"></div>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
