@@ -196,7 +196,7 @@
                                 </td>
                                 <td>
                                     <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
-                                    <?php echo e($equipment->price_per_unit_time); ?><br>
+                                    <?php echo e($equipment->time_unit); ?> mins<br>
                                     <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
                                 </td>
                                 <td>
@@ -243,7 +243,7 @@
                                 </td>
                                 <td>
                                     <?php echo e($equipment->availability == 1? 'Available': 'Unavailable'); ?><br>
-                                    <?php echo e($equipment->price_per_unit_time); ?><br>
+                                    <?php echo e($equipment->time_unit); ?> mins<br>
                                     <?php echo e($equipment->max_reservation_time); ?> hr(s)<br>
                                 </td>
                                 <td>
