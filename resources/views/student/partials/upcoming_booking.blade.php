@@ -32,7 +32,7 @@
                 <button type="button" class="btn btn-default pull-right cancel-booking inActiveBtn"  id="{{ $booking->id }}" disabled="disabled"> Cancel</button>
                 @else
                 <?php $bookingSlot = []; if (!is_null($booking->time_slot)) { $bookingSlot = $booking->time_slot; } ?>
-                <button type="button" class="btn btn-default pull-right cancel-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}" > Cancel</button>
+                <button type="button" class="btn btn-default pull-right cancel-booking upcoming-booking" id="{{ $booking->id }}" data-time-slot="{{ implode(' , ', $bookingSlot) }}" > Cancel</button>
                 <?php $bookingSlot = []; ?>
                 @endif
             </td>

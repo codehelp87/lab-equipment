@@ -54,7 +54,7 @@
                         <hr>
                     </div>
                     <div class="col-md-8">
-                        <h5>You select <span id="time"></span></h5>
+                        <h5><strong>You select <span id="time"></span></strong></h5>
                         <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
