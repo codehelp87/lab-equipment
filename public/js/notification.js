@@ -132,8 +132,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 if (data.message == 'deleted') {
                   $btn.button('reset');
                   var tr = $(document)
-                    .find('tr#edit-notification' + notifyId)
-                    ; //#edit-notification' + notifyId
+                    .find('tr#edit-notification' + notifyId); //#edit-notification' + notifyId
                   tr.next().remove();
                   tr.remove();
                   return toastr.success('Notification has been successfully deleted ');
