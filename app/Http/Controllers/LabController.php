@@ -37,7 +37,8 @@ class LabController extends Controller
 
     	if (count($lab) > 0) {
     		return response()->json([
-    			'message' => 'Lab was created successfully'
+    			'message' => 'Lab was created successfully',
+                'lab' => $lab,
     		]);
     	}
 

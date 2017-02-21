@@ -135,6 +135,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
 
           lab.makeAjaxCall('/labs/add', params, 'POST').done(function (data) {
+            console.log(data);
+            var newLab = lab.appendNewLab(data.lab);
+            $('table#list-labs').append(newLab);
+
             toastr.success(data.message);
             lab.checkforEmptyFields();
             lab.clearFormFields();
@@ -149,7 +153,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     {
       key: 'appendNewLab',
       value: function appendNewLab(data) {
-
+        var tableRow = '<tr id="edit-lab' + data.id + '">';
+        tableRow += '<td>' + data.title + '</td>';
+        tableRow += '<td><a href="#" class="edit-lab" id=' + data.id + ' title=' + data.title + '>Edit</a></td>' + 
+        '<td><a href="#"  class="delete-lab" id=' + data.id + ' rel="/labs/' + data.id + '/delete">Delete</a></td>' +
+        '</tr>';
+        return tableRow;
       }
     },
      {

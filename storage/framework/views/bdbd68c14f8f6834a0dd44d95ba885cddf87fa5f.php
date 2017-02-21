@@ -27,8 +27,8 @@
                 <td><a href="#"  class="delete-lab" id="<?php echo e($lab->id); ?>" rel= "<?php echo e(route('delete_equipment', ['id' => $lab->id ])); ?>">Delete</a></td>
             </tr>
             <tr>
-                <td colspan="8">
-                    <div class="display<?php echo e($lab->id); ?>" id="edit-eqipment<?php echo e($lab->id); ?>" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
+                <td colspan="3">
+                    <div class="display<?php echo e($lab->id); ?>" id="edit-eqipment<?php echo e($lab->id); ?>" style="display: none;"></div>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
