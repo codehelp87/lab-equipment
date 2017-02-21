@@ -1323,6 +1323,8 @@
                 if (newUrl[1] != undefined) {
                     var newDate =  newUrl[1].split('=');
                     $(document).find('span#time').text(moment(newDate[1]).format('YYYY-MM-DD ddd'));
+                    $(document).find('div#datetimepicker1 > input[type="text"]')
+                    .val(moment(newDate[1]).format('YYYY-MM-DD ddd'));
                 }
 
                 $('#datetimepicker1').datepicker({
