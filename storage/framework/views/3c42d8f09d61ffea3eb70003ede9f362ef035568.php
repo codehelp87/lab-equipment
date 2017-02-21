@@ -15,6 +15,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="edit-notification">Update</button>
+            <button type="submit" class="btn btn-large btn-default close-notification" id="<?php echo e($notification->id); ?>">Cancel</button>
         </div>
     </div>
 </form>

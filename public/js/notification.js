@@ -12,6 +12,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       notify.editNotification();
       notify.updateNotification();
       notify.readNotification();
+      notify.closeForm();
     });
   };
 
@@ -104,7 +105,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return false;
         });
       }
-    }, {
+    },{
+      key: 'closeForm',
+      value: function closeForm() {
+        $('body').on('click', 'button.close-notification', function () {
+          var notifyId = $(this).attr('id');
+          $(document).find('div#edit-notification' + notifyId).slideUp();
+          return false;
+        });
+      }
+    },
+    {
       key: 'addNewNotificationToHtmlTable',
       value: function addNewNotificationToHtmlTable(data) {
         var date = moment().format('YYYY/MM/DD');

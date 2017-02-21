@@ -54,23 +54,6 @@
             </select>
         </div>
     </div>
-    {{-- <div class="form-group">
-        <label for="assign_lab" class="col-sm-2 control-label">Assign to Lab</label>
-        <div class="col-sm-10">
-            <select name="assign_lab" id="assign_lab" name="assign_lab" class="form-control" required="required">
-                <option value="0">Choose Lab</option>
-                @if ($labs->count() > 0)
-                @foreach($labs as $lab)
-                @if ($equipment->lab->id == $lab-> id)
-                <option value="{{ $lab->id }}" selected="selected">{{ $lab->title }}</option>
-                @else
-                <option value="{{ $lab->id }}">{{ $lab->title }}</option>
-                @endif
-                @endforeach
-                @endif
-            </select>
-        </div>
-    </div> --}}
     <div class="form-group">
         <label for="photo" class="col-sm-2 control-label">Photo</label>
         <div class="col-sm-10">
