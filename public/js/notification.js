@@ -154,9 +154,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var tableRow = '<tr>';
         tableRow += '<td class="text-left">' + data.title + '</td>';
         tableRow += '<td>' + date + '</td>';
-        tableRow += '<td class="text-right"><a href="/notification/' + data.id + '/edit" class="edit-notification" id="notify' + data.id + '">';
+        tableRow += '<td class="text-right"><a href="/notification/' + data.id + '/edit" class="edit-notification" id='+ data.id + '>';
         tableRow += '<i class="glyphicon glyphicon-pencil"></i> Edit</a> </td>';
         tableRow += '</tr>';
+        tableRow += '<tr>';
+        tableRow += '<td colspan="3">';
+        tableRow += '<div class="display'+ data.id + '" id="edit-notification'+ data.id + '" style="display: none;"></div>' +
+                '</td></tr>'
         return tableRow;
       }
     }, {
