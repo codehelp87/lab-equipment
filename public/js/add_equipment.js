@@ -135,9 +135,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'addNewEquipmentToHtmlTable',
       value: function addNewEquipmentToHtmlTable(data) {
+        console.log(data);
         var status = data.availability == 1 ? 'Available' : 'Unavailable';
         var tableRow = '<tr id="edit-eqipment' + data.id + '">';
-        tableRow += '<td>' + data.model_no + '</td>';
+        tableRow += '<td>' + data.title + '<br>' + 
+                   data.model_no + '<br>' +
+                   data.maker + '<br>' + '</td>';
         tableRow += '<td><img src=' + data.equipment_photo + ' style="width: 50px; height: 50px;"></td>';
         tableRow += '<td>';
         tableRow += '<strong>Status</strong><br>' + '<strong>Unit Time</strong><br>' + '<strong>Max Time(per day)</strong><br>' + '</td>';
