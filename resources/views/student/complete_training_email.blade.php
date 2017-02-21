@@ -1,5 +1,3 @@
-@extends('layouts.app')
-@section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -13,8 +11,12 @@ You have completed the training session and you can now use the following equipm
 				Thanks,<br><br>
 				The Equipment Administrator
 			</p>
+			<span class="text-center"><strong>Please contact the admin via email</strong></span> <br><br>
+			<address>
+			    <strong>Name:</strong> Diwesh Saxena <br>
+				<strong>Email:</strong> diweshsaxena@gmail.com
+			</address>
 		</div>
 		
 	</div>
 </div>
-@endsection
