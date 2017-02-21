@@ -27,8 +27,8 @@
                 <td><a href="#"  class="delete-lab" id="{{ $lab->id }}" rel= "{{ route('delete_equipment', ['id' => $lab->id ]) }}">Delete</a></td>
             </tr>
             <tr>
-                <td colspan="8">
-                    <div class="display{{ $lab->id }}" id="edit-eqipment{{ $lab->id }}" style="display: none;">dddjdjdjdjjddjdjdddjjdjjddjddjjddj</div>
+                <td colspan="3">
+                    <div class="display{{ $lab->id }}" id="edit-eqipment{{ $lab->id }}" style="display: none;"></div>
                 </td>
             </tr>
             @endforeach

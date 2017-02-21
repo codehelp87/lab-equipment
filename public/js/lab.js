@@ -123,7 +123,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var saveBtn = $('#save-lab');
         saveBtn.on('click', function () {
           var title = $('form#manage_lab').find('#title').val();
-          //var modelNo = $('form#manage_lab').find('#model_no').val();
 
           if (lab.checkforEmptyFields().length > 0) {
             toastr.error('Filled the fields in red!');
@@ -146,7 +145,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return false;
         });
       }
-    }, {
+    },
+    {
+      key: 'appendNewLab',
+      value: function appendNewLab(data) {
+
+      }
+    },
+     {
       key: 'checkforEmptyFields',
       value: function checkforEmptyFields() {
         var error = [];
