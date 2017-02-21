@@ -116,6 +116,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     },
     {
+      key: 'deleteNotification',
+      value: function deleteNotification() {
+        var lab = new Lab();
+        $('body').on('click', 'a.delete-notification', function () {
+          var _this = $(this);
+          var $btn = _this.button('loading');
+          var notifyId = _this.attr('id');
+          var route = _this.attr('rel');
+
+          bootbox.confirm('Are you sure to delete?', function (result) {
+            if (result) {
+              lab.makeAjaxCall(route, {}, 'DELETE').done(function (data) {
+                if (data.message == 'deleted') {
+                  $btn.button('reset');
+                  var tr = _this.parents('#edit-notification' + notifyId);
+                  tr.next().remove();
+                  tr.remove();
+                  return toastr.success('Notification has been successfully deleted ');
+                }
+                return toastr.error(data.message);
+              }).fail(function (error) {
+                console.log(error);
+              });
+            }
+            return $btn.button('reset');
+          });
+        });
+      }
+    },
+    {
       key: 'addNewNotificationToHtmlTable',
       value: function addNewNotificationToHtmlTable(data) {
         var date = moment().format('YYYY/MM/DD');
