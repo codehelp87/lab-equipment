@@ -16,7 +16,7 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="edit-notification">Update</button>
             <button type="submit" class="btn btn-large btn-default close-notification" id="<?php echo e($notification->id); ?>">Cancel</button>
-            <a href="#"  class="delete-notification" id="<?php echo e($notification->id); ?>" rel= "<?php echo e(route('delete_notification', ['id' => $notification->id ])); ?>">Delete</a>
+            <a href="#" class="delete-notification" id="<?php echo e($notification->id); ?>" rel= "<?php echo e(route('delete_notification', ['id' => $notification->id ])); ?>">Delete</a>
         </div>
     </div>
 </form>

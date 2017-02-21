@@ -9,6 +9,18 @@ use LabEquipment\NotifiedUser;
 
 class NotificationController extends Controller
 {
+	public function deleteNotification(Request $request, $id)
+    {
+        $notification = Notification::find($id);
+
+        if ($notification->count() > 0) {
+            $notification->forceDelete();
+
+            return response()->json(['message' => 'deleted']);
+        }
+        return response()->json(['message' => 'Error deleting Notification']);
+    }
+
 	public function editNotification(Request $request, $id)
     {
         $notification = Notification::find($id);

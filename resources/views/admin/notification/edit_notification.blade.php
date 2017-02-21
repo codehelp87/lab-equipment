@@ -16,7 +16,7 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-large btn-default" id="edit-notification">Update</button>
             <button type="submit" class="btn btn-large btn-default close-notification" id="{{ $notification->id }}">Cancel</button>
-            <a href="#"  class="delete-notification" id="{{ $notification->id }}" rel= "{{ route('delete_notification', ['id' => $notification->id ]) }}">Delete</a>
+            <a href="#" class="delete-notification" id="{{ $notification->id }}" rel= "{{ route('delete_notification', ['id' => $notification->id ]) }}">Delete</a>
         </div>
     </div>
 </form>

@@ -13,6 +13,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       notify.updateNotification();
       notify.readNotification();
       notify.closeForm();
+      notify.deleteNotification();
     });
   };
 
@@ -118,7 +119,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     {
       key: 'deleteNotification',
       value: function deleteNotification() {
-        var lab = new Lab();
+        var notify = new Notification();
         $('body').on('click', 'a.delete-notification', function () {
           var _this = $(this);
           var $btn = _this.button('loading');
@@ -127,10 +128,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           bootbox.confirm('Are you sure to delete?', function (result) {
             if (result) {
-              lab.makeAjaxCall(route, {}, 'DELETE').done(function (data) {
+              notify.makeAjaxCall(route, {}, 'DELETE').done(function (data) {
                 if (data.message == 'deleted') {
                   $btn.button('reset');
-                  var tr = _this.parents('#edit-notification' + notifyId);
+                  var tr = $(document)
+                    .find('tr#edit-notification' + notifyId)
+                    ; //#edit-notification' + notifyId
                   tr.next().remove();
                   tr.remove();
                   return toastr.success('Notification has been successfully deleted ');
