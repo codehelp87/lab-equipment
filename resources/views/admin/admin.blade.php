@@ -186,7 +186,9 @@
                             @foreach($equipments as $equipment)
                             @if (in_array($equipment->id, $trainedEquipments))
                             <tr id="edit-eqipment{{ $equipment->id }}">
-                                <td>{{ $equipment->model_no }}</td>
+                                <td>{{ $equipment->title }}<br>
+                                    {{ $equipment->model_no }}<br>
+                                {{ $equipment->maker }}<br></td>
                                 <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                                 <td>
                                     <Strong>Status</Strong><br>
@@ -231,7 +233,9 @@
                             $difference = $created->diff($now)->days;
                             ?>
                             <tr id="edit-eqipment{{ $equipment->id }}">
-                                <td>{{ $equipment->model_no }}</td>
+                                <td>{{ $equipment->title }}<br>
+                                    {{ $equipment->model_no }}<br>
+                                {{ $equipment->maker }}<br></td>
                                 <td><img src="{{ $equipment->equipment_photo }}" style="width: 50px; height: 50px;"></td>
                                 <td>
                                     <Strong>Status</Strong><br>
@@ -280,8 +284,8 @@
 </div>
 <!-- container -->
 <style type="text/css">
-    input[type="checkbox"] {
-    width: 20px;
+input[type="checkbox"] {
+width: 20px;
 }
 </style>
 @endsection
