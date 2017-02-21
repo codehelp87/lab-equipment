@@ -29,7 +29,7 @@ class Lab extends Model
     public function scopeFindAll($query)
     {
         return $query
-            ->orderBy('id', 'desc')
+            ->orderBy('title', 'asc')
             ->get();
     }
 
