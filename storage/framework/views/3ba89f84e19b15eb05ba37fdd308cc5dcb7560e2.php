@@ -12,6 +12,12 @@
 				Thanks,<br><br>
 				The Equipment Administrator
 			</p>
+
+			<span class="text-center"><strong>Please contact the admin via email</strong></span> <br><br>
+			<address>
+			    <strong>Name:</strong> Diwesh Saxena <br>
+				<strong>Email:</strong> diweshsaxena@gmail.com
+			</address>
 		</div>
 		
 	</div>
