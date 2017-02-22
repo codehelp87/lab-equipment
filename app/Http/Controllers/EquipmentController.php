@@ -150,8 +150,8 @@ class EquipmentController extends Controller
             }
         }
 
-        print_r($dayBooking);
-        print_r($nightBooking);
+        $result = array_merge_recursive($dayBooking, $nightBooking);
+        print_r($result);
 
         return response()->json(array_merge($dayBooking, $nightBooking));
     }
