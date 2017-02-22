@@ -123,12 +123,14 @@ class EquipmentController extends Controller
 
             if (count($dayTimeBookings) > 0) {
                 foreach($dayTimeBookings as $booking) {
-                    $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
-                    $dayTimeBookingProf = $booking->lab->title;
-                    $dayTimeBookingProfId = $booking->lab->id;
-                    $equipmentId = $booking->equipment_id;
+                    $bookings = Booking::orderBy('id', 'desc')
+                        ->where('lab_id', $booking->lab_id)
+                        ->where('status', '>=', 1)
+                        ->where('timezone_flag', 'daytime')
+                        ->where('cancelled_time_slot', '!=', NULL)
+                        ->get();
 
-                    array_push($nightBooking, $this->calculateDayBooking($bookings));
+                    array_push($dayBooking, $this->calculateDayBooking($bookings));
                 }
             }
 
