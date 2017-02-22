@@ -529,12 +529,12 @@ class EquipmentController extends Controller
         if (count($dayBooking) > 0 || count($nightBooking) > 0) {
             if (count($dayBooking) > count($nightBooking)) {
             foreach($dayBooking as $key => $booking) {
-                $newArray[] = array_merge($booking, $nightBooking[$i]);
+                $newArray[] = array_merge(@$booking, @$nightBooking[$i]);
                 $i++;
             }
         } else {
             foreach($nightBooking as $key => $booking) {
-                $newArray[] = array_merge($booking, $dayBooking[$i]);
+                $newArray[] = array_merge(@$booking, @$dayBooking[$i]);
                 $i++;
             }
         }
