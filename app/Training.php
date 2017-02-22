@@ -17,6 +17,7 @@ class Training extends Model
         'user_id',
         'equipment_id',
         'status',
+        'lab_id',
      ];
     
     public function user()
