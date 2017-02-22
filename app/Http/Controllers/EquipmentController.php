@@ -46,7 +46,7 @@ class EquipmentController extends Controller
 
             $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
             $labEquipment = [
-                'lab_prof' => User::findOneById($labUser)->name, 
+                'lab_prof' => Lab::findOneById($labUser)->title, 
                 'equipment_amount' => $equipmentAmount
             ];
             $uniqueUsers = array_unique($users); // get the unique user_id
@@ -94,6 +94,9 @@ class EquipmentController extends Controller
         $totalHourByDay = 0;
         $totalHourByNight = 0;
 
+        $nightBooking = [];
+        $dayBooking = [];
+
         if ($equipment->count() > 0) {
             $totalCharge = (int) ($equipment->price_per_unit_time);
             //get daytime bookings
@@ -111,9 +114,21 @@ class EquipmentController extends Controller
                 ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
 
-            if ($dayTimeBookings->count() > 0) {
+
+            // get distinct day bookings
+                $collection = collect($dayTimeBookings);
+                $unique = $collection->unique('lab_id');
+                $unique->values()->all();
+                $dayTimeBookings = $unique->values()->all();
+
+            if (count($dayTimeBookings) > 0) {
                 foreach($dayTimeBookings as $booking) {
                     $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
+                    $dayTimeBookingProf = $booking->lab->title;
+                    $dayTimeBookingProfId = $booking->lab->id;
+                    $equipmentId = $booking->equipment_id;
+
+                    array_push($nightBooking, $this->calculateDayBooking($bookings));
                 }
             }
 
@@ -126,22 +141,27 @@ class EquipmentController extends Controller
                 ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
 
-            if ($nightTimeBookings->count() > 0) {
+                // get distinct night bookings
+                $collection = collect($nightTimeBookings);
+                $unique = $collection->unique('lab_id');
+                $unique->values()->all();
+                $nightTimeBookings = $unique->values()->all();
+
+            if (count($nightTimeBookings) > 0) {
                 foreach ($nightTimeBookings as $booking) {
-                   $totalHourByNight += (int) (count($booking->cancelled_time_slot) * 10);
+                    $bookings = Booking::orderBy('id', 'desc')
+                        ->where('lab_id', $booking->lab_id)
+                        ->where('status', '>=', 1)
+                        ->where('timezone_flag', 'nighttime')
+                        ->where('cancelled_time_slot', '!=', NULL)
+                        ->get();
+
+                    array_push($nightBooking, $this->calculateNightBooking($bookings));
                 }
             }
         }
 
-        return response()->json([
-            'equipment_id' => $equipment->id,
-            'lab_prof' => $equipment->user->name,
-            'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ((int) ($totalCharge / 10) * $totalHourByDay),
-            'total_charge_by_night' => ((int) ($totalCharge / 10) * $totalHourByNight),
-            'total_hour_by_day' => ($totalHourByDay / 60),
-            'total_hour_by_night' => ($totalHourByNight / 60),
-        ]);
+        return response()->json(array_merge($dayBooking, $nightBooking));
     }
 
     public function getLabUsers(Request $request, $id, $lab_user)
@@ -435,5 +455,49 @@ class EquipmentController extends Controller
         $days = date('t', mktime(0, 0, 0, $explodeDate[1], 1, $explodeDate[0])); 
 
         return $days;
+    }
+
+    protected function calculateNightBooking($bookings)
+    {
+        $totalHourByNight = 0;
+        $totalNightCharge = 0;
+
+        foreach($bookings as $book) {
+            $totalHourByNight += (int) (count($book->cancelled_time_slot) * 10);
+            $totalNightCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
+            $nightTimeBookingProf = $book->lab->title;
+            $nightTimeBookingProfId = $book->lab->id;
+            $equipmentId = $book->equipment_id;
+        }
+
+        return [
+            'night_equipment_id' => $equipmentId,
+            'night_lab_prof' => $nightTimeBookingProf,
+            'night_lab_prof_id' => $nightTimeBookingProfId,
+            'total_charge_by_night' => $totalNightCharge,
+            'total_hour_by_night' => ($totalHourByNight / 60),
+        ];
+    }
+
+    protected function calculateDayBooking($bookings)
+    {
+        $totalHourByDay = 0;
+        $totalDayCharge = 0;
+
+        foreach($bookings as $book) {
+            $totalHourByDay += (int) (count($book->cancelled_time_slot) * 10);
+            $totalDayCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
+            $dayTimeBookingProf = $book->lab->title;
+            $dayTimeBookingProfId = $book->lab->id;
+            $equipmentId = $book->equipment_id;
+        }
+
+        return [
+            'day_equipment_id' => $equipmentId,
+            'day_lab_prof' => $dayTimeBookingProf,
+            'day_lab_prof_id' => $dayTimeBookingProfId,
+            'total_charge_by_day' => $totalDayCharge,
+            'total_hour_by_day' => ($totalHourByDay / 60),
+        ];
     }
 }

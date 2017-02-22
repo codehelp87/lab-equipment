@@ -35,7 +35,7 @@
             <th>Lab</th>
             <th colspan="2">Day time (9am - 9pm)</th>
             <th>Lab</th>
-            <th colspan="2">Nigh ttime (9pm - 9am)</th>
+            <th colspan="2">Night time (9pm - 9am)</th>
         </tr>
         <tr>
            <td></td>

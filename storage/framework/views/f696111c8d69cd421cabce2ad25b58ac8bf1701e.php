@@ -163,7 +163,7 @@
                     <table class="table table-hover table-responsive">
                         <tbody>
                             <tr>
-                                <td align="left"><strong><?php echo e(Auth::user()-> name); ?></strong></td>
+                                <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
                                 <td align="center"><strong>Lab: <?php echo e($trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill'); ?></strong></td>
                                 <td><a  class="pull-right" href="<?php echo e(route('my_profile')); ?>" title="<?php echo e(Auth::user()-> name); ?>"><strong>See my page</strong></a></td>
                             </tr>
