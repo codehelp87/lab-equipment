@@ -150,8 +150,22 @@ class EquipmentController extends Controller
             }
         }
 
-        $result = array_merge_recursive($dayBooking, $nightBooking);
-        print_r($result);
+        $i = 0;
+        $newArray = [];
+
+        if (count($dayBooking) > count($nightBooking)) {
+            foreach($dayBooking $key => $booking) {
+                $newArray[] = array_merge($booking, $nightBooking[$i]);
+                $i++;
+            }
+        } else {
+            foreach($nightBooking $key => $booking) {
+                $newArray[] = array_merge($booking, $dayBooking[$i]);
+                $i++;
+            }
+        }
+
+        print_r($newArray);
 
         return response()->json(array_merge($dayBooking, $nightBooking));
     }
