@@ -525,15 +525,15 @@ class EquipmentController extends Controller
         $i = 0;
         $newArray = [];
 
-        print_r($dayBooking);
-        print_r($nightBooking); exit;
+        //print_r($dayBooking);
+        //print_r($nightBooking); exit;
 
         if (count($dayBooking) > 0 || count($nightBooking) > 0) {
             if (count($dayBooking) > count($nightBooking)) {
                 foreach($dayBooking as $key => $booking) {
-                    if (is_array($booking) && is_array(@$nightBooking[$key])) {
+                    if (is_array($booking) && is_array(@$nightBooking[$i])) {
                         if (count($nightBooking) > 0) {
-                            $newArray[] = array_merge(@$booking, @$nightBooking[$key]);
+                            $newArray[] = array_merge(@$booking, @$nightBooking[$i]);
                         } else {
                             $newArray[] = @$booking;
                         }
@@ -542,9 +542,9 @@ class EquipmentController extends Controller
                 }
             } else {
                 foreach($nightBooking as $key => $booking) {
-                    if (is_array($booking) && is_array(@$dayBooking[$key])) {
+                    if (is_array($booking) && is_array(@$dayBooking[$i])) {
                         if (count($dayBooking) > 0) {
-                            $newArray[] = array_merge(@$booking, @$dayBooking[$key]);
+                            $newArray[] = array_merge(@$booking, @$dayBooking[$i]);
                         } else {
                             $newArray[] = @$booking;
                         }
