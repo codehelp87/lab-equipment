@@ -165,7 +165,7 @@
                         <tbody>
                             <tr>
                                 <?php
-                                $labBooking = Booking::where('user_id', Auth::user()->id)
+                                $labBooking = LabEquipment\Booking::where('user_id', Auth::user()->id)
                                     ->where('time_slot_id', '=', NULL)
                                     ->where('status', 1)
                                     ->first(); // newly added
