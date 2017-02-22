@@ -525,6 +525,9 @@ class EquipmentController extends Controller
         $i = 0;
         $newArray = [];
 
+        print_r($dayBooking);
+        print_r($nightBooking); exit;
+
         if (count($dayBooking) > 0 || count($nightBooking) > 0) {
             if (count($dayBooking) > count($nightBooking)) {
                 foreach($dayBooking as $key => $booking) {
@@ -541,7 +544,6 @@ class EquipmentController extends Controller
                 foreach($nightBooking as $key => $booking) {
                     if (is_array($booking) && is_array(@$dayBooking[$key])) {
                         if (count($dayBooking) > 0) {
-                            //print_r($dayBooking);
                             $newArray[] = array_merge(@$booking, @$dayBooking[$key]);
                         } else {
                             $newArray[] = @$booking;
