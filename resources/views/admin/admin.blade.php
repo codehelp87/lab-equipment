@@ -164,8 +164,14 @@
                     <table class="table table-hover table-responsive">
                         <tbody>
                             <tr>
+                                <?php
+                                $labBooking = Booking::where('user_id', Auth::user()->id)
+                                    ->where('time_slot_id', '=', NULL)
+                                    ->where('status', 1)
+                                    ->first(); // newly added
+                                ?>
                                 <td><strong>{{ Auth::user()-> name }}</strong></td>
-                                <td align="center"><strong>Lab: {{ $trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill' }}</strong></td>
+                                <td align="center"><strong>Lab: {{ $labBooking->lab->name }}</strong></td>
                                 <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                             </tr>
                         </tbody>
