@@ -165,9 +165,9 @@ class EquipmentController extends Controller
             }
         }
 
-        print_r($newArray);
+        //print_r($newArray);
 
-        return response()->json(array_merge($dayBooking, $nightBooking));
+        return response()->json($newArray);
     }
 
     public function getLabUsersBySessionAndEquipment(Request $request, $id) 
