@@ -50,8 +50,8 @@ class BookingController extends Controller
 		$equipment = Equipment::findOneById($request->equipment);
 
 		$labBooking = Booking::where('user_id', Auth::user()->id)
-		    ->where('time_slot_id', '!=', NULL)
-		    ->where('status', '>=', 1)
+		    ->where('cancelled_time_slot', '=', '')
+		    ->where('status', 1)
 		    ->first(); // newly added
 
 		$bookings = Booking::where('equipment_id', $request->equipment)
