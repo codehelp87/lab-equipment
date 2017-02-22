@@ -143,23 +143,14 @@ class UserController extends Controller
             'last_login_time' => new \DateTime(),
         ]);
 
-        // lab user 
-        $lab = Lab::findOneById($request->lab);
-
-        if ($lab->count() > 0) {
-            $labUser = LabUser::create([
-                'user_id' => $user->id,
-                'lab_id' => $lab->id,
-            ]);
-        }
-
         if (count($user) > 0) {
             $booking = Booking::create([
                 'user_id' => $user->id,
                 'equipment_id' => $request->equipment,
                 'time_slot' => null,
                 'booking_date' => $request->session,
-                'session' => $request->session
+                'session' => $request->session,
+                'lab_id' => $request->lab,
             ]);
 
             // send email
