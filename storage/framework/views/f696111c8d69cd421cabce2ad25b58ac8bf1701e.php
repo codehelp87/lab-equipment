@@ -163,8 +163,14 @@
                     <table class="table table-hover table-responsive">
                         <tbody>
                             <tr>
+                                <?php
+                                $labBooking = LabEquipment\Booking::where('user_id', Auth::user()->id)
+                                    ->where('time_slot_id', '=', NULL)
+                                    ->where('status', 1)
+                                    ->first(); // newly added
+                                ?>
                                 <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
-                                <td align="center"><strong>Lab: <?php echo e($trainings->count() > 0 ? $trainings[0]->equipment->user->name: 'Nill'); ?></strong></td>
+                                <td align="center"><strong>Lab: <?php echo e($labBooking->lab->title); ?></strong></td>
                                 <td><a  class="pull-right" href="<?php echo e(route('my_profile')); ?>" title="<?php echo e(Auth::user()-> name); ?>"><strong>See my page</strong></a></td>
                             </tr>
                         </tbody>

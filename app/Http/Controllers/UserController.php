@@ -82,7 +82,7 @@ class UserController extends Controller
 
         if (count($students) > 0) {
             foreach($students as $student) {
-                 // Send confirmation email
+                // Send confirmation email
                 $user = User::findOneById($student);
                 $getTraining = Training::where('equipment_id', $request->equipment)
                    ->where('user_id', $user->id)

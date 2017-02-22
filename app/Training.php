@@ -30,6 +30,11 @@ class Training extends Model
         return $this->belongsTo('LabEquipment\Equipment');
     }
 
+    public function lab()
+    {
+        return $this->belongsTo('LabEquipment\Lab');
+    }
+
     public function scopeGetTrainedEquipments($query, $userId)
     {
         return $query

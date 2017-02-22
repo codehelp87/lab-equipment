@@ -294,7 +294,6 @@ class EquipmentController extends Controller
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
-                //->where('status', 1)
                 ->distinct()
                 ->get();
 
@@ -542,6 +541,7 @@ class EquipmentController extends Controller
                 foreach($nightBooking as $key => $booking) {
                     if (is_array($booking) && is_array($dayBooking)) {
                         if (count($dayBooking) > 0) {
+                            print_r($dayBooking);
                             $newArray[] = array_merge(@$booking, @$dayBooking[$i]);
                         } else {
                             $newArray[] = @$booking;
