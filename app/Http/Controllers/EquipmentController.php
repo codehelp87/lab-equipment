@@ -180,7 +180,7 @@ class EquipmentController extends Controller
 
             $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
             $labEquipment = [
-                'lab_prof' => User::findOneById($lab_user)->name, 
+                'lab_prof' => Lab::findOneById($labUser)->title,
                 'equipment_amount' => $equipmentAmount
             ];
             $uniqueUsers = array_unique($users); // get the unique user_id
