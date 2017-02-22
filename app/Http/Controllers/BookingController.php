@@ -54,8 +54,6 @@ class BookingController extends Controller
 		    ->where('status', 1)
 		    ->first(); // newly added
 
-		dump($labBooking); exit;
-
 		$bookings = Booking::where('equipment_id', $request->equipment)
 		    ->where('time_slot_id', '!=', NULL)
 		    ->where('timezone_flag', 'daytime')
