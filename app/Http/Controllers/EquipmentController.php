@@ -150,22 +150,7 @@ class EquipmentController extends Controller
             }
         }
 
-        $i = 0;
-        $newArray = [];
-
-        if (count($dayBooking) > count($nightBooking)) {
-            foreach($dayBooking as $key => $booking) {
-                $newArray[] = array_merge($booking, $nightBooking[$i]);
-                $i++;
-            }
-        } else {
-            foreach($nightBooking as $key => $booking) {
-                $newArray[] = array_merge($booking, $dayBooking[$i]);
-                $i++;
-            }
-        }
-
-        //print_r($newArray);
+        $newArray = $this->mergeMultiArray($dayBooking, $nightBooking);
 
         return response()->json($newArray);
     }
@@ -244,7 +229,9 @@ class EquipmentController extends Controller
             }
         }
 
-        return response()->json(array_merge($dayBooking, $nightBooking));
+         $newArray = $this->mergeMultiArray($dayBooking, $nightBooking);
+
+        return response()->json($newArray);
     }
 
     public function getLabUsers(Request $request, $id, $labUser)
@@ -532,5 +519,25 @@ class EquipmentController extends Controller
             'total_charge_by_day' => $totalDayCharge,
             'total_hour_by_day' => ($totalHourByDay / 60),
         ];
+    }
+
+    protected function mergeMultiArray($dayBooking, $nightBooking)
+    {
+        $i = 0;
+        $newArray = [];
+
+        if (count($dayBooking) > count($nightBooking)) {
+            foreach($dayBooking as $key => $booking) {
+                $newArray[] = array_merge($booking, $nightBooking[$i]);
+                $i++;
+            }
+        } else {
+            foreach($nightBooking as $key => $booking) {
+                $newArray[] = array_merge($booking, $dayBooking[$i]);
+                $i++;
+            }
+        }
+
+        return $newArray;
     }
 }
