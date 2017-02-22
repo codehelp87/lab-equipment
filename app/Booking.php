@@ -21,6 +21,7 @@ class Booking extends Model
         'status',
         'timezone_flag',
         'cancelled_time_slot',
+        'lab_id',
     ];
 
     /**
