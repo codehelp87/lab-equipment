@@ -15,8 +15,8 @@ class AddLabIdToBooking extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->integer('lab_id')
-                ->unsigned()
-                ->default(1);
+                ->unsigned();
+
             $table->foreign('lab_id')
                 ->references('id')
                 ->on('labs')
