@@ -224,7 +224,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'listEquipmentLab',
       value: function listEquipmentLab(data) {
-        var table = '<tr>' + '<td><a href="#" class="view-equipment-users" data-id=' + data.equipment_id + ' id=' + data.lab_prof_id + '>' + decodeURI(data.lab_prof) + '</a></td>' + '<td>' + data.total_hour_by_day + '</td>' + '<td>' + data.total_charge_by_day + '</td>' + '<td><a href="#" class="view-equipment-users-by-night" data-id=' + data.equipment_id + ' id=' + data.lab_prof_id + '>' + decodeURI(data.lab_prof) + '</a></td>' + '<td>' + data.total_hour_by_night + '</td>' + '<td>' + data.total_charge_by_night + '</td>' + '</tr>' + '<tr>' + '<td colspan="5" align="right"><strong>Total</strong></td>' + '<td><strong>' + parseInt(data.total_charge_by_day + data.total_charge_by_night) + '</strong></td>' + '</tr>';
+        // var table = '<tr>' + '<td><a href="#" class="view-equipment-users" data-id=' + data.equipment_id +
+        //  ' id=' + data.lab_prof_id + '>' + decodeURI(data.lab_prof) + '</a></td>' + '<td>' +
+        //   data.total_hour_by_day + '</td>' + '<td>' + data.total_charge_by_day + '</td>' + 
+        //   '<td><a href="#" class="view-equipment-users-by-night" data-id=' + data.equipment_id + 
+        //   ' id=' + data.lab_prof_id + '>' + decodeURI(data.lab_prof) + '</a></td>' + '<td>' + 
+        //   data.total_hour_by_night + '</td>' + '<td>' + data.total_charge_by_night + '</td>' + 
+        //   '</tr>' + '<tr>' + '<td colspan="5" align="right"><strong>Total</strong></td>' + '<td><strong>' 
+        //   + parseInt(data.total_charge_by_day + data.total_charge_by_night) + '</strong></td>' + '</tr>';
+        // return table;
+
+
+        var table = ''
+        for (var usage in data) {
+          var day_lab_prof_id = data[usage].day_lab_prof_id == undefined? 0: data[usage].day_lab_prof_id;
+          var day_equipment_id = data[usage].day_equipment_id ==undefined? 0: data[usage].day_equipment_id;
+          var day_lab_prof = data[usage].day_lab_prof == undefined? 'Nill': data[usage].day_lab_prof;
+          var total_hour_by_day = data[usage].total_hour_by_day == undefined? 0: data[usage].total_hour_by_day;
+          var total_charge_by_day = data[usage].total_charge_by_day == undefined? 0: data[usage].total_charge_by_day;
+
+          var night_lab_prof_id = data[usage].night_lab_prof_id == undefined? 0: data[usage].night_lab_prof_id;
+          var night_equipment_id = data[usage].night_equipment_id ==undefined? 0: data[usage].night_equipment_id;
+          var night_lab_prof = data[usage].night_lab_prof == undefined? 'Nill': data[usage].night_lab_prof;
+          var total_hour_by_night = data[usage].total_hour_by_night == undefined? 0: data[usage].total_hour_by_night;
+          var total_charge_by_night = data[usage].total_charge_by_night == undefined? 0: data[usage].total_charge_by_night;
+
+          table += '<tr>' + '<td><a href="#" class="view-equipment-users" data-id=' +
+         day_equipment_id + ' id=' + day_lab_prof_id + '>' + decodeURI(day_lab_prof) + '</a></td>' +
+          '<td>' + total_hour_by_day + '</td>' + '<td>' + total_charge_by_day + '</td>' + 
+          '<td><a href="#" class="view-equipment-users-by-night" data-id=' + night_equipment_id +
+           ' id=' + night_lab_prof_id + '>' + decodeURI(night_lab_prof) + '</a</td>' + '<td>' +
+            total_hour_by_night + '</td>' + '<td>' + total_charge_by_night + '</td>' + 
+            '</tr>' + '<tr>' + '<td colspan="5" align="right"><strong>Total</strong></td>' + 
+            '<td><strong>' + parseInt(total_charge_by_day + total_charge_by_night) + 
+            '</strong></td>' + '</tr>';
+        }
+        
         return table;
       }
     }, {

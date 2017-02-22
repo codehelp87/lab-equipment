@@ -86,13 +86,77 @@ class EquipmentController extends Controller
         }
     }
 
+    public function getEquipmentLabUsage(Request $request, $id)
+    {
+        $equipment = Equipment::findOneById($id);
+
+        $nightBooking = [];
+        $dayBooking = [];
+
+        if ($equipment->count() > 0) {
+            $totalCharge = (int) ($equipment->price_per_unit_time);
+            //get daytime bookings
+            $dayTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('cancelled_time_slot', '!=', NULL)
+                ->where('status', '>=', 1)
+                ->where('timezone_flag', 'daytime')
+                ->get();
+
+            // get distinct day bookings
+                $collection = collect($dayTimeBookings);
+                $unique = $collection->unique('lab_id');
+                $unique->values()->all();
+                $dayTimeBookings = $unique->values()->all();
+
+            if (count($dayTimeBookings) > 0) {
+                foreach($dayTimeBookings as $booking) {
+                    $bookings = Booking::orderBy('id', 'desc')
+                        ->where('lab_id', $booking->lab_id)
+                        ->where('status', '>=', 1)
+                        ->where('timezone_flag', 'daytime')
+                        ->where('cancelled_time_slot', '!=', NULL)
+                        ->get();
+
+                    array_push($dayBooking, $this->calculateDayBooking($bookings));
+                }
+            }
+
+            //get nighttime bookings
+            $nightTimeBookings = Booking::orderBy('id', 'desc')
+                ->where('equipment_id', $equipment->id)
+                ->where('cancelled_time_slot', '!=', NULL)
+                ->where('status', '>=', 1)
+                ->where('timezone_flag', 'nighttime')
+                ->get();
+
+            // get distinct night bookings
+                $collection = collect($nightTimeBookings);
+                $unique = $collection->unique('lab_id');
+                $unique->values()->all();
+                $nightTimeBookings = $unique->values()->all();
+
+            if (count($nightTimeBookings) > 0) {
+                foreach ($nightTimeBookings as $booking) {
+                   $bookings = Booking::orderBy('id', 'desc')
+                        ->where('lab_id', $booking->lab_id)
+                        ->where('status', '>=', 1)
+                        ->where('timezone_flag', 'nighttime')
+                        ->where('cancelled_time_slot', '!=', NULL)
+                        ->get();
+
+                    array_push($nightBooking, $this->calculateNightBooking($bookings));
+                }
+            }
+        }
+
+        return response()->json(array_merge($dayBooking, $nightBooking));
+    }
+
     public function getLabUsersBySessionAndEquipment(Request $request, $id) 
     {
         $equipment = Equipment::findOneById($id);
         $session = $request->session;
-
-        $totalHourByDay = 0;
-        $totalHourByNight = 0;
 
         $nightBooking = [];
         $dayBooking = [];
@@ -166,7 +230,7 @@ class EquipmentController extends Controller
         return response()->json(array_merge($dayBooking, $nightBooking));
     }
 
-    public function getLabUsers(Request $request, $id, $lab_user)
+    public function getLabUsers(Request $request, $id, $labUser)
     {
         $users = [];
         $response = [];
@@ -214,56 +278,6 @@ class EquipmentController extends Controller
 
             return response()->json([$labEquipment, $response], 200);
         }
-    }
-
-
-    public function getEquipmentLabUsage(Request $request, $id)
-    {
-        $equipment = Equipment::findOneById($id);
-
-        $totalHourByDay = 0;
-        $totalHourByNight = 0;
-
-        if ($equipment->count() > 0) {
-            $totalCharge = (int) ($equipment->price_per_unit_time);
-            //get daytime bookings
-            $dayTimeBookings = Booking::orderBy('id', 'desc')
-                ->where('equipment_id', $equipment->id)
-                ->where('cancelled_time_slot', '!=', NULL)
-                ->where('status', '>=', 1)
-                ->where('timezone_flag', 'daytime')
-                ->get();
-
-            if ($dayTimeBookings->count() > 0) {
-                foreach($dayTimeBookings as $booking) {
-                    $totalHourByDay += (int) (count($booking->cancelled_time_slot) * 10);
-                }
-            }
-
-            //get nighttime bookings
-            $nightTimeBookings = Booking::orderBy('id', 'desc')
-                ->where('equipment_id', $equipment->id)
-                ->where('cancelled_time_slot', '!=', NULL)
-                ->where('status', '>=', 1)
-                ->where('timezone_flag', 'nighttime')
-                ->get();
-
-            if ($nightTimeBookings->count() > 0) {
-                foreach ($nightTimeBookings as $booking) {
-                   $totalHourByNight += (int) (count($booking->cancelled_time_slot) * 10);
-                }
-            }
-        }
-
-        return response()->json([
-            'equipment_id' => $equipment->id,
-            'lab_prof' => $equipment->user->name,
-            'lab_prof_id' => $equipment->user->id,
-            'total_charge_by_day' => ((int) ($totalCharge / 10) * $totalHourByDay),
-            'total_charge_by_night' => ((int) ($totalCharge / 10) * $totalHourByNight),
-            'total_hour_by_day' => ($totalHourByDay / 60),
-            'total_hour_by_night' => ($totalHourByNight / 60),
-        ]);
     }
 
     public function TrainingUsers(Request $request, $id)
