@@ -94,7 +94,7 @@ class UserController extends Controller
                         'date_of_training_session' => $request->booking_date,
                         'location' => $request->location,
                         'equipment_id' => $request->equipment,
-                        'lab_id' => 1,
+                        'lab_id' => 3,
                     ]);
                 }
                 // send email
