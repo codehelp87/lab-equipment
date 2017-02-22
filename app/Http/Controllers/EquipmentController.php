@@ -150,7 +150,7 @@ class EquipmentController extends Controller
             }
         }
 
-        return response()->json(array_combine($dayBooking, $nightBooking));
+        return response()->json(array_merge($dayBooking, $nightBooking));
     }
 
     public function getLabUsersBySessionAndEquipment(Request $request, $id) 
@@ -227,7 +227,7 @@ class EquipmentController extends Controller
             }
         }
 
-        return response()->json(array_combine($dayBooking, $nightBooking));
+        return response()->json(array_merge($dayBooking, $nightBooking));
     }
 
     public function getLabUsers(Request $request, $id, $labUser)
