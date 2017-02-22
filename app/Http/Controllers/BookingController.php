@@ -49,6 +49,11 @@ class BookingController extends Controller
 
 		$equipment = Equipment::findOneById($request->equipment);
 
+		$labBooking = Booking::where('user_id', Auth::user()->id)
+		    ->where('time_slot_id', '!=', NULL)
+		    ->where('status', '>=', 1)
+		    ->first(); // newly added
+
 		$bookings = Booking::where('equipment_id', $request->equipment)
 		    ->where('time_slot_id', '!=', NULL)
 		    ->where('timezone_flag', 'daytime')
@@ -99,6 +104,7 @@ class BookingController extends Controller
 					'time_slot_id' => [$timeSlotId[$index]],
 					'timezone_flag' => $timezoneFlag,
 					'cancelled_time_slot' => [$timeSlot[$index]],
+					'lab_id' => $labBooking->lab_id,
 				]);
 			}
 
