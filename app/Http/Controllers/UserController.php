@@ -88,13 +88,18 @@ class UserController extends Controller
                    ->where('user_id', $user->id)
                    ->first();
 
+                $labBooking = Booking::where('user_id', Auth::user()->id)
+                    ->where('time_slot_id', '=', NULL)
+                    ->where('status', 1)
+                    ->first(); // newly added
+
                 if (is_null($getTraining)) {
                     $training = Training::create([
                         'user_id' => $student,
                         'date_of_training_session' => $request->booking_date,
                         'location' => $request->location,
                         'equipment_id' => $request->equipment,
-                        'lab_id' => 3,
+                        'lab_id' => $labBooking->lab-id,
                     ]);
                 }
                 // send email
