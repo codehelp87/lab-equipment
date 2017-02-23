@@ -525,9 +525,6 @@ class EquipmentController extends Controller
         $i = 0;
         $newArray = [];
 
-        //print_r($dayBooking);
-        //print_r($nightBooking); exit;
-
         if (count($dayBooking) > 0 || count($nightBooking) > 0) {
             if (count($dayBooking) > count($nightBooking)) {
                 foreach($dayBooking as $key => $booking) {
