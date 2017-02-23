@@ -7,7 +7,7 @@
 				Congratulations!
 You have completed the training session and you can now use the following equipment..<br><br>
 				Equipment: {{ $equipment }}<br><br>
-				Please <a href="<?php echo $_SERVER['HTTP_HOST'];?>/users/{{ base64_encode($email) }}/activate">click here</a> to update your account informaion.
+				Please <a href="<?php echo $_SERVER['HTTP_HOST'];?>/users/{{ base64_encode($email) }}/activate"><strong>CLICK HERE</strong></a> to update your account informaion.
 				Thanks,<br><br>
 				The Equipment Administrator
 			</p>
