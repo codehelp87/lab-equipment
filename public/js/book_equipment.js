@@ -111,10 +111,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return false;
           }
 
-          selectedTimeSlot = [];
-          selectedDate = [];
-          selectedTimeSlotId = [];
-
           checkBox.each(function (index, el) {
             var _this = $(this);
             selectedTimeSlot.push(_this.val());
