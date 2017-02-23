@@ -299,10 +299,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'displayTrainingRequest',
       value: function displayTrainingRequest(data) {
         var tableRow = '';
-        var labProf = data[0];
+        //var labProf = data[0];
         var students = data[1];
         for (var i = 0; i < students.length; i++) {
-          tableRow += '<tr>' + '<td>' + students[i].student_id + '</td>' + '<td>' + students[i].name + '</td>' + '<td>' + students[i].email + '</td>' + '<td>' + students[i].phone + '</td>' + '<td>' + labProf + '</td>' + '<td><input type="checkbox" class="form-control training-requester" data-name=' + encodeURI(students[i].name) + ' id="training-requester" value=' + students[i].id + '></td>';
+          tableRow += '<tr>' + '<td>' + students[i].student_id + '</td>' + '<td>' + students[i].name + '</td>' + '<td>' + students[i].email + '</td>' + '<td>' + students[i].phone + '</td>' + '<td>' + students[i].lab_prof + '</td>' + '<td><input type="checkbox" class="form-control training-requester" data-name=' + encodeURI(students[i].name) + ' id="training-requester" value=' + students[i].id + '></td>';
           tableRow += '</tr>';
         }
         return tableRow;

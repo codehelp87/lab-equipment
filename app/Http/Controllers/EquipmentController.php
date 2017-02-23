@@ -302,6 +302,7 @@ class EquipmentController extends Controller
                     $student = User::findOneByIdWithRole($training->user_id);
                     if ($student->count() > 0) {
                         $students[$index] = $student;
+                        $students[$index]['lab_prof'] = $booking->lab->title;
                     }
                 }
             }
@@ -331,6 +332,7 @@ class EquipmentController extends Controller
             if (count($bookings) > 0) {
                 foreach($bookings as $index => $booking) {
                     $students[$index] = $booking->user;
+                    $students[$index]['lab_prof'] = $booking->lab->title;
                 }
             }
             return response()->json([$labProfessor, $students], 200);
