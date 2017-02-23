@@ -122,7 +122,7 @@ class LabController extends Controller
 
         return response()->json([
             'message' => 'Lab Users not found'
-        ], 400);
+        ], 200);
     }
 
     public function assignUserToLab(Request $request, $id)
