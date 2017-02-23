@@ -90,7 +90,7 @@ class UserController extends Controller
 
                 $labBooking = Booking::where('user_id', $user->id)
                     ->where('time_slot_id', '=', NULL)
-                    ->where('status', 1)
+                    ->where('status', '>=', 0)
                     ->first(); // newly added
 
                 if (is_null($getTraining)) {

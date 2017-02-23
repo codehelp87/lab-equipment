@@ -62,7 +62,7 @@ class LabController extends Controller
 
         if (count($lab) > 0) {
             $equipments = $lab->equipments;
-            $LabProfessor = $lab->labUser[0]->user->name ?? 'Nil';
+            $LabProfessor = $lab->title ?? 'Nil';
             $professorEmail = $lab->labUser[0]->user->email ?? 'Nil';
             $profDetails = ['name' => $LabProfessor, 'email' => $professorEmail];
 
