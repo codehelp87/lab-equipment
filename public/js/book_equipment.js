@@ -149,9 +149,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'selected_date': selectedDate
           };
 
+          var request = [];
+
           okBtn.on('click', function () {
-             console.log(okBtn.size());
-            equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
+
+            request.push( equipment.makeAjaxCall(route, params, 'POST'));
+
+            request[request.length - 1].done(function (data) {
               if (data[0].id != undefined) {
                 modal.modal('hide');
                 toastr.success('Your booking has been recorded');
