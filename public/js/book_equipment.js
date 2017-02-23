@@ -88,10 +88,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function bookEquipment() {
         var MAX_BOOKING_AHEAD = 30;
 
-        var equipment = new Equipment();
         var bookBtn = $(document).find('button#book-now');
 
         bookBtn.on('click', function () {
+          var equipment = new Equipment();
           var selectedTimeSlot = [];
           var selectedTimeSlotId = [];
           var selectedDate = [];
