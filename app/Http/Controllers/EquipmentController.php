@@ -302,7 +302,7 @@ class EquipmentController extends Controller
                     $student = User::findOneByIdWithRole($training->user_id);
                     if ($student->count() > 0) {
                         $students[$index] = $student;
-                        $students[$index]['lab_prof'] = $booking->lab->title;
+                        $students[$index]['lab_prof'] = $training->lab->title;
                     }
                 }
             }
