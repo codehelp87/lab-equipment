@@ -171,7 +171,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'prepareModalForBookingCancel',
       value: function prepareModalForBookingCancel(bookingDate, selectedTimeSlot) {
-        var stuff = '<h5 class="text-center">Are you sure you want to cancel this reservation</h5>';
+        var stuff = '<h5 class="text-center">Are you sure you want to cancel <br>this reservation</h5>';
         var dateSelected = '<h5 class="text-center">' + bookingDate + '</h5>';
         var info = '<h5 class="text-center">If it\'s correct press Cancel Now</h5><br>';
         var timeSlot = selectedTimeSlot.split(',');
@@ -196,7 +196,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var info = '<h5 class="text-center">If it\'s correct press ok</h5>';
         var slots = '<ul style="padding:0; list-style: none;">';
         for (var i = 0; i < selectedTimeSlot.length; i++) {
-          slots += '<li class="text-center"><h4>' + selectedTimeSlot[i] + '</h4></li>';
+          slots += '<li class="text-center"><h4><strong>' + selectedTimeSlot[i] + '</strong></h4></li>';
         }
         slots += '</ul>';
 
