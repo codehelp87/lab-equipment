@@ -37,7 +37,7 @@ class EquipmentController extends Controller
        $labUser = $request->prof;
        $session = $request->session;
 
-       $equipmentBookings = Booking::findOneByEquipmentUser($id);
+       $equipmentBookings = Booking::findOneByEquipmentUser($id,  $labUser);
 
         if ($equipmentBookings->count() > 0) {
             foreach($equipmentBookings as $index => $booking) {
