@@ -100,7 +100,6 @@ class EquipmentController extends Controller
                 ->where('equipment_id', $equipment->id)
                 ->where('cancelled_time_slot', '!=', NULL)
                 ->where('status', '>=', 1)
-                //->whereIn('timezone_flag', ['daytime', 'nighttime'])
                 ->get();
 
             // get distinct day bookings
@@ -114,45 +113,13 @@ class EquipmentController extends Controller
                     $bookings = Booking::orderBy('id', 'desc')
                         ->where('lab_id', $booking->lab_id)
                         ->where('status', '>=', 1)
-                        //->where('timezone_flag', 'daytime')
                         ->where('cancelled_time_slot', '!=', NULL)
                         ->get();
 
-                    array_push($dayBooking, $this->calculateDayBooking($bookings));
+                    array_push($dayBooking, $this->calculateBooking($bookings));
                 }
             }
-
-            //get nighttime bookings
-            // $nightTimeBookings = Booking::orderBy('id', 'desc')
-            //     ->where('equipment_id', $equipment->id)
-            //     ->where('cancelled_time_slot', '!=', NULL)
-            //     ->where('status', '>=', 1)
-            //     ->where('timezone_flag', 'nighttime')
-            //     ->get();
-
-            // // get distinct night bookings
-            //     $collection = collect($nightTimeBookings);
-            //     $unique = $collection->unique('lab_id');
-            //     $unique->values()->all();
-            //     $nightTimeBookings = $unique->values()->all();
-
-            // if (count($nightTimeBookings) > 0) {
-            //     foreach ($nightTimeBookings as $booking) {
-            //        $bookings = Booking::orderBy('id', 'desc')
-            //             ->where('lab_id', $booking->lab_id)
-            //             ->where('status', '>=', 1)
-            //             ->where('timezone_flag', 'nighttime')
-            //             ->where('cancelled_time_slot', '!=', NULL)
-            //             ->get();
-
-            //         array_push($nightBooking, $this->calculateNightBooking($bookings));
-            //     }
-            // }
         }
-
-        // dump($dayBooking); exit;
-
-        //$newArray = $this->mergeMultiArray($dayBooking, $nightBooking);
 
         return response()->json($dayBooking);
     }
@@ -197,53 +164,10 @@ class EquipmentController extends Controller
                         ->where('cancelled_time_slot', '!=', NULL)
                         ->get();
 
-                    array_push($dayBooking, $this->calculateDayBooking($bookings));
+                    array_push($dayBooking, $this->calculateBooking($bookings));
                 }
             }
-
-            // if (count($dayTimeBookings) > 0) {
-            //     foreach($dayTimeBookings as $booking) {
-            //         $bookings = Booking::orderBy('id', 'desc')
-            //             ->where('lab_id', $booking->lab_id)
-            //             ->where('status', '>=', 1)
-            //             ->where('timezone_flag', 'daytime')
-            //             ->where('cancelled_time_slot', '!=', NULL)
-            //             ->get();
-
-            //         array_push($dayBooking, $this->calculateDayBooking($bookings));
-            //     }
-            // }
-
-            // //get nighttime bookings
-            // $nightTimeBookings = Booking::orderBy('id', 'desc')
-            //     ->where('equipment_id', $equipment->id)
-            //     ->where('status', '>=', 1)
-            //     ->where('timezone_flag', 'nighttime')
-            //     ->where('cancelled_time_slot', '!=', NULL)
-            //     ->whereBetween('booking_date', array($dt, $monthEnd))
-            //     ->get();
-
-            //     // get distinct night bookings
-            //     $collection = collect($nightTimeBookings);
-            //     $unique = $collection->unique('lab_id');
-            //     $unique->values()->all();
-            //     $nightTimeBookings = $unique->values()->all();
-
-            // if (count($nightTimeBookings) > 0) {
-            //     foreach ($nightTimeBookings as $booking) {
-            //         $bookings = Booking::orderBy('id', 'desc')
-            //             ->where('lab_id', $booking->lab_id)
-            //             ->where('status', '>=', 1)
-            //             ->where('timezone_flag', 'nighttime')
-            //             ->where('cancelled_time_slot', '!=', NULL)
-            //             ->get();
-
-            //         array_push($nightBooking, $this->calculateNightBooking($bookings));
-            //     }
-            // }
         }
-
-         // $newArray = $this->mergeMultiArray($dayBooking, $nightBooking);
 
         return response()->json($dayBooking);
     }
@@ -492,29 +416,7 @@ class EquipmentController extends Controller
         return $days;
     }
 
-    protected function calculateNightBooking($bookings)
-    {
-        $totalHourByNight = 0;
-        $totalNightCharge = 0;
-
-        foreach($bookings as $book) {
-            $totalHourByNight += (int) (count($book->cancelled_time_slot) * 10);
-            $totalNightCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
-            $nightTimeBookingProf = $book->lab->title;
-            $nightTimeBookingProfId = $book->lab->id;
-            $equipmentId = $book->equipment_id;
-        }
-
-        return [
-            'night_equipment_id' => $equipmentId,
-            'night_lab_prof' => $nightTimeBookingProf,
-            'night_lab_prof_id' => $nightTimeBookingProfId,
-            'total_charge_by_night' => $totalNightCharge,
-            'total_hour_by_night' => ($totalHourByNight / 60),
-        ];
-    }
-
-    protected function calculateDayBooking($bookings)
+    protected function calculateBooking($bookings)
     {
         // Day booking
         $totalHourByDay = 0;
@@ -553,40 +455,5 @@ class EquipmentController extends Controller
             'total_charge_by_night' => $totalNightCharge,
             'total_hour_by_night' => ($totalHourByNight / 60),
         ];
-    }
-
-    protected function mergeMultiArray($dayBooking, $nightBooking)
-    {
-        $i = 0;
-        $newArray = [];
-
-        if (count($dayBooking) > 0 || count($nightBooking) > 0) {
-            if (count($dayBooking) > count($nightBooking)) {
-                foreach($dayBooking as $key => $booking) {
-                    //if (is_array($booking) && is_array(@$nightBooking[$i])) {
-                        //print_r($dayBooking); print_r($nightBooking); exit;
-                        if (count($booking) > 0 && count(@$nightBooking[$i]) > 0) {
-                            $newArray[] = array_merge(@$booking, @$nightBooking[$i]);
-                        } else {
-                            $newArray[] = @$booking;
-                        }
-                    //}
-                    $i++;
-                }
-            } else {
-                foreach($nightBooking as $key => $booking) {
-                    //if (is_array($booking) && is_array(@$dayBooking[$i])) {
-                        if (count($booking) > 0 && count(@$dayBooking[$i]) > 0) {
-                            $newArray[] = array_merge(@$booking, @$dayBooking[$i]);
-                        } else {
-                            $newArray[] = @$booking;
-                        }
-                    //}
-                    $i++;
-                }
-            }
-        }
-
-        return $newArray;
     }
 }
