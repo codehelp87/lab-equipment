@@ -1,6 +1,8 @@
 button.upcoming-booking {
-    background: #ffffff;
-    color: #616161;
+    background: #ffffff !important;
+    color: #616161 !important;
+    border: 1px solid #666 !important;
+    font-weight: bold;
 }
 
 hr {

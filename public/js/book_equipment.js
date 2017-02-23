@@ -93,6 +93,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var params = null;
         var equipment = new Equipment();
         var route = '/equipments/booking';
+        var equipmentId = null;
 
         okBtn.on('click', function () {            
           equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
@@ -115,7 +116,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var selectedDate = [];
           var request = [];
 
-          var equipmentId = $(this).attr('data-id');
+          equipmentId = $(this).attr('data-id');
           var checkBox = $(document).find('div.checkbox').find('input[type="checkbox"]:checked').not('input[type="checkbox"]:disabled');
           var time = $(document).find('span#time').text();
 
