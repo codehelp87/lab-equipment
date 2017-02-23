@@ -89,7 +89,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var MAX_BOOKING_AHEAD = 30;
 
         var bookBtn = $(document).find('button#book-now');
-        console.log(bookBtn.size());
 
         bookBtn.on('click', function () {
           var equipment = new Equipment();
@@ -140,6 +139,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           modal.modal('show');
 
           var okBtn = modal.find('button.ok');
+
+          console.log(okBtn.size());
           var route = '/equipments/booking';
           var params = {
             'equipment': equipmentId,
