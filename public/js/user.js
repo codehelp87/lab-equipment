@@ -113,8 +113,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           user.makeAjaxCall('/users/' + email + '/password_change', params, 'PUT').done(function (data) {
             // business logic...
             $btn.button('reset');
-            toastr.success(data.message);
             user.clearFormFields();
+            if (data.message == 'Your password has been updated successfully') {
+              return toastr.success('Your password has been updated successfully');
+            }
+            toastr.error(data.message);
             return false;
           }).fail(function (error) {
             toastr.error(error.toString());
@@ -299,7 +302,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           user.makeAjaxCall('/users/' + email, params, 'PUT').done(function (data) {
             // business logic...
             $btn.button('reset');
-            toastr.success(data.message);
+            if (data.message == 'Record updated successfully') {
+              return toastr.success('Record updated successfully')
+            }
+            toastr.error(data.message);
             return false;
           }).fail(function (error) {
             // business logic...

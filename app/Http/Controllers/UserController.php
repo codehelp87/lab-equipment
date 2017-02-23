@@ -214,11 +214,10 @@ class UserController extends Controller
             if (\Hash::check($oldPassword, $user->getAuthPassword())) {
                 $user->password = bcrypt($newPassword);
                 $user->save();
+                return response()->json([
+                    'message' => 'Your password has been updated successfully'
+                ]);
             }
-
-            return response()->json([
-                'message' => 'Your password has been updated successfully'
-            ]);
         }
 
         return response()->json(['message' => 'Error updating password']);
@@ -264,19 +263,25 @@ class UserController extends Controller
         $user = User::findOneByEmail($email);
 
         if (count($user) > 0) {
-            //if (\Hash::check($oldPassword, $user->getAuthPassword())) {
-                $user->name = $name;
-                $user->email = $email;
-                $user->office_location = $office;
-                $user->phone = $phone;
+            $user->name = $name;
+            $user->email = $email;
+            $user->office_location = $office;
+            $user->phone = $phone;
 
-                if ($newPassword != '') {
-                    $user->password = bcrypt($newPassword);
+            if ($oldPassword != '') {
+                if (\Hash::check($oldPassword, $user->getAuthPassword())) {
+                    if ($newPassword != '') {
+                        $user->password = bcrypt($newPassword);
+                    }
+                    $user->save();
+                    return response()->json(['message' => 'Record updated successfully']);
+                } else {
+                    return response()->json(['message' => 'Current password is Incorrect']);
                 }
-                
+            } else {
                 $user->save();
-            //} 
-            return response()->json(['message' => 'Record updated successfully']);
+                return response()->json(['message' => 'Record updated successfully']);
+            }
         }
         return response()->json(['message' => 'Error updating record']);
     }
