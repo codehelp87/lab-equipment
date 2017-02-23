@@ -241,7 +241,7 @@ class EquipmentController extends Controller
 
         $bookingMode = is_null($request->get('mode'))? 'daytime': 'nighttime';
 
-        $equipmentBookings = Booking::findOneByEquipmentUser($id);
+        $equipmentBookings = Booking::findOneByEquipmentUser($id, $labUser);
 
         if ($equipmentBookings->count() > 0) {
             foreach($equipmentBookings as $index => $booking) {
@@ -270,13 +270,13 @@ class EquipmentController extends Controller
                         $sumSlot += count($booking->cancelled_time_slot) * 10;
                     }
 
-                    $userbookings = null;
-
                     array_push($response, [
                         'name' => $user->name,
                         'total_time_booked' => $sumSlot,
+                        //'lab_prof' => $userbookings[$index]->lab->title,
                     ]);
                 }
+                $userbookings = null;
                 $sumSlot = 0;// set slot back to 0
             }
 
