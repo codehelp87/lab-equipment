@@ -41,7 +41,13 @@
                             <?php endif; ?>
                         </td>
                         <td><a href="#"  class="student-edit" id="<?php echo e($user->id); ?>">Edit</a></td>
-                        <td><a href="#"  class="student-delete" id="<?php echo e($user->id); ?>" rel= "<?php echo e(route('delete_user', ['id' => $user->id])); ?>">Delete</a></td>
+                        <td>
+                        <?php if($user->role_id == 1): ?>
+                        <a href="#"  class="student-delete" id="<?php echo e($user->id); ?>" rel= "<?php echo e(route('delete_user', ['id' => $user->id])); ?>">Delete</a>
+                        <?php else: ?> 
+                        <span class="label label-default" >Disabled</span>
+                        <?php endif; ?> 
+                        </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                     <?php endif; ?>
