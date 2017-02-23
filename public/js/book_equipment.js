@@ -87,7 +87,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'bookEquipment',
       value: function bookEquipment() {
         var MAX_BOOKING_AHEAD = 30;
-
         var bookBtn = $(document).find('button#book-now');
 
         bookBtn.on('click', function () {
@@ -95,6 +94,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var selectedTimeSlot = [];
           var selectedTimeSlotId = [];
           var selectedDate = [];
+          var request = [];
 
           var equipmentId = $(this).attr('data-id');
           var modal = $(document).find('div.booking-detail');
@@ -149,18 +149,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'selected_date': selectedDate
           };
 
-          var request = [];
-
-          okBtn.on('click', function () {
-
-            request.push( equipment.makeAjaxCall(route, params, 'POST'));
-
-            request[request.length - 1].done(function (data) {
+          okBtn.on('click', function () {            
+            equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
               if (data[0].id != undefined) {
                 modal.modal('hide');
                 toastr.success('Your booking has been recorded');
-                okBtn.unbind('click');
-                bookBtn.unbind('click');
                 return window.location.href = '/equipments/' + equipment.base64Encode().encode(equipmentId) + '/booking';
               }
               return toastr.success(data.message);

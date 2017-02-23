@@ -82,8 +82,6 @@ class BookingController extends Controller
             $timeSlot = $request->time_slot;
             $dateSelected = $request->selected_date;
 
-            dump($dateSelected); exit;
-
 			foreach($timeSlot as $index => $slot) {
 				// Check the selected date as either night booking
 				// or daytime booking
