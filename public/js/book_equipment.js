@@ -88,16 +88,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function bookEquipment() {
         var MAX_BOOKING_AHEAD = 30;
         var bookBtn = $(document).find('button#book-now');
+        var modal = $(document).find('div.booking-detail');
+        var okBtn = modal.find('button.ok');
+        var params = null;
+        var equipment = new Equipment();
+        var route = '/equipments/booking';
+
+        okBtn.on('click', function () {            
+          equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
+            if (data[0].id != undefined) {
+              modal.modal('hide');
+              toastr.success('Your booking has been recorded');
+              return window.location.href = '/equipments/' + equipment.base64Encode().encode(equipmentId) + '/booking';
+            }
+            return toastr.success(data.message);
+          }).fail(function (error) {
+            console.log(error);
+          });
+
+          return false;
+        });
 
         bookBtn.on('click', function () {
-          var equipment = new Equipment();
           var selectedTimeSlot = [];
           var selectedTimeSlotId = [];
           var selectedDate = [];
           var request = [];
 
           var equipmentId = $(this).attr('data-id');
-          var modal = $(document).find('div.booking-detail');
           var checkBox = $(document).find('div.checkbox').find('input[type="checkbox"]:checked').not('input[type="checkbox"]:disabled');
           var time = $(document).find('span#time').text();
 
@@ -138,31 +156,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           modal.find('div.modal-body').html(modalContent);
           modal.modal('show');
 
-          var okBtn = modal.find('button.ok');
-
-          var route = '/equipments/booking';
-          var params = {
+          params = {
             'equipment': equipmentId,
             'time_slot': selectedTimeSlot,
             'booking_date': time,
             'time_slot_id': selectedTimeSlotId,
             'selected_date': selectedDate
           };
-
-          okBtn.on('click', function () {            
-            equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
-              if (data[0].id != undefined) {
-                modal.modal('hide');
-                toastr.success('Your booking has been recorded');
-                return window.location.href = '/equipments/' + equipment.base64Encode().encode(equipmentId) + '/booking';
-              }
-              return toastr.success(data.message);
-            }).fail(function (error) {
-              console.log(error);
-            });
-
-            return false;
-          });
 
           return false;
         });
