@@ -114,9 +114,10 @@ class LabController extends Controller
                 foreach ($labUsers as $index => $users) {
                     $labUsers[$index] = $users->user;
                 }
+
+                return response()->json($labUsers, 200);
             }
 
-            return response()->json($labUsers, 200);
         }
 
         return response()->json([
