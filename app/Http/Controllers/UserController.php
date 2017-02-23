@@ -88,7 +88,7 @@ class UserController extends Controller
                    ->where('user_id', $user->id)
                    ->first();
 
-                $labBooking = Booking::where('user_id', Auth::user()->id)
+                $labBooking = Booking::where('user_id', $user->id)
                     ->where('time_slot_id', '=', NULL)
                     ->where('status', 1)
                     ->first(); // newly added
