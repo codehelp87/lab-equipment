@@ -140,7 +140,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var okBtn = modal.find('button.ok');
 
-          console.log(okBtn.size());
           var route = '/equipments/booking';
           var params = {
             'equipment': equipmentId,
@@ -151,6 +150,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
 
           okBtn.on('click', function () {
+             console.log(okBtn.size());
             equipment.makeAjaxCall(route, params, 'POST').done(function (data) {
               if (data[0].id != undefined) {
                 modal.modal('hide');
