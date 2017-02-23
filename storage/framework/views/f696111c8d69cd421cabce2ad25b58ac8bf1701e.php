@@ -169,8 +169,8 @@
                                     ->where('status', 1)
                                     ->first(); // newly added
                                 ?>
-                                <td><strong><?php echo e(Auth::user()-> name); ?></strong></td>
-                                <td align="center"><strong>Lab: <?php echo e($labBooking->lab->title); ?></strong></td>
+                                <td><strong><?php echo e(Auth::user()->name); ?></strong></td>
+                                <td align="center"><strong>Lab: <?php echo e(@$labBooking->lab->title); ?></strong></td>
                                 <td><a  class="pull-right" href="<?php echo e(route('my_profile')); ?>" title="<?php echo e(Auth::user()-> name); ?>"><strong>See my page</strong></a></td>
                             </tr>
                         </tbody>

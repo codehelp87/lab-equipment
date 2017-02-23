@@ -5,6 +5,7 @@ namespace LabEquipment\Http\Controllers;
 use Auth;
 use LabEquipment\Lab;
 use LabEquipment\LabUser;
+use LabEquipment\Booking;
 use Illuminate\Http\Request;
 
 class LabController extends Controller
@@ -100,7 +101,14 @@ class LabController extends Controller
 
         if (count($lab) > 0) {
             $labUsers = [];
-            $labUsers = LabUser::where('lab_id', $lab->id)->get();
+            $labUsers = Booking::where('lab_id', $lab->id)
+               ->where('status', '>=', 1)
+               ->get();
+
+             $collection = collect($labUsers);
+             $unique = $collection->unique('user_id');
+             $unique->values()->all();
+             $labUsers = $unique->values()->all();
 
             if (count($labUsers) > 0) {
                 foreach ($labUsers as $index => $users) {
