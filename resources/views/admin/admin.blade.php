@@ -170,8 +170,8 @@
                                     ->where('status', 1)
                                     ->first(); // newly added
                                 ?>
-                                <td><strong>{{ Auth::user()-> name }}</strong></td>
-                                <td align="center"><strong>Lab: {{ $labBooking->lab->title }}</strong></td>
+                                <td><strong>{{ Auth::user()->name }}</strong></td>
+                                <td align="center"><strong>Lab: {{ @$labBooking->lab->title }}</strong></td>
                                 <td><a  class="pull-right" href="{{ route('my_profile') }}" title="{{ Auth::user()-> name}}"><strong>See my page</strong></a></td>
                             </tr>
                         </tbody>
