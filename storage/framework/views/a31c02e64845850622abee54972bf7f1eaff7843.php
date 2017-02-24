@@ -19,23 +19,24 @@
     </div>
 </form>
 <div class="table-responsive">
-<table class="table table-hover" id="list-notification">
-    <tbody>
-    <?php if($notifications->count() > 0): ?>
-        <?php $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+    <table class="table table-hover table-striped" id="list-notification">
+        <tbody>
+            <?php if($notifications->count() > 0): ?>
+            <?php $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tr id="edit-notification<?php echo e($notification->id); ?>">
+                <td><?php echo e($loop->index + 1); ?></td>
                 <td><?php echo e($notification->title); ?></td>
                 <td ><?php echo e(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at)->format('Y/m/d')); ?></td>
                 <td class="text-right"><a href="/notification/<?php echo e($notification->id); ?>/edit" class="edit-notification" id="<?php echo e($notification->id); ?>"> <i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <div class="display<?php echo e($notification->id); ?>" id="edit-notification<?php echo e($notification->id); ?>" style="display: none;"></div>
-                </td>
-            </tr>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="display<?php echo e($notification->id); ?>" id="edit-notification<?php echo e($notification->id); ?>" style="display: none;"></div>
+            </td>
+        </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-    <?php endif; ?>
+        <?php endif; ?>
     </tbody>
 </table>
 </div>

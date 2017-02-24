@@ -50,6 +50,16 @@
         <script type="text/javascript" src="{{ asset('js/training_request.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/lab_usage.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/notification.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("table").simplePagination({
+                    perPage: 10,
+                    previousButtonClass: "btn btn-default",
+                    nextButtonClass: "btn btn-default"
+                });
+            });
+        </script>
         @include('student.cancel_booking_modal')
         @include('student.contact_the_admin_modal')
     </body>

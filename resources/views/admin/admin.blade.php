@@ -138,13 +138,13 @@
             <br>
             <hr>
             <p>
-                <h5><strong>Notifications</strong> <a class="pull-right" href="/my_notifications">Read all</a></h5>
+                <h5><strong>Notifications</strong> {{-- <a class="pull-right" href="/my_notifications">Read all</a> --}}</h5>
                 <div class="table-responsive">
                     <table class="table table-hover table-responsive notifications">
                         <tbody>
                             @if (Auth::user()->notifications->count() > 0)
                             @foreach(Auth::user()->notifications as $notification)
-                            @if ($loop->index < 3)
+                           {{--  @if ($loop->index < 3) --}}
                             <tr>
                                 <td><a href="#" class="read-notification" id="{{ $notification->notification->id }}">{{ $notification->notification->title }}</a></td>
                                 <td class="text-right">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->notification->created_at)->format('Y/m/d') }}</td>
@@ -152,7 +152,7 @@
                             <tr id="view-content{{ $notification->notification->id }}" style="display: none;">
                                 <td colspan="2">{{ $notification->notification->content }}</td>
                             </tr>
-                            @endif
+                           {{--  @endif --}}
                             @endforeach
                             @endif
                         </tbody>

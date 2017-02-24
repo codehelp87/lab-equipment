@@ -1,6 +1,6 @@
 <h5><strong>Upcoming Booking</strong> <span class="text-danger" style="margin-left: 50px;">Cancellation is allowed until 1hr. before your reservation</span></h5> <br>
  <div class="table-responsive">
-<table class="table table-hover table-responsive">
+<table class="table table-hover table-responsive table-striped">
     <tbody>
         @foreach($bookings as $booking)
         <?php 

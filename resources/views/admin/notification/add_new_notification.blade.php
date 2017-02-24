@@ -19,23 +19,24 @@
     </div>
 </form>
 <div class="table-responsive">
-<table class="table table-hover" id="list-notification">
-    <tbody>
-    @if($notifications->count() > 0)
-        @foreach($notifications as $notification)
+    <table class="table table-hover table-striped" id="list-notification">
+        <tbody>
+            @if($notifications->count() > 0)
+            @foreach($notifications as $notification)
             <tr id="edit-notification{{ $notification->id }}">
+                <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $notification->title }}</td>
                 <td >{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at)->format('Y/m/d') }}</td>
                 <td class="text-right"><a href="/notification/{{ $notification->id }}/edit" class="edit-notification" id="{{ $notification->id }}"> <i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <div class="display{{ $notification->id }}" id="edit-notification{{ $notification->id }}" style="display: none;"></div>
-                </td>
-            </tr>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="display{{ $notification->id }}" id="edit-notification{{ $notification->id }}" style="display: none;"></div>
+            </td>
+        </tr>
         @endforeach
-    @endif
+        @endif
     </tbody>
 </table>
 </div>

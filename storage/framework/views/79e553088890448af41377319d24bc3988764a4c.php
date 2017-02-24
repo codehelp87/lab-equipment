@@ -50,6 +50,16 @@
         <script type="text/javascript" src="<?php echo e(asset('js/training_request.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/lab_usage.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/notification.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(asset('js/jquery.simplePagination.js')); ?>"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("table").simplePagination({
+                    perPage: 10,
+                    previousButtonClass: "btn btn-default",
+                    nextButtonClass: "btn btn-default"
+                });
+            });
+        </script>
         <?php echo $__env->make('student.cancel_booking_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         <?php echo $__env->make('student.contact_the_admin_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </body>

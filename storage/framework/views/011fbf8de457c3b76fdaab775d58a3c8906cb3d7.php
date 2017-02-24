@@ -8,6 +8,13 @@
              <?php if(Auth::user()->notifications->count() > 0): ?>
               <div class="table-responsive">
             <table class="table table-hover notifications">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>TITLE</th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
                 <tbody>
                     <?php $__currentLoopData = Auth::user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                     <tr>
