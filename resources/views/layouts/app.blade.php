@@ -52,8 +52,9 @@
         <script type="text/javascript" src="{{ asset('js/notification.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
-                $("table").simplePagination({
+            $(document).ready(function() {
+                var table = $('#notifications, .equipment-book, #list-equipment, #list-labs, .user-account-list, #list-notification, #display-complete-training, #notifications, #booking-history');
+                table.simplePagination({
                     perPage: 10,
                     previousButtonClass: "btn btn-default",
                     nextButtonClass: "btn btn-default"

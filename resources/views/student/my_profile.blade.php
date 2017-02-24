@@ -74,7 +74,7 @@
                     <h5><strong>Booking History</strong></h5><br>
                     @if($bookingHistories->count() > 0)
                     <div class="table-responsive">
-                        <table class="table table-hover table-responsive">
+                        <table class="table table-hover table-responsive" id="booking-history">
                             <tbody>
                                 @foreach($bookingHistories as $booking)
                                 <tr>

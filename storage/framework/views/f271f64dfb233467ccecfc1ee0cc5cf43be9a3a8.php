@@ -74,7 +74,7 @@
                     <h5><strong>Booking History</strong></h5><br>
                     <?php if($bookingHistories->count() > 0): ?>
                     <div class="table-responsive">
-                        <table class="table table-hover table-responsive">
+                        <table class="table table-hover table-responsive" id="booking-history">
                             <tbody>
                                 <?php $__currentLoopData = $bookingHistories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $booking): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                 <tr>

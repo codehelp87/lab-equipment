@@ -8,7 +8,7 @@
             <h5>My Notifications</h5>
              @if (Auth::user()->notifications->count() > 0)
               <div class="table-responsive">
-            <table class="table table-hover table-striped notifications">
+            <table class="table table-hover table-striped notifications" id="notifications">
                 <tbody>
                     @foreach(Auth::user()->notifications as $notification)
                     <tr>
