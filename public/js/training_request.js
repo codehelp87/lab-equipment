@@ -248,7 +248,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var route = '/equipments/' + equipmentId + '/trainings';
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
-              if (data[1].length == undefined) {
+              if (data[1].length == undefined || data[1].length > 0) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
                 return toastr.success('Student loaded');
