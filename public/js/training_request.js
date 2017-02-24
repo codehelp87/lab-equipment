@@ -249,6 +249,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
               if (data[1].length > 0) {
+                console.log(data[1]);
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
                 return toastr.success('Student loaded');
@@ -301,7 +302,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var tableRow = '';
         var students = data[1];
         for (var student in students) {
-          console.log(student);
           tableRow += '<tr>' + '<td>' + students[student].student_id + '</td>' + '<td>' + 
           students[student].name + '</td>' + '<td>' + students[student].email + '</td>' + '<td>' + 
           students[student].phone + '</td>' + '<td>' + students[student].lab_prof + '</td>' + 
