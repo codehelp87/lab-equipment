@@ -301,6 +301,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var tableRow = '';
         var students = data[1];
         for (var student in students) {
+          console.log(student);
           tableRow += '<tr>' + '<td>' + students[student].student_id + '</td>' + '<td>' + 
           students[student].name + '</td>' + '<td>' + students[student].email + '</td>' + '<td>' + 
           students[student].phone + '</td>' + '<td>' + students[student].lab_prof + '</td>' + 
