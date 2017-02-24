@@ -220,7 +220,7 @@ class UserController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Error updating password']);
+        return response()->json(['message' => 'The current password is Incorrect']);
     }
 
     public function viewMyProfile()
