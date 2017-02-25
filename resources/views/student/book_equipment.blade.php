@@ -44,13 +44,13 @@
                             </div>
                         </div>
                         <hr>
-                        <h5>Daytime (9am - 9pm)</h5>
+                        <h5><strong>Daytime (9am - 9pm)</strong></h5>
                         <h5>Maximum reservation time: {{ $equipment->max_reservation_time }}hr(s)</h5>
                         <hr>
-                        <h5>Night Time (9pm - 9am)</h5>
+                        <h5><strong>Night Time (9pm - 9am)</strong></h5>
                         <h5>Maximum reservation time: Unlimited</h5>
                         <hr>
-                        <h5>Cancellation policy</h5>
+                        <h5><strong>Cancellation policy</strong></h5>
                         <h5>Before 1hr of reservation</h5>
                         <hr>
                     </div>
