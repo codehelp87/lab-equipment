@@ -77,6 +77,14 @@ class LabController extends Controller
 
     public function createLab(Request $request)
     {
+        $findLab = Lab::where('title', $request->title)->first();
+
+        if (count($findLab) > 0) {
+            return response()->json([
+                'message' => 'Lab Already Exists'
+            ], 200);
+        }
+
     	$lab = Lab::create([
     		'title' => $request->title,
     		'model_no' => 'model_no',
@@ -92,7 +100,7 @@ class LabController extends Controller
 
     	return response()->json([
     		'message' => 'Error creating Lab'
-    	], 400);
+    	], 200);
     }
 
     public function getLabUsers(Request $request, $id)
