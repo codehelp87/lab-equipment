@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="model" class="col-sm-2 control-label">Student ID#</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="student_id" name="student_id" placeholder="Model No" value="{{ old('student_id') }}" required="required">
+                                <input type="text" class="form-control" id="student_id" name="student_id" placeholder="Student ID" value="{{ old('student_id') }}" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,13 +90,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="new_password" class="col-sm-2 control-label">Enter New Password</label>
+                            <label for="new_password" class="col-sm-2 control-label">Enter Password</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" id="new_password" name= "new_password" placeholder="Enter New Password" required="required">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="com_password" class="col-sm-2 control-label">Confirm New Password</label>
+                            <label for="com_password" class="col-sm-2 control-label">Confirm Password</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" id="com_password" name="com_password" placeholder="Confirm New Password" required="required">
                             </div>
@@ -106,6 +106,10 @@
                                 <button type="submit" class="btn btn-large btn-default request-training">Send</button>
                                 <a class="btn btn-link open-modal" href="#" data-target="#contact-admin">
                                     Have a question?
+                                </a>
+
+                                <a class="btn btn-link " href="/">
+                                    <strong>Back to Home</strong>
                                 </a>
                             </div>
                         </div>
