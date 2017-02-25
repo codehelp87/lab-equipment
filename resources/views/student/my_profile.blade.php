@@ -77,20 +77,22 @@
                         <table class="table table-hover table-responsive" id="booking-history">
                             <tbody>
                                 @foreach($bookingHistories as $booking)
+                                @if($booking->time_slot == null && $booking->status == 2)
                                 <tr>
                                     <td><strong>{{ $booking->equipment->title }}</strong></td>
                                     <td>{{ $booking->equipment->model_no }}</td>
                                     <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
                                     <td>{{ implode(' , ', $booking->cancelled_time_slot) }}</td>
                                     <td>
-                                        @if($booking->time_slot == null && $booking->status == 2)
+                                        
                                         <button type="button" class="btn btn-default pull-right completed"> Completed</button>
-                                        @endif
+                                       
                                         {{-- @if($booking->time_slot == null && $booking->status == 0)
                                         <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
                                         @endif --}}
                                     </td>
                                 </tr>
+                                 @endif
                                 @endforeach
                             </tbody>
                         </table>
