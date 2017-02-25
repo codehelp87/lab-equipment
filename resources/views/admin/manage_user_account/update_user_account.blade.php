@@ -28,9 +28,9 @@
 		<div class="col-sm-10">
 			<input type="text" class="form-control" id="office" name="office" placeholder="Office" value="{{$user->office_location }}">
 		</div>
-		<hr>
+		{{-- <hr style="border: 1px solid #f8f8f8;"> --}}
 	</div>
-	<hr>
+	<hr style="border: 1px solid #f8f8f8;">
 	<div class="form-group">
 		<label for="status" class="col-sm-2 control-label">Account Status</label>
 		<div class="col-sm-6">
@@ -49,7 +49,7 @@
 			</select>
 		</div>
 	</div>
-	<hr>
+	<hr style="border: 1px solid #f8f8f8;">
 	<div class="form-group">
 		<label for="role" class="col-sm-2 control-label">Assign Role</label>
 		<div class="col-sm-6">
@@ -68,7 +68,7 @@
 			</select>
 		</div>
 	</div>
-	<hr>
+	<hr style="border: 1px solid #f8f8f8;">
 	@if (!is_null($equipments))
 	<?php $id = '';?>
 	<h6>Status by equipment</h6>
