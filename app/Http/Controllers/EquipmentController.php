@@ -160,7 +160,6 @@ class EquipmentController extends Controller
                     $bookings = Booking::orderBy('id', 'desc')
                         ->where('lab_id', $booking->lab_id)
                         ->where('status', '>=', 1)
-                        //->where('timezone_flag', 'daytime')
                         ->where('cancelled_time_slot', '!=', NULL)
                         ->get();
 
@@ -232,6 +231,7 @@ class EquipmentController extends Controller
             $labProfessor = $user->name;
 
             $trainings = Training::where('equipment_id', $equipment->id)
+                ->orderBy('id', 'DESC')
                 ->distinct()
                 ->get();
 
@@ -264,6 +264,7 @@ class EquipmentController extends Controller
             $bookings = Booking::where('status', 1)
                 ->where('timezone_flag', NULL)
                 ->where('equipment_id', $equipment->id)
+                ->orderBy('id', 'DESC')
                 ->distinct()
                 ->get();
 
