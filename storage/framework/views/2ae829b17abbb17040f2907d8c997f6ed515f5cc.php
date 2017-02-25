@@ -23,13 +23,15 @@
 			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="<?php echo e($user->phone); ?>">
 		</div>
 	</div>
+	<?php if($user->role_id == 2): ?>
 	<div class="form-group">
 		<label for="office" class="col-sm-2 control-label">Office</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" id="office" name="office" placeholder="Office" value="<?php echo e($user->office_location); ?>">
 		</div>
-		<hr style="border: 1px solid #f8f8f8;">
+		
 	</div>
+	<?php endif; ?>
 	<hr style="border: 1px solid #f8f8f8;">
 	<div class="form-group">
 		<label for="status" class="col-sm-2 control-label">Account Status</label>

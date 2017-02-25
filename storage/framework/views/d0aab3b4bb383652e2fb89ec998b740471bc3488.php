@@ -15,7 +15,7 @@
 						</a>
 					</div>
 				</div>
-				<button type="button" class="btn btn-default no" data-dismiss="modal">No</button>
+				<button type="button" class="btn btn-default no" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-default ok">Ok</button>
 			</div>
 		</div>
