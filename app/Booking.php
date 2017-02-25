@@ -163,4 +163,12 @@ class Booking extends Model
             ->where('user_id', $userId)
             ->first();
     }
+
+    public function scopeFindUserLab($query, $userId)
+    {
+        return $query->where('user_id', $userId)
+            ->where('time_slot_id', '=', NULL)
+            ->where('status', 1)
+            ->first();
+    }
 }

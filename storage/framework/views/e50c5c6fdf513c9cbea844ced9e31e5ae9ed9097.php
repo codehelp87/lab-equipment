@@ -6,7 +6,7 @@
                 <option value="">Select Equipment</option>
                 <?php if($equipments->count() > 0): ?>
                 <?php $__currentLoopData = $equipments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipment): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                <option value="<?php echo e($equipment->id); ?>"><?php echo e($equipment->model_no); ?> <?php echo e($equipment->title); ?></option>
+                <option value="<?php echo e($equipment->id); ?>"><?php echo e($equipment->title); ?> <?php echo e($equipment->model_no); ?> </option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                 <?php endif; ?>
             </select>

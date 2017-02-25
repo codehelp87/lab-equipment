@@ -23,11 +23,14 @@
 			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="<?php echo e($user->phone); ?>">
 		</div>
 	</div>
-	<?php if($user->role_id == 2): ?>
+	<?php if($user->role_id == 1): ?>
+	 <?php
+        $labBooking = LabEquipment\Booking::FindUserLab($user->id);
+     ?>
 	<div class="form-group">
-		<label for="office" class="col-sm-2 control-label">Office</label>
+		<label for="office" class="col-sm-2 control-label">Lab</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="office" name="office" placeholder="Office" value="<?php echo e($user->office_location); ?>">
+			<input type="text" class="form-control" id="office" name="office" placeholder="Lab" value="<?php echo e(@$labBooking->lab->title); ?>" readonly="readonly">
 		</div>
 		
 	</div>

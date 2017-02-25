@@ -165,10 +165,7 @@
                         <tbody>
                             <tr>
                                 <?php
-                                $labBooking = LabEquipment\Booking::where('user_id', Auth::user()->id)
-                                    ->where('time_slot_id', '=', NULL)
-                                    ->where('status', 1)
-                                    ->first(); // newly added
+                                   $labBooking = LabEquipment\Booking::FindUserLab(Auth::user()->id);
                                 ?>
                                 <td><strong>{{ Auth::user()->name }}</strong></td>
                                 <td align="center"><strong>Lab: {{ @$labBooking->lab->title }}</strong></td>
