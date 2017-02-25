@@ -137,12 +137,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
 
           lab.makeAjaxCall('/labs/add', params, 'POST').done(function (data) {
-            var newLab = lab.appendNewLab(data.lab);
-            $('table#list-labs').append(newLab);
-
-            toastr.success(data.message);
-            lab.checkforEmptyFields();
-            lab.clearFormFields();
+            if (data.message == 'Lab was created successfully') {
+               var newLab = lab.appendNewLab(data.lab);
+               $('table#list-labs').append(newLab);
+               lab.checkforEmptyFields();
+               lab.clearFormFields();
+  
+              return toastr.success(data.message);
+            }
+            toastr.error(data.message);
+            
             return false;
           }).fail(function (error) {
             toastr.error(error.toString());
