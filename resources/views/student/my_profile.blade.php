@@ -54,7 +54,7 @@
                                             <option value="">Select Equipment</option>
                                             @if ($trainings->count() > 0)
                                             @foreach($trainings as $training)
-                                            <option value="{{ base64_encode($training->equipment->id) }}">{{ $training->equipment->model_no }} {{ $training->equipment->title }}</option>
+                                            <option value="{{ base64_encode($training->equipment->id) }}">{{ $training->equipment->title }} {{ $training->equipment->model_no }} </option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -84,9 +84,7 @@
                                     <td>{{ date_format(new \DateTime($booking->booking_date), 'Y/m/d') }}</td>
                                     <td>{{ implode(' , ', $booking->cancelled_time_slot) }}</td>
                                     <td>
-                                        
                                         <button type="button" class="btn btn-default pull-right completed"> Completed</button>
-                                       
                                         {{-- @if($booking->time_slot == null && $booking->status == 0)
                                         <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
                                         @endif --}}
