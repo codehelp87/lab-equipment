@@ -6,7 +6,7 @@
                 <option value="">Select Equipment</option>
                 @if($equipments->count() > 0)
                 @foreach($equipments as $equipment)
-                <option value="{{ $equipment->id }}">{{ $equipment->model_no }}</option>
+                <option value="{{ $equipment->id }}">{{ $equipment->model_no }}  {{ $equipment->title }}</option>
                 @endforeach
                 @endif
             </select>

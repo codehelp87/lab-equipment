@@ -263,13 +263,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var total = 0;
         for (var usage in data) {
           var day_lab_prof_id = data[usage].day_lab_prof_id == undefined? 0: data[usage].day_lab_prof_id;
-          var day_equipment_id = data[usage].day_equipment_id ==undefined? 0: data[usage].day_equipment_id;
+          var day_equipment_id = data[usage].day_equipment_id == undefined? 0: data[usage].day_equipment_id;
           var day_lab_prof = data[usage].day_lab_prof == undefined? 'Nill': data[usage].day_lab_prof;
           var total_hour_by_day = data[usage].total_hour_by_day == undefined? 0: data[usage].total_hour_by_day;
           var total_charge_by_day = data[usage].total_charge_by_day == undefined? 0: data[usage].total_charge_by_day;
 
           var night_lab_prof_id = data[usage].night_lab_prof_id == undefined? 0: data[usage].night_lab_prof_id;
-          var night_equipment_id = data[usage].night_equipment_id ==undefined? 0: data[usage].night_equipment_id;
+          var night_equipment_id = data[usage].night_equipment_id == undefined? 0: data[usage].night_equipment_id;
           var night_lab_prof = data[usage].night_lab_prof == undefined? 'Nill': data[usage].night_lab_prof;
           var total_hour_by_night = data[usage].total_hour_by_night == undefined? 0: data[usage].total_hour_by_night;
           var total_charge_by_night = data[usage].total_charge_by_night == undefined? 0: data[usage].total_charge_by_night;
