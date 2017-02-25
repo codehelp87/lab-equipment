@@ -86,9 +86,9 @@
                                         @if($booking->time_slot == null && $booking->status == 2)
                                         <button type="button" class="btn btn-default pull-right completed"> Completed</button>
                                         @endif
-                                        @if($booking->time_slot == null && $booking->status == 0)
+                                        {{-- @if($booking->time_slot == null && $booking->status == 0)
                                         <button type="button" class="btn btn-default pull-right cancelled"> Cancelled</button>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                                 @endforeach
