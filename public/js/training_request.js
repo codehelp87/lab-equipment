@@ -241,6 +241,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var selectEquipment = $(document).find('form#complete-training').find('select#equipment');
 
         var tableBody = $(document).find('form#complete-training').find('table#display-complete-training tbody');
+        var table = $(document).find('form#complete-training').find('table#display-complete-training');
 
         selectEquipment.on('change', function () {
           var _this = $(this);
@@ -251,6 +252,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (data[1].length == undefined || data[1].length > 0) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
+                table.simplePagination({
+                  perPage: 10,
+                  previousButtonClass: "btn btn-default",
+                  nextButtonClass: "btn btn-default"
+                });
                 return toastr.success('Student loaded');
               }
               tableBody.html('');
@@ -272,6 +278,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var selectEquipment = $(document).find('form#approve-request').find('select#equipment');
 
         var tableBody = $(document).find('form#approve-request').find('table#display-training-request tbody');
+        var table = $(document).find('form#complete-training').find('table#display-training-request');
 
         selectEquipment.on('change', function () {
           var _this = $(this);
@@ -282,6 +289,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (data[1].length > 0) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
+                table.simplePagination({
+                  perPage: 10,
+                  previousButtonClass: "btn btn-default",
+                  nextButtonClass: "btn btn-default"
+                });
                 return toastr.success('Student loaded');
               }
               tableBody.html('');

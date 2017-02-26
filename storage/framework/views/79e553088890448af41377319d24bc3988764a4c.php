@@ -40,6 +40,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/moment.js')); ?>"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="<?php echo e(asset('js/jquery.simplePagination.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/bootbox.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/jquery.table2excel.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/keep_alive.js')); ?>"></script>
@@ -50,10 +51,9 @@
         <script type="text/javascript" src="<?php echo e(asset('js/training_request.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/lab_usage.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/notification.js')); ?>"></script>
-        <script type="text/javascript" src="<?php echo e(asset('js/jquery.simplePagination.js')); ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                var table = $('#notifications, .equipment-book, #list-equipment, #list-labs, .user-account-list, #list-notification, #display-complete-training, #notifications, #booking-history');
+                var table = $('#notifications, .equipment-book, #list-equipment, #list-labs, .user-account-list, #list-notification, #notifications, #booking-history');
                 table.simplePagination({
                     perPage: 10,
                     previousButtonClass: "btn btn-default",
