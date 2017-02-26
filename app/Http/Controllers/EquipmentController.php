@@ -32,7 +32,6 @@ class EquipmentController extends Controller
     {
        $users = [];
        $response = [];
-       $bookingMode = is_null($request->get('mode'))? 'daytime': 'nighttime';
 
        $labUser = $request->prof;
        $session = $request->session;
@@ -60,31 +59,92 @@ class EquipmentController extends Controller
                 $userbookings = Booking::where('user_id', $user->id)
                     ->where('status', '>=', 1)
                     ->where('equipment_id', $id)
-                    ->where('timezone_flag', '=', trim($bookingMode))
                     ->where('cancelled_time_slot', '!=', NULL)
                     ->whereBetween('booking_date', array($dt, $monthEnd))
                     ->get();
 
-                $sumSlot = 0;
+                $nightBookingSlot = 0;
+                $dayBookingSlot = 0;
 
                 if ($userbookings->count() > 0 ) {
                     foreach($userbookings as $index => $booking) {
-                        $sumSlot += count($booking->cancelled_time_slot) * 10;
+                        if ($booking->timezone_flag == 'daytime') {
+                            $dayBookingSlot += count($booking->cancelled_time_slot) * 10;
+                        } else {
+                            $nightBookingSlot += count($booking->cancelled_time_slot) * 10;
+                        }
                     }
 
                     $userbookings = null;
 
                     array_push($response, [
                         'name' => $user->name,
-                        'total_time_booked' => $sumSlot,
+                        'total_daytime_booked' => $dayBookingSlot,
+                        'total_nighttime_booked' => $nightBookingSlot,
                     ]);
                 }
-                $sumSlot = 0;// set slot back to 0
+                $dayBookingSlot = 0;// set slot back to 0
+                $nightBookingSlot = 0;
             }
 
             return response()->json([$labEquipment, $response], 200);
         }
     }
+
+    public function getLabUsers(Request $request, $id, $labUser)
+    {
+        $users = [];
+        $response = [];
+
+        $equipmentBookings = Booking::findOneByEquipmentUser($id, $labUser);
+
+        if ($equipmentBookings->count() > 0) {
+            foreach($equipmentBookings as $index => $booking) {
+                $users[$index] = $booking->user_id;
+            }
+
+            $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
+            $labEquipment = [
+                'lab_prof' => Lab::findOneById($labUser)->title,
+                'equipment_amount' => $equipmentAmount
+            ];
+            $uniqueUsers = array_unique($users); // get the unique user_id
+
+            foreach ($uniqueUsers as $userId) {
+                $user = User::findOneById($userId);
+                $userbookings = Booking::where('user_id', $user->id)
+                    ->where('status', '>=', 1)
+                    ->where('equipment_id', $id)
+                    ->get();
+
+                $nightBookingSlot = 0;
+                $dayBookingSlot = 0;
+
+                if ($userbookings->count() > 0 ) {
+                    foreach($userbookings as $index => $booking) {
+                        if ($booking->timezone_flag == 'daytime') {
+                            $dayBookingSlot += count($booking->cancelled_time_slot) * 10;
+                        } else {
+                            $nightBookingSlot += count($booking->cancelled_time_slot) * 10;
+                        }
+                    }
+
+                    $userbookings = null;
+                    array_push($response, [
+                        'name' => $user->name,
+                        'total_daytime_booked' => $dayBookingSlot,
+                        'total_nighttime_booked' => $nightBookingSlot,
+                    ]);
+                }
+                
+                $dayBookingSlot = 0;// set slot back to 0
+                $nightBookingSlot = 0;
+            }
+
+            return response()->json([$labEquipment, $response], 200);
+        }
+    }
+
 
     public function getEquipmentLabUsage(Request $request, $id)
     {
@@ -139,12 +199,11 @@ class EquipmentController extends Controller
 
             $days = $this->getMonthDays($session);
 
-            $monthEnd = date('Y-m-d h:i:s', strtotime($session. '+'.($days - 1).'days'));
+            $monthEnd = date('Y-m-d', strtotime($session. '+'.($days - 1).'days'));
 
             $dayTimeBookings = Booking::orderBy('id', 'desc')
                 ->where('equipment_id', $equipment->id)
                 ->where('status', '>=', 1)
-                ->where('timezone_flag', 'daytime')
                 ->where('cancelled_time_slot', '!=', NULL)
                 ->whereBetween('booking_date', array($dt, $monthEnd))
                 ->get();
@@ -169,56 +228,6 @@ class EquipmentController extends Controller
         }
 
         return response()->json($dayBooking);
-    }
-
-    public function getLabUsers(Request $request, $id, $labUser)
-    {
-        $users = [];
-        $response = [];
-
-        $bookingMode = is_null($request->get('mode'))? 'daytime': 'nighttime';
-
-        $equipmentBookings = Booking::findOneByEquipmentUser($id, $labUser);
-
-        if ($equipmentBookings->count() > 0) {
-            foreach($equipmentBookings as $index => $booking) {
-                $users[$index] = $booking->user_id;
-            }
-
-            $equipmentAmount = (int) ($booking->equipment->price_per_unit_time);
-            $labEquipment = [
-                'lab_prof' => Lab::findOneById($labUser)->title,
-                'equipment_amount' => $equipmentAmount
-            ];
-            $uniqueUsers = array_unique($users); // get the unique user_id
-
-            foreach ($uniqueUsers as $userId) {
-                $user = User::findOneById($userId);
-                $userbookings = Booking::where('user_id', $user->id)
-                    ->where('status', '>=', 1)
-                    ->where('equipment_id', $id)
-                    ->where('timezone_flag','=', trim($bookingMode))
-                    ->get();
-
-                $sumSlot = 0;
-
-                if ($userbookings->count() > 0 ) {
-                    foreach($userbookings as $index => $booking) {
-                        $sumSlot += count($booking->cancelled_time_slot) * 10;
-                    }
-
-                    array_push($response, [
-                        'name' => $user->name,
-                        'total_time_booked' => $sumSlot,
-                        //'lab_prof' => $userbookings[$index]->lab->title,
-                    ]);
-                }
-                $userbookings = null;
-                $sumSlot = 0;// set slot back to 0
-            }
-
-            return response()->json([$labEquipment, $response], 200);
-        }
     }
 
     public function TrainingUsers(Request $request, $id)

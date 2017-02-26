@@ -70,8 +70,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var route = '/equipments/' + equipmentId + '/labusers/sessions';
 
           lab.makeAjaxCall(route, { session: session, prof: labProf }, 'GET').done(function (data) {
-            console.log(data);
-            modalTitle.html(data.lab_prof);
+            modalTitle.html(data[0].lab_prof);
             var content = lab.prepareLabUserTable(data[1], data[0].equipment_amount);
             modalBody.html(content);
             modal.modal('show');
@@ -184,15 +183,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'prepareLabUserTable',
       value: function prepareLabUserTable(data, equipmentAmount) {
-        var total = 0;
+        var totalDayBookings = 0;
+        var totalNightBookings = 0;
         var table = '<table class="table table-hover" id="lab-equipment-users">';
+        table += '<thead><tr><th></th><th>Day time<br>(9am-9pm)</th><th>Night time<br>(9pm-9am)</th></tr></thead>';
         table += '<tbody>';
         for (var booking in data) {
-          table += '<tr><td><strong>' + data[booking].name + '</strong></td><td><strong>' + data[booking].total_time_booked + '</strong></td></tr>';
-          total += parseFloat(data[booking].total_time_booked);
+          table += '<tr><td><strong>' + data[booking].name + '</strong></td><td><strong>' + 
+         data[booking].total_daytime_booked + '</strong></td><td><strong>' + 
+          data[booking].total_nighttime_booked  + '</strong></td></tr>';
+          totalDayBookings += parseFloat(data[booking].total_daytime_booked);
+          totalNightBookings += parseFloat(data[booking].total_nighttime_booked);
         }
-        table += '<tr><td><strong>Total Hours</strong></td><td><strong>' + parseFloat(total / 60) + '<strong></td></tr>';
-        table += '<tr><td><strong>Total Price</strong></td><td><strong>' + parseFloat(total * (equipmentAmount / 10)) + '</strong></td></tr>';
+        table += '<tr><td><strong>Total Hours</strong></td><td><strong>' + parseFloat(Math.round(parseFloat(totalDayBookings / 60)* 100) / 100).toFixed(2) +
+        '<strong></td> <td><strong>' +  parseFloat(Math.round(parseFloat(totalNightBookings / 60) * 100) / 100).toFixed(2) + '<strong></td></tr>';
+        table += '<tr><td><strong>Total Price</strong></td><td><strong>' + parseFloat(totalDayBookings * (equipmentAmount / 10)) + 
+        '</strong></td><td><strong>' + parseFloat(totalNightBookings * (equipmentAmount / 10)) + 
+        '</strong></td></tr>';
         table += '</tbody>';
         table += '</table>';
 
