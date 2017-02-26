@@ -249,6 +249,8 @@ class EquipmentController extends Controller
                         } else {
                             $students[$index]['accepted'] = false;
                         }
+
+                        $completedTrainingRequest = null;
                     }
                 }
             }
@@ -288,6 +290,7 @@ class EquipmentController extends Controller
                     } else {
                         $students[$index]['accepted'] = false;
                     }
+                    $acceptedTrainingRequest = null;
                 }
             }
             return response()->json([$labProfessor, $students], 200);
