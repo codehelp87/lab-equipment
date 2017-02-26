@@ -481,8 +481,7 @@ class EquipmentController extends Controller
             ->where('user_id', $userId)
             ->orderBy('id', 'DESC')
             ->distinct()
-            ->get()
-            ->toArray();
+            ->get();
 
         return $acceptedTrainingRequests;
     }
@@ -494,8 +493,7 @@ class EquipmentController extends Controller
             ->where('user_id', $userId)
             ->orderBy('id', 'DESC')
             ->distinct()
-            ->get()
-            ->toArray();
+            ->get();
 
         return $completedTrainingRequests;
     }
