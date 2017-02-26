@@ -479,9 +479,7 @@ class EquipmentController extends Controller
         $acceptedTrainingRequests = Training::where('status', 0)
             ->where('equipment_id', $equipmentId)
             ->where('user_id', $userId)
-            ->orderBy('id', 'DESC')
-            ->distinct()
-            ->get();
+            ->first();
 
         return $acceptedTrainingRequests;
     }
@@ -491,9 +489,7 @@ class EquipmentController extends Controller
         $completedTrainingRequests = Training::where('status', 1)
             ->where('equipment_id', $equipmentId)
             ->where('user_id', $userId)
-            ->orderBy('id', 'DESC')
-            ->distinct()
-            ->get();
+            ->first();
 
         return $completedTrainingRequests;
     }
