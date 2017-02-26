@@ -445,17 +445,19 @@ class EquipmentController extends Controller
         $totalNightCharge = 0;
 
         foreach($bookings as $book) {
+            $dayTimeBookingProf = $book->lab->title;
+            $dayTimeBookingProfId = $book->lab->id;
             if ($book->timezone_flag == 'daytime') {
                 $totalHourByDay += (int) (count($book->cancelled_time_slot) * 10);
                 $totalDayCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
-                $dayTimeBookingProf = $book->lab->title;
-                $dayTimeBookingProfId = $book->lab->id;
+                // $dayTimeBookingProf = $book->lab->title;
+                // $dayTimeBookingProfId = $book->lab->id;
                 $equipmentId = $book->equipment_id;
             } else {
                 $totalHourByNight += (int) (count($book->cancelled_time_slot) * 10);
                 $totalNightCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
-                $nightTimeBookingProf = $book->lab->title;
-                $nightTimeBookingProfId = $book->lab->id;
+                //$nightTimeBookingProf = $book->lab->title;
+                //$nightTimeBookingProfId = $book->lab->id;
                 $equipmentId = $book->equipment_id;
             }
         }

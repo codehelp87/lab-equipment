@@ -242,12 +242,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           total += parseInt(total_charge_by_day + total_charge_by_night);
 
           table += '<tr>' + '<td><a href="#" class="view-equipment-users" data-id=' +
-         day_equipment_id + ' id=' + day_lab_prof_id + '>' + decodeURI(day_lab_prof) + '</a></td>' +
-          '<td>' + total_hour_by_day + '</td>' + '<td>' + total_charge_by_day + '</td>' + 
-          '<td><a href="#" class="view-equipment-users-by-night" data-id=' + night_equipment_id +
-           ' id=' + night_lab_prof_id + '>' + decodeURI(night_lab_prof) + '</a</td>' + '<td>' +
+            day_equipment_id + ' id=' + day_lab_prof_id + '>' + decodeURI(day_lab_prof) + '</a></td>' +
+            '<td>' + total_hour_by_day + '</td>' + '<td>' + total_charge_by_day + '</td><td></td>' + 
+            '<td>' +
             total_hour_by_night + '</td>' + '<td>' + total_charge_by_night + '</td>' + 
             '</tr>';
+
+           //  '<td><a href="#" class="view-equipment-users-by-night" data-id=' + night_equipment_id +
+           // ' id=' + night_lab_prof_id + '>' + decodeURI(night_lab_prof) + '</a</td>' +
         }
 
         table += '<tr>' + '<td colspan="5" align="right"><strong>Total</strong></td>' + 
@@ -278,11 +280,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           table += '<tr>' + '<td><a href="#" class="view-equipment-users-with-session" data-id=' +
          day_equipment_id + ' id=' + day_lab_prof_id + '>' + decodeURI(day_lab_prof) + '</a></td>' +
-          '<td>' + total_hour_by_day + '</td>' + '<td>' + total_charge_by_day + '</td>' + 
-          '<td><a href="#" class="view-equipment-users-with-session-bynight" data-id=' + night_equipment_id +
-           ' id=' + night_lab_prof_id + '>' + decodeURI(night_lab_prof) + '</a</td>' + '<td>' +
+          '<td>' + total_hour_by_day + '</td>' + '<td>' + total_charge_by_day + '</td><td></td>' + 
+          '<td>' +
             total_hour_by_night + '</td>' + '<td>' + total_charge_by_night + '</td>' + 
             '</tr>';
+           //  '<td><a href="#" class="view-equipment-users-with-session-bynight" data-id=' + night_equipment_id +
+           // ' id=' + night_lab_prof_id + '>' + decodeURI(night_lab_prof) + '</a</td>' + 
         }
 
         table += '<tr>' + '<td colspan="5" align="right"><strong>Total</strong></td>' + 
