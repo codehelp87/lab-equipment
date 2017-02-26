@@ -241,6 +241,14 @@ class EquipmentController extends Controller
                     if ($student->count() > 0) {
                         $students[$index] = $student;
                         $students[$index]['lab_prof'] = $training->lab->title;
+                        $completedTrainingRequest = $this->getCompletedTrainingRequest(
+                            $equipment->id, $training->user->id
+                        );
+                        if (!is_null($completedTrainingRequest)) {
+                            $students[$index]['accepted'] = true;
+                        } else {
+                            $students[$index]['accepted'] = false;
+                        }
                     }
                 }
             }
@@ -272,6 +280,14 @@ class EquipmentController extends Controller
                 foreach($bookings as $index => $booking) {
                     $students[$index] = $booking->user;
                     $students[$index]['lab_prof'] = $booking->lab->title;
+                    $acceptedTrainingRequest = $this->getAcceptedTrainingRequest(
+                        $equipment->id, $booking->user->id
+                    );
+                    if (!is_null($acceptedTrainingRequest)) {
+                        $students[$index]['accepted'] = true;
+                    } else {
+                        $students[$index]['accepted'] = false;
+                    }
                 }
             }
             return response()->json([$labProfessor, $students], 200);
@@ -305,7 +321,6 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($decodedId);
         $equipmentBookings = Booking::findBy([
             ['equipment_id', '=', $decodedId],
-            //['booking_date', '=', $bookingDate],
             ['status', '=', 1],
         ]);
 
@@ -411,7 +426,6 @@ class EquipmentController extends Controller
     public function getMonthDays($date)
     {
         $explodeDate = explode('-', $date);
-        //$days = cal_days_in_month(CAL_GREGORIAN, $explodeDate[1], $explodeDate[0]);
         $days = date('t', mktime(0, 0, 0, $explodeDate[1], 1, $explodeDate[0])); 
 
         return $days;
@@ -428,7 +442,6 @@ class EquipmentController extends Controller
         $totalNightCharge = 0;
 
         foreach($bookings as $book) {
-            //echo $book->timezone_flag . "\n";
             if ($book->timezone_flag == 'daytime') {
                 $totalHourByDay += (int) (count($book->cancelled_time_slot) * 10);
                 $totalDayCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
@@ -456,5 +469,31 @@ class EquipmentController extends Controller
             'total_charge_by_night' => $totalNightCharge,
             'total_hour_by_night' => ($totalHourByNight / 60),
         ];
+    }
+
+    protected function getAcceptedTrainingRequest($equipmentId, $userId)
+    {
+        $acceptedTrainingRequests = Training::where('status', 0)
+            ->where('equipment_id', $equipmentId)
+            ->where('user_id', $userId)
+            ->orderBy('id', 'DESC')
+            ->distinct()
+            ->get()
+            ->toArray();
+
+        return $acceptedTrainingRequests;
+    }
+
+    protected function getCompletedTrainingRequest($equipmentId, $userId)
+    {
+        $completedTrainingRequests = Training::where('status', 1)
+            ->where('equipment_id', $equipmentId)
+            ->where('user_id', $userId)
+            ->orderBy('id', 'DESC')
+            ->distinct()
+            ->get()
+            ->toArray();
+
+        return $completedTrainingRequests;
     }
 }

@@ -301,12 +301,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var tableRow = '';
         var students = data[1];
         for (var student in students) {
-          tableRow += '<tr>' + '<td>' + students[student].student_id + '</td>' + '<td>' + 
-          students[student].name + '</td>' + '<td>' + students[student].email + '</td>' + '<td>' + 
-          students[student].phone + '</td>' + '<td>' + students[student].lab_prof + '</td>' + 
-          '<td><input type="checkbox" class="form-control training-requester" data-name=' + 
-          encodeURI(students[student].name) + ' id="training-requester" value=' + students[student].id + '></td>';
-          tableRow += '</tr>';
+          if (students[student].accepted) {
+            tableRow += '<tr style="color:#cccccc;">' + '<td>' + students[student].student_id + '</td>' + '<td>' + 
+            students[student].name + '</td>' + '<td>' + students[student].email + '</td>' + '<td>' + 
+            students[student].phone + '</td>' + '<td>' + students[student].lab_prof + '</td>' + 
+            '<td><input type="checkbox" class="form-control training-requester" data-name=' + 
+            encodeURI(students[student].name) + ' id="training-requester" value=' + students[student].id + '></td>';
+            tableRow += '</tr>';
+          } else {
+            tableRow += '<tr>' + '<td>' + students[student].student_id + '</td>' + '<td>' + 
+            students[student].name + '</td>' + '<td>' + students[student].email + '</td>' + '<td>' + 
+            students[student].phone + '</td>' + '<td>' + students[student].lab_prof + '</td>' + 
+            '<td><input type="checkbox" class="form-control training-requester" data-name=' + 
+            encodeURI(students[student].name) + ' id="training-requester" value=' + students[student].id + '></td>';
+            tableRow += '</tr>';
+          }
         }
         return tableRow;
       }
