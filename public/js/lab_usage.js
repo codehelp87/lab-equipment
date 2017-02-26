@@ -200,6 +200,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         table += '<tr><td><strong>Total Price</strong></td><td><strong>' + parseFloat(totalDayBookings * (equipmentAmount / 10)) + 
         '</strong></td><td><strong>' + parseFloat(totalNightBookings * (equipmentAmount / 10)) + 
         '</strong></td></tr>';
+
+        table += '<tr><td><strong>Total</strong></td><td colspan="2"><strong>' + parseFloat(parseFloat(totalDayBookings * (equipmentAmount / 10)) + parseFloat(totalNightBookings * (equipmentAmount / 10)))
+        '</strong></td></tr>';
+
         table += '</tbody>';
         table += '</table>';
 
