@@ -43,7 +43,7 @@
         <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootbox.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.table2excel.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/jquery-bootpag/lib/jquery.bootpag.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.bootpag.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/keep_alive.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/user.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/lab.js') }}"></script>
