@@ -16,10 +16,17 @@
         <div class="col-sm-12">
         <div class="table-responsive">
             <table class="table table-responsive" id="display-complete-training">
-                <tbody>
-                </tbody>
+            <thead>
+                <tr>
+                    <th>STUDENT ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>LAB</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
             </table>
-            <div id="page-selection"></div>
             </div>
         </div>
     </div>
