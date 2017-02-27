@@ -267,10 +267,10 @@ class EquipmentController extends Controller
                 }
             }
 
-            $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
-            $totalStudents = count($sortedStudents);
+            //$sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
+            $totalStudents = count($students);
 
-            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
+            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $students], 200);
         }
 
         return response()->json([
@@ -313,10 +313,10 @@ class EquipmentController extends Controller
                 }
             }
 
-            $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
+            //$sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
             
-            $totalStudents = count($sortedStudents);
-            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
+            $totalStudents = count($students);
+            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $students], 200);
         }
 
         return response()->json([
