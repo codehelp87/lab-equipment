@@ -264,9 +264,9 @@ class EquipmentController extends Controller
                 }
             }
 
-            $students = $this->array_msort($students, array('accepted'=>SORT_DESC));
+            $sortedStudents = $this->array_msort($students, ['accepted'=>SORT_ASC]);
 
-            return response()->json([$labProfessor, $students], 200);
+            return response()->json([$labProfessor, $sortedStudents], 200);
         }
 
         return response()->json([
@@ -305,9 +305,9 @@ class EquipmentController extends Controller
                     $acceptedTrainingRequest = null;
                 }
             }
-            $students = $this->array_msort($students, array('accepted'=>SORT_DESC));
+            $sortedStudents = $this->array_msort($students, ['accepted'=> SORT_ASC]);
 
-            return response()->json([$labProfessor, $students], 200);
+            return response()->json([$labProfessor, $sortedStudents], 200);
         }
 
         return response()->json([
