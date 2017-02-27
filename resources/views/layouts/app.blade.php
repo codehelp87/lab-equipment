@@ -40,6 +40,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/moment.js')}}"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootbox.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.table2excel.min.js') }}"></script>

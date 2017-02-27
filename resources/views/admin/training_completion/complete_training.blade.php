@@ -19,7 +19,6 @@
                 <tbody>
                 </tbody>
             </table>
-{{--             <div id="page-selection"></div> --}}
             </div>
         </div>
     </div>

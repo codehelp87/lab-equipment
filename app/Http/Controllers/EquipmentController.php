@@ -308,7 +308,12 @@ class EquipmentController extends Controller
 
             $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
 
-            return response()->json([$labProfessor, $sortedStudents], 200);
+            // "draw": 5,
+            // "recordsTotal": 57,
+            // "recordsFiltered": 57,
+            
+            $totalStudents = count($sortedStudents);
+            return response()->json([$labProfessor, 'draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
         }
 
         return response()->json([

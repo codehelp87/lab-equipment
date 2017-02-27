@@ -35,15 +35,16 @@
             </div>
         </div>
         <!-- Scripts -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Latest compiled and minified JavaScript -->
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/moment.js')); ?>"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/jquery.simplePagination.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/bootbox.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/jquery.table2excel.min.js')); ?>"></script>
-        <script type="text/javascript" src="<?php echo e(asset('js/jquery-bootpag/lib/jquery.bootpag.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/keep_alive.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/user.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/lab.js')); ?>"></script>
