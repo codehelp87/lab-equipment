@@ -264,7 +264,9 @@ class EquipmentController extends Controller
                 }
             }
 
-            return response()->json([$labProfessor, $students], 200);
+            $sortedStudents = $this->array_sort($students, 'accepted', SORT_ASC);
+
+            return response()->json([$labProfessor, $sortedStudents], 200);
         }
 
         return response()->json([
@@ -304,7 +306,9 @@ class EquipmentController extends Controller
                 }
             }
 
-            return response()->json([$labProfessor, $students], 200);
+            $sortedStudents = $this->array_sort($students, 'accepted', SORT_ASC);
+
+            return response()->json([$labProfessor, $sortedStudents], 200);
         }
 
         return response()->json([
@@ -461,14 +465,10 @@ class EquipmentController extends Controller
             if ($book->timezone_flag == 'daytime') {
                 $totalHourByDay += (int) (count($book->cancelled_time_slot) * 10);
                 $totalDayCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
-                // $dayTimeBookingProf = $book->lab->title;
-                // $dayTimeBookingProfId = $book->lab->id;
                 $equipmentId = $book->equipment_id;
             } else {
                 $totalHourByNight += (int) (count($book->cancelled_time_slot) * 10);
                 $totalNightCharge += (int) (($book->equipment->price_per_unit_time / 10) * 10);
-                //$nightTimeBookingProf = $book->lab->title;
-                //$nightTimeBookingProfId = $book->lab->id;
                 $equipmentId = $book->equipment_id;
             }
         }
@@ -505,6 +505,41 @@ class EquipmentController extends Controller
             ->first();
 
         return $completedTrainingRequests;
+    }
+
+    protected function array_sort($array, $on, $order = SORT_ASC)
+    {
+        $new_array = array();
+        $sortable_array = array();
+
+        if (count($array) > 0) {
+            foreach ($array as $k => $v) {
+                if (is_array($v)) {
+                    foreach ($v as $k2 => $v2) {
+                        if ($k2 == $on) {
+                            $sortable_array[$k] = $v2;
+                        }
+                    }
+                } else {
+                    $sortable_array[$k] = $v;
+                }
+            }
+
+            switch ($order) {
+                case SORT_ASC:
+                    asort($sortable_array);
+                    break;
+                case SORT_DESC:
+                    arsort($sortable_array);
+                    break;
+            }
+
+            foreach ($sortable_array as $k => $v) {
+                $new_array[$k] = $array[$k];
+            }
+        }
+
+        return $new_array;
     }
 
 }
