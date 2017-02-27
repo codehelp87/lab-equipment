@@ -280,7 +280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var route = '/equipments/' + equipmentId + '/students';
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
-              if (data[1].length > 0) {
+              if (data[1].length > 0 || data[1].length == undefined) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
 
