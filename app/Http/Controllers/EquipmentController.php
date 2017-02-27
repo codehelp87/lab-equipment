@@ -248,7 +248,7 @@ class EquipmentController extends Controller
                 foreach($trainings as $index => $training) {
                     $student = User::findOneByIdWithRole($training->user_id);
                     if ($student->count() > 0) {
-                        $students[$index] = $student;
+                        $students[$index] = $student->toArray();
                         $students[$index]['lab_prof'] = $training->lab->title;
                         $completedTrainingRequest = $this->getCompletedTrainingRequest(
                             $equipment->id, $training->user->id
@@ -264,7 +264,7 @@ class EquipmentController extends Controller
                 }
             }
 
-            $sortedStudents = $this->array_sort($students, 'accepted', SORT_ASC);
+            $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_ASC);
 
             return response()->json([$labProfessor, $sortedStudents], 200);
         }
@@ -292,7 +292,7 @@ class EquipmentController extends Controller
 
             if (count($bookings) > 0) {
                 foreach($bookings as $index => $booking) {
-                    $students[$index] = $booking->user;
+                    $students[$index] = $booking->user->toArray();
                     $students[$index]['lab_prof'] = $booking->lab->title;
                     $acceptedTrainingRequest = $this->getAcceptedTrainingRequest(
                         $equipment->id, $booking->user->id
@@ -306,7 +306,7 @@ class EquipmentController extends Controller
                 }
             }
 
-            $sortedStudents = $this->array_sort($students, 'accepted', SORT_ASC);
+            $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_ASC);
 
             return response()->json([$labProfessor, $sortedStudents], 200);
         }
@@ -541,5 +541,4 @@ class EquipmentController extends Controller
 
         return $new_array;
     }
-
 }
