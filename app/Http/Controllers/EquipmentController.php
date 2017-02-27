@@ -263,6 +263,9 @@ class EquipmentController extends Controller
                     }
                 }
             }
+
+            $students = $this->array_msort($students, array('accepted'=>SORT_DESC));
+
             return response()->json([$labProfessor, $students], 200);
         }
 
@@ -302,6 +305,8 @@ class EquipmentController extends Controller
                     $acceptedTrainingRequest = null;
                 }
             }
+            $students = $this->array_msort($students, array('accepted'=>SORT_DESC));
+
             return response()->json([$labProfessor, $students], 200);
         }
 
@@ -504,4 +509,29 @@ class EquipmentController extends Controller
 
         return $completedTrainingRequests;
     }
+
+    protected function array_msort($array, $cols)
+    {
+        $colarr = [];
+        foreach ($cols as $col => $order) {
+            $colarr[$col] = [];
+            foreach ($array as $k => $row) { $colarr[$col]['_'.$k] = strtolower($row[$col]); }
+        }
+        $eval = 'array_multisort(';
+        foreach ($cols as $col => $order) {
+            $eval .= '$colarr[\''.$col.'\'],'.$order.',';
+        }
+        $eval = substr($eval,0,-1).');';
+        eval($eval);
+        $ret = [];
+        foreach ($colarr as $col => $arr) {
+            foreach ($arr as $k => $v) {
+                $k = substr($k,1);
+                if (!isset($ret[$k])) $ret[$k] = $array[$k];
+                $ret[$k][$col] = $array[$k][$col];
+            }
+        }
+        return $ret;
+    }
+
 }
