@@ -35,7 +35,7 @@
             </div>
         </div>
         <!-- Scripts -->
-        <!-- Latest compiled and minified JavaScript -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/moment.js')); ?>"></script>
@@ -43,6 +43,7 @@
         <script type="text/javascript" src="<?php echo e(asset('js/jquery.simplePagination.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/bootbox.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/jquery.table2excel.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(asset('js/jquery-bootpag/lib/jquery.bootpag.min.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/keep_alive.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/user.js')); ?>"></script>
         <script type="text/javascript" src="<?php echo e(asset('js/lab.js')); ?>"></script>
