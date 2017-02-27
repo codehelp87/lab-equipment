@@ -251,12 +251,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (data[1].length == undefined || data[1].length > 0) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
-                $('#page-selection').bootpag({
-                  total: data[1].length
-                }).on("page", function(event, /* page number here */ num){
-                  //$("#content").html("Insert content"); // some ajax content loading...
-                  tableBody.html(students);
-                });
+                // $('#page-selection').bootpag({
+                //   total: data[1].length
+                // }).on("page", function(event, /* page number here */ num){
+                //   //$("#content").html("Insert content"); // some ajax content loading...
+                //   tableBody.html(students);
+                // });
 
                 return toastr.success('Student loaded');
               }
@@ -290,12 +290,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (data[1].length > 0 || data[1].length == undefined) {
                 var students = req.displayTrainingRequest(data);
                 tableBody.html(students);
-                $('#page-selection').bootpag({
-                  total: data[1].length
-                }).on("page", function(event, /* page number here */ num){
-                  //$("#content").html("Insert content"); // some ajax content loading...
-                  tableBody.html(students);
-                });
+                // $('#page-selection').bootpag({
+                //   total: data[1].length
+                // }).on("page", function(event, /* page number here */ num){
+                //   //$("#content").html("Insert content"); // some ajax content loading...
+                //   tableBody.html(students);
+                // });
 
                 return toastr.success('Student loaded');
               }
