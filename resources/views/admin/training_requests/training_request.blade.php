@@ -15,9 +15,17 @@
     <div class="form-group">
         <div class="col-sm-12">
         <div class="table-responsive">
-            <table class="table table-responsive" id="display-training-request">
-                <tbody>
-                </tbody>
+            <table class="table table-responsive" id="display-training-request" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>STUDENT ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>LAB</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
             </table>
             </div>
         </div>

@@ -196,14 +196,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'prepareModal',
       value: function prepareModal(bookingDate, bookingTime, selectedStudents, location) {
         var students = '';
-        //var bookingTime = moment().format('h:mm:ss a');
         var stuff = '<h5 class="text-center">Are you sure to confirm this request and send a confirmation email?</h5>';
         var dateSelected = '<h5 class="text-center">' + bookingDate + '</h5>';
         var trainingLocation = '<h5 class="text-center">' + location + '</h5>';
         var info = '<h5 class="text-center">If it\'s correct press ok</h5>';
         students = '<ul style="list-style:none;">';
         for (var i = 0; i < selectedStudents.length; i++) {
-          students += '<li><strong>' + decodeURI(selectedStudents[i]) + '</strong></li>';
+          students += '<li><strong>' + decodeURI(selectedStudents[i]).replace('+', ' ') + '</strong></li>';
         }
         students += '</ul>';
 
@@ -248,13 +247,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var route = '/equipments/' + equipmentId + '/trainings';
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
-              if (data[1].length == undefined || data[1].length > 0) {
-                var students = req.displayTrainingRequest(data);
-                tableBody.html(students);
+              if (data.draw != undefined) {
+                $('#display-complete-training').DataTable({
+                  data: data.data,
+                  "columns": [
+                    { "data": "student_id" },
+                    { "data": "name" },
+                    { "data": "email" },
+                    { "data": "phone" },
+                    { "data": "lab_prof" },
+                    { "data": "action" }
+                  ]
+                });
 
                 return toastr.success('Student loaded');
               }
-              tableBody.html('');
+
               return toastr.error('No requests available for this equipment');
             }).fail(function (error) {
               console.log(error);
@@ -280,14 +288,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var route = '/equipments/' + equipmentId + '/students';
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
-              //console.log('Total', data[1].length);
-              if (data[1].length > 0 || data[1].length == undefined) {
-                var students = req.displayTrainingRequest(data);
-                tableBody.html(students);
+              if (data.draw != undefined) {
+                $('#display-training-request').DataTable({
+                  data: data.data,
+                  "columns": [
+                    { "data": "student_id" },
+                    { "data": "name" },
+                    { "data": "email" },
+                    { "data": "phone" },
+                    { "data": "lab_prof" },
+                    { "data": "action" }
+                  ]
+                });
 
                 return toastr.success('Student loaded');
               }
-              tableBody.html('');
+
               return toastr.error('No requests available for this equipment');
             }).fail(function (error) {
               console.log(error);

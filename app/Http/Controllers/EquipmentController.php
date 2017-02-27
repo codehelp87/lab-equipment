@@ -250,6 +250,9 @@ class EquipmentController extends Controller
                     if ($student->count() > 0) {
                         $students[$index] = $student->toArray();
                         $students[$index]['lab_prof'] = $training->lab->title;
+
+                        $students[$index]['action'] = '<input type="checkbox" class="form-control training-requester" data-name=' . urlencode($booking->user->name) . ' id="training-requester" value=' . $booking->user->id . '>';
+
                         $completedTrainingRequest = $this->getCompletedTrainingRequest(
                             $equipment->id, $training->user->id
                         );
@@ -265,8 +268,9 @@ class EquipmentController extends Controller
             }
 
             $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
+            $totalStudents = count($sortedStudents);
 
-            return response()->json([$labProfessor, $sortedStudents], 200);
+            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
         }
 
         return response()->json([
@@ -294,6 +298,9 @@ class EquipmentController extends Controller
                 foreach($bookings as $index => $booking) {
                     $students[$index] = $booking->user->toArray();
                     $students[$index]['lab_prof'] = $booking->lab->title;
+
+                    $students[$index]['action'] = '<input type="checkbox" class="form-control training-requester" data-name=' . urlencode($booking->user->name) . ' id="training-requester" value=' . $booking->user->id . '>';
+
                     $acceptedTrainingRequest = $this->getAcceptedTrainingRequest(
                         $equipment->id, $booking->user->id
                     );
@@ -307,13 +314,9 @@ class EquipmentController extends Controller
             }
 
             $sortedStudents = $this->array_sort($students, 'accepted', $order = SORT_DESC);
-
-            // "draw": 5,
-            // "recordsTotal": 57,
-            // "recordsFiltered": 57,
             
             $totalStudents = count($sortedStudents);
-            return response()->json([$labProfessor, 'draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
+            return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $sortedStudents], 200);
         }
 
         return response()->json([
