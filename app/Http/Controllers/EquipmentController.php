@@ -251,7 +251,7 @@ class EquipmentController extends Controller
                         $students[$index] = $student->toArray();
                         $students[$index]['lab_prof'] = $training->lab->title;
 
-                        $students[$index]['action'] = '<input type="checkbox" class="form-control training-requester" data-name=' . urlencode($booking->user->name) . ' id="training-requester" value=' . $booking->user->id . '>';
+                        $students[$index]['action'] = '<input type="checkbox" class="form-control training-requester" data-name=' . urlencode($training->user->name) . ' id="training-requester" value=' . $training->user->id . '>';
 
                         $completedTrainingRequest = $this->getCompletedTrainingRequest(
                             $equipment->id, $training->user->id
