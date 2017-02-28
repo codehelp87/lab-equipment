@@ -255,15 +255,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   students.push(trainingStudents[student]);
                 }
 
+                var t = students.sort(function(a, b) {
+                  return (a.accepted > b.accepted) ? 1 : ((b.accepted > a.accepted) ? -1 : 0);
+                }); 
+                console.log(t);
                 // Get all objects only
                 $('#display-complete-training').DataTable({
                   "createdRow": function ( row, data, index ) {
                       if (data.accepted) {
                         $(row).css('color', '#cccccc');
                       }
-                      // if ( data[5].replace(/[\$,]/g, '') * 1 > 150000 ) {
-                      //   $('td', row).eq(5).addClass('highlight');
-                      // }
                   },
                   data: students,
                   "columns": [
