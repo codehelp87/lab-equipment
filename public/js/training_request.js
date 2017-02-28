@@ -252,14 +252,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var trainingStudents = data.data;
 
                 for(var student in trainingStudents) {
-                  students.push(student);
+                  students.push(trainingStudents[student]);
                 }
 
                 console.log(students);
 
                 // Get all objects only
                 $('#display-complete-training').DataTable({
-                  data: data.data,
+                  data: students,
                   "columns": [
                     { "data": "student_id" },
                     { "data": "name" },
