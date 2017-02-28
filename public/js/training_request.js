@@ -259,8 +259,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   return (a.accepted > b.accepted) ? 1 : ((b.accepted > a.accepted) ? -1 : 0);
                 });
 
+                console.log(sortedStudents);
+
                 // Get all objects only
                 var table = $('#display-complete-training').DataTable({
+                  retrieve: true,
+                  paging: false,
                   "createdRow": function ( row, data, index ) {
                       if (data.accepted) {
                         $(row).css('color', '#cccccc');
@@ -278,8 +282,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 });
 
                 return toastr.success('Student loaded');
-
-                table.destroy();
               }
 
               return toastr.error('No requests available for this equipment');
