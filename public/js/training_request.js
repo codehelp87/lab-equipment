@@ -255,7 +255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   students.push(student);
                 }
 
-                console.log(student);
+                console.log(students);
 
                 // Get all objects only
                 $('#display-complete-training').DataTable({
