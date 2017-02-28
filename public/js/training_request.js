@@ -255,12 +255,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   students.push(trainingStudents[student]);
                 }
 
-                var sortedStudents = students.sort(function(a, b) {
-                  return (a.accepted > b.accepted) ? 1 : ((b.accepted > a.accepted) ? -1 : 0);
-                });
-
-                console.log(sortedStudents);
-
                 // Get all objects only
                 var table = $('#display-complete-training').DataTable({
                   retrieve: true,
@@ -270,14 +264,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         $(row).css('color', '#cccccc');
                       }
                   },
-                  data: sortedStudents,
+                  data: students,
                   "columns": [
                     { "data": "student_id" },
                     { "data": "name" },
                     { "data": "email" },
                     { "data": "phone" },
                     { "data": "lab_prof" },
-                    { "data": "action" }
+                    { "data": "action" },
+                    { "data": "accepted" }
                   ]
                 });
 

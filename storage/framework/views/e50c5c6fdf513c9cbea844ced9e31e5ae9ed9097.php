@@ -24,6 +24,7 @@
                     <th>PHONE</th>
                     <th>LAB</th>
                     <th>ACTION</th>
+                    <th>STATUS</th>
                 </tr>
             </thead>
             </table>
