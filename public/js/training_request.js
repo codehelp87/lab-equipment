@@ -254,9 +254,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 for(var student in trainingStudents) {
                   students.push(trainingStudents[student]);
                 }
-                
+
                 // Get all objects only
                 $('#display-complete-training').DataTable({
+                  "createdRow": function ( row, data, index ) {
+                      if (data.accepted) {
+                        $(row).css('color', '#cccccc');
+                      }
+                      // if ( data[5].replace(/[\$,]/g, '') * 1 > 150000 ) {
+                      //   $('td', row).eq(5).addClass('highlight');
+                      // }
+                  },
                   data: students,
                   "columns": [
                     { "data": "student_id" },
