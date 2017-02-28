@@ -248,6 +248,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
               if (data.draw != undefined) {
+                var students = [];
+                var trainingStudents = data.data;
+
+                for(var student in trainingStudents) {
+                  students.push(student);
+                }
+
+                console.log(student);
+
+                // Get all objects only
                 $('#display-complete-training').DataTable({
                   data: data.data,
                   "columns": [
