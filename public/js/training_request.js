@@ -222,10 +222,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var info = '<h5 class="text-center">If it\'s correct press ok</h5>';
         students = '<ul style="list-style:none;">';
         for (var i = 0; i < selectedStudents.length; i++) {
-          students += '<li><strong>' + decodeURI(selectedStudents[i]) + '</strong></li>';
+          students += '<li><strong>' + decodeURI(selectedStudents[i]).replace('+', ' ') + '</strong></li>';
         }
         students += '</ul>';
-        var trainingInfo = '<h5 class="text-center">' + decodeURI(equipment).replace('+', ' ') + ' Training is completed </h5>';
+        var trainingInfo = '<h5 class="text-center">' + decodeURI(equipment) + ' Training is completed </h5>';
 
         stuff += students;
         stuff += trainingInfo;
