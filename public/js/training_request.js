@@ -254,12 +254,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 for(var student in trainingStudents) {
                   students.push(trainingStudents[student]);
                 }
-
                 // Get all objects only
-                var table = $('#display-complete-training').DataTable({
+                var table = $('#display-complete-training');
+
+                var options = {
                   retrieve: true,
                   paging: false,
-                  "order": [[ 6, "desc" ]],
+                  "order": [[ 6, "asc" ]],
                   "createdRow": function ( row, data, index ) {
                       if (data.accepted) {
                         $(row).css('color', '#cccccc');
@@ -275,7 +276,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     { "data": "action" },
                     { "data": "accepted" }
                   ]
-                });
+                };
+
+                table.DataTable(options);
+
+                if ( $.fn.dataTable.isDataTable( '#display-complete-training' ) ) {
+                  table = $('#display-complete-training').DataTable();
+                  table.destroy();
+                }
+                else {
+                  table = $('#display-complete-training').DataTable(options);
+                }
 
                 return toastr.success('Student loaded');
               }
@@ -306,7 +317,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (_this.val() != '') {
             req.makeAjaxCall(route, '', 'GET').done(function (data) {
               if (data.draw != undefined) {
-                $('#display-training-request').DataTable({
+                // Get all objects only
+                var table = $('#display-training-request');
+
+                var options = {
+                  retrieve: true,
+                  paging: false,
+                  "order": [[ 6, "asc" ]],
+                  "createdRow": function ( row, data, index ) {
+                      if (data.accepted) {
+                        $(row).css('color', '#cccccc');
+                      }
+                  },
                   data: data.data,
                   "columns": [
                     { "data": "student_id" },
@@ -314,9 +336,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     { "data": "email" },
                     { "data": "phone" },
                     { "data": "lab_prof" },
-                    { "data": "action" }
+                    { "data": "action" },
+                    { "data": "accepted" }
                   ]
-                });
+                };
+
+                table.DataTable(options);
+
+                if ( $.fn.dataTable.isDataTable( '#display-training-request' ) ) {
+                  table = $('#display-training-request').DataTable();
+                  table.destroy();
+                }
+                else {
+                  table = $('#display-training-request').DataTable(options);
+                }
 
                 return toastr.success('Student loaded');
               }
