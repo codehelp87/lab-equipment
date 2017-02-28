@@ -259,7 +259,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var table = $('#display-complete-training').DataTable({
                   retrieve: true,
                   paging: false,
-                  "order": [[ 8, "desc" ]],
+                  "order": [[ 6, "desc" ]],
                   "createdRow": function ( row, data, index ) {
                       if (data.accepted) {
                         $(row).css('color', '#cccccc');
