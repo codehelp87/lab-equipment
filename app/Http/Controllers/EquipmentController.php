@@ -267,6 +267,8 @@ class EquipmentController extends Controller
                 }
             }
 
+            print_r($students);
+
             $totalStudents = count($students);
 
             return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data' => $students], 200);
@@ -312,7 +314,10 @@ class EquipmentController extends Controller
                 }
             }
 
+            print_r($students);
+
             $totalStudents = count($students);
+
             return response()->json(['draw' => 5, 'recordsTotal' => $totalStudents, 'recordsFiltered' => $totalStudents,  'data'  => $students], 200);
         }
 
