@@ -86,6 +86,7 @@ class UserController extends Controller
                 $user = User::findOneById($student);
                 $getTraining = Training::where('equipment_id', $request->equipment)
                    ->where('user_id', $user->id)
+                   ->where('status', 0)
                    ->first();
 
                 $labBooking = Booking::where('user_id', $user->id)
@@ -100,6 +101,7 @@ class UserController extends Controller
                         'location' => $request->location,
                         'equipment_id' => $request->equipment,
                         'lab_id' => $labBooking->lab_id,
+                        //'status' => 1,
                     ]);
                 }
                 // send email

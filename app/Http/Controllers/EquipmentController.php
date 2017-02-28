@@ -303,6 +303,7 @@ class EquipmentController extends Controller
                     $acceptedTrainingRequest = $this->getAcceptedTrainingRequest(
                         $equipment->id, $booking->user->id
                     );
+
                     if (!is_null($acceptedTrainingRequest)) {
                         $students[$index]['accepted'] = true;
                     } else {
