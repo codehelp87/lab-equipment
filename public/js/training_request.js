@@ -278,15 +278,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   ]
                 };
 
-                table.DataTable(options);
+                table.DataTable().destroy();
 
-                if ( $.fn.dataTable.isDataTable( '#display-complete-training' ) ) {
-                  table = $('#display-complete-training').DataTable();
-                  table.destroy();
-                }
-                else {
-                  table = $('#display-complete-training').DataTable(options);
-                }
+                table.DataTable(options);
 
                 return toastr.success('Student loaded');
               }
@@ -322,7 +316,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 var options = {
                   retrieve: true,
-                  paging: false,
+                  //paging: false,
                   "order": [[ 6, "asc" ]],
                   "createdRow": function ( row, data, index ) {
                       if (data.accepted) {
@@ -341,15 +335,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   ]
                 };
 
-                table.DataTable(options);
+                table.DataTable().destroy();
 
-                if ( $.fn.dataTable.isDataTable( '#display-training-request' ) ) {
-                  table = $('#display-training-request').DataTable();
-                  table.destroy();
-                }
-                else {
-                  table = $('#display-training-request').DataTable(options);
-                }
+                table.DataTable(options);
 
                 return toastr.success('Student loaded');
               }
