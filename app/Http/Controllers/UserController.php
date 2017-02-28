@@ -166,7 +166,7 @@ class UserController extends Controller
                 'equipmentName' => $equipment,
                 'studentName' => $request->name,
             ];
-            $email = 'diweshsaxena@gmail.com'; // Admin Email
+            $email = env('ADMIN_EMAIL'); // Admin Email
 
             $this->sendTrainingRequestToLabProfessor($data, $email);
         }
@@ -177,7 +177,7 @@ class UserController extends Controller
     protected function sendEmail($data, $email)
     {
         Mail::send('student.email', $data, function ($message) use ($email) {
-            $message->from('lab-equipment@domain.com', 'You have registered for equipment');
+            $message->from(env('SENDER_EMAIL'), 'You have registered for equipment');
             $message->to($email)->subject('Training Request');
         });
     }
@@ -185,7 +185,7 @@ class UserController extends Controller
     protected function sendTrainingRequestToLabProfessor($data, $email)
     {
         Mail::send('student.lab_professor_email', $data, function ($message) use ($email) {
-            $message->from('lab-equipment@domain.com', 'Student Training Request');
+            $message->from(env('SENDER_EMAIL'), 'Student Training Request');
             $message->to($email)->subject('Student Training Request');
         });
     }   
@@ -193,7 +193,7 @@ class UserController extends Controller
     protected function sendTrainingCompletionEmail($data, $email)
     {
         Mail::send('student.complete_training_email', $data, function ($message) use ($email) {
-            $message->from('lab-equipment@domain.com', 'You have completed your Training');
+            $message->from(env('SENDER_EMAIL'), 'You have completed your Training');
             $message->to($email)->subject('Training Completion');
         });
     }
