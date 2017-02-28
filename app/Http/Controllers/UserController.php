@@ -101,7 +101,6 @@ class UserController extends Controller
                         'location' => $request->location,
                         'equipment_id' => $request->equipment,
                         'lab_id' => $labBooking->lab_id,
-                        //'status' => 1,
                     ]);
                 }
                 // send email

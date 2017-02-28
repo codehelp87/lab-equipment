@@ -63,6 +63,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');
+                /** 
+                 * Mark the selected students rows as grey
+                 */
+                checkBox.each(function (index, el) {
+                  var _this = $(this);
+                  _this.parents('tr').css('color', '#cccccc');
+                  _this.parent().next().html('true');
+                });
+                //End 
                 selectedStudents = [];
                 studentIds = [];
                 return toastr.success('Your confirmation has been sent');
@@ -137,6 +146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var modalContent = req.prepareModal(bookingDate, bookingTime, selectedStudents, location);
           modal.find('div.modal-body').html(modalContent);
           selectedStudents = [];
+  
           modal.modal('show');
           var okBtn = modal.find('button.ok');
           var route = '/equipments/training/confirmation';
@@ -163,6 +173,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 modal.modal('hide');
                 req.clearFields();
                 okBtn.unbind('click');
+                /** 
+                 * Mark the selected students rows as grey
+                */
+                checkBox.each(function (index, el) {
+                  var _this = $(this);
+                  _this.parents('tr').css('color', '#cccccc');
+                  _this.parent().next().html('true');
+                });
+              //End 
                 selectedStudents = [];
                 studentIds = [];
                 return toastr.success('Your confirmation has been sent');
