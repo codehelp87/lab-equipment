@@ -225,7 +225,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           students += '<li><strong>' + decodeURI(selectedStudents[i]) + '</strong></li>';
         }
         students += '</ul>';
-        var trainingInfo = '<h5 class="text-center">' + decodeURI(equipment) + ' Training is completed </h5>';
+        var trainingInfo = '<h5 class="text-center">' + decodeURI(equipment).replace('+', ' ') + ' Training is completed </h5>';
 
         stuff += students;
         stuff += trainingInfo;
