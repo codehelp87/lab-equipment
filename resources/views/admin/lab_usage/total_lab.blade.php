@@ -56,6 +56,11 @@
       <strong>Download as xlsx</strong>
     </a>
 </span>
+<span class="pull-right">
+   <a href="status.php" id="status-popup" class="status-popup">
+      <strong>Status of reservation</strong>
+    </a>
+</span>
 <script type="text/javascript">
 jQuery(document).ready(function() {
     $('a#download-by-equipment').click(function(){
@@ -67,6 +72,12 @@ jQuery(document).ready(function() {
             filename: 'lab_usage' //do not include extension
         });
     });
+
+    $('a#download-by-equipment').popupWindow({
+        height:500,
+        width:800
+    });
+
 
     $('body').on('click', 'a#download-lab-users', function() {
         $('table#lab-equipment-users').table2excel({
