@@ -17,19 +17,16 @@
 	
 	<body>
 		<?php
-		$servername = "localhost";
-		$username = "kkipierzlcjrhl";
-		$password = "f90158d07fb17ef0d4d5c3d7fac06807d777cce2cdb9247c1f2637db80c44e6d";
+		$host = "ec2-75-101-142-182.compute-1.amazonaws.com";
+		$user = "kkipierzlcjrhl";
+		$pass = "f90158d07fb17ef0d4d5c3d7fac06807d777cce2cdb9247c1f2637db80c44e6d";
+		$db = "d26vvd07kpmqjt";
 		
-		// Create connection
-		$conn = new mysqli($servername, $username, $password);
-		
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
+		$con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");
 		
 		echo "Connected successfully";
+
+		pg_close($con);
 		?>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
