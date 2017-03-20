@@ -16,18 +16,21 @@
 	</head>
 	
 	<body>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
-			<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-		</div>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-			<!-- Optional: clear the XS cols if their content doesn't match in height -->
-			<div class="clearfix visible-xs-block"></div>
-			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-		</div>
+		<?php
+		$servername = "ec2-75-101-142-182.compute-1.amazonaws.com";
+		$username = "kkipierzlcjrhl";
+		$password = "f90158d07fb17ef0d4d5c3d7fac06807d777cce2cdb9247c1f2637db80c44e6d";
+		
+		// Create connection
+		$conn = new mysqli($servername, $username, $password);
+		
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+		
+		echo "Connected successfully";
+		?>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
