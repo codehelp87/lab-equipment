@@ -17,7 +17,7 @@
 	
 	<body>
 		<?php
-		$servername = "ec2-75-101-142-182.compute-1.amazonaws.com:5432";
+		$servername = "localhost";
 		$username = "kkipierzlcjrhl";
 		$password = "f90158d07fb17ef0d4d5c3d7fac06807d777cce2cdb9247c1f2637db80c44e6d";
 		
