@@ -73,7 +73,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    $('a#download-by-equipment').popupWindow({
+    $('a#status-popup').popupWindow({
         height:500,
         width:800
     });
