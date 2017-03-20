@@ -57,7 +57,7 @@
     </a>
 </span>
 <span class="pull-right">
-   <a href="status.php" id="status-popup" class="status-popup">
+   <a href="#" id="status-popup" class="status-popup">
       <strong>Status of reservation</strong>
     </a>
 </span>
@@ -73,9 +73,8 @@ jQuery(document).ready(function() {
         });
     });
 
-    $('a#status-popup').popupWindow({
-        height:500,
-        width:800
+    $('a#status-popup').click(function(){
+        window.open("status.php", "_blank", "toolbar=no,scrollbars=yes,resizable=yes,width=800,height=800");
     });
 
 
