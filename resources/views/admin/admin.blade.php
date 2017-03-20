@@ -13,6 +13,7 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Basic Info
+                            Basic Info..
                         </a>
                         </h4>
                     </div>
